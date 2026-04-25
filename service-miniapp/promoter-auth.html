@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>��װƽ̨С����ԭ�� - ��Ŀ��������֤</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        .page-content {
+            height: calc(100% - 44px - 72px);
+            background-color: var(--bg-secondary);
+            overflow-y: auto;
+        }
+
+        .auth-header {
+            background: linear-gradient(135deg, #FF9F43 0%, #FFA726 100%);
+            padding: 32px 20px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+
+        .auth-header .header-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 40px;
+        }
+
+        .auth-header .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .auth-header .header-desc {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .auth-content {
+            padding: 20px 16px;
+        }
+
+        .benefit-section {
+            background-color: var(--bg-primary);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .benefit-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .benefit-title .title-icon {
+            font-size: 18px;
+        }
+
+        .benefit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .benefit-item .item-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #FFF7E6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .benefit-item .item-content {
+            flex: 1;
+        }
+
+        .benefit-item .item-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .benefit-item .item-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .agreement-section {
+            background-color: var(--bg-primary);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .agreement-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .agreement-content {
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 12px;
+            max-height: 280px;
+            overflow-y: auto;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .agreement-content::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .agreement-content::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+            border-radius: 2px;
+        }
+
+        .agreement-content::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+
+        .agreement-content::-webkit-scrollbar-thumb:hover {
+            background: var(--text-tertiary);
+        }
+
+        .agreement-content h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 12px 0 8px;
+        }
+
+        .agreement-content h4:first-child {
+            margin-top: 0;
+        }
+
+        .agreement-content p {
+            margin-bottom: 8px;
+        }
+
+        .agreement-content ul {
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        .agreement-content li {
+            margin-bottom: 4px;
+        }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .checkbox-row:active {
+            opacity: 0.8;
+        }
+
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            background-color: var(--bg-primary);
+        }
+
+        .custom-checkbox:hover {
+            border-color: var(--primary-color);
+        }
+
+        .custom-checkbox.checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .custom-checkbox .check-icon {
+            color: #FFFFFF;
+            font-size: 14px;
+            display: none;
+        }
+
+        .custom-checkbox.checked .check-icon {
+            display: block;
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .checkbox-label .link {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        .submit-section {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 12px 16px;
+            background-color: var(--bg-primary);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            height: 48px;
+            background: linear-gradient(135deg, #FF9F43 0%, #FFA726 100%);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(255, 159, 10, 0.3);
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 159, 10, 0.4);
+        }
+
+        .submit-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            background: #D9D9D9;
+            color: #BFBFBF;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .success-modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-modal.show {
+            display: flex;
+        }
+
+        .success-modal .modal-box {
+            width: 85%;
+            max-width: 300px;
+            background-color: var(--bg-primary);
+            border-radius: 12px;
+            padding: 32px 20px;
+            text-align: center;
+        }
+
+        .success-modal .success-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #52C41A 0%, #73D13D 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 32px;
+            color: #FFFFFF;
+        }
+
+        .success-modal .success-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .success-modal .success-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .success-modal .success-btn {
+            width: 100%;
+            height: 44px;
+            background: linear-gradient(135deg, #FF9F43 0%, #FFA726 100%);
+            color: #FFFFFF;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="status-bar">
+            <div class="time">9:41</div>
+            <div class="icons">?? ??</div>
+        </div>
+        
+        <div class="nav-bar">
+            <div class="back" onclick="history.back()">�� ����</div>
+            <div class="title centered">��Ŀ��������֤</div>
+            <div class="actions">
+                <div class="action-btn" onclick="alert('�ر�С����')">?</div>
+            </div>
+        </div>
+        
+        <div class="page-content">
+            <div class="auth-header">
+                <div class="header-icon">?</div>
+                <div class="header-title">��Ϊ��Ŀ������</div>
+                <div class="header-desc">����������Ŀ����֮��</div>
+            </div>
+
+            <div class="auth-content">
+                <div class="benefit-section">
+                    <div class="benefit-title">
+                        <span class="title-icon">??</span>
+                        <span>������Ȩ��</span>
+                    </div>
+                    <div class="benefit-list">
+                        <div class="benefit-item">
+                            <div class="item-icon">??</div>
+                            <div class="item-content">
+                                <div class="item-title">��Ŀ����</div>
+                                <div class="item-desc">��Ϊ��Ŀ�����ˣ����������Ŀ����ķֳ�����</div>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="item-icon">??</div>
+                            <div class="item-content">
+                                <div class="item-title">���ݿ���</div>
+                                <div class="item-desc">�鿴��Ŀ����ϸ���ݷ��������汨��</div>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="item-icon">??</div>
+                            <div class="item-content">
+                                <div class="item-title">�����Ƽ�</div>
+                                <div class="item-desc">������Ŀ�����ƽ̨�����Ƽ����ع�</div>
+                            </div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="item-icon">???</div>
+                            <div class="item-content">
+                                <div class="item-title">ר������</div>
+                                <div class="item-desc">����ƽ̨�ṩ��ר���ͷ��ͼ���֧��</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="agreement-section">
+                    <div class="agreement-title">
+                        <span class="title-icon">??</span>
+                        <span>������Э��</span>
+                    </div>
+                    <div class="agreement-content">
+                        <h4>һ������</h4>
+                        <p>��ӭ����Ϊ��װƽ̨��Ŀ�����ˡ���Э���������װƽ̨֮�������Ŀ��������֤�����Ȩ��ķ���Э�顣</p>
+                        
+                        <h4>�����������ʸ�</h4>
+                        <p>�����Ϊ��Ŀ����������������������</p>
+                        <ul>
+                            <li>����18���꣬������ȫ������Ϊ����</li>
+                            <li>�ṩ��ʵ��׼ȷ�ĸ�����Ϣ</li>
+                            <li>����ƽ̨�������ط��ɷ���</li>
+                        </ul>
+                        
+                        <h4>����������Ȩ��</h4>
+                        <p>��Ϊ��Ŀ�����˺�������������Ȩ�棺</p>
+                        <ul>
+                            <li>��Ŀ����������ƽ̨��������Ŀ����ֳ�</li>
+                            <li>���ݿ��壺�鿴��Ŀ���ݺ����汨��</li>
+                            <li>�����Ƽ�����Ŀ���ƽ̨�����Ƽ�</li>
+                            <li>ר����������ר���ͷ��ͼ���֧��</li>
+                        </ul>
+                        
+                        <h4>�ġ�����������</h4>
+                        <p>��Ϊ��Ŀ�����ˣ�����Ҫ������������</p>
+                        <ul>
+                            <li>ȷ����Ŀ��Ϣ��ʵ��׼ȷ������</li>
+                            <li>����ƽ̨����ά��ƽ̨����</li>
+                            <li>��ʱ������Ŀ�������</li>
+                            <li>���ƽ̨���б�Ҫ����˺ͼල</li>
+                        </ul>
+                        
+                        <h4>�塢��������</h4>
+                        <p>��Ŀ�����������¹���ִ�У�</p>
+                        <ul>
+                            <li>����������������Ŀ���ͺ͹�ģȷ��</li>
+                            <li>�������ڣ����½��㣬����15��ǰ����</li>
+                            <li>���㷽ʽ��ͨ��ƽ̨�˻�����</li>
+                        </ul>
+                        
+                        <h4>����ΥԼ����</h4>
+                        <p>�緢����Υ����Э��Լ����ƽ̨��Ȩ��</p>
+                        <ul>
+                            <li>��ͣ��ȡ���������ʸ�</li>
+                            <li>�۳���Ӧ����</li>
+                            <li>׷����������</li>
+                        </ul>
+                        
+                        <h4>�ߡ���������</h4>
+                        <p>��Э��Ľ���Ȩ���װƽ̨���С��������飬˫��Ӧ�Ѻ�Э�̽����</p>
+                    </div>
+                    
+                    <div class="checkbox-row" onclick="toggleCheckbox()">
+                        <div class="custom-checkbox" id="agreementCheckbox">
+                            <span class="check-icon">?</span>
+                        </div>
+                        <div class="checkbox-label">
+                            �����Ķ���ͬ��<span class="link">����Ŀ������Э�顷</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="submit-section">
+            <button type="button" class="submit-btn" id="submitBtn" onclick="submitAuth()" disabled>������֤</button>
+        </div>
+
+        <div class="success-modal" id="successModal">
+            <div class="modal-box">
+                <div class="success-icon">?</div>
+                <div class="success-title">��֤�ɹ�</div>
+                <div class="success-desc">��ϲ����Ϊ��Ŀ�����ˣ�<br>���ڿ��Դ�����Ŀ�����ܷ���Ȩ����</div>
+                <button class="success-btn" onclick="goToCreateProject()">����������Ŀ</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="page-nav">
+        <div class="page-nav-title">ԭ�͵���</div>
+        <a href="home.html" class="page-nav-item">��ҳ</a>
+        <a href="project-list.html" class="page-nav-item">��Ŀ�б�</a>
+        <a href="create-project.html" class="page-nav-item">������Ŀ</a>
+        <a href="promoter-auth.html" class="page-nav-item active">��������֤</a>
+    </div>
+
+    <script>
+        let isAgreed = false;
+
+        function toggleCheckbox() {
+            isAgreed = !isAgreed;
+            const checkbox = document.getElementById('agreementCheckbox');
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (isAgreed) {
+                checkbox.classList.add('checked');
+                submitBtn.disabled = false;
+                submitBtn.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    submitBtn.style.transform = 'scale(1)';
+                }, 200);
+            } else {
+                checkbox.classList.remove('checked');
+                submitBtn.disabled = true;
+            }
+        }
+
+        function submitAuth() {
+            if (!isAgreed) {
+                alert('�����Ķ���ͬ����Ŀ������Э��');
+                return;
+            }
+            
+            document.getElementById('successModal').classList.add('show');
+        }
+
+        function goToCreateProject() {
+            localStorage.setItem('isPromoter', 'true');
+            location.href = 'create-project.html?promoter=certified';
+        }
+    </script>
+</body>
+</html>
+
