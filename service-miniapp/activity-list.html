@@ -390,7 +390,8 @@
             width: 60px;
             height: 60px;
             border-radius: 6px;
-            background-color: var(--bg-secondary);
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -988,13 +989,25 @@
         function renderActivityCard(activity) {
             let mediaHtml = '';
             if (activity.hasMedia) {
+                const taskImages = [
+                    'https://img.freepik.com/free-photo/electrical-wiring-installation-residential-building_23-2150702790.jpg',
+                    'https://img.freepik.com/free-photo/plasterer-working-wall-construction-site_23-2150702787.jpg',
+                    'https://img.freepik.com/free-photo/plumber-checking-water-pressure-residential-property_23-2150702794.jpg',
+                    'https://img.freepik.com/free-photo/electrical-conduit-installation-construction-site_23-2150702792.jpg'
+                ];
+                const contractImages = [
+                    'https://img.freepik.com/free-photo/business-people-signing-contract_23-2149368616.jpg',
+                    'https://img.freepik.com/free-photo/construction-contract-agreement-documents_23-2149368618.jpg'
+                ];
+                
                 mediaHtml = `
                     <div class="activity-media">
-                        ${Array(activity.mediaCount).fill(0).map((_, i) => 
-                            `<div class="activity-media-item${i === 2 && activity.mediaCount > 2 ? ' video' : ''}">${
-                                activity.type === 'contract' ? '📄' : '📷'
-                            }</div>`
-                        ).join('')}
+                        ${Array(activity.mediaCount).fill(0).map((_, i) => {
+                            const isVideo = i === 2 && activity.mediaCount > 2;
+                            const images = activity.type === 'contract' ? contractImages : taskImages;
+                            const imageUrl = images[i % images.length];
+                            return `<div class="activity-media-item${isVideo ? ' video' : ''}" style="background-image: url('${imageUrl}'); background-color: var(--bg-secondary); background-size: cover; background-position: center;"></div>`;
+                        }).join('')}
                     </div>
                 `;
             }

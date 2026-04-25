@@ -184,6 +184,44 @@
             font-size: 12px;
         }
 
+        .share-nav {
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .share-nav-card {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 12px 24px;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        .share-nav-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .share-nav-icon {
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        .share-nav-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .share-nav-arrow {
+            margin-left: 10px;
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
         @media (max-width: 900px) {
             .nav-grid {
                 grid-template-columns: 1fr;
@@ -205,7 +243,7 @@
         </div>
 
         <div class="nav-grid">
-            <a href="pc/pc-login.html" class="nav-card pc">
+            <a href="pc/pc-login.html" class="nav-card pc" target="_blank">
                 <div class="nav-icon">💻</div>
                 <div class="nav-title">PC管理端</div>
                 <div class="nav-desc">面向企业管理人员，提供全面的项目管理与合同配置功能</div>
@@ -217,7 +255,7 @@
                 <span class="nav-btn">进入管理端</span>
             </a>
 
-            <a href="service-miniapp/home.html" class="nav-card service">
+            <a href="service-miniapp/home.html" class="nav-card service" target="_blank">
                 <div class="nav-icon">🔧</div>
                 <div class="nav-title">服务方小程序</div>
                 <div class="nav-desc">面向施工团队与监理人员，支持任务执行与验收流程</div>
@@ -229,7 +267,7 @@
                 <span class="nav-btn">进入服务端</span>
             </a>
 
-            <a href="owner-miniapp/home.html" class="nav-card owner">
+            <a href="owner-miniapp/home.html" class="nav-card owner" target="_blank">
                 <div class="nav-icon">🏠</div>
                 <div class="nav-title">业主小程序</div>
                 <div class="nav-desc">面向业主用户，实时掌握装修进度与项目动态</div>
@@ -239,6 +277,14 @@
                     <li>合同款项管理</li>
                 </ul>
                 <span class="nav-btn">进入业主端</span>
+            </a>
+        </div>
+
+        <div class="share-nav">
+            <a href="share-navigation.html" class="share-nav-card" target="_blank">
+                <span class="share-nav-icon">🔗</span>
+                <span class="share-nav-text">分享功能导航</span>
+                <span class="share-nav-arrow">→</span>
             </a>
         </div>
 
