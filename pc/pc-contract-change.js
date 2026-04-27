@@ -428,16 +428,34 @@
                 
                 document.getElementById('editTaskName').value = taskName;
                 
-                const metaMatch = taskMeta.match(/执行人：(.+?) \| 确认人：(.+)/);
-                if (metaMatch) {
-                    // 清空之前的选择
-                    document.getElementById('editTaskExecutor').value = '';
-                    document.getElementById('selectedExecutor').innerHTML = '';
-                    document.getElementById('editTaskConfirmer').value = '';
-                    document.getElementById('selectedConfirmers').innerHTML = '';
-                    
-                    // 设置执行人
-                    const executor = metaMatch[1];
+                // 解析task-meta中的所有字段
+                const executionStandardMatch = taskMeta.match(/执行标准：(.*?) \|/);
+                const confirmationStandardMatch = taskMeta.match(/确认标准：(.*?) \|/);
+                const responsibilityStandardMatch = taskMeta.match(/担责标准：(.*?) \|/);
+                const executorMatch = taskMeta.match(/执行人：(.*?) \|/);
+                const confirmerMatch = taskMeta.match(/确认人：(.*)/);
+                
+                // 设置执行标准
+                const executionStandard = executionStandardMatch ? executionStandardMatch[1] : '';
+                document.getElementById('editExecuteStandard').value = executionStandard;
+                
+                // 设置确认标准
+                const confirmationStandard = confirmationStandardMatch ? confirmationStandardMatch[1] : '';
+                document.getElementById('editConfirmStandard').value = confirmationStandard;
+                
+                // 设置担责标准
+                const responsibilityStandard = responsibilityStandardMatch ? responsibilityStandardMatch[1] : '';
+                document.getElementById('editResponsibleStandard').value = responsibilityStandard;
+                
+                // 清空之前的选择
+                document.getElementById('editTaskExecutor').value = '';
+                document.getElementById('selectedExecutor').innerHTML = '';
+                document.getElementById('editTaskConfirmer').value = '';
+                document.getElementById('selectedConfirmers').innerHTML = '';
+                
+                // 设置执行人
+                const executor = executorMatch ? executorMatch[1] : '';
+                if (executor && executor !== '待分配') {
                     document.getElementById('editTaskExecutor').value = executor;
                     document.getElementById('selectedExecutor').innerHTML = `
                         <div class="selected-user-tag">
@@ -446,9 +464,12 @@
                             <span class="remove-user" onclick="removeUser('executor')">×</span>
                         </div>
                     `;
-                    
-                    // 设置确认人
-                    const confirmers = metaMatch[2].split('、');
+                }
+                
+                // 设置确认人
+                const confirmer = confirmerMatch ? confirmerMatch[1] : '';
+                if (confirmer && confirmer !== '待分配') {
+                    const confirmers = confirmer.split('、');
                     const selectedConfirmersContainer = document.getElementById('selectedConfirmers');
                     confirmers.forEach(c => {
                         selectedConfirmersContainer.insertAdjacentHTML('beforeend', `
@@ -461,10 +482,6 @@
                     });
                     document.getElementById('editTaskConfirmer').value = confirmers.join('、');
                 }
-                
-                document.getElementById('editExecuteStandard').value = '按照规范进行布线施工，确保线路走向合理、固定牢固';
-                document.getElementById('editConfirmStandard').value = '检查布线是否符合设计要求，线路是否通畅';
-                document.getElementById('editResponsibleStandard').value = '因施工质量问题导致的返工由执行人承担';
             } else if (taskItem.classList.contains('task-modified')) {
                 currentEditTaskType = 'modified';
                 document.getElementById('editTaskModalTitle').textContent = '编辑已修改任务';
@@ -497,16 +514,36 @@
                 document.getElementById('editTaskName').value = taskName;
                 document.getElementById('editTaskName').classList.add('highlight-input');
                 
-                const metaMatch = taskMeta.match(/执行人：(.+?) \| 确认人：(.+)/);
-                if (metaMatch) {
-                    // 清空之前的选择
-                    document.getElementById('editTaskExecutor').value = '';
-                    document.getElementById('selectedExecutor').innerHTML = '';
-                    document.getElementById('editTaskConfirmer').value = '';
-                    document.getElementById('selectedConfirmers').innerHTML = '';
-                    
-                    // 设置执行人
-                    const executor = metaMatch[1];
+                // 解析task-meta中的所有字段
+                const executionStandardMatch = taskMeta.match(/执行标准：(.*?) \|/);
+                const confirmationStandardMatch = taskMeta.match(/确认标准：(.*?) \|/);
+                const responsibilityStandardMatch = taskMeta.match(/担责标准：(.*?) \|/);
+                const executorMatch = taskMeta.match(/执行人：(.*?) \|/);
+                const confirmerMatch = taskMeta.match(/确认人：(.*)/);
+                
+                // 设置执行标准
+                const executionStandard = executionStandardMatch ? executionStandardMatch[1] : '';
+                document.getElementById('editExecuteStandard').value = executionStandard;
+                document.getElementById('editExecuteStandard').classList.add('highlight-input');
+                
+                // 设置确认标准
+                const confirmationStandard = confirmationStandardMatch ? confirmationStandardMatch[1] : '';
+                document.getElementById('editConfirmStandard').value = confirmationStandard;
+                document.getElementById('editConfirmStandard').classList.add('highlight-input');
+                
+                // 设置担责标准
+                const responsibilityStandard = responsibilityStandardMatch ? responsibilityStandardMatch[1] : '';
+                document.getElementById('editResponsibleStandard').value = responsibilityStandard;
+                
+                // 清空之前的选择
+                document.getElementById('editTaskExecutor').value = '';
+                document.getElementById('selectedExecutor').innerHTML = '';
+                document.getElementById('editTaskConfirmer').value = '';
+                document.getElementById('selectedConfirmers').innerHTML = '';
+                
+                // 设置执行人
+                const executor = executorMatch ? executorMatch[1] : '';
+                if (executor && executor !== '待分配') {
                     document.getElementById('editTaskExecutor').value = executor;
                     document.getElementById('selectedExecutor').innerHTML = `
                         <div class="selected-user-tag">
@@ -515,9 +552,12 @@
                             <span class="remove-user" onclick="removeUser('executor')">×</span>
                         </div>
                     `;
-                    
-                    // 设置确认人
-                    const confirmers = metaMatch[2].split('、');
+                }
+                
+                // 设置确认人
+                const confirmer = confirmerMatch ? confirmerMatch[1] : '';
+                if (confirmer && confirmer !== '待分配') {
+                    const confirmers = confirmer.split('、');
                     const selectedConfirmersContainer = document.getElementById('selectedConfirmers');
                     confirmers.forEach(c => {
                         selectedConfirmersContainer.insertAdjacentHTML('beforeend', `
@@ -530,93 +570,12 @@
                     });
                     document.getElementById('editTaskConfirmer').value = confirmers.join('、');
                 }
-                
-                document.getElementById('editExecuteStandard').value = '按最新规范施工，增加验收环节';
-                document.getElementById('editExecuteStandard').classList.add('highlight-input');
-                document.getElementById('editConfirmStandard').value = '检查布线是否符合设计要求，线路是否通畅，业主现场确认';
-                document.getElementById('editConfirmStandard').classList.add('highlight-input');
-                document.getElementById('editResponsibleStandard').value = '因施工质量问题导致的返工由执行人承担';
             } else {
                 showToast('此任务不支持编辑');
                 return;
             }
             
             document.getElementById('editTaskModal').classList.add('show');
-        }
-
-        function toggleExecutorDropdown() {
-            const dropdown = document.getElementById('executorDropdown');
-            const confirmerDropdown = document.getElementById('confirmerDropdown');
-            confirmerDropdown.classList.remove('show');
-            dropdown.classList.toggle('show');
-        }
-
-        function selectExecutor(name, role) {
-            selectedExecutor = { name, role };
-            document.getElementById('executorInput').value = `${name}（${role}）`;
-            document.getElementById('executorDropdown').classList.remove('show');
-        }
-
-        function toggleConfirmerDropdown() {
-            const dropdown = document.getElementById('confirmerDropdown');
-            const executorDropdown = document.getElementById('executorDropdown');
-            executorDropdown.classList.remove('show');
-            dropdown.classList.toggle('show');
-        }
-
-        function toggleConfirmer(name, role) {
-            const existing = selectedConfirmers.find(c => c.name === name);
-            if (existing) {
-                selectedConfirmers = selectedConfirmers.filter(c => c.name !== name);
-            } else {
-                if (selectedConfirmers.length >= 5) {
-                    showToast('确认人最多选择5人');
-                    return;
-                }
-                selectedConfirmers.push({ name, role });
-            }
-            renderConfirmerTags();
-            updateConfirmerOptions();
-        }
-
-        function renderConfirmerTags() {
-            const container = document.getElementById('confirmerTags');
-            container.innerHTML = selectedConfirmers.map(c => `
-                <div class="person-tag">
-                    <span>${c.name}（${c.role}）</span>
-                    <span class="remove" onclick="removeConfirmer('${c.name}')">×</span>
-                </div>
-            `).join('');
-        }
-
-        function removeConfirmer(name) {
-            selectedConfirmers = selectedConfirmers.filter(c => c.name !== name);
-            renderConfirmerTags();
-            updateConfirmerOptions();
-        }
-
-        function updateConfirmerOptions() {
-            const options = document.querySelectorAll('#confirmerDropdown .person-select-option');
-            options.forEach(opt => {
-                const name = opt.querySelector('span:last-child').textContent.split('（')[0];
-                if (selectedConfirmers.find(c => c.name === name)) {
-                    opt.classList.add('selected');
-                    // 添加确认标识
-                    if (!opt.querySelector('.checkmark')) {
-                        const checkmark = document.createElement('span');
-                        checkmark.className = 'checkmark';
-                        checkmark.innerHTML = '✓';
-                        opt.appendChild(checkmark);
-                    }
-                } else {
-                    opt.classList.remove('selected');
-                    // 移除确认标识
-                    const checkmark = opt.querySelector('.checkmark');
-                    if (checkmark) {
-                        checkmark.remove();
-                    }
-                }
-            });
         }
 
         function saveTask() {
@@ -1478,8 +1437,228 @@
             showToast('查看变更记录');
         }
 
+        // 保存变更功能
+        function saveChange() {
+            // 收集变更数据
+            const changeData = {
+                contractName: document.getElementById('contractName').value,
+                changeReason: document.getElementById('changeReason').value,
+                contractContent: document.getElementById('contractContent').innerHTML,
+                stages: [],
+                attachments: contractAttachments,
+                savedAt: new Date().toISOString()
+            };
+            
+            // 收集阶段和任务数据
+            const stageItems = document.querySelectorAll('.stage-item');
+            stageItems.forEach((stageItem, index) => {
+                const stageName = stageItem.querySelector('.stage-name').textContent;
+                const stageStatus = stageItem.classList.contains('stage-added') ? 'added' : 
+                                   stageItem.classList.contains('stage-modified') ? 'modified' :
+                                   stageItem.classList.contains('stage-deleted') ? 'deleted' : 'unchanged';
+                
+                const tasks = [];
+                const taskItems = stageItem.querySelectorAll('.task-item');
+                taskItems.forEach(taskItem => {
+                    const taskName = taskItem.querySelector('.task-name').textContent;
+                    const taskMeta = taskItem.querySelector('.task-meta').textContent;
+                    const taskStatus = taskItem.classList.contains('task-added') ? 'added' :
+                                      taskItem.classList.contains('task-modified') ? 'modified' :
+                                      taskItem.classList.contains('task-deleted') ? 'deleted' : 'unchanged';
+                    
+                    tasks.push({
+                        name: taskName,
+                        meta: taskMeta,
+                        status: taskStatus
+                    });
+                });
+                
+                changeData.stages.push({
+                    name: stageName,
+                    status: stageStatus,
+                    tasks: tasks
+                });
+            });
+            
+            // 保存到localStorage
+            try {
+                localStorage.setItem('contractChangeData', JSON.stringify(changeData));
+                updateAutoSaveStatus('saved');
+                showToast('变更已保存');
+                return true;
+            } catch (error) {
+                console.error('保存失败:', error);
+                showToast('保存失败，请重试');
+                return false;
+            }
+        }
+
+        // 预览变更功能
+        function previewChange() {
+            // 创建预览窗口
+            const previewWindow = window.open('', '_blank', 'width=1200,height=800');
+            if (!previewWindow) {
+                showToast('请允许弹出窗口以预览变更');
+                return;
+            }
+            
+            // 收集变更数据
+            const changeData = {
+                contractName: document.getElementById('contractName').value,
+                changeReason: document.getElementById('changeReason').value,
+                contractContent: document.getElementById('contractContent').innerHTML,
+                stages: []
+            };
+            
+            // 收集阶段和任务数据
+            const stageItems = document.querySelectorAll('.stage-item');
+            stageItems.forEach((stageItem, index) => {
+                const stageName = stageItem.querySelector('.stage-name').textContent;
+                const stageStatus = stageItem.classList.contains('stage-added') ? 'added' : 
+                                   stageItem.classList.contains('stage-modified') ? 'modified' :
+                                   stageItem.classList.contains('stage-deleted') ? 'deleted' : 'unchanged';
+                
+                const tasks = [];
+                const taskItems = stageItem.querySelectorAll('.task-item');
+                taskItems.forEach(taskItem => {
+                    const taskName = taskItem.querySelector('.task-name').textContent;
+                    const taskMeta = taskItem.querySelector('.task-meta').textContent;
+                    const taskStatus = taskItem.classList.contains('task-added') ? 'added' :
+                                      taskItem.classList.contains('task-modified') ? 'modified' :
+                                      taskItem.classList.contains('task-deleted') ? 'deleted' : 'unchanged';
+                    
+                    tasks.push({
+                        name: taskName,
+                        meta: taskMeta,
+                        status: taskStatus
+                    });
+                });
+                
+                changeData.stages.push({
+                    name: stageName,
+                    status: stageStatus,
+                    tasks: tasks
+                });
+            });
+            
+            // 生成预览HTML
+            const previewHTML = `
+                <!DOCTYPE html>
+                <html lang="zh-CN">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>合同变更预览</title>
+                    <style>
+                        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 20px; max-width: 1200px; margin: 0 auto; }
+                        h1 { text-align: center; color: #1890ff; }
+                        .section { margin: 20px 0; padding: 20px; border: 1px solid #e8e8e8; border-radius: 4px; }
+                        .section-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #e8e8e8; }
+                        .change-reason { background: #fff7e6; padding: 15px; border-radius: 4px; margin-bottom: 20px; }
+                        .stage { margin: 15px 0; padding: 15px; background: #fafafa; border-radius: 4px; }
+                        .stage-name { font-weight: bold; margin-bottom: 10px; }
+                        .task { margin: 10px 0; padding: 10px; background: white; border-radius: 4px; border-left: 3px solid #1890ff; }
+                        .added { border-left-color: #52c41a; }
+                        .modified { border-left-color: #fa8c16; }
+                        .deleted { border-left-color: #ff4d4f; opacity: 0.6; }
+                        .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 12px; margin-left: 10px; }
+                        .badge.added { background: #f6ffed; color: #52c41a; }
+                        .badge.modified { background: #fff7e6; color: #fa8c16; }
+                        .badge.deleted { background: #fff1f0; color: #ff4d4f; }
+                    </style>
+                </head>
+                <body>
+                    <h1>合同变更预览</h1>
+                    <div class="change-reason">
+                        <strong>变更原因：</strong>${changeData.changeReason}
+                    </div>
+                    <div class="section">
+                        <div class="section-title">合同正文</div>
+                        ${changeData.contractContent}
+                    </div>
+                    <div class="section">
+                        <div class="section-title">阶段任务变更</div>
+                        ${changeData.stages.map(stage => `
+                            <div class="stage ${stage.status}">
+                                <div class="stage-name">
+                                    ${stage.name}
+                                    <span class="badge ${stage.status}">${stage.status === 'added' ? '新增' : stage.status === 'modified' ? '已修改' : stage.status === 'deleted' ? '已删除' : ''}</span>
+                                </div>
+                                ${stage.tasks.map(task => `
+                                    <div class="task ${task.status}">
+                                        <div><strong>${task.name}</strong>
+                                            <span class="badge ${task.status}">${task.status === 'added' ? '新增' : task.status === 'modified' ? '已修改' : task.status === 'deleted' ? '已删除' : ''}</span>
+                                        </div>
+                                        <div style="font-size: 12px; color: #8c8c8c; margin-top: 5px;">${task.meta}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `).join('')}
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            previewWindow.document.write(previewHTML);
+            previewWindow.document.close();
+        }
+
+        // 更新自动保存状态
+        function updateAutoSaveStatus(status) {
+            const autoSaveStatus = document.getElementById('autoSaveStatus');
+            const statusIcon = autoSaveStatus.querySelector('.status-icon');
+            const statusText = autoSaveStatus.querySelector('.status-text');
+            const saveTime = autoSaveStatus.querySelector('.save-time');
+            
+            if (status === 'saved') {
+                autoSaveStatus.className = 'auto-save-status saved';
+                statusIcon.textContent = '✓';
+                statusText.textContent = '已自动保存';
+                const now = new Date();
+                saveTime.textContent = now.getHours().toString().padStart(2, '0') + ':' + 
+                                       now.getMinutes().toString().padStart(2, '0') + ':' + 
+                                       now.getSeconds().toString().padStart(2, '0');
+            } else if (status === 'saving') {
+                autoSaveStatus.className = 'auto-save-status saving';
+                statusIcon.textContent = '⏳';
+                statusText.textContent = '正在保存...';
+            } else if (status === 'error') {
+                autoSaveStatus.className = 'auto-save-status error';
+                statusIcon.textContent = '✗';
+                statusText.textContent = '保存失败';
+            }
+        }
+
+        // 自动保存功能
+        let autoSaveTimer = null;
+        function startAutoSave() {
+            // 每30秒自动保存一次
+            autoSaveTimer = setInterval(() => {
+                saveChange();
+            }, 30000);
+        }
+
+        // 页面加载时启动自动保存
+        document.addEventListener('DOMContentLoaded', function() {
+            startAutoSave();
+            
+            // 尝试恢复之前保存的数据
+            const savedData = localStorage.getItem('contractChangeData');
+            if (savedData) {
+                try {
+                    const changeData = JSON.parse(savedData);
+                    // 可以在这里提示用户是否恢复数据
+                    console.log('发现已保存的变更数据:', changeData);
+                } catch (error) {
+                    console.error('恢复数据失败:', error);
+                }
+            }
+        });
+
         function cancelChange() {
             if (confirm('确定要取消变更吗？\n\n取消后将返回合同详情页面，变更内容将不会保存。')) {
+                // 清除自动保存的数据
+                localStorage.removeItem('contractChangeData');
                 window.location.href = 'pc-contract-detail.html?id=1&status=signed';
             }
         }
@@ -1491,7 +1670,7 @@
                 return;
             }
             
-            if (confirm('确定要提交变更申请吗？\n\n提交后将发送给合同另一方确认。')) {
+            if (confirm('确认要提交变更申请吗？提交后将由平台进行审核再给合同另一方进行确认。')) {
                 const now = new Date();
                 const timeStr = now.getFullYear() + '-' + 
                     String(now.getMonth() + 1).padStart(2, '0') + '-' + 

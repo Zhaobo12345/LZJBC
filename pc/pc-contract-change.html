@@ -375,7 +375,7 @@
                                         </div>
                                     </div>
                                     <div class="stage-body" style="display: none;">
-                                        <div class="task-item task-added">
+                                        <div class="task-item task-added" data-task-id="2">
                                             <div class="task-info">
                                                 <span class="task-name">新增点位布线</span>
                                                 <span class="task-meta">执行人：电工组 | 确认人：项目经理</span>
@@ -386,7 +386,7 @@
                                                 <button class="pc-btn pc-btn-text pc-btn-sm" onclick="deleteTask(2)">删除</button>
                                             </div>
                                         </div>
-                                        <div class="task-item task-added">
+                                        <div class="task-item task-added" data-task-id="3">
                                             <div class="task-info">
                                                 <span class="task-name">新增点位验收</span>
                                                 <span class="task-meta">执行人：电工组 | 确认人：项目经理、业主</span>
@@ -413,7 +413,7 @@
                                         </div>
                                     </div>
                                     <div class="stage-body" style="display: none;">
-                                        <div class="task-item task-modified">
+                                        <div class="task-item task-modified" data-task-id="4">
                                             <div class="task-info">
                                                 <span class="task-name">整体验收</span>
                                                 <span class="task-meta">执行人：电工组 | 确认人：项目经理、业主</span>
@@ -424,7 +424,7 @@
                                                 <button class="pc-btn pc-btn-text pc-btn-sm" onclick="deleteTask(4)">删除</button>
                                             </div>
                                         </div>
-                                        <div class="task-item task-added">
+                                        <div class="task-item task-added" data-task-id="5">
                                             <div class="task-info">
                                                 <span class="task-name">新增点位整体验收</span>
                                                 <span class="task-meta">执行人：电工组 | 确认人：项目经理、业主</span>
@@ -472,7 +472,7 @@
                                 <span class="status-text">已自动保存</span>
                                 <span class="save-time">16:30:45</span>
                             </div>
-                            <button class="pc-btn pc-btn-default">预览变更</button>
+                            <button class="pc-btn pc-btn-default" onclick="previewChange()">预览变更</button>
                         </div>
                         <div class="footer-right">
                             <button class="pc-btn pc-btn-default" onclick="cancelChange()">取消变更</button>

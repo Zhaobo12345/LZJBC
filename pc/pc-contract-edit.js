@@ -1226,6 +1226,212 @@
             }
         }
 
+        // 保存合同功能
+        function saveContract() {
+            // 收集合同数据
+            const contractData = {
+                contractName: document.getElementById('contractName').value,
+                contractAmount: document.querySelector('input[placeholder="请输入合同金额"]').value,
+                contractContent: document.getElementById('contractContentEditor').innerHTML,
+                stages: [],
+                attachments: contractAttachments,
+                savedAt: new Date().toISOString()
+            };
+            
+            // 收集阶段和任务数据
+            const stageItems = document.querySelectorAll('.stage-item');
+            stageItems.forEach((stageItem, index) => {
+                const stageName = stageItem.querySelector('.stage-name').textContent;
+                const isSequential = stageItem.querySelector('.stage-sequential') !== null;
+                
+                const tasks = [];
+                const taskItems = stageItem.querySelectorAll('.task-item');
+                taskItems.forEach(taskItem => {
+                    const taskName = taskItem.querySelector('.task-name').textContent;
+                    const taskMeta = taskItem.querySelector('.task-meta').textContent;
+                    
+                    tasks.push({
+                        name: taskName,
+                        meta: taskMeta
+                    });
+                });
+                
+                contractData.stages.push({
+                    name: stageName,
+                    isSequential: isSequential,
+                    tasks: tasks
+                });
+            });
+            
+            // 保存到localStorage
+            try {
+                localStorage.setItem('contractEditData', JSON.stringify(contractData));
+                updateAutoSaveStatus('saved');
+                showToast('合同已保存');
+                return true;
+            } catch (error) {
+                console.error('保存失败:', error);
+                showToast('保存失败，请重试');
+                return false;
+            }
+        }
+
+        // 取消编辑功能
+        function cancelEdit() {
+            if (confirm('确定要取消编辑吗？\n\n取消后将返回合同列表页面，编辑内容将不会保存。')) {
+                // 清除自动保存的数据
+                localStorage.removeItem('contractEditData');
+                window.location.href = 'pc-contract-list.html';
+            }
+        }
+
+        // 预览合同功能
+        function previewContract() {
+            // 创建预览窗口
+            const previewWindow = window.open('', '_blank', 'width=1200,height=800');
+            if (!previewWindow) {
+                showToast('请允许弹出窗口以预览合同');
+                return;
+            }
+            
+            // 收集合同数据
+            const contractData = {
+                contractName: document.getElementById('contractName').value,
+                contractAmount: document.querySelector('input[placeholder="请输入合同金额"]').value,
+                contractContent: document.getElementById('contractContentEditor').innerHTML,
+                stages: []
+            };
+            
+            // 收集阶段和任务数据
+            const stageItems = document.querySelectorAll('.stage-item');
+            stageItems.forEach((stageItem, index) => {
+                const stageName = stageItem.querySelector('.stage-name').textContent;
+                const isSequential = stageItem.querySelector('.stage-sequential') !== null;
+                
+                const tasks = [];
+                const taskItems = stageItem.querySelectorAll('.task-item');
+                taskItems.forEach(taskItem => {
+                    const taskName = taskItem.querySelector('.task-name').textContent;
+                    const taskMeta = taskItem.querySelector('.task-meta').textContent;
+                    
+                    tasks.push({
+                        name: taskName,
+                        meta: taskMeta
+                    });
+                });
+                
+                contractData.stages.push({
+                    name: stageName,
+                    isSequential: isSequential,
+                    tasks: tasks
+                });
+            });
+            
+            // 生成预览HTML
+            const previewHTML = `
+                <!DOCTYPE html>
+                <html lang="zh-CN">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>合同预览</title>
+                    <style>
+                        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 20px; max-width: 1200px; margin: 0 auto; }
+                        h1 { text-align: center; color: #1890ff; }
+                        .info { background: #f5f5f5; padding: 15px; border-radius: 4px; margin-bottom: 20px; }
+                        .info-item { margin: 8px 0; }
+                        .info-label { font-weight: bold; margin-right: 10px; }
+                        .section { margin: 20px 0; padding: 20px; border: 1px solid #e8e8e8; border-radius: 4px; }
+                        .section-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #e8e8e8; }
+                        .stage { margin: 15px 0; padding: 15px; background: #fafafa; border-radius: 4px; }
+                        .stage-name { font-weight: bold; margin-bottom: 10px; }
+                        .task { margin: 10px 0; padding: 10px; background: white; border-radius: 4px; border-left: 3px solid #1890ff; }
+                        .task-meta { font-size: 12px; color: #8c8c8c; margin-top: 5px; }
+                    </style>
+                </head>
+                <body>
+                    <h1>${contractData.contractName || '合同预览'}</h1>
+                    <div class="info">
+                        <div class="info-item"><span class="info-label">合同金额：</span>${contractData.contractAmount || '未填写'}元</div>
+                    </div>
+                    <div class="section">
+                        <div class="section-title">合同正文</div>
+                        ${contractData.contractContent}
+                    </div>
+                    <div class="section">
+                        <div class="section-title">阶段任务</div>
+                        ${contractData.stages.map(stage => `
+                            <div class="stage">
+                                <div class="stage-name">${stage.name}${stage.isSequential ? ' <span style="color: #8c8c8c; font-size: 12px;">(按序执行)</span>' : ''}</div>
+                                ${stage.tasks.map(task => `
+                                    <div class="task">
+                                        <div><strong>${task.name}</strong></div>
+                                        <div class="task-meta">${task.meta}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `).join('')}
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            previewWindow.document.write(previewHTML);
+            previewWindow.document.close();
+        }
+
+        // 更新自动保存状态
+        function updateAutoSaveStatus(status) {
+            const autoSaveStatus = document.getElementById('autoSaveStatus');
+            const statusIcon = autoSaveStatus.querySelector('.status-icon');
+            const statusText = autoSaveStatus.querySelector('.status-text');
+            const saveTime = autoSaveStatus.querySelector('.save-time');
+            
+            if (status === 'saved') {
+                autoSaveStatus.className = 'auto-save-status saved';
+                statusIcon.textContent = '✓';
+                statusText.textContent = '已自动保存';
+                const now = new Date();
+                saveTime.textContent = now.getHours().toString().padStart(2, '0') + ':' + 
+                                       now.getMinutes().toString().padStart(2, '0') + ':' + 
+                                       now.getSeconds().toString().padStart(2, '0');
+            } else if (status === 'saving') {
+                autoSaveStatus.className = 'auto-save-status saving';
+                statusIcon.textContent = '⏳';
+                statusText.textContent = '正在保存...';
+            } else if (status === 'error') {
+                autoSaveStatus.className = 'auto-save-status error';
+                statusIcon.textContent = '✗';
+                statusText.textContent = '保存失败';
+            }
+        }
+
+        // 自动保存功能
+        let autoSaveTimer = null;
+        function startAutoSave() {
+            // 每30秒自动保存一次
+            autoSaveTimer = setInterval(() => {
+                saveContract();
+            }, 30000);
+        }
+
+        // 页面加载时启动自动保存
+        document.addEventListener('DOMContentLoaded', function() {
+            startAutoSave();
+            
+            // 尝试恢复之前保存的数据
+            const savedData = localStorage.getItem('contractEditData');
+            if (savedData) {
+                try {
+                    const contractData = JSON.parse(savedData);
+                    // 可以在这里提示用户是否恢复数据
+                    console.log('发现已保存的合同数据:', contractData);
+                } catch (error) {
+                    console.error('恢复数据失败:', error);
+                }
+            }
+        });
+
         function submitContract() {
             document.getElementById('submitConfirmModal').classList.add('show');
         }
@@ -1244,7 +1450,7 @@
 
         function confirmSubmit() {
             if (submitAction === 'save') {
-                showToast('合同已保存');
+                saveContract();
                 closeSubmitModal();
             } else {
                 const contractName = document.getElementById('contractName').value.trim();
@@ -1252,6 +1458,9 @@
                     showToast('请输入合同名称');
                     return;
                 }
+                
+                // 清除自动保存的数据
+                localStorage.removeItem('contractEditData');
                 
                 const now = new Date();
                 const timeStr = now.getFullYear() + '-' + 
