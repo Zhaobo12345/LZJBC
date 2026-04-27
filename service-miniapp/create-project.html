@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>��װƽ̨С����ԭ�� - ������Ŀ</title>
+    <title>家装平台小程序原型 - 创建项目</title>
     <link rel="stylesheet" href="common.css">
     <style>
         .page-content {
@@ -458,275 +458,275 @@
     <div class="phone-frame">
         <div class="status-bar">
             <div class="time">9:41</div>
-            <div class="icons">?? ??</div>
+            <div class="icons">📶 🔋</div>
         </div>
-        
+
         <div class="nav-bar">
-            <div class="back" onclick="history.back()">�� ����</div>
+            <div class="back" onclick="history.back()">← 返回</div>
             <div class="title centered">
-                ������Ŀ
+                创建项目
                 <span class="promoter-badge" id="promoterBadge" style="display: none;">
-                    <span class="badge-icon">?</span>
-                    <span>��Ŀ������</span>
+                    <span class="badge-icon">⭐</span>
+                    <span>项目发起人</span>
                 </span>
             </div>
             <div class="actions">
-                <div class="action-btn" onclick="alert('�ر�С����')">?</div>
+                <div class="action-btn" onclick="alert('关闭小程序')">✕</div>
             </div>
         </div>
-        
+
         <div class="page-content">
             <div class="promoter-banner" id="promoterBanner" onclick="goToPromoterAuth()">
                 <div class="banner-left">
-                    <div class="banner-icon">??</div>
+                    <div class="banner-icon">💰</div>
                     <div class="banner-content">
-                        <div class="banner-title">��Ϊ��Ŀ�����˿�������Ŀ����</div>
-                        <div class="banner-desc">������֤����������֮��</div>
+                        <div class="banner-title">成为项目发起人可享受项目分利</div>
+                        <div class="banner-desc">立即认证，开启收益之旅</div>
                     </div>
                 </div>
-                <div class="banner-arrow">?</div>
+                <div class="banner-arrow">›</div>
             </div>
-            
+
             <div class="promoter-tip" id="promoterTip">
-                <span class="tip-icon">?</span>
-                <span>��������֤��Ŀ�����ˣ���������Ŀ����Ȩ��</span>
+                <span class="tip-icon">✓</span>
+                <span>您已是认证项目发起人，可享受项目分利权益</span>
             </div>
-            
+
             <form id="createForm">
                 <div class="form-section">
-                    <div class="form-section-title">�ͻ���Ϣ</div>
-                    
+                    <div class="form-section-title">客户信息</div>
+
                     <div class="form-group">
                         <label class="form-label">
                             <span class="required">*</span>
-                            <span>�ͻ�����</span>
+                            <span>客户姓名</span>
                         </label>
-                        <input type="text" class="form-input" id="customerName" placeholder="������ͻ�����" maxlength="20">
-                        <div class="error-message" id="customerNameError">������ͻ�����</div>
+                        <input type="text" class="form-input" id="customerName" placeholder="请输入客户姓名" maxlength="20">
+                        <div class="error-message" id="customerNameError">请输入客户姓名</div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="form-label">
                             <span class="required">*</span>
-                            <span>��ϵ��ʽ</span>
+                            <span>联系方式</span>
                         </label>
-                        <input type="tel" class="form-input" id="customerPhone" placeholder="�������ֻ�����" maxlength="11">
-                        <div class="error-message" id="customerPhoneError">��������ȷ���ֻ�����</div>
+                        <input type="tel" class="form-input" id="customerPhone" placeholder="请输入手机号码" maxlength="11">
+                        <div class="error-message" id="customerPhoneError">请输入正确的手机号码</div>
                     </div>
                 </div>
-                
+
                 <div class="form-section">
-                    <div class="form-section-title">������Ϣ</div>
-                    
+                    <div class="form-section-title">房屋信息</div>
+
                     <div class="form-group">
                         <label class="form-label">
                             <span class="required">*</span>
-                            <span>��������</span>
+                            <span>所在区域</span>
                         </label>
                         <div class="region-select">
                             <select class="form-select" id="province">
-                                <option value="">��ѡ��ʡ</option>
-                                <option value="�㽭ʡ">�㽭ʡ</option>
-                                <option value="����ʡ">����ʡ</option>
-                                <option value="�Ϻ���">�Ϻ���</option>
-                                <option value="������">������</option>
+                                <option value="">请选择省</option>
+                                <option value="浙江省">浙江省</option>
+                                <option value="江苏省">江苏省</option>
+                                <option value="上海市">上海市</option>
+                                <option value="北京市">北京市</option>
                             </select>
                             <select class="form-select" id="city">
-                                <option value="">��ѡ����</option>
-                                <option value="������">������</option>
-                                <option value="������">������</option>
-                                <option value="������">������</option>
+                                <option value="">请选择市</option>
+                                <option value="杭州市">杭州市</option>
+                                <option value="宁波市">宁波市</option>
+                                <option value="温州市">温州市</option>
                             </select>
                             <select class="form-select" id="district">
-                                <option value="">��ѡ����</option>
-                                <option value="������">������</option>
-                                <option value="�ຼ��">�ຼ��</option>
-                                <option value="������">������</option>
+                                <option value="">请选择区</option>
+                                <option value="西湖区">西湖区</option>
+                                <option value="余杭区">余杭区</option>
+                                <option value="滨江区">滨江区</option>
                             </select>
                         </div>
-                        <input type="text" class="form-input" id="address" placeholder="��������ϸ��ַ���ֵ���С����¥���ŵȣ�">
-                        <div class="error-message" id="regionError">��ѡ��������������Ϣ</div>
+                        <input type="text" class="form-input" id="address" placeholder="请输入详细地址（街道、小区、楼栋号等）">
+                        <div class="error-message" id="regionError">请选择完整的区域信息</div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="form-label">
                             <span class="required">*</span>
-                            <span>�������</span>
+                            <span>房屋面积</span>
                         </label>
                         <div style="position: relative;">
-                            <input type="number" class="form-input" id="area" placeholder="�����뷿�����" style="padding-right: 40px;">
-                            <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary);">�O</span>
+                            <input type="number" class="form-input" id="area" placeholder="请输入房屋面积" style="padding-right: 40px;">
+                            <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary);">㎡</span>
                         </div>
-                        <div class="error-message" id="areaError">�����뷿�����</div>
+                        <div class="error-message" id="areaError">请输入房屋面积</div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="form-label">
                             <span class="required">*</span>
-                            <span>�������</span>
+                            <span>房屋类别</span>
                         </label>
                         <div class="category-options" id="categoryOptions">
                             <div class="category-option" data-value="maopi" onclick="selectCategory(this)">
-                                <div class="icon">??</div>
-                                <div class="text">ë����</div>
+                                <div class="icon">🏠</div>
+                                <div class="text">毛坯房</div>
                             </div>
                             <div class="category-option" data-value="jingzhuang" onclick="selectCategory(this)">
-                                <div class="icon">??</div>
-                                <div class="text">��װ��</div>
+                                <div class="icon">🏡</div>
+                                <div class="text">精装房</div>
                             </div>
                             <div class="category-option" data-value="gaizao" onclick="selectCategory(this)">
-                                <div class="icon">??</div>
-                                <div class="text">�ɷ�����</div>
+                                <div class="icon">🔧</div>
+                                <div class="text">旧房改造</div>
                             </div>
                         </div>
-                        <div class="error-message" id="categoryError">��ѡ�������</div>
+                        <div class="error-message" id="categoryError">请选择房屋类别</div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label class="form-label">
                             <span class="required">*</span>
-                            <span>����</span>
+                            <span>房型</span>
                         </label>
                         <div class="house-type-options" id="houseTypeOptions">
                             <div class="house-type-option" data-value="bieshu" onclick="selectHouseType(this)">
-                                <div class="icon">??</div>
-                                <div class="text">����</div>
+                                <div class="icon">🏰</div>
+                                <div class="text">别墅</div>
                             </div>
                             <div class="house-type-option" data-value="pingceng" onclick="selectHouseType(this)">
-                                <div class="icon">??</div>
-                                <div class="text">ƽ��</div>
+                                <div class="icon">🏢</div>
+                                <div class="text">平层</div>
                             </div>
                         </div>
-                        <div class="error-message" id="houseTypeError">��ѡ����</div>
+                        <div class="error-message" id="houseTypeError">请选择房型</div>
                     </div>
                 </div>
-                
+
                 <div class="form-section">
-                    <div class="form-section-title">�ƻ�ʱ��</div>
-                    
+                    <div class="form-section-title">计划时间</div>
+
                     <div class="date-row">
                         <div class="form-group">
-                            <label class="form-label">�ƻ���������</label>
+                            <label class="form-label">计划开工日期</label>
                             <input type="date" class="form-input" id="startDate">
                         </div>
                         <div class="form-group">
-                            <label class="form-label">�ƻ���ס����</label>
+                            <label class="form-label">计划入住日期</label>
                             <input type="date" class="form-input" id="endDate">
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="form-section">
-                    <div class="form-section-title">���ϲ��</div>
-                    
+                    <div class="form-section-title">风格喜好</div>
+
                     <div class="form-group">
-                        <label class="form-label">ѡ��ϲ����װ�޷�񣨿ɶ�ѡ��</label>
+                        <label class="form-label">选择喜欢的装修风格（可多选）</label>
                         <div class="style-options" id="styleOptions">
-                            <div class="style-option" data-value="zhongshi" onclick="toggleStyle(this)">��ʽ</div>
-                            <div class="style-option" data-value="fashi" onclick="toggleStyle(this)">��ʽ</div>
-                            <div class="style-option" data-value="xiandai" onclick="toggleStyle(this)">�ִ�</div>
-                            <div class="style-option" data-value="qingshe" onclick="toggleStyle(this)">����</div>
-                            <div class="style-option" data-value="jianyue" onclick="toggleStyle(this)">��Լ</div>
-                            <div class="style-option" data-value="gongye" onclick="toggleStyle(this)">��ҵ</div>
-                            <div class="style-option" data-value="meishi" onclick="toggleStyle(this)">��ʽ</div>
+                            <div class="style-option" data-value="zhongshi" onclick="toggleStyle(this)">中式</div>
+                            <div class="style-option" data-value="fashi" onclick="toggleStyle(this)">法式</div>
+                            <div class="style-option" data-value="xiandai" onclick="toggleStyle(this)">现代</div>
+                            <div class="style-option" data-value="qingshe" onclick="toggleStyle(this)">轻奢</div>
+                            <div class="style-option" data-value="jianyue" onclick="toggleStyle(this)">简约</div>
+                            <div class="style-option" data-value="gongye" onclick="toggleStyle(this)">工业</div>
+                            <div class="style-option" data-value="meishi" onclick="toggleStyle(this)">美式</div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="form-section">
-                    <div class="form-section-title">����</div>
-                    
+                    <div class="form-section-title">附件</div>
+
                     <div class="form-group">
-                        <label class="form-label">�ϴ���ظ���</label>
+                        <label class="form-label">上传相关附件</label>
                         <div class="upload-area" onclick="uploadFile()">
-                            <div class="icon">??</div>
-                            <div class="text">����ϴ�����</div>
-                            <div class="hint">֧��ͼƬ��PDF��Word�ȸ�ʽ</div>
+                            <div class="icon">📎</div>
+                            <div class="text">点击上传附件</div>
+                            <div class="hint">支持图片、PDF、Word等格式</div>
                         </div>
                         <div class="upload-list" id="uploadList"></div>
                     </div>
                 </div>
-                
+
                 <div style="height: 20px;"></div>
             </form>
         </div>
-        
+
         <div class="submit-section">
-            <button type="button" class="submit-btn" onclick="submitForm()">������Ŀ</button>
+            <button type="button" class="submit-btn" onclick="submitForm()">创建项目</button>
         </div>
-        
+
         <div class="app-modal" id="appModal">
             <div class="modal-box">
-                <div class="modal-title" id="modalTitle">��ʾ</div>
+                <div class="modal-title" id="modalTitle">提示</div>
                 <div class="modal-content" id="modalContent"></div>
                 <div class="modal-actions" id="modalActions">
-                    <div class="modal-btn cancel" id="modalCancel" onclick="closeModal()">ȡ��</div>
-                    <div class="modal-btn confirm" id="modalConfirm" onclick="closeModal()">ȷ��</div>
+                    <div class="modal-btn cancel" id="modalCancel" onclick="closeModal()">取消</div>
+                    <div class="modal-btn confirm" id="modalConfirm" onclick="closeModal()">确定</div>
                 </div>
             </div>
         </div>
-        
+
         <div class="app-toast" id="appToast"></div>
     </div>
-    
+
     <div class="page-nav">
-        <div class="page-nav-title">ԭ�͵���</div>
-        <a href="home.html" class="page-nav-item">��ҳ</a>
-        <a href="project-list.html" class="page-nav-item">��Ŀ�б�</a>
-        <a href="project-detail.html" class="page-nav-item">��Ŀ����</a>
-        <a href="project-info.html" class="page-nav-item">��Ŀ��Ϣ</a>
-        <a href="architecture.html" class="page-nav-item">��Ŀ�ܹ�</a>
-        <a href="create-project.html" class="page-nav-item active">������Ŀ</a>
-        <a href="task-list.html" class="page-nav-item">�����б�</a>
-        <a href="contract-detail.html" class="page-nav-item">��ͬ����</a>
-        <a href="task-detail.html" class="page-nav-item">��������</a>
-        <a href="temp-task-detail.html" class="page-nav-item">��ʱ��������</a>
+        <div class="page-nav-title">原型导航</div>
+        <a href="home.html" class="page-nav-item">首页</a>
+        <a href="project-list.html" class="page-nav-item">项目列表</a>
+        <a href="project-detail.html" class="page-nav-item">项目详情</a>
+        <a href="project-info.html" class="page-nav-item">项目信息</a>
+        <a href="architecture.html" class="page-nav-item">项目架构</a>
+        <a href="create-project.html" class="page-nav-item active">创建项目</a>
+        <a href="task-list.html" class="page-nav-item">任务列表</a>
+        <a href="contract-detail.html" class="page-nav-item">合同详情</a>
+        <a href="task-detail.html" class="page-nav-item">任务详情</a>
+        <a href="temp-task-detail.html" class="page-nav-item">临时任务详情</a>
     </div>
-    
+
     <script>
         let selectedCategory = '';
         let selectedHouseType = '';
         let selectedStyles = [];
         let uploadedFiles = [];
         let isPromoter = false;
-        
+
         function checkPromoterStatus() {
             const urlParams = new URLSearchParams(window.location.search);
             const promoterStatus = urlParams.get('promoter');
-            
+
             if (promoterStatus === 'certified' || localStorage.getItem('isPromoter') === 'true') {
                 isPromoter = true;
                 localStorage.setItem('isPromoter', 'true');
                 showPromoterStatus();
             }
         }
-        
+
         function showPromoterStatus() {
             document.getElementById('promoterBanner').style.display = 'none';
             document.getElementById('promoterTip').classList.add('show');
             document.getElementById('promoterBadge').style.display = 'inline-flex';
         }
-        
+
         function goToPromoterAuth() {
             location.href = 'promoter-auth.html';
         }
-        
+
         function showModal(title, content, onConfirm, showCancel = true) {
             document.getElementById('modalTitle').textContent = title;
             document.getElementById('modalContent').textContent = content;
             document.getElementById('modalCancel').style.display = showCancel ? 'flex' : 'none';
             document.getElementById('appModal').classList.add('show');
-            
+
             document.getElementById('modalConfirm').onclick = function() {
                 closeModal();
                 if (onConfirm) onConfirm();
             };
         }
-        
+
         function closeModal() {
             document.getElementById('appModal').classList.remove('show');
         }
-        
+
         function showToast(message, duration = 2000) {
             const toast = document.getElementById('appToast');
             toast.textContent = message;
@@ -735,21 +735,21 @@
                 toast.classList.remove('show');
             }, duration);
         }
-        
+
         function selectCategory(element) {
             document.querySelectorAll('#categoryOptions .category-option').forEach(opt => opt.classList.remove('selected'));
             element.classList.add('selected');
             selectedCategory = element.dataset.value;
             document.getElementById('categoryError').classList.remove('show');
         }
-        
+
         function selectHouseType(element) {
             document.querySelectorAll('#houseTypeOptions .house-type-option').forEach(opt => opt.classList.remove('selected'));
             element.classList.add('selected');
             selectedHouseType = element.dataset.value;
             document.getElementById('houseTypeError').classList.remove('show');
         }
-        
+
         function toggleStyle(element) {
             element.classList.toggle('selected');
             const value = element.dataset.value;
@@ -759,31 +759,31 @@
                 selectedStyles.push(value);
             }
         }
-        
+
         function uploadFile() {
-            const fileName = '����_' + (uploadedFiles.length + 1) + '.pdf';
+            const fileName = '附件_' + (uploadedFiles.length + 1) + '.pdf';
             uploadedFiles.push(fileName);
             renderUploadList();
         }
-        
+
         function removeFile(index) {
             uploadedFiles.splice(index, 1);
             renderUploadList();
         }
-        
+
         function renderUploadList() {
             const list = document.getElementById('uploadList');
             list.innerHTML = uploadedFiles.map((file, index) => `
                 <div class="upload-item">
-                    <span>??</span>
-                    <span class="remove" onclick="removeFile(${index})">��</span>
+                    <span>📄</span>
+                    <span class="remove" onclick="removeFile(${index})">×</span>
                 </div>
             `).join('');
         }
-        
+
         function validateForm() {
             let isValid = true;
-            
+
             const customerName = document.getElementById('customerName');
             const customerNameError = document.getElementById('customerNameError');
             if (!customerName.value.trim()) {
@@ -794,7 +794,7 @@
                 customerName.classList.remove('error');
                 customerNameError.classList.remove('show');
             }
-            
+
             const customerPhone = document.getElementById('customerPhone');
             const customerPhoneError = document.getElementById('customerPhoneError');
             const phoneReg = /^1[3-9]\d{9}$/;
@@ -806,7 +806,7 @@
                 customerPhone.classList.remove('error');
                 customerPhoneError.classList.remove('show');
             }
-            
+
             const province = document.getElementById('province');
             const city = document.getElementById('city');
             const district = document.getElementById('district');
@@ -826,7 +826,7 @@
                 address.classList.remove('error');
                 regionError.classList.remove('show');
             }
-            
+
             const area = document.getElementById('area');
             const areaError = document.getElementById('areaError');
             if (!area.value || parseFloat(area.value) <= 0) {
@@ -837,7 +837,7 @@
                 area.classList.remove('error');
                 areaError.classList.remove('show');
             }
-            
+
             const categoryError = document.getElementById('categoryError');
             if (!selectedCategory) {
                 categoryError.classList.add('show');
@@ -845,7 +845,7 @@
             } else {
                 categoryError.classList.remove('show');
             }
-            
+
             const houseTypeError = document.getElementById('houseTypeError');
             if (!selectedHouseType) {
                 houseTypeError.classList.add('show');
@@ -853,33 +853,33 @@
             } else {
                 houseTypeError.classList.remove('show');
             }
-            
+
             return isValid;
         }
-        
+
         function submitForm() {
             if (validateForm()) {
                 const styleNames = {
-                    'zhongshi': '��ʽ',
-                    'fashi': '��ʽ',
-                    'xiandai': '�ִ�',
-                    'qingshe': '����',
-                    'jianyue': '��Լ',
-                    'gongye': '��ҵ',
-                    'meishi': '��ʽ'
+                    'zhongshi': '中式',
+                    'fashi': '法式',
+                    'xiandai': '现代',
+                    'qingshe': '轻奢',
+                    'jianyue': '简约',
+                    'gongye': '工业',
+                    'meishi': '美式'
                 };
-                
+
                 const categoryNames = {
-                    'maopi': 'ë����',
-                    'jingzhuang': '��װ��',
-                    'gaizao': '�ɷ�����'
+                    'maopi': '毛坯房',
+                    'jingzhuang': '精装房',
+                    'gaizao': '旧房改造'
                 };
-                
+
                 const houseTypeNames = {
-                    'bieshu': '����',
-                    'pingceng': 'ƽ��'
+                    'bieshu': '别墅',
+                    'pingceng': '平层'
                 };
-                
+
                 const formData = {
                     customerName: document.getElementById('customerName').value.trim(),
                     customerPhone: document.getElementById('customerPhone').value.trim(),
@@ -895,10 +895,10 @@
                     styles: selectedStyles.map(s => styleNames[s]),
                     attachments: uploadedFiles
                 };
-                
-                console.log('�ύ����:', formData);
-                
-                showModal('�����ɹ�', '��Ŀ�����ɹ���������ת����Ŀ����ҳ�档', function() {
+
+                console.log('提交数据:', formData);
+
+                showModal('创建成功', '项目创建成功！即将跳转到项目详情页面。', function() {
                     location.href = 'project-detail.html';
                 }, false);
             } else {
@@ -908,14 +908,14 @@
                 }
             }
         }
-        
+
         document.getElementById('customerName').addEventListener('input', function() {
             if (this.value.trim()) {
                 this.classList.remove('error');
                 document.getElementById('customerNameError').classList.remove('show');
             }
         });
-        
+
         document.getElementById('customerPhone').addEventListener('input', function() {
             const phoneReg = /^1[3-9]\d{9}$/;
             if (phoneReg.test(this.value.trim())) {
@@ -923,21 +923,21 @@
                 document.getElementById('customerPhoneError').classList.remove('show');
             }
         });
-        
+
         document.getElementById('area').addEventListener('input', function() {
             if (this.value && parseFloat(this.value) > 0) {
                 this.classList.remove('error');
                 document.getElementById('areaError').classList.remove('show');
             }
         });
-        
+
         document.getElementById('address').addEventListener('input', function() {
             if (this.value.trim()) {
                 this.classList.remove('error');
                 document.getElementById('regionError').classList.remove('show');
             }
         });
-        
+
         ['province', 'city', 'district'].forEach(id => {
             document.getElementById(id).addEventListener('change', function() {
                 if (this.value) {
@@ -945,9 +945,8 @@
                 }
             });
         });
-        
+
         checkPromoterStatus();
     </script>
 </body>
 </html>
-

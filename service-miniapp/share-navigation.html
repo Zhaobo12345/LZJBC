@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>家装平台小程序原�?- 分享功能导航</title>
+    <title>家装平台小程序原�?- 分享功能导航</title>
     <style>
         * {
             margin: 0;
@@ -29,6 +29,52 @@
         .header {
             text-align: center;
             margin-bottom: 40px;
+        }
+
+        .toggle-controls {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .toggle-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 0 8px;
+            background: #1890FF;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background: #40a9ff;
+        }
+
+        .nav-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-card-content {
+            max-height: 500px;
+            transition: max-height 0.3s ease;
+        }
+
+        .nav-card-content.collapsed {
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .card-toggle {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 12px;
+            color: #1890FF;
+            cursor: pointer;
+            text-decoration: underline;
         }
 
         .header h1 {
@@ -122,55 +168,104 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>家装平台小程�?- 分享功能原型</h1>
-            <p>被分享人查看分享内容的页面效�?/p>
+            <h1>家装平台小程序 - 分享功能原型</h1>
+            <p>被分享人查看分享内容的页面效果</p>
+        </div>
+
+        <div class="toggle-controls">
+            <div class="toggle-btn" onclick="expandAll()">全部展开</div>
+            <div class="toggle-btn" onclick="collapseAll()">全部收起</div>
         </div>
 
         <div class="nav-section">
             <h2>分享接收页面</h2>
             <div class="nav-grid">
                 <div class="nav-card">
-                    <div class="icon">🏠</div>
-                    <h3>项目详情分享</h3>
-                    <p>查看分享的项目基本信息、成员、架构等</p>
-                    <a href="prototype-share-receive.html">查看页面</a>
+                    <div class="card-toggle" onclick="toggleCard(this)">收起</div>
+                    <div class="nav-card-content">
+                        <div class="icon">🏠</div>
+                        <h3>项目详情分享</h3>
+                        <p>查看分享的项目基本信息、成员、架构等</p>
+                        <a href="prototype-share-receive.html">查看页面</a>
+                    </div>
                 </div>
                 <div class="nav-card">
-                    <div class="icon">📅</div>
-                    <h3>项目动态分�?/h3>
-                    <p>查看分享的项目最新活动和历史动�?/p>
-                    <a href="prototype-share-receive-activity.html">查看页面</a>
+                    <div class="card-toggle" onclick="toggleCard(this)">收起</div>
+                    <div class="nav-card-content">
+                        <div class="icon">📅</div>
+                        <h3>项目动态分享</h3>
+                        <p>查看分享的项目最新活动和历史动态</p>
+                        <a href="prototype-share-receive-activity.html">查看页面</a>
+                    </div>
                 </div>
                 <div class="nav-card">
-                    <div class="icon">�?/div>
-                    <h3>项目任务分享</h3>
-                    <p>查看分享的项目任务列表和详情</p>
-                    <a href="prototype-share-receive-task.html">查看页面</a>
+                    <div class="card-toggle" onclick="toggleCard(this)">收起</div>
+                    <div class="nav-card-content">
+                        <div class="icon">✅</div>
+                        <h3>项目任务分享</h3>
+                        <p>查看分享的项目任务列表和详情</p>
+                        <a href="prototype-share-receive-task.html">查看页面</a>
+                    </div>
                 </div>
                 <div class="nav-card">
-                    <div class="icon">📄</div>
-                    <h3>项目合同列表</h3>
-                    <p>查看分享的项目合同列表，点击进入详情</p>
-                    <a href="prototype-share-receive-contract-list.html">查看页面</a>
+                    <div class="card-toggle" onclick="toggleCard(this)">收起</div>
+                    <div class="nav-card-content">
+                        <div class="icon">📄</div>
+                        <h3>项目合同列表</h3>
+                        <p>查看分享的项目合同列表，点击进入详情</p>
+                        <a href="prototype-share-receive-contract-list.html">查看页面</a>
+                    </div>
                 </div>
                 <div class="nav-card">
-                    <div class="icon">📋</div>
-                    <h3>项目合同详情</h3>
-                    <p>查看合同详情、阶段任务、任务详�?/p>
-                    <a href="prototype-share-receive-contract-detail.html">查看页面</a>
+                    <div class="card-toggle" onclick="toggleCard(this)">收起</div>
+                    <div class="nav-card-content">
+                        <div class="icon">📋</div>
+                        <h3>项目合同详情</h3>
+                        <p>查看合同详情、阶段任务、任务详情</p>
+                        <a href="prototype-share-receive-contract-detail.html">查看页面</a>
+                    </div>
                 </div>
                 <div class="nav-card">
-                    <div class="icon">📝</div>
-                    <h3>申请加入项目</h3>
-                    <p>非项目成员申请加入项目的页面</p>
-                    <a href="prototype-join-request.html">查看页面</a>
+                    <div class="card-toggle" onclick="toggleCard(this)">收起</div>
+                    <div class="nav-card-content">
+                        <div class="icon">📝</div>
+                        <h3>申请加入项目</h3>
+                        <p>非项目成员申请加入项目的页面</p>
+                        <a href="prototype-join-request.html">查看页面</a>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <p>© 2026 家装平台小程�?分享功能原型</p>
+            <p>© 2026 家装平台小程序 分享功能原型</p>
         </div>
     </div>
+
+    <script>
+        function toggleCard(toggle) {
+            const content = toggle.nextElementSibling;
+            content.classList.toggle('collapsed');
+            toggle.textContent = content.classList.contains('collapsed') ? '展开' : '收起';
+        }
+
+        function expandAll() {
+            const contents = document.querySelectorAll('.nav-card-content');
+            const toggles = document.querySelectorAll('.card-toggle');
+            contents.forEach((content, index) => {
+                content.classList.remove('collapsed');
+                toggles[index].textContent = '收起';
+            });
+        }
+
+        function collapseAll() {
+            const contents = document.querySelectorAll('.nav-card-content');
+            const toggles = document.querySelectorAll('.card-toggle');
+            contents.forEach((content, index) => {
+                content.classList.add('collapsed');
+                toggles[index].textContent = '展开';
+            });
+        }
+    </script>
 </body>
 </html>

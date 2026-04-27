@@ -1264,8 +1264,9 @@
                         </label>
                         <select class="form-select" id="contractPartyA">
                             <option value="">请选择甲方</option>
-                            <option value="company">良造家装饰公司</option>
-                            <option value="owner">业主</option>
+                            <option value="zhangsan">张三（项目经理）</option>
+                            <option value="owner">王业主（业主）</option>
+                            <option value="lisi">李四（业主代表）</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -1275,19 +1276,19 @@
                         </label>
                         <select class="form-select" id="contractPartyB">
                             <option value="">请选择乙方</option>
-                            <option value="team1">水电施工一组</option>
-                            <option value="team2">水电施工二组</option>
-                            <option value="team3">泥瓦施工组</option>
-                            <option value="team4">木工施工组</option>
-                            <option value="team5">油漆施工组</option>
+                            <option value="lisi">李四（水电组长）</option>
+                            <option value="wangwu">王五（强电组长）</option>
+                            <option value="sunba">孙八（弱电组长）</option>
+                            <option value="zhoujiu">周九（泥瓦组长）</option>
+                            <option value="wushi">吴十（木工组长）</option>
+                            <option value="zhengshiyi">郑十一（油漆组长）</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="form-label">
-                            <span class="required">*</span>
                             <span>合同金额</span>
                         </label>
-                        <input type="text" class="form-input" id="contractAmount" placeholder="请输入合同金额">
+                        <input type="text" class="form-input" id="contractAmount" placeholder="请输入合同金额（选填）">
                     </div>
                     <div class="create-contract-notice">
                         <div class="notice-icon">💡</div>
@@ -1630,7 +1631,6 @@
             document.getElementById('contractPartyA').selectedIndex = 0;
             document.getElementById('contractPartyB').selectedIndex = 0;
             document.getElementById('contractAmount').value = '';
-            document.getElementById('contractDuration').value = '';
             document.getElementById('createContractModal').classList.add('show');
         }
         
@@ -1666,10 +1666,6 @@
             }
             if (!partyB) {
                 showAppModal('提示', '请选择乙方', null, false);
-                return;
-            }
-            if (!amount.trim()) {
-                showAppModal('提示', '请输入合同金额', null, false);
                 return;
             }
             

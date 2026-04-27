@@ -60,6 +60,13 @@
             color: #333;
             transition: all 0.3s ease;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-card .nav-btn {
+            margin-top: auto;
+            margin-bottom: 0;
         }
 
         .nav-card:hover {
@@ -109,14 +116,16 @@
             font-size: 18px;
             font-weight: 600;
             color: #262626;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            line-height: 1.3;
         }
 
         .nav-desc {
-            font-size: 13px;
+            font-size: 14px;
             color: #666;
             line-height: 1.6;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            min-height: 48px;
         }
 
         .nav-features {
@@ -125,12 +134,13 @@
         }
 
         .nav-features li {
-            font-size: 12px;
+            font-size: 13px;
             color: #888;
-            padding: 4px 0;
+            padding: 6px 0;
             list-style: none;
             position: relative;
-            padding-left: 16px;
+            padding-left: 18px;
+            line-height: 1.4;
         }
 
         .nav-features li::before {
@@ -246,11 +256,12 @@
             <a href="pc/pc-login.html" class="nav-card pc" target="_blank">
                 <div class="nav-icon">💻</div>
                 <div class="nav-title">PC管理端</div>
-                <div class="nav-desc">面向企业管理人员，提供全面的项目管理与合同配置功能</div>
+                <div class="nav-desc">面向平台管理人员与签约方，提供合同配置功能与合同编辑功能</div>
                 <ul class="nav-features">
-                    <li>合同创建与编辑</li>
+                    <li>合同编辑变更编辑</li>
+                    <li>合同平台审核</li>
                     <li>阶段任务模板配置</li>
-                    <li>项目数据统计分析</li>
+                    <li>合同文本模板</li>
                 </ul>
                 <span class="nav-btn">进入管理端</span>
             </a>
@@ -258,11 +269,11 @@
             <a href="service-miniapp/home.html" class="nav-card service" target="_blank">
                 <div class="nav-icon">🔧</div>
                 <div class="nav-title">服务方小程序</div>
-                <div class="nav-desc">面向施工团队与监理人员，支持任务执行与验收流程</div>
+                <div class="nav-desc">面向设计师、施工团队、监理人员等，支持合同创建、任务执行与确认等流程</div>
                 <ul class="nav-features">
+                    <li>架构搭建与合同创建</li>
                     <li>任务执行与进度上报</li>
                     <li>验收申请与确认</li>
-                    <li>合同履约管理</li>
                 </ul>
                 <span class="nav-btn">进入服务端</span>
             </a>
@@ -272,9 +283,9 @@
                 <div class="nav-title">业主小程序</div>
                 <div class="nav-desc">面向业主用户，实时掌握装修进度与项目动态</div>
                 <ul class="nav-features">
-                    <li>项目进度实时查看</li>
+                    <li>项目架构与合同查看</li>
+                    <li>进度实时查看</li>
                     <li>验收确认与评价</li>
-                    <li>合同款项管理</li>
                 </ul>
                 <span class="nav-btn">进入业主端</span>
             </a>
