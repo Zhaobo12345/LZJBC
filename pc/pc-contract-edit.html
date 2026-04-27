@@ -221,7 +221,6 @@
                                     <div class="stage-header" onclick="toggleStage(this)">
                                         <div class="stage-info">
                                             <span class="stage-name">阶段一：材料进场</span>
-                                            <span class="stage-duration">工期：3天</span>
                                             <span class="stage-sequential">按序执行</span>
                                         </div>
                                         <div class="stage-actions">
@@ -234,21 +233,21 @@
                                         <div class="task-item">
                                             <div class="task-info">
                                                 <span class="task-name">材料验收</span>
-                                                <span class="task-meta">执行人：材料员 | 确认人：项目经理、监理</span>
+                                                <span class="task-meta">执行标准：材料品牌、规格、数量符合合同要求 | 确认标准：现场清点数量并核对品牌规格 | 担责标准：材料不符合要求时需及时上报 | 执行人：材料员 | 确认人：项目经理、监理</span>
                                             </div>
                                             <div class="flex gap-8">
-                                                <button class="pc-btn pc-btn-text pc-btn-sm">编辑</button>
-                                                <button class="pc-btn pc-btn-text pc-btn-sm">删除</button>
+                                                <button class="pc-btn pc-btn-text pc-btn-sm" onclick="editTask(1, 0)">编辑</button>
+                                                <button class="pc-btn pc-btn-text pc-btn-sm" onclick="deleteTask(1, 0)">删除</button>
                                             </div>
                                         </div>
                                         <div class="task-item">
                                             <div class="task-info">
                                                 <span class="task-name">材料入库</span>
-                                                <span class="task-meta">执行人：材料员 | 确认人：仓库管理员</span>
+                                                <span class="task-meta">执行标准：材料分类堆放、标识清晰 | 确认标准：检查材料是否完好无损 | 担责标准：确保材料安全存储 | 执行人：材料员 | 确认人：仓库管理员</span>
                                             </div>
                                             <div class="flex gap-8">
-                                                <button class="pc-btn pc-btn-text pc-btn-sm">编辑</button>
-                                                <button class="pc-btn pc-btn-text pc-btn-sm">删除</button>
+                                                <button class="pc-btn pc-btn-text pc-btn-sm" onclick="editTask(1, 1)">编辑</button>
+                                                <button class="pc-btn pc-btn-text pc-btn-sm" onclick="deleteTask(1, 1)">删除</button>
                                             </div>
                                         </div>
                                         <button class="pc-btn pc-btn-default pc-btn-sm mt-8" onclick="addTask(1)">+ 添加任务</button>
@@ -258,7 +257,6 @@
                                     <div class="stage-header" onclick="toggleStage(this)">
                                         <div class="stage-info">
                                             <span class="stage-name">阶段二：布管布线</span>
-                                            <span class="stage-duration">工期：15天</span>
                                         </div>
                                         <div class="stage-actions">
                                             <button class="pc-btn pc-btn-text pc-btn-sm" onclick="event.stopPropagation(); editStage(2)">编辑</button>
@@ -270,21 +268,21 @@
                                         <div class="task-item">
                                             <div class="task-info">
                                                 <span class="task-name">强电布管</span>
-                                                <span class="task-meta">执行人：电工组 | 确认人：项目经理</span>
+                                                <span class="task-meta">执行标准：管道横平竖直、间距均匀 | 确认标准：检查管道固定是否牢固 | 担责标准：确保线路安全规范 | 执行人：电工组 | 确认人：项目经理</span>
                                             </div>
                                             <div class="flex gap-8">
-                                                <button class="pc-btn pc-btn-text pc-btn-sm">编辑</button>
-                                                <button class="pc-btn pc-btn-text pc-btn-sm">删除</button>
+                                                <button class="pc-btn pc-btn-text pc-btn-sm" onclick="editTask(2, 0)">编辑</button>
+                                                <button class="pc-btn pc-btn-text pc-btn-sm" onclick="deleteTask(2, 0)">删除</button>
                                             </div>
                                         </div>
                                         <div class="task-item">
                                             <div class="task-info">
                                                 <span class="task-name">弱电布线</span>
-                                                <span class="task-meta">执行人：弱电组 | 确认人：项目经理</span>
+                                                <span class="task-meta">执行标准：线路走向合理、标识清晰 | 确认标准：测试线路通断 | 担责标准：确保信号传输正常 | 执行人：弱电组 | 确认人：项目经理</span>
                                             </div>
                                             <div class="flex gap-8">
-                                                <button class="pc-btn pc-btn-text pc-btn-sm">编辑</button>
-                                                <button class="pc-btn pc-btn-text pc-btn-sm">删除</button>
+                                                <button class="pc-btn pc-btn-text pc-btn-sm" onclick="editTask(2, 1)">编辑</button>
+                                                <button class="pc-btn pc-btn-text pc-btn-sm" onclick="deleteTask(2, 1)">删除</button>
                                             </div>
                                         </div>
                                         <button class="pc-btn pc-btn-default pc-btn-sm mt-8" onclick="addTask(2)">+ 添加任务</button>
@@ -294,7 +292,6 @@
                                     <div class="stage-header" onclick="toggleStage(this)">
                                         <div class="stage-info">
                                             <span class="stage-name">阶段三：验收调试</span>
-                                            <span class="stage-duration">工期：5天</span>
                                             <span class="stage-sequential">按序执行</span>
                                         </div>
                                         <div class="stage-actions">
@@ -307,11 +304,11 @@
                                         <div class="task-item">
                                             <div class="task-info">
                                                 <span class="task-name">通电测试</span>
-                                                <span class="task-meta">执行人：电工组 | 确认人：项目经理、业主</span>
+                                                <span class="task-meta">执行标准：各回路绝缘良好、接地可靠 | 确认标准：测试所有插座和开关 | 担责标准：确保用电安全 | 执行人：电工组 | 确认人：项目经理、业主</span>
                                             </div>
                                             <div class="flex gap-8">
-                                                <button class="pc-btn pc-btn-text pc-btn-sm">编辑</button>
-                                                <button class="pc-btn pc-btn-text pc-btn-sm">删除</button>
+                                                <button class="pc-btn pc-btn-text pc-btn-sm" onclick="editTask(3, 0)">编辑</button>
+                                                <button class="pc-btn pc-btn-text pc-btn-sm" onclick="deleteTask(3, 0)">删除</button>
                                             </div>
                                         </div>
                                         <button class="pc-btn pc-btn-default pc-btn-sm mt-8" onclick="addTask(3)">+ 添加任务</button>
@@ -419,6 +416,191 @@
             <div class="submit-confirm-footer">
                 <button class="pc-btn pc-btn-default" onclick="closeSubmitModal()">取消</button>
                 <button class="pc-btn pc-btn-primary" id="submitConfirmBtn" onclick="confirmSubmit()">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="template-select-modal" id="templateSelectModal">
+        <div class="template-select-content">
+            <div class="template-select-header">
+                <div class="template-select-title">
+                    <span>📄</span>
+                    <span>选择合同文本模板</span>
+                </div>
+                <div class="template-select-close" onclick="closeTemplateModal()">×</div>
+            </div>
+            <div class="template-select-filter">
+                <div class="template-filter-info">
+                    <span class="filter-label">当前合同：</span>
+                    <span class="filter-value" id="filterCity">杭州</span>
+                    <span class="filter-sep">·</span>
+                    <span class="filter-value" id="filterType">分包合同 - 水电工程</span>
+                </div>
+                <div class="template-filter-tip">
+                    <span class="tip-icon">💡</span>
+                    <span>仅显示与当前合同城市、类型匹配的模板</span>
+                </div>
+            </div>
+            <div class="template-select-body">
+                <div class="template-select-list" id="templateSelectList">
+                </div>
+                <div class="template-empty" id="templateEmpty" style="display: none;">
+                    <div class="empty-icon">📭</div>
+                    <div class="empty-text">暂无匹配的模板</div>
+                    <div class="empty-desc">请前往模板管理创建相关模板</div>
+                </div>
+            </div>
+            <div class="template-select-footer">
+                <button class="pc-btn pc-btn-default" onclick="closeTemplateModal()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="stage-template-modal" id="stageTemplateModal">
+        <div class="stage-template-content">
+            <div class="stage-template-header">
+                <div class="stage-template-title">
+                    <span>📝</span>
+                    <span>选择阶段任务模板</span>
+                </div>
+                <div class="stage-template-close" onclick="closeStageTemplateModal()">×</div>
+            </div>
+            <div class="stage-template-filter">
+                <div class="stage-filter-info">
+                    <span class="filter-label">当前合同：</span>
+                    <span class="filter-value" id="stageFilterCity">杭州</span>
+                    <span class="filter-sep">·</span>
+                    <span class="filter-value" id="stageFilterType">水电工程</span>
+                </div>
+                <div class="stage-filter-tip">
+                    <span class="tip-icon">💡</span>
+                    <span>仅显示与当前合同城市、类型匹配的阶段任务模板</span>
+                </div>
+            </div>
+            <div class="stage-template-body">
+                <div class="stage-template-list" id="stageTemplateList">
+                </div>
+                <div class="stage-template-empty" id="stageTemplateEmpty" style="display: none;">
+                    <div class="empty-icon">📭</div>
+                    <div class="empty-text">暂无匹配的阶段任务模板</div>
+                    <div class="empty-desc">请前往模板管理创建相关模板</div>
+                </div>
+            </div>
+            <div class="stage-template-footer">
+                <button class="pc-btn pc-btn-default" onclick="closeStageTemplateModal()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="stage-edit-modal" id="stageEditModal">
+        <div class="stage-edit-content">
+            <div class="stage-edit-header">
+                <div class="stage-edit-title">
+                    <span>📝</span>
+                    <span>编辑阶段</span>
+                </div>
+                <div class="stage-edit-close" onclick="closeStageEditModal()">×</div>
+            </div>
+            <div class="stage-edit-body">
+                <input type="hidden" id="editStageId">
+                <div class="pc-form-group">
+                    <label class="pc-form-label">阶段名称<span class="required">*</span></label>
+                    <input type="text" class="pc-form-input" id="editStageName" placeholder="请输入阶段名称">
+                </div>
+                <div class="pc-form-group">
+                    <label class="pc-form-label">执行顺序</label>
+                    <div class="pc-checkbox-group">
+                        <label class="pc-checkbox-label">
+                            <input type="checkbox" id="editStageSequential">
+                            <span>按序执行</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="stage-edit-footer">
+                <button class="pc-btn pc-btn-default" onclick="closeStageEditModal()">取消</button>
+                <button class="pc-btn pc-btn-primary" onclick="saveStageEdit()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="task-edit-modal" id="taskEditModal">
+        <div class="task-edit-content">
+            <div class="task-edit-header">
+                <div class="task-edit-title">
+                    <span>📋</span>
+                    <span>编辑任务</span>
+                </div>
+                <div class="task-edit-close" onclick="closeTaskEditModal()">×</div>
+            </div>
+            <div class="task-edit-body">
+                <input type="hidden" id="editTaskStageId">
+                <input type="hidden" id="editTaskIndex">
+                <div class="pc-form-group">
+                    <label class="pc-form-label">任务名称<span class="required">*</span></label>
+                    <input type="text" class="pc-form-input" id="editTaskName" placeholder="请输入任务名称">
+                </div>
+                <div class="pc-form-group">
+                    <label class="pc-form-label">执行标准<span class="required">*</span></label>
+                    <input type="text" class="pc-form-input" id="editTaskExecutionStandard" placeholder="请输入执行标准">
+                </div>
+                <div class="pc-form-group">
+                    <label class="pc-form-label">确认标准<span class="required">*</span></label>
+                    <input type="text" class="pc-form-input" id="editTaskConfirmationStandard" placeholder="请输入确认标准">
+                </div>
+                <div class="pc-form-group">
+                    <label class="pc-form-label">担责标准<span class="required">*</span></label>
+                    <input type="text" class="pc-form-input" id="editTaskResponsibilityStandard" placeholder="请输入担责标准">
+                </div>
+                <div class="pc-form-group">
+                    <label class="pc-form-label">执行人</label>
+                    <div class="user-selector">
+                        <input type="text" class="pc-form-input" id="executorSearch" placeholder="搜索人员（姓名或角色）" onkeyup="searchUsers('executor')">
+                        <div class="user-dropdown" id="executorDropdown"></div>
+                        <input type="hidden" id="editTaskExecutor">
+                        <div class="selected-user" id="selectedExecutor"></div>
+                    </div>
+                </div>
+                <div class="pc-form-group">
+                    <label class="pc-form-label">确认人（最多选择5个）</label>
+                    <div class="user-selector">
+                        <input type="text" class="pc-form-input" id="confirmerSearch" placeholder="搜索人员（姓名或角色）" onkeyup="searchUsers('confirmer')">
+                        <div class="user-dropdown" id="confirmerDropdown"></div>
+                        <input type="hidden" id="editTaskConfirmer">
+                        <div class="selected-users" id="selectedConfirmers"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="task-edit-footer">
+                <button class="pc-btn pc-btn-default" onclick="closeTaskEditModal()">取消</button>
+                <button class="pc-btn pc-btn-primary" onclick="saveTaskEdit()">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="template-preview-modal" id="templatePreviewModal">
+        <div class="template-preview-content">
+            <div class="template-preview-header">
+                <div class="template-preview-title">
+                    <span>📄</span>
+                    <span>模板预览</span>
+                </div>
+                <div class="template-preview-close" onclick="closeTemplatePreviewModal()">×</div>
+            </div>
+            <div class="template-preview-body">
+                <div class="template-preview-info">
+                    <h3 id="previewTemplateName"></h3>
+                    <div class="template-preview-meta">
+                        <span class="meta-item">类型：<span id="previewTemplateType"></span></span>
+                        <span class="meta-item">城市：<span id="previewTemplateCity"></span></span>
+                        <span class="meta-item">更新时间：<span id="previewTemplateUpdateTime"></span></span>
+                    </div>
+                </div>
+                <div class="template-stages-preview" id="templateStagesPreview"></div>
+            </div>
+            <div class="template-preview-footer">
+                <button class="pc-btn pc-btn-primary" onclick="applyTemplateFromPreview()">使用此模板</button>
+                <button class="pc-btn pc-btn-default" onclick="closeTemplatePreviewModal()">关闭</button>
             </div>
         </div>
     </div>

@@ -651,6 +651,118 @@
             </div>
         </div>
     </div>
+
+    <div class="template-select-modal" id="templateSelectModal">
+        <div class="template-select-content">
+            <div class="template-select-header">
+                <div class="template-select-title">
+                    <span>📄</span>
+                    <span>选择合同文本模板</span>
+                </div>
+                <div class="template-select-close" onclick="closeTemplateModal()">×</div>
+            </div>
+            <div class="template-select-filter">
+                <div class="template-filter-info">
+                    <span class="filter-label">当前合同：</span>
+                    <span class="filter-value" id="filterCity">杭州</span>
+                    <span class="filter-sep">·</span>
+                    <span class="filter-value" id="filterType">分包合同 - 水电工程</span>
+                </div>
+                <div class="template-filter-tip">
+                    <span class="tip-icon">💡</span>
+                    <span>仅显示与当前合同城市、类型匹配的模板</span>
+                </div>
+            </div>
+            <div class="template-select-body">
+                <div class="template-select-list" id="templateSelectList">
+                </div>
+                <div class="template-empty" id="templateEmpty" style="display: none;">
+                    <div class="empty-icon">📭</div>
+                    <div class="empty-text">暂无匹配的模板</div>
+                    <div class="empty-desc">请前往模板管理创建相关模板</div>
+                </div>
+            </div>
+            <div class="template-select-footer">
+                <button class="pc-btn pc-btn-default" onclick="closeTemplateModal()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="stage-template-modal" id="stageTemplateModal">
+        <div class="stage-template-content">
+            <div class="stage-template-header">
+                <div class="stage-template-title">
+                    <span>📝</span>
+                    <span>选择阶段任务模板</span>
+                </div>
+                <div class="stage-template-close" onclick="closeStageTemplateModal()">×</div>
+            </div>
+            <div class="stage-template-filter">
+                <div class="stage-filter-info">
+                    <span class="filter-label">当前合同：</span>
+                    <span class="filter-value" id="stageFilterCity">杭州</span>
+                    <span class="filter-sep">·</span>
+                    <span class="filter-value" id="stageFilterType">水电工程</span>
+                </div>
+                <div class="stage-filter-tip">
+                    <span class="tip-icon">💡</span>
+                    <span>仅显示与当前合同城市、类型匹配的阶段任务模板</span>
+                </div>
+            </div>
+            <div class="stage-template-body">
+                <div class="stage-template-list" id="stageTemplateList">
+                </div>
+                <div class="stage-template-empty" id="stageTemplateEmpty" style="display: none;">
+                    <div class="empty-icon">📭</div>
+                    <div class="empty-text">暂无匹配的阶段任务模板</div>
+                    <div class="empty-desc">请前往模板管理创建相关模板</div>
+                </div>
+            </div>
+            <div class="stage-template-footer">
+                <button class="pc-btn pc-btn-default" onclick="closeStageTemplateModal()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="template-preview-modal" id="templatePreviewModal">
+        <div class="template-preview-content">
+            <div class="template-preview-header">
+                <div class="template-preview-title">
+                    <span>👁️</span>
+                    <span>模板预览</span>
+                </div>
+                <div class="template-preview-close" onclick="closeTemplatePreviewModal()">×</div>
+            </div>
+            <div class="template-preview-body">
+                <div class="template-preview-info">
+                    <div class="template-preview-info-row">
+                        <span class="preview-info-label">模板名称：</span>
+                        <span class="preview-info-value" id="previewTemplateName"></span>
+                    </div>
+                    <div class="template-preview-info-row">
+                        <span class="preview-info-label">适用类型：</span>
+                        <span class="preview-info-value" id="previewTemplateType"></span>
+                    </div>
+                    <div class="template-preview-info-row">
+                        <span class="preview-info-label">适用城市：</span>
+                        <span class="preview-info-value" id="previewTemplateCity"></span>
+                    </div>
+                    <div class="template-preview-info-row">
+                        <span class="preview-info-label">更新时间：</span>
+                        <span class="preview-info-value" id="previewTemplateUpdateTime"></span>
+                    </div>
+                </div>
+                <div class="template-preview-content">
+                    <div class="template-stages-preview" id="templateStagesPreview">
+                    </div>
+                </div>
+            </div>
+            <div class="template-preview-footer">
+                <button class="pc-btn pc-btn-default" onclick="closeTemplatePreviewModal()">取消</button>
+                <button class="pc-btn pc-btn-primary" onclick="applyTemplateFromPreview()">使用此模板</button>
+            </div>
+        </div>
+    </div>
     <script src="pc-common.js"></script>
     <script src="pc-contract-change.js"></script>
 

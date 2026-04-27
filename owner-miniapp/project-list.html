@@ -507,5 +507,35 @@
             alert('关闭小程序');
         }
     </script>
+    <script>
+        // 直接在页面中初始化原型导航折叠功能
+        (function() {
+            function initPageNav() {
+                var pageNav = document.querySelector('.page-nav');
+                if (!pageNav) return;
+
+                var navTitle = pageNav.querySelector('.page-nav-title');
+                if (!navTitle) return;
+
+                // 如果已经添加过按钮，不再重复添加
+                if (navTitle.querySelector('.toggle-btn')) return;
+
+                // 添加切换按钮
+                var toggleBtn = document.createElement('span');
+                toggleBtn.className = 'toggle-btn';
+                toggleBtn.textContent = '▼';
+                navTitle.appendChild(toggleBtn);
+
+                // 点击标题切换折叠/展开状态
+                navTitle.addEventListener('click', function() {
+                    pageNav.classList.toggle('collapsed');
+                    toggleBtn.classList.toggle('collapsed');
+                });
+            }
+
+            // 立即执行初始化
+            initPageNav();
+        })();
+    </script>
 </body>
 </html>

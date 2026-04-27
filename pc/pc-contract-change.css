@@ -1240,6 +1240,703 @@
         }
 
         .change-summary-item .dot.added { background-color: #52C41A; }
-        .change-summary-item .dot.deleted { background-color: #FF4D4F; }
-        .change-summary-item .dot.modified { background-color: #FA8C16; }
+.change-summary-item .dot.deleted { background-color: #FF4D4F; }
+.change-summary-item .dot.modified { background-color: #FA8C16; }
+
+/* 模板选择模态框 - 与编辑合同页面一致 */
+.template-select-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    overflow: auto;
+}
+
+.template-select-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 600px;
+    max-width: 90%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.template-select-modal.show {
+    display: flex;
+}
+
+.template-select-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 600px;
+    max-width: 90%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.template-select-header {
+    padding: 20px;
+    border-bottom: 1px solid #E8E8E8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.template-select-title {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.template-select-title span:first-child {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.template-select-close {
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-tertiary);
+}
+
+.template-select-filter {
+    padding: 16px 20px;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.template-filter-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.filter-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.filter-value {
+    font-size: 14px;
+    color: var(--text-primary);
+}
+
+.filter-sep {
+    color: var(--text-tertiary);
+}
+
+.template-filter-tip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-tertiary);
+}
+
+.tip-icon {
+    font-size: 14px;
+}
+
+.template-select-body {
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.template-select-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.template-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border: 1px solid #E8E8E8;
+    border-radius: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.template-item:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.template-info {
+    flex: 1;
+}
+
+.template-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.template-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.template-meta {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    gap: 12px;
+}
+
+.template-tag {
+    background-color: var(--bg-primary);
+    color: var(--primary-color);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.template-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-tertiary);
+}
+
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.empty-text {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.empty-desc {
+    font-size: 14px;
+}
+
+.template-select-footer {
+    padding: 20px;
+    border-top: 1px solid #E8E8E8;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 阶段任务模板选择模态框 - 与编辑合同页面一致 */
+.stage-template-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    overflow: auto;
+}
+
+.stage-template-modal.show {
+    display: flex;
+}
+
+.stage-template-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 600px;
+    max-width: 90%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stage-template-header {
+    padding: 20px;
+    border-bottom: 1px solid #E8E8E8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stage-template-title {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.stage-template-title span:first-child {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.stage-template-close {
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-tertiary);
+}
+
+.stage-template-filter {
+    padding: 16px 20px;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.stage-filter-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.stage-filter-tip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-tertiary);
+}
+
+.stage-template-body {
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.stage-template-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stage-template-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border: 1px solid #E8E8E8;
+    border-radius: 8px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.stage-template-item:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.stage-template-info {
+    flex: 1;
+}
+
+.stage-template-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.stage-template-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.stage-template-meta {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    gap: 12px;
+}
+
+.stage-template-tag {
+    background-color: var(--bg-primary);
+    color: var(--primary-color);
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.stage-template-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-tertiary);
+}
+
+.stage-template-footer {
+    padding: 20px;
+    border-top: 1px solid #E8E8E8;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* 模板预览模态框 - 与编辑合同页面一致 */
+.template-preview-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    overflow: auto;
+}
+
+.template-preview-modal.show {
+    display: flex;
+}
+
+.template-preview-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 800px;
+    max-width: 90%;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
+.template-preview-header {
+    padding: 20px;
+    border-bottom: 1px solid #E8E8E8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.template-preview-title {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.template-preview-title span:first-child {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.template-preview-close {
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text-tertiary);
+}
+
+.template-preview-body {
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.template-preview-info {
+    margin-bottom: 24px;
+    padding: 16px;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+}
+
+.template-preview-info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.template-preview-info-row:last-child {
+    margin-bottom: 0;
+}
+
+.preview-info-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+    width: 100px;
+}
+
+.preview-info-value {
+    font-size: 14px;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.template-stages-preview {
+    border: 1px solid #E8E8E8;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.preview-stage-item {
+    margin-bottom: 16px;
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 16px;
+}
+
+.preview-stage-item:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.preview-stage-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.preview-stage-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.preview-stage-order {
+    font-size: 12px;
+    color: var(--text-tertiary);
+}
+
+.preview-tasks-list {
+    margin-left: 20px;
+}
+
+.preview-task-item {
+    margin-bottom: 12px;
+    padding: 12px;
+    background-color: var(--bg-secondary);
+    border-radius: 4px;
+}
+
+.preview-task-item:last-child {
+    margin-bottom: 0;
+}
+
+.preview-task-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.preview-task-standards {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.preview-task-standard {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.preview-task-meta {
+    font-size: 12px;
+    color: var(--text-tertiary);
+}
+
+.template-content-preview {
+    margin-bottom: 16px;
+}
+
+.template-content-preview h4 {
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.template-content {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    white-space: pre-wrap;
+}
+
+.template-preview-footer {
+    padding: 20px;
+    border-top: 1px solid #E8E8E8;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* 模板选择项目样式 - 与编辑合同页面一致 */
+.template-select-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+    border: 1px solid #E8E8E8;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.template-select-item:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.template-select-item.selected {
+    border-color: var(--primary-color);
+    background-color: var(--bg-primary);
+}
+
+.template-item-icon {
+    font-size: 24px;
+    margin-right: 16px;
+}
+
+.template-item-content {
+    flex: 1;
+}
+
+.template-item-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.template-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.template-item-tag {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+.template-item-tag.city {
+    background-color: var(--bg-primary);
+    color: var(--primary-color);
+}
+
+.template-item-version {
+    font-size: 12px;
+    color: var(--text-tertiary);
+}
+
+.template-item-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.template-item-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* 阶段任务模板项目样式 - 与编辑合同页面一致 */
+.stage-template-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border: 1px solid #E8E8E8;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.stage-template-header-row:hover {
+    border-color: var(--primary-color);
+}
+
+.stage-template-info {
+    display: flex;
+    align-items: center;
+}
+
+.stage-template-icon {
+    font-size: 24px;
+    margin-right: 16px;
+}
+
+.stage-template-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.stage-template-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--text-tertiary);
+}
+
+.stage-template-body-row {
+    border: 1px solid #E8E8E8;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 16px;
+    display: none;
+}
+
+.stage-template-body-row.show {
+    display: block;
+}
+
+.stage-preview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.stage-preview-item {
+    padding: 12px;
+    background-color: var(--bg-secondary);
+    border-radius: 4px;
+}
+
+.stage-preview-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.stage-preview-item-name {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.stage-preview-item-order {
+    font-size: 12px;
+    color: var(--text-tertiary);
+}
+
+.task-preview-list {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.task-preview-item {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
     

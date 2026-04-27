@@ -408,12 +408,675 @@
             }
         }
 
+        // 合同文本模板数据
+        const contractTemplates = [
+            {
+                id: 1,
+                name: '水电分包合同模板',
+                category: '分包合同',
+                type: '水电工程',
+                city: '杭州',
+                version: 'v2.0',
+                status: 'active',
+                desc: '适用于水电工程分包业务的标准合同模板',
+                updateTime: '2024-01-10 14:30',
+                content: `<h3 style="text-align: center; margin-bottom: 20px;">水电分包合同（变更版）</h3>
+<p><strong>甲方：</strong>杭州绿城装饰工程有限公司</p>
+<p><strong>乙方：</strong>杭州水电安装有限公司</p>
+<br>
+<p>根据《中华人民共和国合同法》及相关法律法规，甲乙双方本着平等、自愿、公平、诚实信用的原则，就水电工程分包事宜，经协商一致，签订本合同。</p>
+<br>
+<h4>第一条 工程概况</h4>
+<p>1.1 工程名称：绿城桃花源项目水电工程</p>
+<p>1.2 工程地点：杭州市西湖区</p>
+<p>1.3 承包范围：强电、弱电、给排水等水电安装工程</p>
+<br>
+<h4>第二条 合同价款</h4>
+<p>2.1 本合同总价款为人民币壹拾捌万元整（¥180,000.00）</p>
+<p>2.2 合同价款为固定总价，不因市场价格波动而调整</p>
+<br>
+<h4 style="color: var(--error-color);">【变更条款】</h4>
+<p style="color: var(--error-color);">因业主需求变更，增加水电点位30个，合同金额由原150,000元调整为180,000元。</p>`
+            },
+            {
+                id: 2,
+                name: '泥瓦分包合同模板',
+                category: '分包合同',
+                type: '泥瓦工程',
+                city: '杭州',
+                version: 'v1.5',
+                status: 'active',
+                desc: '适用于泥瓦工程分包业务的标准合同模板',
+                updateTime: '2024-01-08 10:20',
+                content: `<h3 style="text-align: center; margin-bottom: 20px;">泥瓦分包合同（变更版）</h3>
+<p><strong>甲方：</strong>杭州绿城装饰工程有限公司</p>
+<p><strong>乙方：</strong>杭州泥瓦工程有限公司</p>
+<br>
+<p>根据《中华人民共和国合同法》及相关法律法规，甲乙双方就泥瓦工程分包事宜签订本合同。</p>
+<br>
+<h4>第一条 工程概况</h4>
+<p>1.1 工程名称：绿城桃花源项目泥瓦工程</p>
+<p>1.2 工程地点：杭州市西湖区</p>
+<p>1.3 承包范围：防水处理、贴砖施工等泥瓦工程</p>
+<br>
+<h4>第二条 合同价款</h4>
+<p>2.1 本合同总价款为人民币壹拾贰万元整（¥120,000.00）</p>
+<p>2.2 合同价款为固定总价，不因市场价格波动而调整</p>
+<br>
+<h4 style="color: var(--error-color);">【变更条款】</h4>
+<p style="color: var(--error-color);">因设计变更，增加卫生间防水面积，合同金额由原100,000元调整为120,000元。</p>`
+            },
+            {
+                id: 3,
+                name: '木工分包合同模板',
+                category: '分包合同',
+                type: '木工工程',
+                city: '杭州',
+                version: 'v1.2',
+                status: 'active',
+                desc: '适用于木工工程分包业务的标准合同模板',
+                updateTime: '2024-01-05 16:45',
+                content: `<h3 style="text-align: center; margin-bottom: 20px;">木工分包合同（变更版）</h3>
+<p><strong>甲方：</strong>杭州绿城装饰工程有限公司</p>
+<p><strong>乙方：</strong>杭州木工工程有限公司</p>
+<br>
+<p>根据《中华人民共和国合同法》及相关法律法规，甲乙双方就木工工程分包事宜签订本合同。</p>
+<br>
+<h4>第一条 工程概况</h4>
+<p>1.1 工程名称：绿城桃花源项目木工工程</p>
+<p>1.2 工程地点：杭州市西湖区</p>
+<p>1.3 承包范围：木作施工、家具制作等木工工程</p>
+<br>
+<h4>第二条 合同价款</h4>
+<p>2.1 本合同总价款为人民币壹拾伍万元整（¥150,000.00）</p>
+<p>2.2 合同价款为固定总价，不因市场价格波动而调整</p>
+<br>
+<h4 style="color: var(--error-color);">【变更条款】</h4>
+<p style="color: var(--error-color);">因业主需求变更，增加定制衣柜，合同金额由原120,000元调整为150,000元。</p>`
+            },
+            {
+                id: 4,
+                name: '油漆分包合同模板',
+                category: '分包合同',
+                type: '油漆工程',
+                city: '杭州',
+                version: 'v1.0',
+                status: 'active',
+                desc: '适用于油漆工程分包业务的标准合同模板',
+                updateTime: '2024-01-03 09:15',
+                content: `<h3 style="text-align: center; margin-bottom: 20px;">油漆分包合同（变更版）</h3>
+<p><strong>甲方：</strong>杭州绿城装饰工程有限公司</p>
+<p><strong>乙方：</strong>杭州油漆工程有限公司</p>
+<br>
+<p>根据《中华人民共和国合同法》及相关法律法规，甲乙双方就油漆工程分包事宜签订本合同。</p>
+<br>
+<h4>第一条 工程概况</h4>
+<p>1.1 工程名称：绿城桃花源项目油漆工程</p>
+<p>1.2 工程地点：杭州市西湖区</p>
+<p>1.3 承包范围：墙面油漆、家具油漆等油漆工程</p>
+<br>
+<h4>第二条 合同价款</h4>
+<p>2.1 本合同总价款为人民币捌万元整（¥80,000.00）</p>
+<p>2.2 合同价款为固定总价，不因市场价格波动而调整</p>
+<br>
+<h4 style="color: var(--error-color);">【变更条款】</h4>
+<p style="color: var(--error-color);">因业主需求变更，增加墙面艺术漆，合同金额由原60,000元调整为80,000元。</p>`
+            },
+            {
+                id: 5,
+                name: '水电分包合同模板（全国版）',
+                category: '分包合同',
+                type: '水电工程',
+                city: '全国',
+                version: 'v1.0',
+                status: 'active',
+                desc: '适用于全国范围的水电工程分包合同模板',
+                updateTime: '2024-01-01 08:00',
+                content: `<h3 style="text-align: center; margin-bottom: 20px;">水电分包合同（全国版）</h3>
+<p><strong>甲方：</strong>杭州绿城装饰工程有限公司</p>
+<p><strong>乙方：</strong>杭州水电安装有限公司</p>
+<br>
+<p>根据《中华人民共和国合同法》及相关法律法规，甲乙双方就水电工程分包事宜签订本合同。</p>`
+            }
+        ];
+
+        let currentContractInfo = {
+            city: '杭州',
+            type: '水电工程',
+            category: '分包合同'
+        };
+
+        let selectedTemplateId = null;
+
+        // 阶段任务模板数据
+        const stageTemplates = [
+            {
+                id: 1,
+                name: '水电施工阶段模板',
+                type: '水电工程',
+                city: '杭州',
+                status: 'active',
+                stageCount: 3,
+                taskCount: 8,
+                updateTime: '2024-01-10 14:30',
+                stages: [
+                    { name: '材料进场', order: true, tasks: [
+                        { name: '材料验收', 
+                          executionStandard: '材料品牌、规格、数量符合合同要求', 
+                          confirmationStandard: '现场清点数量并核对品牌规格', 
+                          responsibilityStandard: '材料不符合要求时需及时上报', 
+                          executor: '材料员', 
+                          confirmer: '项目经理、监理' },
+                        { name: '材料入库', 
+                          executionStandard: '材料分类堆放、标识清晰', 
+                          confirmationStandard: '检查材料是否完好无损', 
+                          responsibilityStandard: '确保材料安全存储', 
+                          executor: '材料员', 
+                          confirmer: '仓库管理员' }
+                    ]},
+                    { name: '布管布线', order: false, tasks: [
+                        { name: '强电布管', 
+                          executionStandard: '管道横平竖直、间距均匀', 
+                          confirmationStandard: '检查管道固定是否牢固', 
+                          responsibilityStandard: '确保线路安全规范', 
+                          executor: '电工组', 
+                          confirmer: '项目经理' },
+                        { name: '弱电布线', 
+                          executionStandard: '线路走向合理、标识清晰', 
+                          confirmationStandard: '测试线路通断', 
+                          responsibilityStandard: '确保信号传输正常', 
+                          executor: '弱电组', 
+                          confirmer: '项目经理' },
+                        { name: '给水管道', 
+                          executionStandard: '管道密封、无渗漏', 
+                          confirmationStandard: '进行压力测试', 
+                          responsibilityStandard: '确保管道系统正常运行', 
+                          executor: '水电工', 
+                          confirmer: '项目经理' },
+                        { name: '排水管道', 
+                          executionStandard: '管道畅通、无堵塞', 
+                          confirmationStandard: '进行通水测试', 
+                          responsibilityStandard: '确保排水系统正常', 
+                          executor: '水电工', 
+                          confirmer: '项目经理' }
+                    ]},
+                    { name: '验收调试', order: true, tasks: [
+                        { name: '通电测试', 
+                          executionStandard: '各回路绝缘良好、接地可靠', 
+                          confirmationStandard: '测试所有插座和开关', 
+                          responsibilityStandard: '确保用电安全', 
+                          executor: '电工组', 
+                          confirmer: '项目经理、业主' },
+                        { name: '通水测试', 
+                          executionStandard: '水压正常、无渗漏', 
+                          confirmationStandard: '检查所有水龙头和阀门', 
+                          responsibilityStandard: '确保水路系统正常', 
+                          executor: '水电工', 
+                          confirmer: '项目经理' },
+                        { name: '整体验收', 
+                          executionStandard: '符合设计及规范要求', 
+                          confirmationStandard: '逐项检查所有工程内容', 
+                          responsibilityStandard: '确保工程质量合格', 
+                          executor: '项目经理', 
+                          confirmer: '业主、监理' }
+                    ]}
+                ]
+            },
+            {
+                id: 2,
+                name: '泥瓦施工阶段模板',
+                type: '泥瓦工程',
+                city: '杭州',
+                status: 'active',
+                stageCount: 4,
+                taskCount: 10,
+                updateTime: '2024-01-08 10:20',
+                stages: [
+                    { name: '基层处理', order: false, tasks: [
+                        { name: '墙面找平', 
+                          executionStandard: '平整度≤3mm/2m', 
+                          confirmationStandard: '使用靠尺检查平整度', 
+                          responsibilityStandard: '确保墙面平整达标', 
+                          executor: '泥瓦工', 
+                          confirmer: '项目经理' },
+                        { name: '地面找平', 
+                          executionStandard: '平整度≤5mm/2m', 
+                          confirmationStandard: '使用水平仪检查平整度', 
+                          responsibilityStandard: '确保地面平整达标', 
+                          executor: '泥瓦工', 
+                          confirmer: '项目经理' }
+                    ]},
+                    { name: '防水施工', order: true, tasks: [
+                        { name: '防水涂刷', 
+                          executionStandard: '涂刷均匀、无遗漏', 
+                          confirmationStandard: '检查涂层厚度和均匀度', 
+                          responsibilityStandard: '确保防水效果达标', 
+                          executor: '泥瓦工', 
+                          confirmer: '项目经理、监理' },
+                        { name: '闭水试验', 
+                          executionStandard: '48小时无渗漏', 
+                          confirmationStandard: '检查水位是否下降', 
+                          responsibilityStandard: '确保防水工程合格', 
+                          executor: '泥瓦工', 
+                          confirmer: '项目经理、业主' }
+                    ]},
+                    { name: '瓷砖铺贴', order: false, tasks: [
+                        { name: '墙面瓷砖', 
+                          executionStandard: '无空鼓、缝隙均匀', 
+                          confirmationStandard: '使用空鼓锤检查', 
+                          responsibilityStandard: '确保瓷砖铺贴质量', 
+                          executor: '泥瓦工', 
+                          confirmer: '项目经理' },
+                        { name: '地面瓷砖', 
+                          executionStandard: '无空鼓、坡度正确', 
+                          confirmationStandard: '检查排水坡度和空鼓情况', 
+                          responsibilityStandard: '确保地面瓷砖质量', 
+                          executor: '泥瓦工', 
+                          confirmer: '项目经理' },
+                        { name: '阴阳角处理', 
+                          executionStandard: '角度方正、边缘整齐', 
+                          confirmationStandard: '使用直角尺检查', 
+                          responsibilityStandard: '确保阴阳角处理美观', 
+                          executor: '泥瓦工', 
+                          confirmer: '项目经理' }
+                    ]},
+                    { name: '验收清洁', order: true, tasks: [
+                        { name: '空鼓检测', 
+                          executionStandard: '单块砖空鼓率≤5%', 
+                          confirmationStandard: '全面检查所有瓷砖', 
+                          responsibilityStandard: '确保瓷砖铺贴质量', 
+                          executor: '泥瓦工', 
+                          confirmer: '项目经理' },
+                        { name: '平整度检测', 
+                          executionStandard: '平整度≤2mm/2m', 
+                          confirmationStandard: '使用靠尺检查', 
+                          responsibilityStandard: '确保表面平整', 
+                          executor: '泥瓦工', 
+                          confirmer: '项目经理' },
+                        { name: '清洁收尾', 
+                          executionStandard: '表面洁净、无污染', 
+                          confirmationStandard: '检查瓷砖表面清洁度', 
+                          responsibilityStandard: '确保工地整洁', 
+                          executor: '清洁工', 
+                          confirmer: '项目经理' }
+                    ]}
+                ]
+            },
+            {
+                id: 3,
+                name: '木工施工阶段模板',
+                type: '木工工程',
+                city: '杭州',
+                status: 'active',
+                stageCount: 3,
+                taskCount: 7,
+                updateTime: '2024-01-05 16:45',
+                stages: [
+                    { name: '材料准备', order: true, tasks: [
+                        { name: '材料验收', standard: '材料品牌、规格符合合同要求', executor: '木工', confirmer: '项目经理' },
+                        { name: '图纸核对', standard: '尺寸、样式与设计一致', executor: '木工', confirmer: '项目经理' }
+                    ]},
+                    { name: '木工制作', order: false, tasks: [
+                        { name: '吊顶制作', standard: '结构牢固、造型美观', executor: '木工', confirmer: '项目经理' },
+                        { name: '柜体制作', standard: '尺寸准确、封边严密', executor: '木工', confirmer: '项目经理' },
+                        { name: '门窗套制作', standard: '安装平整、缝隙均匀', executor: '木工', confirmer: '项目经理' }
+                    ]},
+                    { name: '安装验收', order: true, tasks: [
+                        { name: '安装固定', standard: '牢固可靠、无松动', executor: '木工', confirmer: '项目经理' },
+                        { name: '验收确认', standard: '符合设计及规范要求', executor: '项目经理', confirmer: '业主' }
+                    ]}
+                ]
+            },
+            {
+                id: 4,
+                name: '油漆施工阶段模板',
+                type: '油漆工程',
+                city: '杭州',
+                status: 'active',
+                stageCount: 2,
+                taskCount: 5,
+                updateTime: '2024-01-03 09:15',
+                stages: [
+                    { name: '基层处理', order: true, tasks: [
+                        { name: '墙面打磨', standard: '表面平整、无砂痕', executor: '油漆工', confirmer: '项目经理' },
+                        { name: '腻子批刮', standard: '均匀无气泡、干燥彻底', executor: '油漆工', confirmer: '项目经理' },
+                        { name: '底漆涂刷', standard: '涂刷均匀、无遗漏', executor: '油漆工', confirmer: '项目经理' }
+                    ]},
+                    { name: '面漆施工', order: true, tasks: [
+                        { name: '面漆涂刷', standard: '色泽均匀、无刷痕', executor: '油漆工', confirmer: '项目经理、业主' },
+                        { name: '验收确认', standard: '表面光滑、颜色一致', executor: '项目经理', confirmer: '业主' }
+                    ]}
+                ]
+            },
+            {
+                id: 5,
+                name: '水电施工阶段模板（全国版）',
+                type: '水电工程',
+                city: '全国',
+                status: 'active',
+                stageCount: 3,
+                taskCount: 8,
+                updateTime: '2024-01-01 08:00',
+                stages: [
+                    { name: '材料进场', order: true, tasks: [
+                        { name: '材料验收', standard: '材料品牌、规格、数量符合合同要求', executor: '材料员', confirmer: '项目经理、监理' },
+                        { name: '材料入库', standard: '材料分类堆放、标识清晰', executor: '材料员', confirmer: '仓库管理员' }
+                    ]},
+                    { name: '布管布线', order: false, tasks: [
+                        { name: '强电布管', standard: '管道横平竖直、间距均匀', executor: '电工组', confirmer: '项目经理' },
+                        { name: '弱电布线', standard: '线路走向合理、标识清晰', executor: '弱电组', confirmer: '项目经理' },
+                        { name: '给水管道', standard: '管道密封、无渗漏', executor: '水电工', confirmer: '项目经理' },
+                        { name: '排水管道', standard: '管道畅通、无堵塞', executor: '水电工', confirmer: '项目经理' }
+                    ]},
+                    { name: '验收调试', order: true, tasks: [
+                        { name: '通电测试', standard: '各回路绝缘良好、接地可靠', executor: '电工组', confirmer: '项目经理、业主' },
+                        { name: '通水测试', standard: '水压正常、无渗漏', executor: '水电工', confirmer: '项目经理' },
+                        { name: '整体验收', standard: '符合设计及规范要求', executor: '项目经理', confirmer: '业主、监理' }
+                    ]}
+                ]
+            }
+        ];
+
+        let previewingTemplateId = null;
+        let previewingTemplateType = null; // 'contract' or 'stage'
+
         function showTemplateModal() {
-            showToast('选择合同文本模板');
+            selectedTemplateId = null;
+            
+            document.getElementById('filterCity').textContent = currentContractInfo.city;
+            document.getElementById('filterType').textContent = currentContractInfo.category + ' - ' + currentContractInfo.type;
+            
+            const filteredTemplates = contractTemplates.filter(t => 
+                t.status === 'active' && 
+                (t.city === currentContractInfo.city || t.city === '全国') &&
+                t.type === currentContractInfo.type
+            );
+            
+            const listContainer = document.getElementById('templateSelectList');
+            const emptyContainer = document.getElementById('templateEmpty');
+            
+            if (filteredTemplates.length === 0) {
+                listContainer.style.display = 'none';
+                emptyContainer.style.display = 'flex';
+            } else {
+                listContainer.style.display = 'flex';
+                emptyContainer.style.display = 'none';
+                
+                listContainer.innerHTML = filteredTemplates.map(template => `
+                    <div class="template-select-item" data-id="${template.id}" onclick="selectTemplate(${template.id})">
+                        <div class="template-item-icon">📄</div>
+                        <div class="template-item-content">
+                            <div class="template-item-name">${template.name}</div>
+                            <div class="template-item-meta">
+                                <span class="template-item-tag city">${template.city}</span>
+                                <span class="template-item-tag">${template.category}</span>
+                                <span class="template-item-version">${template.version}</span>
+                            </div>
+                            <div class="template-item-desc">${template.desc}</div>
+                        </div>
+                        <div class="template-item-actions">
+                            <button class="pc-btn pc-btn-default pc-btn-sm" onclick="event.stopPropagation(); previewTemplate(${template.id})"><i class="icon">👁️</i> 预览</button>
+                            <button class="pc-btn pc-btn-primary pc-btn-sm" onclick="event.stopPropagation(); applyTemplate(${template.id})"><i class="icon">✓</i> 使用</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            document.getElementById('templateSelectModal').classList.add('show');
+        }
+
+        function closeTemplateModal() {
+            document.getElementById('templateSelectModal').classList.remove('show');
+        }
+
+        function selectTemplate(id) {
+            document.querySelectorAll('.template-select-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            document.querySelector(`.template-select-item[data-id="${id}"]`).classList.add('selected');
+            selectedTemplateId = id;
+        }
+
+        function previewTemplate(id) {
+            // 先尝试从合同文本模板中查找
+            const contractTemplate = contractTemplates.find(t => t.id === id);
+            if (contractTemplate) {
+                previewingTemplateId = id;
+                previewingTemplateType = 'contract';
+                document.getElementById('previewTemplateName').textContent = contractTemplate.name;
+                document.getElementById('previewTemplateType').textContent = contractTemplate.type;
+                document.getElementById('previewTemplateCity').textContent = contractTemplate.city;
+                document.getElementById('previewTemplateUpdateTime').textContent = contractTemplate.updateTime;
+                
+                const stagesPreview = document.getElementById('templateStagesPreview');
+                stagesPreview.innerHTML = `
+                    <div class="template-content-preview">
+                        <h4>合同文本内容</h4>
+                        <div class="template-content">${contractTemplate.content}</div>
+                    </div>
+                `;
+                
+                document.getElementById('templatePreviewModal').classList.add('show');
+                return;
+            }
+            
+            // 再尝试从阶段任务模板中查找
+            const stageTemplate = stageTemplates.find(t => t.id === id);
+            if (stageTemplate) {
+                previewingTemplateId = id;
+                previewingTemplateType = 'stage';
+                document.getElementById('previewTemplateName').textContent = stageTemplate.name;
+                document.getElementById('previewTemplateType').textContent = stageTemplate.type;
+                document.getElementById('previewTemplateCity').textContent = stageTemplate.city;
+                document.getElementById('previewTemplateUpdateTime').textContent = stageTemplate.updateTime;
+                
+                const stagesPreview = document.getElementById('templateStagesPreview');
+                stagesPreview.innerHTML = stageTemplate.stages.map((stage, stageIndex) => `
+                    <div class="preview-stage-item">
+                        <div class="preview-stage-header">
+                            <span class="preview-stage-name">${stage.name}</span>
+                            <span class="preview-stage-order">${stage.order ? '按序执行' : '并行执行'}</span>
+                        </div>
+                        <div class="preview-tasks-list">
+                            ${stage.tasks.map((task, taskIndex) => `
+                                <div class="preview-task-item">
+                                    <span class="preview-task-name">${task.name}</span>
+                                    <div class="preview-task-standards">
+                                        ${task.executionStandard ? `<span class="preview-task-standard">执行标准：${task.executionStandard}</span>` : ''}
+                                        ${task.confirmationStandard ? `<span class="preview-task-standard">确认标准：${task.confirmationStandard}</span>` : ''}
+                                        ${task.responsibilityStandard ? `<span class="preview-task-standard">担责标准：${task.responsibilityStandard}</span>` : ''}
+                                        ${task.standard ? `<span class="preview-task-standard">标准：${task.standard}</span>` : ''}
+                                    </div>
+                                    <span class="preview-task-meta">执行人：${task.executor} | 确认人：${task.confirmer || task.confirmers || '待分配'}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('templatePreviewModal').classList.add('show');
+            }
+        }
+
+        function closeTemplatePreviewModal() {
+            document.getElementById('templatePreviewModal').classList.remove('show');
+            previewingTemplateId = null;
+        }
+
+        function applyTemplateFromPreview() {
+            if (previewingTemplateId) {
+                if (previewingTemplateType === 'contract') {
+                    applyTemplate(previewingTemplateId);
+                } else if (previewingTemplateType === 'stage') {
+                    applyStageTemplate(previewingTemplateId);
+                }
+                closeTemplatePreviewModal();
+            }
+        }
+
+        function applyTemplate(id) {
+            const template = contractTemplates.find(t => t.id === id);
+            if (template) {
+                if (confirm(`确定要使用"${template.name}"吗？\n此操作将覆盖当前合同正文内容。`)) {
+                    document.getElementById('contractContent').innerHTML = template.content;
+                    highlightChanges();
+                    closeTemplateModal();
+                    showToast(`已应用模板：${template.name}`);
+                }
+            }
         }
 
         function showStageTemplateModal() {
-            showToast('选择阶段任务模板');
+            document.getElementById('stageFilterCity').textContent = currentContractInfo.city;
+            document.getElementById('stageFilterType').textContent = currentContractInfo.type;
+            
+            const filteredTemplates = stageTemplates.filter(t => 
+                t.status === 'active' && 
+                (t.city === currentContractInfo.city || t.city === '全国') &&
+                t.type === currentContractInfo.type
+            );
+            
+            const listContainer = document.getElementById('stageTemplateList');
+            const emptyContainer = document.getElementById('stageTemplateEmpty');
+            
+            if (filteredTemplates.length === 0) {
+                listContainer.style.display = 'none';
+                emptyContainer.style.display = 'flex';
+            } else {
+                listContainer.style.display = 'flex';
+                emptyContainer.style.display = 'none';
+                
+                listContainer.innerHTML = filteredTemplates.map(template => `
+                    <div class="stage-template-item" data-id="${template.id}">
+                        <div class="stage-template-header-row" onclick="toggleStageTemplateItem(this)">
+                            <div class="stage-template-info">
+                                <div class="stage-template-icon">📝</div>
+                                <div>
+                                    <div class="stage-template-name">${template.name}</div>
+                                    <div class="stage-template-meta">
+                                        <span>🏙️ ${template.city}</span>
+                                        <span>📋 ${template.stageCount}个阶段</span>
+                                        <span>📝 ${template.taskCount}个任务</span>
+                                        <span>🕐 ${template.updateTime}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="stage-template-actions">
+                                <button class="pc-btn pc-btn-default pc-btn-sm" onclick="event.stopPropagation(); previewTemplate(${template.id})"><i class="icon">👁️</i> 预览</button>
+                                <button class="pc-btn pc-btn-primary pc-btn-sm" onclick="event.stopPropagation(); applyStageTemplate(${template.id})"><i class="icon">✓</i> 使用</button>
+                                <span style="color: var(--text-tertiary); margin-left: 8px; cursor: pointer;">▶</span>
+                            </div>
+                        </div>
+                        <div class="stage-template-body-row">
+                            <div class="stage-preview-list">
+                                ${template.stages.map((stage, index) => `
+                                    <div class="stage-preview-item">
+                                        <div class="stage-preview-item-header">
+                                            <span class="stage-preview-item-name">${stage.name}</span>
+                                            <span class="stage-preview-item-order">${stage.order ? '按序执行' : '并行执行'}</span>
+                                        </div>
+                                        <div class="task-preview-list">
+                                            ${stage.tasks.map((task, taskIndex) => `
+                                                <div class="task-preview-item">
+                                                    ${task.name} - 执行人：${task.executor} | 确认人：${task.confirmer || task.confirmers || '待分配'}
+                                                </div>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            document.getElementById('stageTemplateModal').classList.add('show');
+        }
+
+        function closeStageTemplateModal() {
+            document.getElementById('stageTemplateModal').classList.remove('show');
+        }
+
+        function toggleStageTemplateItem(header) {
+            const body = header.nextElementSibling;
+            const arrow = header.querySelector('.stage-template-actions span');
+            if (body.classList.contains('show')) {
+                body.classList.remove('show');
+                arrow.textContent = '▶';
+            } else {
+                body.classList.add('show');
+                arrow.textContent = '▼';
+            }
+        }
+
+        function applyStageTemplate(id) {
+            const template = stageTemplates.find(t => t.id === id);
+            if (template) {
+                if (confirm(`确定要使用"${template.name}"吗？\n此操作将添加模板中的阶段和任务。`)) {
+                    const stageList = document.getElementById('stageList');
+                    
+                    // 清空现有阶段（保留已完成和进行中的阶段）
+                    const existingStages = stageList.querySelectorAll('.stage-item');
+                    existingStages.forEach(stage => {
+                        if (!stage.querySelector('.task-status-tag.completed') && !stage.querySelector('.task-status-tag.in-progress')) {
+                            stage.remove();
+                        }
+                    });
+                    
+                    // 添加模板阶段
+                    template.stages.forEach((stage, index) => {
+                        const stageHtml = `
+                            <div class="stage-item stage-added">
+                                <div class="stage-header" onclick="toggleStage(this)">
+                                    <div class="stage-info">
+                                        <span class="stage-name">${stage.name}</span>
+                                        ${stage.order ? '<span class="stage-sequential">按序执行</span>' : ''}
+                                        <span class="change-badge added">新增</span>
+                                    </div>
+                                    <div class="stage-actions">
+                                        <button class="pc-btn pc-btn-text pc-btn-sm" onclick="event.stopPropagation(); editStage(${100 + index})">编辑</button>
+                                        <button class="pc-btn pc-btn-text pc-btn-sm" onclick="event.stopPropagation(); deleteStage(${100 + index})">删除</button>
+                                        <span style="color: var(--text-tertiary);">▼</span>
+                                    </div>
+                                </div>
+                                <div class="stage-body" style="display: none;">
+                                    ${stage.tasks.map((task, taskIndex) => `
+                                        <div class="task-item task-added">
+                                            <div class="task-info">
+                                                <span class="task-name">${task.name}</span>
+                                                <span class="task-meta">执行标准：${task.executionStandard || task.standard || '-'} | 确认标准：${task.confirmationStandard || task.standard || '-'} | 担责标准：${task.responsibilityStandard || task.standard || '-'} | 执行人：${task.executor} | 确认人：${task.confirmer || task.confirmers || '待分配'}</span>
+                                                <span class="change-badge added">新增</span>
+                                            </div>
+                                            <div class="flex gap-8">
+                                                <button class="pc-btn pc-btn-text pc-btn-sm" onclick="editTask(${100 + index}, ${taskIndex})">编辑</button>
+                                                <button class="pc-btn pc-btn-text pc-btn-sm" onclick="deleteTask(${100 + index}, ${taskIndex})">删除</button>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                    <button class="pc-btn pc-btn-default pc-btn-sm mt-8" onclick="addTask(${100 + index})"><i class="icon">+</i> 添加任务</button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        const addBtn = stageList.querySelector('.add-stage-btn');
+                        addBtn.insertAdjacentHTML('beforebegin', stageHtml);
+                    });
+                    
+                    closeStageTemplateModal();
+                    showToast(`已应用阶段任务模板：${template.name}`);
+                }
+            }
+        }
+
+        function highlightChanges() {
+            // 高亮变更内容
+            const changeSections = document.querySelectorAll('[style*="color: var(--error-color)"]');
+            changeSections.forEach(section => {
+                section.style.backgroundColor = '#FFF7E6';
+                section.style.padding = '8px 12px';
+                section.style.borderRadius = '4px';
+                section.style.margin = '8px 0';
+            });
         }
 
         function clearContent() {
