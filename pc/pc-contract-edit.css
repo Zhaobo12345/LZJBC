@@ -73,7 +73,7 @@
 
         .attachment-item {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 12px;
             padding: 12px 16px;
             background-color: var(--bg-primary);
@@ -120,7 +120,8 @@
 
         .attachment-item .file-actions {
             display: flex;
-            gap: 8px;
+            flex-direction: column;
+            gap: 4px;
         }
 
         .attachment-item .btn-preview {

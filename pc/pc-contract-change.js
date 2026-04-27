@@ -354,27 +354,58 @@
         });
 
         function editTask(stageId, taskIndex) {
-            // 生成唯一的任务ID
-            const taskId = `${stageId}_${taskIndex}`;
+            // 处理两种情况：
+            // 1. 只传递一个参数（taskId）
+            // 2. 传递两个参数（stageId, taskIndex）
+            let taskId;
+            if (taskIndex === undefined) {
+                // 只传递了一个参数，作为taskId
+                taskId = stageId;
+            } else {
+                // 传递了两个参数，组合成taskId
+                taskId = `${stageId}_${taskIndex}`;
+            }
+            
             currentEditTaskId = taskId;
             const allTaskItems = document.querySelectorAll('.task-item');
             let taskItem = null;
             
+            // 遍历所有任务项，查找onclick属性中包含editTask的按钮
             for (let item of allTaskItems) {
-                if (item.getAttribute('data-task-id') == taskId) {
-                    taskItem = item;
-                    break;
-                }
-                
                 const buttons = item.querySelectorAll('button');
                 for (let btn of buttons) {
                     const onclickAttr = btn.getAttribute('onclick');
-                    if (onclickAttr && (onclickAttr.includes(`editTask(${stageId}, ${taskIndex})`) || onclickAttr.includes(`editTask(${taskId})`))) {
-                        taskItem = item;
-                        break;
+                    if (onclickAttr) {
+                        // 检查是否包含editTask(taskId)或editTask(stageId, taskIndex)
+                        if (taskIndex === undefined) {
+                            // 只传递了一个参数的情况
+                            if (onclickAttr.includes(`editTask(${taskId})`)) {
+                                taskItem = item;
+                                break;
+                            }
+                        } else {
+                            // 传递了两个参数的情况
+                            if (onclickAttr.includes(`editTask(${stageId}, ${taskIndex})`)) {
+                                taskItem = item;
+                                break;
+                            }
+                        }
                     }
                 }
                 if (taskItem) break;
+            }
+            
+            // 如果没有找到，尝试通过data-task-id属性查找
+            if (!taskItem) {
+                taskItem = document.querySelector(`.task-item[data-task-id="${taskId}"]`);
+            }
+            
+            // 如果没有找到，尝试通过索引查找（仅当taskId是数字时）
+            if (!taskItem && typeof taskId === 'number') {
+                const taskItems = document.querySelectorAll('.task-item');
+                if (taskItems.length > taskId - 1) {
+                    taskItem = taskItems[taskId - 1];
+                }
             }
             
             if (!taskItem) {
@@ -659,26 +690,57 @@
         }
 
         function deleteTask(stageId, taskIndex) {
-            // 生成唯一的任务ID
-            const taskId = `${stageId}_${taskIndex}`;
+            // 处理两种情况：
+            // 1. 只传递一个参数（taskId）
+            // 2. 传递两个参数（stageId, taskIndex）
+            let taskId;
+            if (taskIndex === undefined) {
+                // 只传递了一个参数，作为taskId
+                taskId = stageId;
+            } else {
+                // 传递了两个参数，组合成taskId
+                taskId = `${stageId}_${taskIndex}`;
+            }
+            
             const allTaskItems = document.querySelectorAll('.task-item');
             let taskItem = null;
             
+            // 遍历所有任务项，查找onclick属性中包含deleteTask的按钮
             for (let item of allTaskItems) {
-                if (item.getAttribute('data-task-id') == taskId) {
-                    taskItem = item;
-                    break;
-                }
-                
                 const buttons = item.querySelectorAll('button');
                 for (let btn of buttons) {
                     const onclickAttr = btn.getAttribute('onclick');
-                    if (onclickAttr && (onclickAttr.includes(`deleteTask(${stageId}, ${taskIndex})`) || onclickAttr.includes(`deleteTask(${taskId})`))) {
-                        taskItem = item;
-                        break;
+                    if (onclickAttr) {
+                        // 检查是否包含deleteTask(taskId)或deleteTask(stageId, taskIndex)
+                        if (taskIndex === undefined) {
+                            // 只传递了一个参数的情况
+                            if (onclickAttr.includes(`deleteTask(${taskId})`)) {
+                                taskItem = item;
+                                break;
+                            }
+                        } else {
+                            // 传递了两个参数的情况
+                            if (onclickAttr.includes(`deleteTask(${stageId}, ${taskIndex})`)) {
+                                taskItem = item;
+                                break;
+                            }
+                        }
                     }
                 }
                 if (taskItem) break;
+            }
+            
+            // 如果没有找到，尝试通过data-task-id属性查找
+            if (!taskItem) {
+                taskItem = document.querySelector(`.task-item[data-task-id="${taskId}"]`);
+            }
+            
+            // 如果没有找到，尝试通过索引查找（仅当taskId是数字时）
+            if (!taskItem && typeof taskId === 'number') {
+                const taskItems = document.querySelectorAll('.task-item');
+                if (taskItems.length > taskId - 1) {
+                    taskItem = taskItems[taskId - 1];
+                }
             }
             
             if (!taskItem) {

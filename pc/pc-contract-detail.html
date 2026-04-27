@@ -702,86 +702,40 @@
         </div>
     </div>
 
-    <div class="pc-modal-overlay" id="confirmModal">
-        <div class="pc-modal">
-            <div class="pc-modal-header">
-                <div class="pc-modal-title" id="confirmModalTitle">确认操作</div>
-                <div class="pc-modal-close" onclick="closeConfirmModal()">×</div>
-            </div>
-            <div class="pc-modal-body">
-                <p id="confirmModalContent">确定要执行此操作吗？</p>
-            </div>
-            <div class="pc-modal-footer">
-                <button class="pc-btn pc-btn-default" onclick="closeConfirmModal()">取消</button>
-                <button class="pc-btn pc-btn-primary" id="confirmModalBtn" onclick="confirmAction()">确定</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="task-detail-modal" id="taskDetailModal">
-        <div class="task-detail-content">
-            <div class="task-detail-header">
-                <div class="task-detail-title">
-                    <span>📋</span>
-                    <span id="taskDetailTitle">任务详情</span>
-                </div>
-                <div class="task-detail-close" onclick="closeTaskDetail()">×</div>
-            </div>
-            <div class="task-detail-body">
-                <div class="task-detail-section">
-                    <div class="task-detail-section-title">
-                        <span>👤</span>
-                        <span>人员信息</span>
-                    </div>
-                    <div class="task-detail-row">
-                        <span class="task-detail-label">执行人</span>
-                        <span class="task-detail-value" id="taskDetailExecutor">-</span>
-                    </div>
-                    <div class="task-detail-row">
-                        <span class="task-detail-label">确认人</span>
-                        <div class="task-detail-value" id="taskDetailConfirmers">
-                            <span class="task-detail-person">
-                                <span>👤</span>
-                                <span>张三（项目经理）</span>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="task-detail-section">
-                    <div class="task-detail-section-title">
-                        <span>📝</span>
-                        <span>执行标准</span>
-                    </div>
-                    <div class="task-detail-standard" id="taskDetailExecuteStandard">
-                        按照材料清单核对材料品牌、规格、数量，确保材料质量符合国家标准
-                    </div>
-                </div>
-                
-                <div class="task-detail-section">
-                    <div class="task-detail-section-title">
-                        <span>✅</span>
-                        <span>确认标准</span>
-                    </div>
-                    <div class="task-detail-standard" id="taskDetailConfirmStandard">
-                        核对材料是否与清单一致，检查材料质量证明文件
-                    </div>
-                </div>
-                
-                <div class="task-detail-section">
-                    <div class="task-detail-section-title">
-                        <span>⚖️</span>
-                        <span>担责标准</span>
-                    </div>
-                    <div class="task-detail-standard" id="taskDetailResponsibleStandard">
-                        材料验收不合格由采购方负责退换
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="pc-common.js"></script>
     <script src="pc-contract-detail.js"></script>
-
+    <script>
+        // 根据URL参数条件性隐藏变更记录tab
+        function hideChangeRecordTab() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            const status = urlParams.get('status');
+            const role = urlParams.get('role');
+            
+            // 需要隐藏变更记录tab的条件
+            const conditions = [
+                { id: '2', status: 'platform_reviewing', role: 'operator' },
+                { id: '1', status: 'platform_reviewing', role: 'operator' },
+                { id: '9', status: 'reviewed_pass', role: 'operator' },
+                { id: '10', status: 'reviewed_reject', role: 'operator' }
+            ];
+            
+            // 检查是否匹配任何条件
+            const shouldHide = conditions.some(condition => 
+                id === condition.id && 
+                status === condition.status && 
+                role === condition.role
+            );
+            
+            if (shouldHide) {
+                const changeTab = document.querySelector('.detail-tab[onclick="switchTab(\'changes\', event)"]');
+                if (changeTab) {
+                    changeTab.style.display = 'none';
+                }
+            }
+        }
+        
+        // 页面加载时执行
+        window.addEventListener('DOMContentLoaded', hideChangeRecordTab);
+    </script>
 </body>
 </html>
