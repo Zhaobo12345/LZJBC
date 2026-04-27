@@ -13,6 +13,21 @@
             { id: '2', name: '变更确认单.docx', size: 256000, type: 'word', ext: 'docx' }
         ];
 
+        // 项目内人员数据
+        const projectUsers = [
+            { id: 1, name: '张三', role: '项目经理', avatar: '👨‍💼' },
+            { id: 2, name: '李四', role: '监理', avatar: '👷‍♂️' },
+            { id: 3, name: '王五', role: '业主', avatar: '🏠' },
+            { id: 4, name: '赵六', role: '材料员', avatar: '📦' },
+            { id: 5, name: '钱七', role: '电工组', avatar: '🔧' },
+            { id: 6, name: '孙八', role: '弱电组', avatar: '📡' },
+            { id: 7, name: '周九', role: '水电工', avatar: '💧' },
+            { id: 8, name: '吴十', role: '泥瓦工', avatar: '🧱' },
+            { id: 9, name: '郑十一', role: '木工', avatar: '🪚' },
+            { id: 10, name: '王十二', role: '油漆工', avatar: '🎨' },
+            { id: 11, name: '陈十三', role: '清洁工', avatar: '🧹' }
+        ];
+
         function switchPcRole(role, evt) {
             currentPcRole = role;
             
@@ -80,7 +95,7 @@
                 </div>
             `;
             
-            const addBtn = stageList.querySelector('.add-stage-btn');
+            const addBtn = document.querySelector('.add-stage-btn');
             addBtn.insertAdjacentHTML('beforebegin', newStageHtml);
             
             closeAddStageModal();
@@ -103,7 +118,77 @@
         }
 
         function editStage(id) {
-            showToast('编辑阶段：' + id);
+            console.log('editStage called with id:', id);
+            const stageItem = document.querySelector(`.stage-item[data-stage-id="${id}"]`) || Array.from(document.querySelectorAll('.stage-item')).find((item, index) => {
+                const editBtn = item.querySelector('button[onclick*="editStage"]');
+                if (editBtn) {
+                    const onclickAttr = editBtn.getAttribute('onclick');
+                    const match = onclickAttr.match(/editStage\((\d+)\)/);
+                    return match && parseInt(match[1]) === id;
+                }
+                return false;
+            });
+            
+            if (!stageItem) {
+                showToast('未找到阶段');
+                return;
+            }
+            
+            const stageName = stageItem.querySelector('.stage-name').textContent;
+            const isSequential = stageItem.querySelector('.stage-sequential') !== null;
+            
+            document.getElementById('editStageId').value = id;
+            document.getElementById('editStageName').value = stageName;
+            document.getElementById('editStageSequential').checked = isSequential;
+            
+            document.getElementById('stageEditModal').classList.add('show');
+        }
+        
+        function closeStageEditModal() {
+            document.getElementById('stageEditModal').classList.remove('show');
+        }
+        
+        function saveStageEdit() {
+            const id = document.getElementById('editStageId').value;
+            const name = document.getElementById('editStageName').value.trim();
+            const isSequential = document.getElementById('editStageSequential').checked;
+            
+            if (!name) {
+                showToast('请输入阶段名称');
+                return;
+            }
+            
+            const stageItem = document.querySelector(`.stage-item[data-stage-id="${id}"]`) || Array.from(document.querySelectorAll('.stage-item')).find((item, index) => {
+                const editBtn = item.querySelector('button[onclick*="editStage"]');
+                if (editBtn) {
+                    const onclickAttr = editBtn.getAttribute('onclick');
+                    const match = onclickAttr.match(/editStage\((\d+)\)/);
+                    return match && parseInt(match[1]) === parseInt(id);
+                }
+                return false;
+            });
+            
+            if (!stageItem) {
+                showToast('未找到阶段');
+                return;
+            }
+            
+            stageItem.querySelector('.stage-name').textContent = name;
+            
+            const stageInfo = stageItem.querySelector('.stage-info');
+            const sequentialSpan = stageItem.querySelector('.stage-sequential');
+            
+            if (isSequential && !sequentialSpan) {
+                const newSequentialSpan = document.createElement('span');
+                newSequentialSpan.className = 'stage-sequential';
+                newSequentialSpan.textContent = '按序执行';
+                stageInfo.appendChild(newSequentialSpan);
+            } else if (!isSequential && sequentialSpan) {
+                sequentialSpan.remove();
+            }
+            
+            closeStageEditModal();
+            showToast('阶段信息已保存');
         }
 
         function deleteStage(id) {
@@ -124,9 +209,10 @@
             document.getElementById('taskChangeDiff').style.display = 'none';
             
             document.getElementById('editTaskName').value = '';
-            document.getElementById('executorInput').value = '';
-            document.getElementById('confirmerTags').innerHTML = '';
-            selectedConfirmers = [];
+            document.getElementById('editTaskExecutor').value = '';
+            document.getElementById('selectedExecutor').innerHTML = '';
+            document.getElementById('editTaskConfirmer').value = '';
+            document.getElementById('selectedConfirmers').innerHTML = '';
             document.getElementById('editExecuteStandard').value = '';
             document.getElementById('editConfirmStandard').value = '';
             document.getElementById('editResponsibleStandard').value = '';
@@ -139,16 +225,151 @@
             document.querySelectorAll('.highlight-input').forEach(el => el.classList.remove('highlight-input'));
         }
 
-        function editTask(taskId) {
+        // 搜索用户函数
+        function searchUsers(type) {
+            const searchInput = document.getElementById(`${type}Search`);
+            const dropdown = document.getElementById(`${type}Dropdown`);
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            let filteredUsers = projectUsers;
+            if (searchTerm.length > 0) {
+                filteredUsers = projectUsers.filter(user => 
+                    user.name.toLowerCase().includes(searchTerm) || 
+                    user.role.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            dropdown.innerHTML = filteredUsers.map(user => `
+                <div class="user-item" onclick="selectUser('${type}', ${user.id})">
+                    <span class="user-avatar">${user.avatar}</span>
+                    <span class="user-info">
+                        <span class="user-name">${user.name}</span>
+                        <span class="user-role">${user.role}</span>
+                    </span>
+                </div>
+            `).join('');
+            
+            dropdown.style.display = filteredUsers.length > 0 ? 'block' : 'none';
+        }
+
+        // 为搜索框添加点击事件，点击时显示所有人员
+        document.addEventListener('DOMContentLoaded', function() {
+            const executorSearch = document.getElementById('executorSearch');
+            if (executorSearch) {
+                executorSearch.addEventListener('click', function() {
+                    searchUsers('executor');
+                });
+            }
+            
+            const confirmerSearch = document.getElementById('confirmerSearch');
+            if (confirmerSearch) {
+                confirmerSearch.addEventListener('click', function() {
+                    searchUsers('confirmer');
+                });
+            }
+        });
+
+        // 选择用户函数
+        function selectUser(type, userId) {
+            const user = projectUsers.find(u => u.id === userId);
+            if (!user) return;
+            
+            if (type === 'executor') {
+                // 执行人只能选择一个
+                document.getElementById('editTaskExecutor').value = `${user.name}(${user.role})`;
+                document.getElementById('selectedExecutor').innerHTML = `
+                    <div class="selected-user-tag">
+                        <span class="user-avatar">${user.avatar}</span>
+                        <span>${user.name}(${user.role})</span>
+                        <span class="remove-user" onclick="removeUser('executor')">×</span>
+                    </div>
+                `;
+                document.getElementById('executorDropdown').style.display = 'none';
+                document.getElementById('executorSearch').value = '';
+            } else if (type === 'confirmer') {
+                // 确认人最多选择5个
+                const selectedConfirmers = document.getElementById('selectedConfirmers');
+                const currentCount = selectedConfirmers.children.length;
+                
+                if (currentCount >= 5) {
+                    showToast('确认人最多选择5个');
+                    return;
+                }
+                
+                // 检查是否已经选择
+                const existingUsers = Array.from(selectedConfirmers.children).map(tag => 
+                    tag.querySelector('span:nth-child(2)').textContent
+                );
+                
+                const userText = `${user.name}(${user.role})`;
+                if (existingUsers.includes(userText)) {
+                    showToast('该人员已选择');
+                    return;
+                }
+                
+                selectedConfirmers.insertAdjacentHTML('beforeend', `
+                    <div class="selected-user-tag">
+                        <span class="user-avatar">${user.avatar}</span>
+                        <span>${userText}</span>
+                        <span class="remove-user" onclick="removeUser('confirmer', this)">×</span>
+                    </div>
+                `);
+                
+                // 更新隐藏输入值
+                updateConfirmerValue();
+                
+                document.getElementById('confirmerDropdown').style.display = 'none';
+                document.getElementById('confirmerSearch').value = '';
+            }
+        }
+
+        // 移除用户函数
+        function removeUser(type, element) {
+            if (type === 'executor') {
+                document.getElementById('editTaskExecutor').value = '';
+                document.getElementById('selectedExecutor').innerHTML = '';
+            } else if (type === 'confirmer' && element) {
+                element.parentElement.remove();
+                updateConfirmerValue();
+            }
+        }
+
+        // 更新确认人隐藏输入值
+        function updateConfirmerValue() {
+            const selectedConfirmers = document.getElementById('selectedConfirmers');
+            const confirmers = Array.from(selectedConfirmers.children).map(tag => 
+                tag.querySelector('span:nth-child(2)').textContent
+            );
+            document.getElementById('editTaskConfirmer').value = confirmers.join('、');
+        }
+
+        // 点击其他地方关闭下拉框
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.user-selector')) {
+                const executorDropdown = document.getElementById('executorDropdown');
+                const confirmerDropdown = document.getElementById('confirmerDropdown');
+                if (executorDropdown) executorDropdown.style.display = 'none';
+                if (confirmerDropdown) confirmerDropdown.style.display = 'none';
+            }
+        });
+
+        function editTask(stageId, taskIndex) {
+            // 生成唯一的任务ID
+            const taskId = `${stageId}_${taskIndex}`;
             currentEditTaskId = taskId;
             const allTaskItems = document.querySelectorAll('.task-item');
             let taskItem = null;
             
             for (let item of allTaskItems) {
+                if (item.getAttribute('data-task-id') == taskId) {
+                    taskItem = item;
+                    break;
+                }
+                
                 const buttons = item.querySelectorAll('button');
                 for (let btn of buttons) {
                     const onclickAttr = btn.getAttribute('onclick');
-                    if (onclickAttr && onclickAttr.includes(`editTask(${taskId})`)) {
+                    if (onclickAttr && (onclickAttr.includes(`editTask(${stageId}, ${taskIndex})`) || onclickAttr.includes(`editTask(${taskId})`))) {
                         taskItem = item;
                         break;
                     }
@@ -178,10 +399,36 @@
                 
                 const metaMatch = taskMeta.match(/执行人：(.+?) \| 确认人：(.+)/);
                 if (metaMatch) {
-                    document.getElementById('executorInput').value = metaMatch[1];
+                    // 清空之前的选择
+                    document.getElementById('editTaskExecutor').value = '';
+                    document.getElementById('selectedExecutor').innerHTML = '';
+                    document.getElementById('editTaskConfirmer').value = '';
+                    document.getElementById('selectedConfirmers').innerHTML = '';
+                    
+                    // 设置执行人
+                    const executor = metaMatch[1];
+                    document.getElementById('editTaskExecutor').value = executor;
+                    document.getElementById('selectedExecutor').innerHTML = `
+                        <div class="selected-user-tag">
+                            <span class="user-avatar">👤</span>
+                            <span>${executor}</span>
+                            <span class="remove-user" onclick="removeUser('executor')">×</span>
+                        </div>
+                    `;
+                    
+                    // 设置确认人
                     const confirmers = metaMatch[2].split('、');
-                    selectedConfirmers = confirmers.map(c => ({ name: c.trim(), role: '' }));
-                    renderConfirmerTags();
+                    const selectedConfirmersContainer = document.getElementById('selectedConfirmers');
+                    confirmers.forEach(c => {
+                        selectedConfirmersContainer.insertAdjacentHTML('beforeend', `
+                            <div class="selected-user-tag">
+                                <span class="user-avatar">👤</span>
+                                <span>${c}</span>
+                                <span class="remove-user" onclick="removeUser('confirmer', this)">×</span>
+                            </div>
+                        `);
+                    });
+                    document.getElementById('editTaskConfirmer').value = confirmers.join('、');
                 }
                 
                 document.getElementById('editExecuteStandard').value = '按照规范进行布线施工，确保线路走向合理、固定牢固';
@@ -221,10 +468,36 @@
                 
                 const metaMatch = taskMeta.match(/执行人：(.+?) \| 确认人：(.+)/);
                 if (metaMatch) {
-                    document.getElementById('executorInput').value = metaMatch[1];
+                    // 清空之前的选择
+                    document.getElementById('editTaskExecutor').value = '';
+                    document.getElementById('selectedExecutor').innerHTML = '';
+                    document.getElementById('editTaskConfirmer').value = '';
+                    document.getElementById('selectedConfirmers').innerHTML = '';
+                    
+                    // 设置执行人
+                    const executor = metaMatch[1];
+                    document.getElementById('editTaskExecutor').value = executor;
+                    document.getElementById('selectedExecutor').innerHTML = `
+                        <div class="selected-user-tag">
+                            <span class="user-avatar">👤</span>
+                            <span>${executor}</span>
+                            <span class="remove-user" onclick="removeUser('executor')">×</span>
+                        </div>
+                    `;
+                    
+                    // 设置确认人
                     const confirmers = metaMatch[2].split('、');
-                    selectedConfirmers = confirmers.map(c => ({ name: c.trim(), role: '' }));
-                    renderConfirmerTags();
+                    const selectedConfirmersContainer = document.getElementById('selectedConfirmers');
+                    confirmers.forEach(c => {
+                        selectedConfirmersContainer.insertAdjacentHTML('beforeend', `
+                            <div class="selected-user-tag">
+                                <span class="user-avatar">👤</span>
+                                <span>${c}</span>
+                                <span class="remove-user" onclick="removeUser('confirmer', this)">×</span>
+                            </div>
+                        `);
+                    });
+                    document.getElementById('editTaskConfirmer').value = confirmers.join('、');
                 }
                 
                 document.getElementById('editExecuteStandard').value = '按最新规范施工，增加验收环节';
@@ -297,8 +570,20 @@
                 const name = opt.querySelector('span:last-child').textContent.split('（')[0];
                 if (selectedConfirmers.find(c => c.name === name)) {
                     opt.classList.add('selected');
+                    // 添加确认标识
+                    if (!opt.querySelector('.checkmark')) {
+                        const checkmark = document.createElement('span');
+                        checkmark.className = 'checkmark';
+                        checkmark.innerHTML = '✓';
+                        opt.appendChild(checkmark);
+                    }
                 } else {
                     opt.classList.remove('selected');
+                    // 移除确认标识
+                    const checkmark = opt.querySelector('.checkmark');
+                    if (checkmark) {
+                        checkmark.remove();
+                    }
                 }
             });
         }
@@ -308,8 +593,8 @@
             const executeStandard = document.getElementById('editExecuteStandard').value.trim();
             const confirmStandard = document.getElementById('editConfirmStandard').value.trim();
             const responsibleStandard = document.getElementById('editResponsibleStandard').value.trim();
-            const executor = document.getElementById('executorInput').value || '未指定';
-            const confirmerNames = selectedConfirmers.map(c => c.name).join('、') || '未指定';
+            const executor = document.getElementById('editTaskExecutor').value || '未指定';
+            const confirmerNames = document.getElementById('editTaskConfirmer').value || '未指定';
             
             if (!taskName) {
                 showToast('请输入任务名称');
@@ -373,15 +658,22 @@
             showToast('任务已保存');
         }
 
-        function deleteTask(taskId) {
+        function deleteTask(stageId, taskIndex) {
+            // 生成唯一的任务ID
+            const taskId = `${stageId}_${taskIndex}`;
             const allTaskItems = document.querySelectorAll('.task-item');
             let taskItem = null;
             
             for (let item of allTaskItems) {
+                if (item.getAttribute('data-task-id') == taskId) {
+                    taskItem = item;
+                    break;
+                }
+                
                 const buttons = item.querySelectorAll('button');
                 for (let btn of buttons) {
                     const onclickAttr = btn.getAttribute('onclick');
-                    if (onclickAttr && onclickAttr.includes(`deleteTask(${taskId})`)) {
+                    if (onclickAttr && (onclickAttr.includes(`deleteTask(${stageId}, ${taskIndex})`) || onclickAttr.includes(`deleteTask(${taskId})`))) {
                         taskItem = item;
                         break;
                     }
@@ -400,11 +692,29 @@
             }
             
             if (confirm('确定要删除此任务吗？')) {
-                taskItem.classList.add('task-deleting');
-                setTimeout(() => {
-                    taskItem.remove();
-                    showToast('任务已删除');
-                }, 300);
+                // 为删除的任务添加删除标识和样式
+                taskItem.classList.add('task-deleted');
+                taskItem.style.opacity = '0.6';
+                taskItem.style.backgroundColor = '#FFF1F0';
+                
+                // 禁用删除的任务的编辑和删除按钮
+                const buttons = taskItem.querySelectorAll('button');
+                buttons.forEach(btn => {
+                    btn.disabled = true;
+                    btn.classList.add('btn-disabled');
+                    btn.onclick = function() { showToast('已删除的任务不支持操作'); };
+                });
+                
+                // 添加删除标识
+                const taskInfo = taskItem.querySelector('.task-info');
+                if (taskInfo && !taskInfo.querySelector('.change-badge.deleted')) {
+                    const deleteBadge = document.createElement('span');
+                    deleteBadge.className = 'change-badge deleted';
+                    deleteBadge.textContent = '已删除';
+                    taskInfo.appendChild(deleteBadge);
+                }
+                
+                showToast('任务已删除');
             }
         }
 
@@ -882,12 +1192,10 @@
                                 <div class="preview-task-item">
                                     <span class="preview-task-name">${task.name}</span>
                                     <div class="preview-task-standards">
-                                        ${task.executionStandard ? `<span class="preview-task-standard">执行标准：${task.executionStandard}</span>` : ''}
-                                        ${task.confirmationStandard ? `<span class="preview-task-standard">确认标准：${task.confirmationStandard}</span>` : ''}
-                                        ${task.responsibilityStandard ? `<span class="preview-task-standard">担责标准：${task.responsibilityStandard}</span>` : ''}
-                                        ${task.standard ? `<span class="preview-task-standard">标准：${task.standard}</span>` : ''}
+                                        <span class="preview-task-standard">执行标准：${task.executionStandard || task.standard || ''}</span>
+                                        <span class="preview-task-standard">确认标准：${task.confirmationStandard || task.standard || ''}</span>
+                                        <span class="preview-task-standard">担责标准：${task.responsibilityStandard || task.standard || ''}</span>
                                     </div>
-                                    <span class="preview-task-meta">执行人：${task.executor} | 确认人：${task.confirmer || task.confirmers || '待分配'}</span>
                                 </div>
                             `).join('')}
                         </div>
@@ -957,13 +1265,11 @@
                                         <span>🏙️ ${template.city}</span>
                                         <span>📋 ${template.stageCount}个阶段</span>
                                         <span>📝 ${template.taskCount}个任务</span>
-                                        <span>🕐 ${template.updateTime}</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="stage-template-actions">
-                                <button class="pc-btn pc-btn-default pc-btn-sm" onclick="event.stopPropagation(); previewTemplate(${template.id})"><i class="icon">👁️</i> 预览</button>
-                                <button class="pc-btn pc-btn-primary pc-btn-sm" onclick="event.stopPropagation(); applyStageTemplate(${template.id})"><i class="icon">✓</i> 使用</button>
+                                <button class="pc-btn pc-btn-primary pc-btn-sm" onclick="event.stopPropagation(); applyStageTemplate(${template.id})"><i class="icon">✓</i> 使用此模板</button>
                                 <span style="color: var(--text-tertiary); margin-left: 8px; cursor: pointer;">▶</span>
                             </div>
                         </div>
@@ -971,16 +1277,22 @@
                             <div class="stage-preview-list">
                                 ${template.stages.map((stage, index) => `
                                     <div class="stage-preview-item">
-                                        <div class="stage-preview-item-header">
-                                            <span class="stage-preview-item-name">${stage.name}</span>
-                                            <span class="stage-preview-item-order">${stage.order ? '按序执行' : '并行执行'}</span>
-                                        </div>
-                                        <div class="task-preview-list">
-                                            ${stage.tasks.map((task, taskIndex) => `
-                                                <div class="task-preview-item">
-                                                    ${task.name} - 执行人：${task.executor} | 确认人：${task.confirmer || task.confirmers || '待分配'}
-                                                </div>
-                                            `).join('')}
+                                        <div class="stage-preview-number">${index + 1}</div>
+                                        <div class="stage-preview-content">
+                                            <div class="stage-preview-name">
+                                                ${stage.name}
+                                                ${stage.order ? '<span class="stage-preview-order">按序执行</span>' : ''}
+                                            </div>
+                                            <div class="stage-preview-tasks">
+                                                ${stage.tasks.map(task => `
+                                                    <div class="stage-preview-task-item">
+                                                        <span class="task-name">${task.name}</span>
+                                                        <span class="task-meta">执行标准：${task.executionStandard || task.standard || ''}</span>
+                                                        <span class="task-meta">确认标准：${task.confirmationStandard || task.standard || ''}</span>
+                                                        <span class="task-meta">担责标准：${task.responsibilityStandard || task.standard || ''}</span>
+                                                    </div>
+                                                `).join('')}
+                                            </div>
                                         </div>
                                     </div>
                                 `).join('')}
@@ -997,26 +1309,29 @@
             document.getElementById('stageTemplateModal').classList.remove('show');
         }
 
-        function toggleStageTemplateItem(header) {
-            const body = header.nextElementSibling;
-            const arrow = header.querySelector('.stage-template-actions span');
-            if (body.classList.contains('show')) {
-                body.classList.remove('show');
-                arrow.textContent = '▶';
-            } else {
-                body.classList.add('show');
+        function toggleStageTemplateItem(headerRow) {
+            const item = headerRow.parentElement;
+            const arrow = headerRow.querySelector('.stage-template-actions span:last-child');
+            item.classList.toggle('expanded');
+            if (item.classList.contains('expanded')) {
                 arrow.textContent = '▼';
+            } else {
+                arrow.textContent = '▶';
             }
         }
 
         function applyStageTemplate(id) {
+            console.log('applyStageTemplate called with id:', id);
             const template = stageTemplates.find(t => t.id === id);
             if (template) {
+                console.log('Found template:', template);
                 if (confirm(`确定要使用"${template.name}"吗？\n此操作将添加模板中的阶段和任务。`)) {
                     const stageList = document.getElementById('stageList');
+                    console.log('Stage list element:', stageList);
                     
                     // 清空现有阶段（保留已完成和进行中的阶段）
                     const existingStages = stageList.querySelectorAll('.stage-item');
+                    console.log('Existing stages:', existingStages);
                     existingStages.forEach(stage => {
                         if (!stage.querySelector('.task-status-tag.completed') && !stage.querySelector('.task-status-tag.in-progress')) {
                             stage.remove();
@@ -1041,7 +1356,7 @@
                                 </div>
                                 <div class="stage-body" style="display: none;">
                                     ${stage.tasks.map((task, taskIndex) => `
-                                        <div class="task-item task-added">
+                                        <div class="task-item task-added" data-task-id="${100 + index}_${taskIndex}">
                                             <div class="task-info">
                                                 <span class="task-name">${task.name}</span>
                                                 <span class="task-meta">执行标准：${task.executionStandard || task.standard || '-'} | 确认标准：${task.confirmationStandard || task.standard || '-'} | 担责标准：${task.responsibilityStandard || task.standard || '-'} | 执行人：${task.executor} | 确认人：${task.confirmer || task.confirmers || '待分配'}</span>
@@ -1059,12 +1374,20 @@
                         `;
                         
                         const addBtn = stageList.querySelector('.add-stage-btn');
-                        addBtn.insertAdjacentHTML('beforebegin', stageHtml);
+                        console.log('Add button element:', addBtn);
+                        if (addBtn) {
+                            addBtn.insertAdjacentHTML('beforebegin', stageHtml);
+                        } else {
+                            console.error('Add button not found');
+                            stageList.insertAdjacentHTML('beforeend', stageHtml);
+                        }
                     });
                     
                     closeStageTemplateModal();
                     showToast(`已应用阶段任务模板：${template.name}`);
                 }
+            } else {
+                console.log('Template not found with id:', id);
             }
         }
 

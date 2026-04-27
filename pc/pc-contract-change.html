@@ -528,51 +528,22 @@
                 
                 <div class="edit-task-form-group">
                     <label class="edit-task-label">执行人</label>
-                    <div class="person-select" id="executorSelect">
-                        <input type="text" class="person-select-input" id="executorInput" placeholder="请选择执行人" readonly onclick="toggleExecutorDropdown()">
-                        <span class="person-select-arrow">▼</span>
-                        <div class="person-select-dropdown" id="executorDropdown">
-                            <div class="person-select-option" onclick="selectExecutor('张三', '项目经理')">
-                                <span>👤</span>
-                                <span>张三（项目经理）</span>
-                            </div>
-                            <div class="person-select-option" onclick="selectExecutor('李四', '电工组长')">
-                                <span>👤</span>
-                                <span>李四（电工组长）</span>
-                            </div>
-                            <div class="person-select-option" onclick="selectExecutor('王五', '材料员')">
-                                <span>👤</span>
-                                <span>王五（材料员）</span>
-                            </div>
-                        </div>
+                    <div class="user-selector">
+                        <input type="text" class="person-select-input" id="executorSearch" placeholder="搜索人员（姓名或角色）" onkeyup="searchUsers('executor')">
+                        <div class="user-dropdown" id="executorDropdown"></div>
+                        <input type="hidden" id="editTaskExecutor">
+                        <div class="selected-user" id="selectedExecutor"></div>
                     </div>
                 </div>
                 
                 <div class="edit-task-form-group">
                     <label class="edit-task-label">确认人（最多5人）</label>
-                    <div class="person-select" id="confirmerSelect">
-                        <input type="text" class="person-select-input" id="confirmerInput" placeholder="请选择确认人" readonly onclick="toggleConfirmerDropdown()">
-                        <span class="person-select-arrow">▼</span>
-                        <div class="person-select-dropdown" id="confirmerDropdown">
-                            <div class="person-select-option" onclick="toggleConfirmer('张三', '项目经理')">
-                                <span>👤</span>
-                                <span>张三（项目经理）</span>
-                            </div>
-                            <div class="person-select-option" onclick="toggleConfirmer('李四', '电工组长')">
-                                <span>👤</span>
-                                <span>李四（电工组长）</span>
-                            </div>
-                            <div class="person-select-option" onclick="toggleConfirmer('赵六', '监理')">
-                                <span>👤</span>
-                                <span>赵六（监理）</span>
-                            </div>
-                            <div class="person-select-option" onclick="toggleConfirmer('钱七', '业主')">
-                                <span>👤</span>
-                                <span>钱七（业主）</span>
-                            </div>
-                        </div>
+                    <div class="user-selector">
+                        <input type="text" class="person-select-input" id="confirmerSearch" placeholder="搜索人员（姓名或角色）" onkeyup="searchUsers('confirmer')">
+                        <div class="user-dropdown" id="confirmerDropdown"></div>
+                        <input type="hidden" id="editTaskConfirmer">
+                        <div class="selected-users" id="selectedConfirmers"></div>
                     </div>
-                    <div class="person-tags" id="confirmerTags"></div>
                 </div>
                 
                 <div class="edit-task-form-group">
@@ -648,6 +619,38 @@
                     <div class="waiting-info-label">待确认方</div>
                     <div class="waiting-info-value">乙方 - 李四</div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="stage-edit-modal" id="stageEditModal">
+        <div class="stage-edit-content">
+            <div class="stage-edit-header">
+                <div class="stage-edit-title">
+                    <span>📝</span>
+                    <span>编辑阶段</span>
+                </div>
+                <div class="stage-edit-close" onclick="closeStageEditModal()">×</div>
+            </div>
+            <div class="stage-edit-body">
+                <input type="hidden" id="editStageId">
+                <div class="pc-form-group">
+                    <label class="pc-form-label">阶段名称<span class="required">*</span></label>
+                    <input type="text" class="pc-form-input" id="editStageName" placeholder="请输入阶段名称">
+                </div>
+                <div class="pc-form-group">
+                    <label class="pc-form-label">执行顺序</label>
+                    <div class="pc-checkbox-group">
+                        <label class="pc-checkbox-label">
+                            <input type="checkbox" id="editStageSequential">
+                            <span>按序执行</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="stage-edit-footer">
+                <button class="pc-btn pc-btn-default" onclick="closeStageEditModal()">取消</button>
+                <button class="pc-btn pc-btn-primary" onclick="saveStageEdit()">保存</button>
             </div>
         </div>
     </div>
@@ -728,38 +731,25 @@
         <div class="template-preview-content">
             <div class="template-preview-header">
                 <div class="template-preview-title">
-                    <span>👁️</span>
+                    <span>📄</span>
                     <span>模板预览</span>
                 </div>
                 <div class="template-preview-close" onclick="closeTemplatePreviewModal()">×</div>
             </div>
             <div class="template-preview-body">
                 <div class="template-preview-info">
-                    <div class="template-preview-info-row">
-                        <span class="preview-info-label">模板名称：</span>
-                        <span class="preview-info-value" id="previewTemplateName"></span>
-                    </div>
-                    <div class="template-preview-info-row">
-                        <span class="preview-info-label">适用类型：</span>
-                        <span class="preview-info-value" id="previewTemplateType"></span>
-                    </div>
-                    <div class="template-preview-info-row">
-                        <span class="preview-info-label">适用城市：</span>
-                        <span class="preview-info-value" id="previewTemplateCity"></span>
-                    </div>
-                    <div class="template-preview-info-row">
-                        <span class="preview-info-label">更新时间：</span>
-                        <span class="preview-info-value" id="previewTemplateUpdateTime"></span>
+                    <h3 id="previewTemplateName"></h3>
+                    <div class="template-preview-meta">
+                        <span class="meta-item">类型：<span id="previewTemplateType"></span></span>
+                        <span class="meta-item">城市：<span id="previewTemplateCity"></span></span>
+                        <span class="meta-item">更新时间：<span id="previewTemplateUpdateTime"></span></span>
                     </div>
                 </div>
-                <div class="template-preview-content">
-                    <div class="template-stages-preview" id="templateStagesPreview">
-                    </div>
-                </div>
+                <div class="template-stages-preview" id="templateStagesPreview"></div>
             </div>
             <div class="template-preview-footer">
-                <button class="pc-btn pc-btn-default" onclick="closeTemplatePreviewModal()">取消</button>
                 <button class="pc-btn pc-btn-primary" onclick="applyTemplateFromPreview()">使用此模板</button>
+                <button class="pc-btn pc-btn-default" onclick="closeTemplatePreviewModal()">关闭</button>
             </div>
         </div>
     </div>
