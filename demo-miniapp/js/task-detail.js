@@ -2774,9 +2774,35 @@ const TaskDetailPage = (function() {
         updateTaskStatus: updateTaskStatus,
         switchUserRole: switchUserRole
     };
+    
+    function getStatusFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        const status = params.get('status');
+        return status;
+    }
+    
+    function initPage() {
+        const urlStatus = getStatusFromURL();
+        if (urlStatus === 'completed') {
+            updateTaskStatus(TaskStatus.COMPLETED);
+        } else if (urlStatus === 'configuring') {
+            updateTaskStatus(TaskStatus.CONFIGURING);
+        } else if (urlStatus === 'pending') {
+            updateTaskStatus(TaskStatus.PENDING);
+        } else if (urlStatus === 'in_progress') {
+            updateTaskStatus(TaskStatus.IN_PROGRESS);
+        } else if (urlStatus === 'confirming') {
+            updateTaskStatus(TaskStatus.CONFIRMING);
+        } else {
+            // 默认显示已完成状态
+            updateTaskStatus(TaskStatus.COMPLETED);
+        }
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPage);
+    } else {
+        initPage();
+    }
 })();
 
-    window.onload = function() {
-        updateTaskStatus(TaskStatus.COMPLETED);
-    };
-    

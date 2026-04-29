@@ -269,55 +269,76 @@
 
         .ppt-flow-image-wrapper:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
         }
 
-        .ppt-flow-image {
+        .ppt-flow-image-wrapper img {
             width: 100%;
+            height: auto;
             display: block;
         }
 
-        .ppt-flow-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .ppt-flow-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
-        .ppt-flow-step-num {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: 600;
+        .ppt-right-panel {
+            width: 280px;
             flex-shrink: 0;
         }
 
-        .ppt-flow-step-content {
-            flex: 1;
+        .ppt-text-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 28px;
+            color: white;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
         }
 
-        .ppt-flow-step-title {
+        .ppt-text-card .main-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .ppt-text-card .sub-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
             font-size: 15px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 4px;
+            line-height: 1.6;
         }
 
-        .ppt-flow-step-desc {
+        .ppt-text-card .sub-item .bullet {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .ppt-text-card .sub-item .text {
+            flex: 1;
+            opacity: 0.95;
+        }
+
+        .ppt-text-card .highlight-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .ppt-text-card .highlight-box .title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .ppt-text-card .highlight-box .content {
             font-size: 13px;
-            color: #666;
-            line-height: 1.5;
+            line-height: 1.6;
+            opacity: 0.85;
         }
 
         .toast {
@@ -341,92 +362,135 @@
         }
     </style>
 </head>
-<body>
-    <div class="phone-container">
-        <div class="phone-screen">
-            <div class="phone-notch"></div>
-            <div class="wx-capsule">
-                <div class="wx-capsule-btn">
-                    <div class="dot">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+<body class="ppt-layout-mode">
+    <div class="ppt-layout">
+        <!-- 左侧流程图展示 -->
+        <div class="ppt-left-panel">
+            <div class="ppt-flow-title">
+                <span class="icon">📊</span>
+                <span>个人电子名片</span>
+            </div>
+            <div class="ppt-flow-image-wrapper">
+                <img src="./imgs/imgOne.png" alt="个人电子名片思维导图">
+            </div>
+        </div>
+
+        <!-- 中间手机展示区域 -->
+        <div class="ppt-center-panel">
+            <div class="phone-container">
+                <div class="phone-screen">
+                    <div class="phone-notch"></div>
+                    <div class="wx-capsule">
+                        <div class="wx-capsule-btn">
+                            <div class="dot">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="wx-capsule-btn" onclick="showToast('关闭小程序')">
+                            <div class="close-icon"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="wx-capsule-btn" onclick="showToast('关闭小程序')">
-                    <div class="close-icon"></div>
+                    <div class="phone-content">
+                        <div class="header">
+                            <div class="header-back" onclick="history.back()">‹</div>
+                            <div class="header-title">个人电子名片</div>
+                        </div>
+                        
+                        <div class="profile-header">
+                            <div class="profile-avatar" id="profileAvatar">张</div>
+                            <div class="profile-name" id="profileName">张三</div>
+                            <div class="profile-role" id="profileRole">项目部 · 项目经理</div>
+                        </div>
+                        
+                        <div class="profile-section">
+                            <div class="section-header">基本信息</div>
+                            <div class="section-content">
+                                <div class="info-item">
+                                    <div class="label">姓名</div>
+                                    <div class="value" id="infoName">张三</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="label">角色</div>
+                                    <div class="value">
+                                        <span class="role-badge manager" id="infoRoleBadge">项目总</span>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="label">所属架构</div>
+                                    <div class="value" id="infoGroup">项目部</div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="label">联系方式</div>
+                                    <div class="value">138****8888</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-section">
+                            <div class="section-header">专业技能</div>
+                            <div class="section-content">
+                                <div class="skill-tags" id="skillTags">
+                                    <span class="skill-tag">项目管理</span>
+                                    <span class="skill-tag">施工协调</span>
+                                    <span class="skill-tag">预算管理</span>
+                                    <span class="skill-tag">质量控制</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="profile-section">
+                            <div class="section-header">项目经历</div>
+                            <div class="section-content">
+                                <div class="project-list" id="projectList">
+                                    <div class="project-item" onclick="goToProject('project-001')">
+                                        <div class="project-icon">🏠</div>
+                                        <div class="project-info">
+                                            <div class="project-name">XX小区整体装修</div>
+                                            <div class="project-role">项目经理</div>
+                                        </div>
+                                        <div class="arrow">›</div>
+                                    </div>
+                                    <div class="project-item" onclick="goToProject('project-002')">
+                                        <div class="project-icon">🏢</div>
+                                        <div class="project-info">
+                                            <div class="project-name">商业办公空间装修</div>
+                                            <div class="project-role">项目总监</div>
+                                        </div>
+                                        <div class="arrow">›</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="phone-content">
-                <div class="header">
-                    <div class="header-back" onclick="history.back()">‹</div>
-                    <div class="header-title">个人电子名片</div>
+        </div>
+
+        <!-- 右侧文字说明 -->
+        <div class="ppt-right-panel">
+            <div class="ppt-text-card">
+                <div class="main-title">个人电子名片</div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">基本信息一目了然</div>
                 </div>
-                
-                <div class="profile-header">
-                    <div class="profile-avatar" id="profileAvatar">张</div>
-                    <div class="profile-name" id="profileName">张三</div>
-                    <div class="profile-role" id="profileRole">项目部 · 项目经理</div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">专业技能清晰展示</div>
                 </div>
-                
-                <div class="profile-section">
-                    <div class="section-header">基本信息</div>
-                    <div class="section-content">
-                        <div class="info-item">
-                            <div class="label">姓名</div>
-                            <div class="value" id="infoName">张三</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="label">角色</div>
-                            <div class="value">
-                                <span class="role-badge manager" id="infoRoleBadge">项目总</span>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <div class="label">所属架构</div>
-                            <div class="value" id="infoGroup">项目部</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="label">联系方式</div>
-                            <div class="value">138****8888</div>
-                        </div>
-                    </div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">项目经历完整记录</div>
                 </div>
-                
-                <div class="profile-section">
-                    <div class="section-header">专业技能</div>
-                    <div class="section-content">
-                        <div class="skill-tags" id="skillTags">
-                            <span class="skill-tag">项目管理</span>
-                            <span class="skill-tag">施工协调</span>
-                            <span class="skill-tag">预算管理</span>
-                            <span class="skill-tag">质量控制</span>
-                        </div>
-                    </div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">联系方式便捷沟通</div>
                 </div>
-                
-                <div class="profile-section">
-                    <div class="section-header">项目经历</div>
-                    <div class="section-content">
-                        <div class="project-list" id="projectList">
-                            <div class="project-item" onclick="goToProject('project-001')">
-                                <div class="project-icon">🏠</div>
-                                <div class="project-info">
-                                    <div class="project-name">XX小区整体装修</div>
-                                    <div class="project-role">项目经理</div>
-                                </div>
-                                <div class="arrow">›</div>
-                            </div>
-                            <div class="project-item" onclick="goToProject('project-002')">
-                                <div class="project-icon">🏢</div>
-                                <div class="project-info">
-                                    <div class="project-name">商业办公空间装修</div>
-                                    <div class="project-role">项目总监</div>
-                                </div>
-                                <div class="arrow">›</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="highlight-box">
+                    <div class="title">💡 名片价值</div>
+                    <div class="content">展示个人专业能力<br>建立信任与协作基础</div>
                 </div>
             </div>
         </div>
@@ -440,7 +504,7 @@
                 <div class="page-nav-group-title">子页面</div>
                 <a href="project-detail.html" class="page-nav-item">项目详情</a>
                 <a href="contract-detail.html" class="page-nav-item">合同详情</a>
-                <a href="task-detail.html" class="page-nav-item">任务详情</a>
+                <a href="task-detail.html?status=completed" class="page-nav-item">任务详情</a>
                 <a href="member.html" class="page-nav-item">项目成员</a>
                 <a href="member-profile.html" class="page-nav-item active">个人电子名片</a>
                 <a href="architecture.html" class="page-nav-item">项目架构</a>

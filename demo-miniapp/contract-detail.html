@@ -570,6 +570,19 @@
             background-color: #FAFAFA;
             border-radius: 8px;
             margin: 0 12px 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .attachment-item:hover {
+            background-color: #E6F7FF;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(24, 144, 255, 0.15);
+        }
+
+        .attachment-item:active {
+            transform: translateY(0);
+            background-color: #BAE7FF;
         }
 
         .attachment-item:last-child {
@@ -586,6 +599,12 @@
             justify-content: center;
             font-size: 18px;
             margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .attachment-item:hover .file-icon {
+            background-color: #1890FF;
+            color: #FFFFFF;
         }
 
         .attachment-item .file-info {
@@ -595,6 +614,11 @@
         .attachment-item .file-name {
             font-size: 13px;
             color: #262626;
+            transition: color 0.3s ease;
+        }
+
+        .attachment-item:hover .file-name {
+            color: #1890FF;
         }
 
         .attachment-item .file-meta {
@@ -611,6 +635,47 @@
             justify-content: center;
             color: #1890FF;
             cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .attachment-item:hover .download-btn {
+            color: #1890FF;
+            transform: scale(1.1);
+        }
+
+        .attachment-item .download-btn:active {
+            transform: scale(0.95);
+        }
+
+        .attachment-item .preview-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1890FF;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .attachment-item:hover .preview-btn {
+            color: #1890FF;
+            transform: scale(1.1);
+        }
+
+        .attachments-container {
+            padding: 4px 0;
+            margin-top: 8px;
+        }
+
+        .attachments-container .attachment-item {
+            margin: 0 12px 8px;
+        }
+
+        .attachments-container .attachment-item:last-child {
+            margin-bottom: 0;
         }
     </style>
 </head>
@@ -662,11 +727,11 @@
                         </div>
                         <div class="info-row">
                             <div class="label">合同名称</div>
-                            <div class="value">水电分包合同</div>
+                            <div class="value">京北别墅S1基础施工服务合同</div>
                         </div>
                         <div class="info-row">
                             <div class="label">合同类型</div>
-                            <div class="value"><span class="contract-category-tag">水电服务合同</span></div>
+                            <div class="value"><span class="contract-category-tag">基础施工服务合同</span></div>
                         </div>
                         <div class="info-row">
                             <div class="label">合同编号</div>
@@ -1004,13 +1069,13 @@
                             <div class="card-title">
                                 <span>📝 签约文件</span>
                             </div>
-                            <div class="attachment-item">
+                            <div class="attachment-item" onclick="previewFile('京北别墅S1基础施工服务合同_签约文件.pdf', 'pdf')">
                                 <div class="file-icon">📄</div>
                                 <div class="file-info">
-                                    <div class="file-name">水电分包合同_签约文件.pdf</div>
+                                    <div class="file-name">京北别墅S1基础施工服务合同_签约文件.pdf</div>
                                     <div class="file-meta">张三上传 · 2024-01-15 10:30</div>
                                 </div>
-                                <div class="download-btn">👁️</div>
+                                <div class="download-btn" onclick="event.stopPropagation(); downloadFile('京北别墅S1基础施工服务合同_签约文件.pdf')">⬇</div>
                             </div>
                         </div>
 
@@ -1018,43 +1083,40 @@
                             <div class="card-title">
                                 <span>📎 合同附件</span>
                             </div>
-                            <div class="attachment-item">
+                            <div class="attachment-item" onclick="previewFile('京北别墅S1基础施工服务合同.pdf', 'pdf')">
                                 <div class="file-icon">📄</div>
                                 <div class="file-info">
-                                    <div class="file-name">水电分包合同.pdf</div>
+                                    <div class="file-name">京北别墅S1基础施工服务合同.pdf</div>
                                     <div class="file-meta">2.3MB · 2024-01-10上传</div>
                                 </div>
-                                <div class="download-btn">⬇</div>
+                                <div class="download-btn" onclick="event.stopPropagation(); downloadFile('京北别墅S1基础施工服务合同.pdf')">⬇</div>
                             </div>
-                            <div class="attachment-item">
+                            <div class="attachment-item" onclick="previewFile('签约照片.jpg', 'image')">
                                 <div class="file-icon">🖼️</div>
                                 <div class="file-info">
                                     <div class="file-name">签约照片.jpg</div>
                                     <div class="file-meta">1.5MB · 2024-01-10上传</div>
                                 </div>
-                                <div class="download-btn">👁️</div>
+                                <div class="download-btn" onclick="event.stopPropagation(); downloadFile('签约照片.jpg')">⬇</div>
                             </div>
                         </div>
 
-                        <div class="card" style="margin: 0; border-radius: 0;">
-                            <div class="card-title">
-                                <span>📁 补充文件</span>
-                            </div>
-                            <div class="attachment-item">
+                        <div class="attachments-container">
+                            <div class="attachment-item" onclick="previewFile('基础施工报价清单.xlsx', 'excel')">
                                 <div class="file-icon">📊</div>
                                 <div class="file-info">
-                                    <div class="file-name">材料清单.xlsx</div>
+                                    <div class="file-name">基础施工报价清单.xlsx</div>
                                     <div class="file-meta">156KB · 2024-01-12上传</div>
                                 </div>
-                                <div class="download-btn">⬇</div>
+                                <div class="download-btn" onclick="event.stopPropagation(); downloadFile('基础施工报价清单.xlsx')">⬇</div>
                             </div>
-                            <div class="attachment-item">
+                            <div class="attachment-item" onclick="previewFile('施工图纸.dwg', 'dwg')">
                                 <div class="file-icon">📐</div>
                                 <div class="file-info">
                                     <div class="file-name">施工图纸.dwg</div>
                                     <div class="file-meta">5.8MB · 2024-01-12上传</div>
                                 </div>
-                                <div class="download-btn">⬇</div>
+                                <div class="download-btn" onclick="event.stopPropagation(); downloadFile('施工图纸.dwg')">⬇</div>
                             </div>
                         </div>
                     </div>
@@ -1096,7 +1158,7 @@
                 <div class="page-nav-group-title">子页面</div>
                 <a href="project-detail.html" class="page-nav-item">项目详情</a>
                 <a href="contract-detail.html" class="page-nav-item active">合同详情</a>
-                <a href="task-detail.html" class="page-nav-item">任务详情</a>
+                <a href="task-detail.html?status=completed" class="page-nav-item">任务详情</a>
                 <a href="member.html" class="page-nav-item">项目成员</a>
                 <a href="member-profile.html" class="page-nav-item">个人电子名片</a>
                 <a href="architecture.html" class="page-nav-item">项目架构</a>
@@ -1170,6 +1232,115 @@
                 tasks.classList.add('show');
                 arrow.classList.add('expanded');
             }
+        }
+
+        function previewFile(fileName, fileType) {
+            const previewModal = document.createElement('div');
+            previewModal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+            `;
+            
+            let content = '';
+            if (fileType === 'image') {
+                content = `<div style="color: white; text-align: center;">📷 图片预览：${fileName}</div>`;
+            } else if (fileType === 'pdf') {
+                content = `<div style="color: white; text-align: center; padding: 40px;">📄 PDF文档预览：${fileName}<br><br><span style="font-size: 14px; color: #aaa;">（演示环境仅显示文件名）</span></div>`;
+            } else if (fileType === 'excel') {
+                content = `<div style="color: white; text-align: center; padding: 40px;">📊 Excel文档预览：${fileName}<br><br><span style="font-size: 14px; color: #aaa;">（演示环境仅显示文件名）</span></div>`;
+            } else if (fileType === 'dwg') {
+                content = `<div style="color: white; text-align: center; padding: 40px;">📐 CAD图纸预览：${fileName}<br><br><span style="font-size: 14px; color: #aaa;">（演示环境仅显示文件名）</span></div>`;
+            } else {
+                content = `<div style="color: white; text-align: center; padding: 40px;">📎 文件预览：${fileName}</div>`;
+            }
+            
+            previewModal.innerHTML = `
+                <div style="background: white; border-radius: 12px; padding: 20px; max-width: 90%; max-height: 80%; overflow: auto;">
+                    ${content}
+                    <div style="margin-top: 20px; text-align: center;">
+                        <button onclick="this.closest('div[style*=\"position: fixed\"]').remove()" style="padding: 10px 30px; background: #1890FF; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">关闭</button>
+                    </div>
+                </div>
+            `;
+            
+            previewModal.addEventListener('click', function(e) {
+                if (e.target === previewModal) {
+                    previewModal.remove();
+                }
+            });
+            
+            document.body.appendChild(previewModal);
+        }
+
+        function downloadFile(fileName) {
+            const downloadLink = document.createElement('a');
+            downloadLink.href = '#';
+            downloadLink.download = fileName;
+            downloadLink.style.display = 'none';
+            
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 100px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.75);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 14px;
+                z-index: 10000;
+            `;
+            toast.textContent = `📥 开始下载：${fileName}`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+                showToast(`文件已保存到本地：${fileName}`);
+            }, 1500);
+        }
+
+        function showToast(message) {
+            const existingToast = document.querySelector('.app-toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'app-toast';
+            toast.innerHTML = message.replace(/\n/g, '<br>');
+            toast.style.cssText = `
+                position: absolute;
+                bottom: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: rgba(0, 0, 0, 0.7);
+                color: #FFFFFF;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 13px;
+                z-index: 1000;
+                white-space: pre-wrap;
+                max-width: 90%;
+                text-align: center;
+                line-height: 1.5;
+            `;
+            const phoneFrame = document.querySelector('.phone-frame');
+            if (phoneFrame) {
+                phoneFrame.appendChild(toast);
+            }
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 2500);
         }
     </script>
 </body>

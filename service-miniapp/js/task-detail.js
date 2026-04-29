@@ -1486,8 +1486,25 @@ const TaskDetailPage = (function() {
                         <div class="section-title">
                             <span>📤 执行人提交的内容</span>
                         </div>
-                        <div style="text-align: center; padding: 20px; color: var(--text-tertiary);">
-                            暂无执行记录
+                        <div class="media-grid">
+                            <div class="media-item">📷</div>
+                            <div class="media-item">📷</div>
+                            <div class="media-item">📷</div>
+                            <div class="media-item" style="background-color: #000;">
+                                <span class="play-icon">▶</span>
+                                <span class="duration">0:15</span>
+                            </div>
+                        </div>
+                        <div class="execution-desc">
+                            穿线工作已完成，共穿设强电线管12根，弱电线管6根。已进行绝缘测试，所有线路绝缘电阻均大于0.5MΩ，符合规范要求。
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-tertiary); margin-top: 8px;">
+                            提交人：李四 · 2024-01-26 10:30
+                        </div>
+                        <div style="margin-top: 12px; padding: 10px; background-color: #F6FFED; border-radius: 6px; border-left: 3px solid #52C41A;">
+                            <div style="font-size: 12px; color: #52C41A; font-weight: 600; margin-bottom: 4px;">✓ 任务已完成</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">执行人已重新提交执行结果，等待确认人确认</div>
+                            <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">操作时间：2024-01-26 10:30 · 操作人：李四</div>
                         </div>
                     `;
                 }
@@ -1629,8 +1646,25 @@ const TaskDetailPage = (function() {
                         <div class="section-title">
                             <span>📤 执行人提交的内容</span>
                         </div>
-                        <div style="text-align: center; padding: 20px; color: var(--text-tertiary);">
-                            暂无执行记录
+                        <div class="media-grid">
+                            <div class="media-item">📷</div>
+                            <div class="media-item">📷</div>
+                            <div class="media-item">📷</div>
+                            <div class="media-item" style="background-color: #000;">
+                                <span class="play-icon">▶</span>
+                                <span class="duration">0:15</span>
+                            </div>
+                        </div>
+                        <div class="execution-desc">
+                            穿线工作已完成，共穿设强电线管12根，弱电线管6根。已进行绝缘测试，所有线路绝缘电阻均大于0.5MΩ，符合规范要求。
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-tertiary); margin-top: 8px;">
+                            提交人：李四 · 2024-01-26 10:30
+                        </div>
+                        <div style="margin-top: 12px; padding: 10px; background-color: #F6FFED; border-radius: 6px; border-left: 3px solid #52C41A;">
+                            <div style="font-size: 12px; color: #52C41A; font-weight: 600; margin-bottom: 4px;">✓ 任务已完成</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">执行人已重新提交执行结果，等待确认人确认</div>
+                            <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">操作时间：2024-01-26 10:30 · 操作人：李四</div>
                         </div>
                     `;
                 }
@@ -1658,6 +1692,11 @@ const TaskDetailPage = (function() {
                         </div>
                         <div style="font-size: 12px; color: var(--text-tertiary); margin-top: 8px;">
                             提交人：李四 · 2024-01-25 14:30
+                        </div>
+                        <div style="margin-top: 12px; padding: 10px; background-color: #F6FFED; border-radius: 6px; border-left: 3px solid #52C41A;">
+                            <div style="font-size: 12px; color: #52C41A; font-weight: 600; margin-bottom: 4px;">✓ 任务已完成</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">执行人已提交执行结果，等待确认人确认</div>
+                            <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">操作时间：2024-01-25 14:30 · 操作人：李四</div>
                         </div>
                         <div style="margin-top: 8px; padding: 8px; background-color: #FFF1F0; border-radius: 6px; border-left: 3px solid var(--error-color);">
                             <div style="font-size: 12px; color: var(--error-color); font-weight: 600; margin-bottom: 4px;">驳回原因：</div>
@@ -1828,8 +1867,25 @@ const TaskDetailPage = (function() {
                         <div class="section-title">
                             <span>📤 执行人提交的内容</span>
                         </div>
-                        <div style="text-align: center; padding: 20px; color: var(--text-tertiary);">
-                            暂无执行记录
+                        <div class="media-grid">
+                            <div class="media-item">📷</div>
+                            <div class="media-item">📷</div>
+                            <div class="media-item">📷</div>
+                            <div class="media-item" style="background-color: #000;">
+                                <span class="play-icon">▶</span>
+                                <span class="duration">0:15</span>
+                            </div>
+                        </div>
+                        <div class="execution-desc">
+                            穿线工作已完成，共穿设强电线管12根，弱电线管6根。已进行绝缘测试，所有线路绝缘电阻均大于0.5MΩ，符合规范要求。
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-tertiary); margin-top: 8px;">
+                            提交人：李四 · 2024-01-25 14:30
+                        </div>
+                        <div style="margin-top: 12px; padding: 10px; background-color: #F6FFED; border-radius: 6px; border-left: 3px solid #52C41A;">
+                            <div style="font-size: 12px; color: #52C41A; font-weight: 600; margin-bottom: 4px;">✓ 任务已完成</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">执行人已提交执行结果，等待确认人确认</div>
+                            <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">操作时间：2024-01-25 14:30 · 操作人：李四</div>
                         </div>
                     `;
                 }
@@ -1937,6 +1993,16 @@ const TaskDetailPage = (function() {
             `;
             if (addConfirmerBtn) addConfirmerBtn.style.display = 'none';
             
+            const executorList = document.getElementById('executorList');
+            const executorItem = document.getElementById('executorItem');
+            const noExecutorView = document.getElementById('noExecutorView');
+            const addExecutorBtn = document.getElementById('addExecutorBtn');
+            
+            executorList.style.display = 'flex';
+            executorItem.style.display = 'flex';
+            noExecutorView.style.display = 'none';
+            addExecutorBtn.style.display = 'none';
+            
             if (acceptanceProgress) acceptanceProgress.style.display = 'none';
             
             if (flowStep1) {
@@ -1997,8 +2063,25 @@ const TaskDetailPage = (function() {
                         <div class="section-title">
                             <span>📤 执行人提交的内容</span>
                         </div>
-                        <div style="text-align: center; padding: 20px; color: var(--text-tertiary);">
-                            暂无执行记录
+                        <div class="media-grid">
+                            <div class="media-item">📷</div>
+                            <div class="media-item">📷</div>
+                            <div class="media-item">📷</div>
+                            <div class="media-item" style="background-color: #000;">
+                                <span class="play-icon">▶</span>
+                                <span class="duration">0:15</span>
+                            </div>
+                        </div>
+                        <div class="execution-desc">
+                            穿线工作已完成，共穿设强电线管12根，弱电线管6根。已进行绝缘测试，所有线路绝缘电阻均大于0.5MΩ，符合规范要求。
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-tertiary); margin-top: 8px;">
+                            提交人：李四 · 2024-01-26 10:30
+                        </div>
+                        <div style="margin-top: 12px; padding: 10px; background-color: #F6FFED; border-radius: 6px; border-left: 3px solid #52C41A;">
+                            <div style="font-size: 12px; color: #52C41A; font-weight: 600; margin-bottom: 4px;">✓ 任务已完成</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">执行人已重新提交执行结果，等待确认人确认</div>
+                            <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">操作时间：2024-01-26 10:30 · 操作人：李四</div>
                         </div>
                     `;
                 }
@@ -2026,6 +2109,11 @@ const TaskDetailPage = (function() {
                         </div>
                         <div style="font-size: 12px; color: var(--text-tertiary); margin-top: 8px;">
                             提交人：李四 · 2024-01-25 14:30
+                        </div>
+                        <div style="margin-top: 12px; padding: 10px; background-color: #F6FFED; border-radius: 6px; border-left: 3px solid #52C41A;">
+                            <div style="font-size: 12px; color: #52C41A; font-weight: 600; margin-bottom: 4px;">✓ 任务已完成</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">执行人已提交执行结果，等待确认人确认</div>
+                            <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">操作时间：2024-01-25 14:30 · 操作人：李四</div>
                         </div>
                         <div style="margin-top: 8px; padding: 8px; background-color: #FFF1F0; border-radius: 6px; border-left: 3px solid var(--error-color);">
                             <div style="font-size: 12px; color: var(--error-color); font-weight: 600; margin-bottom: 4px;">驳回原因：</div>
@@ -2162,6 +2250,16 @@ const TaskDetailPage = (function() {
             `;
             if (addConfirmerBtn) addConfirmerBtn.style.display = 'none';
             
+            const executorList = document.getElementById('executorList');
+            const executorItem = document.getElementById('executorItem');
+            const noExecutorView = document.getElementById('noExecutorView');
+            const addExecutorBtn = document.getElementById('addExecutorBtn');
+            
+            executorList.style.display = 'flex';
+            executorItem.style.display = 'flex';
+            noExecutorView.style.display = 'none';
+            addExecutorBtn.style.display = 'none';
+            
             if (acceptanceProgress) acceptanceProgress.style.display = 'none';
             
             if (flowStep1) {
@@ -2252,6 +2350,11 @@ const TaskDetailPage = (function() {
                         </div>
                         <div style="font-size: 12px; color: var(--text-tertiary); margin-top: 8px;">
                             提交人：李四 · 2024-01-25 14:30
+                        </div>
+                        <div style="margin-top: 12px; padding: 10px; background-color: #F6FFED; border-radius: 6px; border-left: 3px solid #52C41A;">
+                            <div style="font-size: 12px; color: #52C41A; font-weight: 600; margin-bottom: 4px;">✓ 任务已完成</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">执行人已提交执行结果，等待确认人确认</div>
+                            <div style="font-size: 11px; color: var(--text-tertiary); margin-top: 4px;">操作时间：2024-01-25 14:30 · 操作人：李四</div>
                         </div>
                         <div style="margin-top: 8px; padding: 8px; background-color: #FFF1F0; border-radius: 6px; border-left: 3px solid var(--error-color);">
                             <div style="font-size: 12px; color: var(--error-color); font-weight: 600; margin-bottom: 4px;">驳回原因：</div>

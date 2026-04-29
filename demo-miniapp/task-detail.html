@@ -191,8 +191,8 @@
                                 <div class="task-name" id="taskName">卫生间瓷砖铺贴交底</div>
                                 <div class="task-stage">📍 基础施工服务合同 > 瓦工施工阶段预验收</div>
                                 <div class="task-status-row">
-                                    <div class="status-badge" id="taskStatus">待配置</div>
-                                    <div class="confirm-progress" id="confirmProgress">请配置执行人（<span style="color: #FF4D4F;">必填</span>）和确认人（<span style="color: #8C8C8C;">选填</span>）</div>
+                                    <div class="status-badge completed" id="taskStatus">已完成</div>
+                                    
                                 </div>
                             </div>
                             
@@ -265,14 +265,6 @@
                                                     <div class="person-name">李四 <span class="role-badge foreman">工长</span></div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="no-executor" id="noExecutorView" style="display: none;" onclick="showExecutorSelector()">
-                                            <div class="icon">👤</div>
-                                            <div class="text">暂无执行人，点击添加</div>
-                                        </div>
-                                        <div class="add-executor-btn" id="addExecutorBtn" style="display: none;" onclick="showExecutorSelector()">
-                                            <span class="icon">✎</span>
-                                            <span class="text">修改执行人</span>
                                         </div>
                                     </div>
                                     
@@ -465,6 +457,16 @@
                                         </div>
                                     </div>
                                     
+                                    <!-- 完成任务记录 -->
+                                    <div class="execution-record-item" style="background: linear-gradient(135deg, #E6F7FF 0%, #BAE7FF 100%); border: 1px solid #91D5FF;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                            <div style="font-size: 12px; color: var(--primary-color); font-weight: 500;">✅ 任务完成 · 2024-01-25 14:45</div>
+                                        </div>
+                                        <div class="execution-desc" style="color: var(--text-primary);">
+                                            执行人李四已完成全部穿线工作，提交任务待确认。共计提交3条执行记录，上传照片9张、视频1段。
+                                        </div>
+                                    </div>
+                                    
                                     <div style="font-size: 12px; color: var(--text-tertiary); margin-top: 12px; padding-top: 12px; border-top: 1px solid #E8E8E8;">
                                         执行人：李四（电工） · 共提交3条执行记录
                                     </div>
@@ -545,10 +547,10 @@
                                 </div>
                             </div>
                             
-                            <div style="height: 80px;"></div>
+                            <div style="height: 20px;"></div>
                         </div>
                         
-                        <div class="action-buttons" id="actionButtons">
+                        <div class="action-buttons" id="actionButtons" style="display: none;">
                             <div class="btn secondary" style="width: 100%; opacity: 0.5; cursor: not-allowed;">请先选择执行人</div>
                         </div>
                         
@@ -750,9 +752,7 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <input type="file" id="fileInput" accept="image/*,video/*,audio/*" style="display: none;" onchange="handleFileSelect(event)">
-                        <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display: none;" onchange="handleFileSelect(event)">
+<input type="file" id="cameraInput" accept="image/*" capture="environment" style="display: none;" onchange="handleFileSelect(event)">
 
                         <div class="evaluation-modal" id="evaluationModal">
                             <div class="modal-content">
@@ -822,84 +822,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="person-selector-modal" id="executorSelectorModal">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <div class="modal-title">选择执行人</div>
-                                    <div class="modal-close" onclick="closeExecutorSelector()">✕</div>
-                                </div>
-                                <div class="search-box">
-                                    <input type="text" class="search-input" id="executorSearchInput" placeholder="搜索姓名..." oninput="filterExecutors(this.value)">
-                                </div>
-                                <div class="person-list" id="executorOptionList">
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="person-selector-modal" id="confirmerSelectorModal">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <div class="modal-title">选择确认人</div>
-                                    <div class="modal-close" onclick="closeConfirmerSelector()">✕</div>
-                                </div>
-                                <div class="search-box">
-                                    <input type="text" class="search-input" id="confirmerSearchInput" placeholder="搜索姓名..." oninput="filterConfirmers(this.value)">
-                                </div>
-                                <div class="person-list" id="confirmerOptionList">
-                                </div>
-                                <div style="padding: 12px 16px; border-top: 1px solid var(--border-color); flex-shrink: 0;">
-                                    <button class="btn primary" style="width: 100%;" onclick="confirmConfirmerSelection()">确定</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="person-selector-modal" id="submitTaskModal">
-                            <div class="modal-content" style="max-height: 80%;">
-                                <div class="modal-header">
-                                    <div class="modal-title">确认提交任务</div>
-                                    <div class="modal-close" onclick="closeSubmitTaskModal()">✕</div>
-                                </div>
-                                <div style="padding: 16px;">
-                                    <div style="margin-bottom: 16px;">
-                                        <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;">提交后将发送通知给以下人员：</div>
-                                    </div>
-                                    <div style="background: #F5F5F5; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
-                                        <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 8px;">执行人</div>
-                                        <div id="submitExecutorInfo" style="display: flex; align-items: center;">
-                                            <div class="avatar" style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%); display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 12px; margin-right: 8px;">李</div>
-                                            <div style="font-size: 14px; color: var(--text-primary);">李四 · 工长</div>
-                                        </div>
-                                    </div>
-                                    <div style="background: #F5F5F5; border-radius: 8px; padding: 12px; margin-bottom: 16px;">
-                                        <div style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 8px;">确认人（<span id="submitConfirmerCount">3</span>人）</div>
-                                        <div id="submitConfirmerInfo">
-                                            <div style="display: flex; align-items: center; margin-bottom: 6px;">
-                                                <div class="avatar" style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%); display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 12px; margin-right: 8px;">张</div>
-                                                <div style="font-size: 14px; color: var(--text-primary);">张三 · 项目总</div>
-                                            </div>
-                                            <div style="display: flex; align-items: center; margin-bottom: 6px;">
-                                                <div class="avatar" style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%); display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 12px; margin-right: 8px;">王</div>
-                                                <div style="font-size: 14px; color: var(--text-primary);">王五 · 业主</div>
-                                            </div>
-                                            <div style="display: flex; align-items: center;">
-                                                <div class="avatar" style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%); display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 12px; margin-right: 8px;">赵</div>
-                                                <div style="font-size: 14px; color: var(--text-primary);">赵六 · 设计师</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div style="background: #FFF7E6; border-radius: 8px; padding: 12px; margin-bottom: 16px;">
-                                        <div style="font-size: 12px; color: #FA8C16; line-height: 1.5;">
-                                            ⚠️ 提交后执行人和确认人将不可修改，请确认信息无误后再提交。
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="padding: 12px 16px; border-top: 1px solid var(--border-color); display: flex; gap: 12px;">
-                                    <button class="btn secondary" style="flex: 1;" onclick="closeSubmitTaskModal()">取消</button>
-                                    <button class="btn primary" style="flex: 1;" onclick="confirmSubmitTask()">确认提交</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -942,12 +864,7 @@
                 <a href="member-profile.html" class="page-nav-item">个人电子名片</a>
                 <a href="architecture.html" class="page-nav-item">项目架构</a>
             </div>
-            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #E8E8E8;">
-                <div class="page-nav-title">任务状态</div>
-                <div class="status-switcher">
-                    <div class="status-switch-item active" onclick="updateTaskStatus('completed')">已完成</div>
-                </div>
-            </div>
+
 
         </div>
     </div>
@@ -961,6 +878,38 @@
                 toggle.textContent = '◀';
             } else {
                 toggle.textContent = '▶';
+            }
+        }
+        
+        function toggleStandard(type) {
+            const list = document.getElementById(type + 'Standard');
+            if (!list) return;
+            const header = list.previousElementSibling;
+            const btn = header ? header.querySelector('.toggle-btn') : null;
+            
+            if (list.classList.contains('collapsed')) {
+                list.classList.remove('collapsed');
+                if (btn) btn.textContent = '收起';
+            } else {
+                list.classList.add('collapsed');
+                if (btn) btn.textContent = '展开';
+            }
+        }
+        
+        function toggleCard(type) {
+            let content, title;
+            
+            if (type === 'execution') {
+                content = document.getElementById('executionCardContent');
+                title = document.querySelector('#executionRecordCard .card-title');
+            } else if (type === 'confirm') {
+                content = document.getElementById('confirmRecordCardContent');
+                title = document.querySelector('#confirmRecordCard .card-title');
+            }
+            
+            if (content && title) {
+                content.classList.toggle('collapsed');
+                title.classList.toggle('collapsed');
             }
         }
     </script>

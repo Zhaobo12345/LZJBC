@@ -279,13 +279,23 @@
 /* 可折叠卡片 */
 .card-collapsible {
     cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin: -4px -8px;
+}
+
+.card-collapsible:hover {
+    background-color: var(--bg-secondary);
 }
 
 .card-collapsible .toggle-icon {
     font-size: 12px;
     color: var(--text-tertiary);
-    transition: transform 0.3s;
+    transition: transform 0.3s ease;
     margin-left: 8px;
+    display: inline-block;
 }
 
 .card-collapsible.collapsed .toggle-icon {
@@ -295,12 +305,14 @@
 .card-content-collapsible {
     transition: max-height 0.3s ease-out;
     overflow: hidden;
+    max-height: 2000px;
 }
 
 .card-content-collapsible.collapsed {
     max-height: 0 !important;
     padding: 0;
     margin: 0;
+    border: none;
 }
 
 /* 人员头像和信息 */
@@ -431,14 +443,33 @@
     font-size: 12px;
     color: var(--primary-color);
     cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.standard-card .toggle-btn:hover {
+    background-color: var(--status-primary-bg);
+}
+
+.standard-card .toggle-btn:active {
+    background-color: var(--primary-color);
+    color: white;
 }
 
 .standard-list {
     font-size: 13px;
+    max-height: 1000px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    opacity: 1;
 }
 
 .standard-list.collapsed {
-    display: none;
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .standard-item {
