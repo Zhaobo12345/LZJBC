@@ -1705,25 +1705,25 @@
                 'draft': {
                     class: 'draft',
                     title: '📝 合同拟定中',
-                    desc: '合同编号：HT-2024-001 | 创建时间：2024-01-10 15:00',
+                    desc: '合同编号：BJSDSWHT000001 | 创建时间：2024-01-10 15:00',
                     actions: '<button class="btn btn-primary" onclick="submitContract()">提交审核</button>'
                 },
                 'draft_submittable': {
                     class: 'draft',
                     title: '📝 合同拟定中（可提交）',
-                    desc: '合同编号：HT-2024-001 | 已完成编辑，可提交审核',
+                    desc: '合同编号：BJSDSWHT000001 | 已完成编辑，可提交审核',
                     actions: '<button class="btn btn-primary" onclick="submitContract()">提交审核</button>'
                 },
                 'platform_reviewing': {
                     class: 'confirmed',
                     title: '⏳ 待平台审核',
-                    desc: '合同编号：HT-2024-001 | 提交时间：2024-01-10 16:00',
+                    desc: '合同编号：BJSDSWHT000001 | 提交时间：2024-01-10 16:00',
                     actions: '<button class="btn" onclick="showDetail()">查看详情</button>'
                 },
                 'platform_rejected': {
                     class: 'rejected',
                     title: '❌ 平台审核驳回',
-                    desc: '合同编号：HT-2024-001 | 驳回时间：2024-01-10 17:00',
+                    desc: '合同编号：BJSDSWHT000001 | 驳回时间：2024-01-10 17:00',
                     actions: '<button class="btn btn-primary" onclick="submitContract()">重新提交</button><button class="btn" onclick="showRejectReason()">查看驳回原因</button>'
                 }
             };

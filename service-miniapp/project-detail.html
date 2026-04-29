@@ -1,4 +1,4 @@
-﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -163,22 +163,22 @@
                     <div class="task-stat-item">
                         <div class="icon-wrap all">📋</div>
                         <div class="info">
-                            <div class="value" id="overallTotal">24</div>
+                            <div class="value"><span class="current" id="overallCompleted">18</span><span class="separator">/</span><span class="total" id="overallTotal">24</span></div>
                             <div class="label">全部任务</div>
                         </div>
                     </div>
                     <div class="task-stat-item">
-                        <div class="icon-wrap accept">✅</div>
+                        <div class="icon-wrap accept">⏳</div>
                         <div class="info">
-                            <div class="value"><span class="current" id="overallAccept">3</span><span class="separator">/</span><span class="total" id="overallAcceptTotal">8</span></div>
-                            <div class="label">验收任务</div>
+                            <div class="value" id="overallConfirming">3</div>
+                            <div class="label">确认中任务</div>
                         </div>
                     </div>
                     <div class="task-stat-item">
-                        <div class="icon-wrap contract">📄</div>
+                        <div class="icon-wrap contract">▶</div>
                         <div class="info">
-                            <div class="value"><span class="current" id="overallContract">18</span><span class="separator">/</span><span class="total" id="overallContractTotal">20</span></div>
-                            <div class="label">合约任务</div>
+                            <div class="value" id="overallInProgress">2</div>
+                            <div class="label">执行中任务</div>
                         </div>
                     </div>
                 </div>
@@ -334,3 +334,4 @@
     <!-- 移除内联脚本，避免事件绑定冲突 -->
 </body>
 </html>
+

@@ -1,4 +1,4 @@
-﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -22,6 +22,45 @@
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 8px;
+        }
+
+        .project-name-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .project-name-input {
+            flex: 1;
+            font-size: 18px;
+            font-weight: 600;
+            color: #FFFFFF;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0;
+            margin-right: 10px;
+        }
+
+        .project-name-input:focus {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .project-name-input:disabled {
+            cursor: default;
+        }
+
+        .info-header .edit-btn {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 3px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+        }
+
+        .info-header .edit-btn:hover {
+            background-color: rgba(255, 255, 255, 0.15);
         }
 
         .project-status {
@@ -122,6 +161,50 @@
         .attachment-item .action {
             font-size: 12px;
             color: var(--primary-color);
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .attachment-item .delete-btn {
+            font-size: 12px;
+            color: var(--error-color);
+            cursor: pointer;
+            display: none;
+        }
+
+        .attachment-item.editable .delete-btn {
+            display: inline;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background-color: var(--status-primary-bg);
+        }
+
+        .upload-area .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .upload-area .text {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .upload-area .hint {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-top: 4px;
         }
 
         .form-group {
@@ -389,6 +472,87 @@
         .view-mode .style-option {
             pointer-events: none;
         }
+
+        .custom-modal {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .custom-modal.show {
+            display: flex;
+        }
+
+        .modal-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            position: relative;
+            width: 260px;
+            background-color: #FFFFFF;
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, #52C41A 0%, #73D13D 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #FFFFFF;
+            font-weight: bold;
+        }
+
+        .modal-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1F1F1F;
+            margin-bottom: 8px;
+        }
+
+        .modal-message {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 24px;
+        }
+
+        .modal-btn {
+            width: 100%;
+            height: 44px;
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .modal-btn:hover {
+            background-color: var(--primary-light);
+        }
     </style>
 </head>
 <body>
@@ -415,7 +579,10 @@
         
         <div class="page-content">
             <div class="info-header">
-                <div class="project-name">XX小区整体装修</div>
+                <div class="project-name-row">
+                    <input type="text" class="project-name-input" id="projectName" value="XX小区整体装修" disabled>
+                    <span class="edit-btn" id="editProjectNameBtn" onclick="toggleProjectNameEdit()">编辑</span>
+                </div>
                 <div class="project-status">进行中</div>
             </div>
             
@@ -440,7 +607,7 @@
                             <span class="required">*</span>
                             <span>联系方式</span>
                         </label>
-                        <input type="tel" class="form-input" id="customerPhone" value="13812345678" disabled>
+                        <input type="tel" class="form-input" id="customerPhone" value="138****5678" disabled>
                         <div class="error-message" id="customerPhoneError">请输入正确的手机号码</div>
                     </div>
                 </div>
@@ -467,7 +634,7 @@
                                 <option value="西湖区" selected>西湖区</option>
                             </select>
                         </div>
-                        <input type="text" class="form-input" id="address" value="XX街道XX小区1栋101室" disabled>
+                        <input type="text" class="form-input" id="address" value="XX街道XX小区*栋***室" disabled>
                         <div class="error-message" id="regionError">请选择完整的区域信息</div>
                     </div>
                     
@@ -515,6 +682,10 @@
                                 <div class="icon">🏰</div>
                                 <div class="text">别墅</div>
                             </div>
+                            <div class="house-type-option disabled" data-value="fushi">
+                                <div class="icon">🏘️</div>
+                                <div class="text">复式</div>
+                            </div>
                             <div class="house-type-option selected" data-value="pingceng">
                                 <div class="icon">🏢</div>
                                 <div class="text">平层</div>
@@ -544,7 +715,7 @@
                 
                 <div class="form-section">
                     <div class="form-section-title">
-                        <span>风格喜好</span>
+                        <span>装修风格</span>
                         <span class="edit-btn" id="editBtn4" onclick="toggleEdit('style')">编辑</span>
                     </div>
                     
@@ -569,16 +740,24 @@
                     </div>
                     
                     <div class="attachment-list" id="attachmentList">
-                        <div class="attachment-item">
+                        <div class="attachment-item" id="attachment1">
                             <span class="icon">📄</span>
                             <span class="name">户型图.pdf</span>
-                            <span class="action">查看</span>
+                            <span class="action" onclick="viewAttachment('户型图.pdf')">查看</span>
+                            <span class="delete-btn" onclick="deleteAttachment('attachment1')">删除</span>
                         </div>
-                        <div class="attachment-item">
+                        <div class="attachment-item" id="attachment2">
                             <span class="icon">📷</span>
                             <span class="name">现场照片.zip</span>
-                            <span class="action">查看</span>
+                            <span class="action" onclick="viewAttachment('现场照片.zip')">查看</span>
+                            <span class="delete-btn" onclick="deleteAttachment('attachment2')">删除</span>
                         </div>
+                    </div>
+                    
+                    <div class="upload-area" id="uploadArea" onclick="selectFile()">
+                        <div class="icon">📁</div>
+                        <div class="text">点击上传附件</div>
+                        <div class="hint">支持 PDF、图片、Word、Excel、ZIP 等格式</div>
                     </div>
                 </div>
                 
@@ -588,6 +767,16 @@
         
         <div class="submit-section" id="submitSection">
             <button type="button" class="submit-btn" onclick="saveForm()">保存修改</button>
+        </div>
+        
+        <div class="custom-modal" id="customModal">
+            <div class="modal-mask" onclick="closeModal()"></div>
+            <div class="modal-content">
+                <div class="modal-icon">✓</div>
+                <div class="modal-title" id="modalTitle">提示</div>
+                <div class="modal-message" id="modalMessage">操作成功</div>
+                <div class="modal-btn" onclick="closeModal()">确定</div>
+            </div>
         </div>
     </div>
     
@@ -608,6 +797,37 @@
         let selectedCategory = 'maopi';
         let selectedHouseType = 'pingceng';
         let selectedStyles = ['zhongshi', 'xiandai'];
+        let isEditingProjectName = false;
+        
+        function toggleProjectNameEdit() {
+            const projectNameInput = document.getElementById('projectName');
+            const editBtn = document.getElementById('editProjectNameBtn');
+            
+            if (isEditingProjectName) {
+                projectNameInput.disabled = true;
+                editBtn.textContent = '编辑';
+                isEditingProjectName = false;
+                showModal('提示', '项目名称已保存：' + projectNameInput.value);
+            } else {
+                projectNameInput.disabled = false;
+                projectNameInput.focus();
+                projectNameInput.select();
+                editBtn.textContent = '保存';
+                isEditingProjectName = true;
+            }
+        }
+        
+        function showModal(title, message) {
+            const modal = document.getElementById('customModal');
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            modal.classList.add('show');
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('customModal');
+            modal.classList.remove('show');
+        }
         
         function toggleEdit(section) {
             const form = document.getElementById('infoForm');
@@ -646,6 +866,9 @@
                 document.getElementById('endDate').disabled = false;
             } else if (section === 'style') {
                 document.querySelectorAll('#styleOptions .style-option').forEach(opt => opt.classList.remove('disabled'));
+            } else if (section === 'attachment') {
+                document.querySelectorAll('#attachmentList .attachment-item').forEach(item => item.classList.add('editable'));
+                document.getElementById('uploadArea').style.display = 'block';
             }
         }
         
@@ -746,6 +969,24 @@
         function shareToFriend() {
             alert('分享给朋友');
             closeActionMenu();
+        }
+        
+        function viewAttachment(filename) {
+            alert('查看附件: ' + filename);
+        }
+        
+        function deleteAttachment(attachmentId) {
+            if (confirm('确定要删除这个附件吗？')) {
+                const item = document.getElementById(attachmentId);
+                if (item) {
+                    item.remove();
+                    alert('附件已删除');
+                }
+            }
+        }
+        
+        function selectFile() {
+            alert('请选择要上传的文件');
         }
     </script>
 </body>

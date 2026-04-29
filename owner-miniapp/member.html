@@ -1,4 +1,4 @@
-﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -1564,11 +1564,18 @@
                             <div class="option-desc">仅可查看所属工作组及下级的数据</div>
                         </div>
                     </div>
+                    <div class="permission-option" onclick="selectDataPermission(this, 'level_with_contract')">
+                        <div class="radio"></div>
+                        <div class="option-content">
+                            <div class="option-title">所在架构及下属层级权限（含合同）</div>
+                            <div class="option-desc">可查看所属工作组及下级的数据，包含合同相关内容</div>
+                        </div>
+                    </div>
                     <div class="permission-option" onclick="selectDataPermission(this, 'none')">
                         <div class="radio"></div>
                         <div class="option-content">
-                            <div class="option-title">不设置</div>
-                            <div class="option-desc">可查看全部公开数据</div>
+                            <div class="option-title">仅基础公开数据</div>
+                            <div class="option-desc">仅可查看基础的公开数据</div>
                         </div>
                     </div>
                 </div>
@@ -1597,6 +1604,13 @@
                             <div class="option-content">
                                 <div class="option-title">移出人员</div>
                                 <div class="option-desc">可将成员从项目中移出</div>
+                            </div>
+                        </div>
+                        <div class="permission-checkbox" onclick="toggleManagePermission(this, 'add_group')">
+                            <div class="checkbox"></div>
+                            <div class="option-content">
+                                <div class="option-title">添加工作组</div>
+                                <div class="option-desc">可在项目中创建新的工作组</div>
                             </div>
                         </div>
                     </div>
@@ -1834,6 +1848,8 @@
                 dataPermTag = '<span class="permission-tag data">数据: 全部</span>';
             } else if (member.dataPermission === 'level') {
                 dataPermTag = '<span class="permission-tag data">数据: 所在层级</span>';
+            } else if (member.dataPermission === 'level_with_contract') {
+                dataPermTag = '<span class="permission-tag data">数据: 层级含合同</span>';
             } else {
                 dataPermTag = '<span class="permission-tag none">数据: 公开</span>';
             }

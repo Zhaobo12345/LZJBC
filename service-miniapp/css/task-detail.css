@@ -923,6 +923,55 @@
     margin-bottom: 16px;
 }
 
+.confirm-modal .rating-section-single {
+    margin-bottom: 16px;
+}
+
+.confirm-modal .tag-section {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.confirm-modal .tag-header {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.confirm-modal .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.confirm-modal .tag-item {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    background-color: #F5F5F5;
+    color: #8C8C8C;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #E8E8E8;
+    flex-shrink: 0;
+}
+
+.confirm-modal .tag-item:hover {
+    background-color: #E6F7FF;
+    color: #1890FF;
+    border-color: #91D5FF;
+}
+
+.confirm-modal .tag-item.selected {
+    background-color: #E6F7FF;
+    color: #1890FF;
+    border-color: #1890FF;
+    font-weight: 500;
+}
+
 .confirm-modal .rating-header {
     font-size: 13px;
     color: var(--text-secondary);
@@ -975,19 +1024,51 @@
     gap: 8px;
 }
 
-.confirm-modal .rating-stars .star {
-    font-size: 28px;
-    color: var(--bg-tertiary);
-    cursor: pointer;
-    transition: all 0.2s;
+.confirm-modal .rating-stars {
+    display: flex;
+    gap: 0;
+    justify-content: flex-start;
 }
 
-.confirm-modal .rating-stars .star.active {
+.confirm-modal .star-wrapper {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.confirm-modal .star-wrapper .star {
+    position: absolute;
+    font-size: 32px;
+    color: #E8E8E8;
+    transition: all 0.2s;
+    top: 0;
+}
+
+.confirm-modal .star-wrapper .star.half {
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.confirm-modal .star-wrapper .star.full {
+    left: 0;
+    z-index: 1;
+}
+
+.confirm-modal .star-wrapper .star.active {
+    color: #FFD700;
+    text-shadow: 0 0 4px rgba(255, 215, 0, 0.5);
+}
+
+.confirm-modal .star-wrapper:hover .star {
     color: #FFD700;
 }
 
-.confirm-modal .rating-stars .star:hover {
-    transform: scale(1.1);
+.confirm-modal .star-wrapper .star.half:hover,
+.confirm-modal .star-wrapper:hover .star.half.active {
+    color: #FFD700;
 }
 
 .confirm-modal .media-upload {
@@ -1590,22 +1671,98 @@
 
 .evaluation-modal .rating-stars {
     display: flex;
-    gap: 8px;
+    gap: 0;
+    justify-content: flex-start;
 }
 
-.evaluation-modal .rating-stars .star {
-    font-size: 32px;
-    color: var(--bg-tertiary);
+.evaluation-modal .star-wrapper {
+    position: relative;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
-    transition: all 0.2s;
 }
 
-.evaluation-modal .rating-stars .star.active {
+.evaluation-modal .star-wrapper .star {
+    position: absolute;
+    font-size: 32px;
+    color: #E8E8E8;
+    transition: all 0.2s;
+    top: 0;
+}
+
+.evaluation-modal .star-wrapper .star.half {
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.evaluation-modal .star-wrapper .star.full {
+    left: 0;
+    z-index: 1;
+}
+
+.evaluation-modal .star-wrapper .star.active {
+    color: #FFD700;
+    text-shadow: 0 0 4px rgba(255, 215, 0, 0.5);
+}
+
+.evaluation-modal .star-wrapper:hover .star {
     color: #FFD700;
 }
 
-.evaluation-modal .rating-stars .star:hover {
-    transform: scale(1.1);
+.evaluation-modal .star-wrapper .star.half:hover,
+.evaluation-modal .star-wrapper:hover .star.half.active {
+    color: #FFD700;
+}
+
+.evaluation-modal .rating-section-single {
+    margin-bottom: 16px;
+}
+
+.evaluation-modal .tag-section {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.evaluation-modal .tag-header {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.evaluation-modal .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.evaluation-modal .tag-item {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    background-color: #F5F5F5;
+    color: #8C8C8C;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid #E8E8E8;
+    flex-shrink: 0;
+}
+
+.evaluation-modal .tag-item:hover {
+    background-color: #E6F7FF;
+    color: #1890FF;
+    border-color: #91D5FF;
+}
+
+.evaluation-modal .tag-item.selected {
+    background-color: #E6F7FF;
+    color: #1890FF;
+    border-color: #1890FF;
+    font-weight: 500;
 }
 
 .evaluation-modal .desc-input {

@@ -752,8 +752,8 @@
                 desc: '适用于水电工程分包业务的标准合同模板',
                 updateTime: '2024-01-10 14:30',
                 content: `<h3 style="text-align: center; margin-bottom: 20px;">水电分包合同（变更版）</h3>
-<p><strong>甲方：</strong>杭州绿城装饰工程有限公司</p>
-<p><strong>乙方：</strong>杭州水电安装有限公司</p>
+<p><strong>甲方：</strong>张三（项目经理）</p>
+<p><strong>乙方：</strong>李四（水电组长）</p>
 <br>
 <p>根据《中华人民共和国合同法》及相关法律法规，甲乙双方本着平等、自愿、公平、诚实信用的原则，就水电工程分包事宜，经协商一致，签订本合同。</p>
 <br>
@@ -780,8 +780,8 @@
                 desc: '适用于泥瓦工程分包业务的标准合同模板',
                 updateTime: '2024-01-08 10:20',
                 content: `<h3 style="text-align: center; margin-bottom: 20px;">泥瓦分包合同（变更版）</h3>
-<p><strong>甲方：</strong>杭州绿城装饰工程有限公司</p>
-<p><strong>乙方：</strong>杭州泥瓦工程有限公司</p>
+<p><strong>甲方：</strong>张三（项目经理）</p>
+<p><strong>乙方：</strong>周九（泥瓦组长）</p>
 <br>
 <p>根据《中华人民共和国合同法》及相关法律法规，甲乙双方就泥瓦工程分包事宜签订本合同。</p>
 <br>
@@ -808,8 +808,8 @@
                 desc: '适用于木工工程分包业务的标准合同模板',
                 updateTime: '2024-01-05 16:45',
                 content: `<h3 style="text-align: center; margin-bottom: 20px;">木工分包合同（变更版）</h3>
-<p><strong>甲方：</strong>杭州绿城装饰工程有限公司</p>
-<p><strong>乙方：</strong>杭州木工工程有限公司</p>
+<p><strong>甲方：</strong>张三（项目经理）</p>
+<p><strong>乙方：</strong>吴十（木工组长）</p>
 <br>
 <p>根据《中华人民共和国合同法》及相关法律法规，甲乙双方就木工工程分包事宜签订本合同。</p>
 <br>
@@ -836,8 +836,8 @@
                 desc: '适用于油漆工程分包业务的标准合同模板',
                 updateTime: '2024-01-03 09:15',
                 content: `<h3 style="text-align: center; margin-bottom: 20px;">油漆分包合同（变更版）</h3>
-<p><strong>甲方：</strong>杭州绿城装饰工程有限公司</p>
-<p><strong>乙方：</strong>杭州油漆工程有限公司</p>
+<p><strong>甲方：</strong>张三（项目经理）</p>
+<p><strong>乙方：</strong>郑十一（油漆组长）</p>
 <br>
 <p>根据《中华人民共和国合同法》及相关法律法规，甲乙双方就油漆工程分包事宜签订本合同。</p>
 <br>
@@ -864,8 +864,8 @@
                 desc: '适用于全国范围的水电工程分包合同模板',
                 updateTime: '2024-01-01 08:00',
                 content: `<h3 style="text-align: center; margin-bottom: 20px;">水电分包合同（全国版）</h3>
-<p><strong>甲方：</strong>杭州绿城装饰工程有限公司</p>
-<p><strong>乙方：</strong>杭州水电安装有限公司</p>
+<p><strong>甲方：</strong>张三（项目经理）</p>
+<p><strong>乙方：</strong>李四（水电组长）</p>
 <br>
 <p>根据《中华人民共和国合同法》及相关法律法规，甲乙双方就水电工程分包事宜签订本合同。</p>`
             }

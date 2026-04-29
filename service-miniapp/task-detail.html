@@ -1,4 +1,4 @@
-﻿﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -328,51 +328,39 @@
                         <span class="text">添加音频</span>
                     </div>
                 </div>
-                <textarea class="desc-input" id="confirmDescInput" placeholder="请输入确认说明（选填）"></textarea>
-                <div class="rating-section-multi">
+                <textarea class="desc-input" id="confirmDescInput" placeholder="请填写真实评语"></textarea>
+                <div class="rating-section-single">
                     <div class="rating-header">
-                        <span>评价（非必填）</span>
+                        <span>综合评星（非必填）</span>
                     </div>
-                    <div class="rating-dimension">
-                        <div class="dimension-header">
-                            <span class="dimension-icon">🔧</span>
-                            <span class="dimension-label">施工质量</span>
-                            <span class="dimension-desc">工艺水平、材料使用、细节处理</span>
-                        </div>
-                        <div class="rating-stars" id="ratingStarsQuality">
-                            <span class="star" data-rating="1" onclick="setDimensionRating('quality', 1)">★</span>
-                            <span class="star" data-rating="2" onclick="setDimensionRating('quality', 2)">★</span>
-                            <span class="star" data-rating="3" onclick="setDimensionRating('quality', 3)">★</span>
-                            <span class="star" data-rating="4" onclick="setDimensionRating('quality', 4)">★</span>
-                            <span class="star" data-rating="5" onclick="setDimensionRating('quality', 5)">★</span>
-                        </div>
+                    <div class="rating-stars" id="ratingStarsOverall">
+                        <span class="star-wrapper" data-rating="1">
+                            <span class="star half" onclick="setOverallRating(0.5)">★</span>
+                            <span class="star full" onclick="setOverallRating(1)">★</span>
+                        </span>
+                        <span class="star-wrapper" data-rating="2">
+                            <span class="star half" onclick="setOverallRating(1.5)">★</span>
+                            <span class="star full" onclick="setOverallRating(2)">★</span>
+                        </span>
+                        <span class="star-wrapper" data-rating="3">
+                            <span class="star half" onclick="setOverallRating(2.5)">★</span>
+                            <span class="star full" onclick="setOverallRating(3)">★</span>
+                        </span>
+                        <span class="star-wrapper" data-rating="4">
+                            <span class="star half" onclick="setOverallRating(3.5)">★</span>
+                            <span class="star full" onclick="setOverallRating(4)">★</span>
+                        </span>
+                        <span class="star-wrapper" data-rating="5">
+                            <span class="star half" onclick="setOverallRating(4.5)">★</span>
+                            <span class="star full" onclick="setOverallRating(5)">★</span>
+                        </span>
                     </div>
-                    <div class="rating-dimension">
-                        <div class="dimension-header">
-                            <span class="dimension-icon">⏱️</span>
-                            <span class="dimension-label">工作效率</span>
-                            <span class="dimension-desc">完成速度、时间安排、进度把控</span>
-                        </div>
-                        <div class="rating-stars" id="ratingStarsEfficiency">
-                            <span class="star" data-rating="1" onclick="setDimensionRating('efficiency', 1)">★</span>
-                            <span class="star" data-rating="2" onclick="setDimensionRating('efficiency', 2)">★</span>
-                            <span class="star" data-rating="3" onclick="setDimensionRating('efficiency', 3)">★</span>
-                            <span class="star" data-rating="4" onclick="setDimensionRating('efficiency', 4)">★</span>
-                            <span class="star" data-rating="5" onclick="setDimensionRating('efficiency', 5)">★</span>
-                        </div>
-                    </div>
-                    <div class="rating-dimension">
-                        <div class="dimension-header">
-                            <span class="dimension-icon">💬</span>
-                            <span class="dimension-label">服务态度</span>
-                            <span class="dimension-desc">沟通配合、响应及时、责任心</span>
-                        </div>
-                        <div class="rating-stars" id="ratingStarsAttitude">
-                            <span class="star" data-rating="1" onclick="setDimensionRating('attitude', 1)">★</span>
-                            <span class="star" data-rating="2" onclick="setDimensionRating('attitude', 2)">★</span>
-                            <span class="star" data-rating="3" onclick="setDimensionRating('attitude', 3)">★</span>
-                            <span class="star" data-rating="4" onclick="setDimensionRating('attitude', 4)">★</span>
-                            <span class="star" data-rating="5" onclick="setDimensionRating('attitude', 5)">★</span>
+                    <div class="tag-section">
+                        <div class="tag-header">评价标签（可多选）</div>
+                        <div class="tag-list">
+                            <span class="tag-item" onclick="toggleTag('responsible')">责任心棒</span>
+                            <span class="tag-item" onclick="toggleTag('attitude')">服务态度好</span>
+                            <span class="tag-item" onclick="toggleTag('professional')">专业能力强</span>
                         </div>
                     </div>
                 </div>
@@ -516,51 +504,39 @@
                     <div class="modal-title">评价任务</div>
                     <div class="modal-close" onclick="closeEvaluationModal()">✕</div>
                 </div>
-                <textarea class="desc-input" id="evaluationDescInput" placeholder="请输入评价内容（选填）"></textarea>
-                <div class="rating-section-multi">
+                <textarea class="desc-input" id="evaluationDescInput" placeholder="请填写真实评语"></textarea>
+                <div class="rating-section-single">
                     <div class="rating-header">
-                        <span>评价（非必填）</span>
+                        <span>综合评星（必填）</span>
                     </div>
-                    <div class="rating-dimension">
-                        <div class="dimension-header">
-                            <span class="dimension-icon">🔧</span>
-                            <span class="dimension-label">施工质量</span>
-                            <span class="dimension-desc">工艺水平、材料使用、细节处理</span>
-                        </div>
-                        <div class="rating-stars" id="evaluationStarsQuality">
-                            <span class="star" data-rating="1" onclick="setEvaluationDimensionRating('quality', 1)">★</span>
-                            <span class="star" data-rating="2" onclick="setEvaluationDimensionRating('quality', 2)">★</span>
-                            <span class="star" data-rating="3" onclick="setEvaluationDimensionRating('quality', 3)">★</span>
-                            <span class="star" data-rating="4" onclick="setEvaluationDimensionRating('quality', 4)">★</span>
-                            <span class="star" data-rating="5" onclick="setEvaluationDimensionRating('quality', 5)">★</span>
-                        </div>
+                    <div class="rating-stars" id="evaluationStarsOverall">
+                        <span class="star-wrapper" data-rating="1">
+                            <span class="star half" onclick="setEvaluationOverallRating(0.5)">★</span>
+                            <span class="star full" onclick="setEvaluationOverallRating(1)">★</span>
+                        </span>
+                        <span class="star-wrapper" data-rating="2">
+                            <span class="star half" onclick="setEvaluationOverallRating(1.5)">★</span>
+                            <span class="star full" onclick="setEvaluationOverallRating(2)">★</span>
+                        </span>
+                        <span class="star-wrapper" data-rating="3">
+                            <span class="star half" onclick="setEvaluationOverallRating(2.5)">★</span>
+                            <span class="star full" onclick="setEvaluationOverallRating(3)">★</span>
+                        </span>
+                        <span class="star-wrapper" data-rating="4">
+                            <span class="star half" onclick="setEvaluationOverallRating(3.5)">★</span>
+                            <span class="star full" onclick="setEvaluationOverallRating(4)">★</span>
+                        </span>
+                        <span class="star-wrapper" data-rating="5">
+                            <span class="star half" onclick="setEvaluationOverallRating(4.5)">★</span>
+                            <span class="star full" onclick="setEvaluationOverallRating(5)">★</span>
+                        </span>
                     </div>
-                    <div class="rating-dimension">
-                        <div class="dimension-header">
-                            <span class="dimension-icon">⏱️</span>
-                            <span class="dimension-label">工作效率</span>
-                            <span class="dimension-desc">完成速度、时间安排、进度把控</span>
-                        </div>
-                        <div class="rating-stars" id="evaluationStarsEfficiency">
-                            <span class="star" data-rating="1" onclick="setEvaluationDimensionRating('efficiency', 1)">★</span>
-                            <span class="star" data-rating="2" onclick="setEvaluationDimensionRating('efficiency', 2)">★</span>
-                            <span class="star" data-rating="3" onclick="setEvaluationDimensionRating('efficiency', 3)">★</span>
-                            <span class="star" data-rating="4" onclick="setEvaluationDimensionRating('efficiency', 4)">★</span>
-                            <span class="star" data-rating="5" onclick="setEvaluationDimensionRating('efficiency', 5)">★</span>
-                        </div>
-                    </div>
-                    <div class="rating-dimension">
-                        <div class="dimension-header">
-                            <span class="dimension-icon">💬</span>
-                            <span class="dimension-label">服务态度</span>
-                            <span class="dimension-desc">沟通配合、响应及时、责任心</span>
-                        </div>
-                        <div class="rating-stars" id="evaluationStarsAttitude">
-                            <span class="star" data-rating="1" onclick="setEvaluationDimensionRating('attitude', 1)">★</span>
-                            <span class="star" data-rating="2" onclick="setEvaluationDimensionRating('attitude', 2)">★</span>
-                            <span class="star" data-rating="3" onclick="setEvaluationDimensionRating('attitude', 3)">★</span>
-                            <span class="star" data-rating="4" onclick="setEvaluationDimensionRating('attitude', 4)">★</span>
-                            <span class="star" data-rating="5" onclick="setEvaluationDimensionRating('attitude', 5)">★</span>
+                    <div class="tag-section">
+                        <div class="tag-header">评价标签（可多选）</div>
+                        <div class="tag-list">
+                            <span class="tag-item" onclick="toggleEvaluationTag('responsible')">责任心棒</span>
+                            <span class="tag-item" onclick="toggleEvaluationTag('attitude')">服务态度好</span>
+                            <span class="tag-item" onclick="toggleEvaluationTag('professional')">专业能力强</span>
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -239,25 +239,18 @@
         
         <div class="page-content">
             <div class="filter-tabs">
-                <div class="filter-tab active">全部</div>
-                <div class="filter-tab">进行中</div>
-                <div class="filter-tab">待启动</div>
-                <div class="filter-tab">已完工</div>
-                <div class="filter-tab">已暂停</div>
+                <div class="filter-tab active" data-status="all">全部</div>
+                <div class="filter-tab" data-status="in-progress">进行中</div>
+                <div class="filter-tab" data-status="completed">已完工</div>
             </div>
             
-            <div class="search-bar">
-                <input type="text" class="search-input" placeholder="🔍 搜索项目名称或编码">
-            </div>
-            
-            <div class="project-card" onclick="location.href='project-detail.html'">
+            <div class="project-card" data-status="in-progress" onclick="location.href='project-detail.html'">
                 <div class="project-header">
                     <div class="project-name">XX小区整体装修</div>
                     <div class="project-status">进行中</div>
                 </div>
                 <div class="project-info">
                     <span class="project-info-item">📍 XX小区***号***室</span>
-                    <span class="project-info-item">工期：2024-01-01 ~ 2024-03-31</span>
                 </div>
                 <div class="project-stats">
                     <div class="stat-box">
@@ -287,19 +280,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-info">
-                    <span class="pending-task-badge">📋 待完成 3 项任务</span>
-                </div>
             </div>
             
-            <div class="project-card" onclick="location.href='project-detail.html'">
+            <div class="project-card" data-status="in-progress" onclick="location.href='project-detail.html'">
                 <div class="project-header">
                     <div class="project-name">YY花园精装修</div>
                     <div class="project-status">进行中</div>
                 </div>
                 <div class="project-info">
                     <span class="project-info-item">📍 YY花园***栋***单元</span>
-                    <span class="project-info-item">工期：2024-02-01 ~ 2024-04-30</span>
                 </div>
                 <div class="project-stats">
                     <div class="stat-box">
@@ -329,58 +318,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-info">
-                    <span class="pending-task-badge">📋 待完成 5 项任务</span>
-                </div>
             </div>
             
-            <div class="project-card" onclick="location.href='project-detail.html'">
-                <div class="project-header">
-                    <div class="project-name">ZZ办公楼装修</div>
-                    <div class="project-status pending">待启动</div>
-                </div>
-                <div class="project-info">
-                    <span class="project-info-item">📍 ZZ办公楼***层</span>
-                    <span class="project-info-item">工期：2024-03-01 ~ 2024-06-30</span>
-                </div>
-                <div class="project-stats">
-                    <div class="stat-box">
-                        <div class="stat-header">
-                            <span class="stat-label">合同</span>
-                            <span class="stat-value">0/3</span>
-                        </div>
-                        <div class="stat-progress">
-                            <div class="stat-progress-bar contract" style="width: 0%"></div>
-                        </div>
-                        <div class="stat-footer">
-                            <span>已签约0份</span>
-                            <span>共3份</span>
-                        </div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-header">
-                            <span class="stat-label">任务</span>
-                            <span class="stat-value">0/20</span>
-                        </div>
-                        <div class="stat-progress">
-                            <div class="stat-progress-bar task" style="width: 0%"></div>
-                        </div>
-                        <div class="stat-footer">
-                            <span>已完成0项</span>
-                            <span>共20项</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card" onclick="location.href='project-detail.html'">
+            <div class="project-card" data-status="completed" onclick="location.href='project-detail.html'">
                 <div class="project-header">
                     <div class="project-name">AA别墅装修</div>
                     <div class="project-status completed">已完工</div>
                 </div>
                 <div class="project-info">
                     <span class="project-info-item">📍 AA别墅***号</span>
-                    <span class="project-info-item">工期：2023-09-01 ~ 2024-01-31</span>
                 </div>
                 <div class="project-stats">
                     <div class="stat-box">
@@ -482,6 +428,15 @@
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
+                
+                const status = this.dataset.status;
+                document.querySelectorAll('.project-card').forEach(card => {
+                    if (status === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = card.dataset.status === status ? 'block' : 'none';
+                    }
+                });
             });
         });
         

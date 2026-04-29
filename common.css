@@ -150,17 +150,24 @@ body {
 
 .nav-bar .actions {
     display: flex;
-    gap: 16px;
+    gap: 8px;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .nav-bar .action-btn {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
+    background: transparent;
+    border-radius: 50%;
+    transition: background-color 0.2s;
 }
 
 .page-content {

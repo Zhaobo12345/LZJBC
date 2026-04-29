@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>演示小程序 - 合同详情</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="demo-common.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            padding-bottom: 60px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            padding-top: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-back {
+            font-size: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        .contract-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .contract-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .contract-info {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .stage-item {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        .stage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .stage-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .stage-status {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #e6f7ff;
+            color: #1890ff;
+        }
+
+        .task-item {
+            background: white;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* PPT布局样式 */
+        .ppt-layout {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 60px;
+            min-height: calc(100vh - 100px);
+            padding: 40px;
+            padding-left: 30px;
+            flex-wrap: nowrap;
+            min-width: 1300px;
+        }
+
+        .ppt-left-panel {
+            width: 500px;
+            flex-shrink: 0;
+            margin-left: 0;
+        }
+
+        .ppt-center-panel {
+            flex-shrink: 0;
+            position: relative;
+            margin-left: 0;
+        }
+
+        .ppt-center-panel > .phone-container {
+            position: relative !important;
+            transform: none !important;
+            top: auto !important;
+            left: auto !important;
+            margin: 0 !important;
+            z-index: 1 !important;
+            display: inline-block !important;
+        }
+
+        .ppt-flow-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ppt-flow-title .icon {
+            font-size: 20px;
+        }
+
+        .ppt-flow-image-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .ppt-flow-image-wrapper:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+        }
+
+        .ppt-flow-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .ppt-right-panel {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .ppt-text-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 28px;
+            color: white;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+
+        .ppt-text-card .main-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .ppt-text-card .sub-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .ppt-text-card .sub-item .bullet {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .ppt-text-card .sub-item .text {
+            flex: 1;
+            opacity: 0.95;
+        }
+
+        .ppt-text-card .highlight-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .ppt-text-card .highlight-box .title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .ppt-text-card .highlight-box .content {
+            font-size: 13px;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+
+        .page-content {
+            height: calc(100% - 44px);
+            padding-bottom: 0;
+            overflow-y: auto;
+        }
+
+        .status-banner {
+            background: linear-gradient(135deg, #1890FF 0%, #40A9FF 100%);
+            margin: 0;
+            border-radius: 0;
+            padding: 16px;
+            color: #FFFFFF;
+        }
+
+        .status-banner .status-text {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .status-banner .status-desc {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            margin: 12px;
+            overflow: hidden;
+        }
+
+        .card-title {
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-title .more {
+            font-size: 12px;
+            color: #1890FF;
+            font-weight: normal;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            padding: 10px 12px;
+        }
+
+        .info-row .label {
+            width: 70px;
+            font-size: 13px;
+            color: #8C8C8C;
+            flex-shrink: 0;
+        }
+
+        .info-row .value {
+            flex: 1;
+            font-size: 13px;
+            color: #262626;
+        }
+
+        .info-row .value.highlight {
+            color: #FA8C16;
+            font-weight: 600;
+        }
+
+        .contract-category-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            background-color: #E6F7FF;
+            color: #1890FF;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .party-card {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background-color: #FAFAFA;
+            border-radius: 8px;
+            margin: 0 12px 8px;
+        }
+
+        .party-card:last-child {
+            margin-bottom: 12px;
+        }
+
+        .party-card .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1890FF 0%, #40A9FF 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 16px;
+            margin-right: 12px;
+        }
+
+        .party-card .avatar.party-b {
+            background: linear-gradient(135deg, #52C41A 0%, #73D13D 100%);
+        }
+
+        .party-card .info {
+            flex: 1;
+        }
+
+        .party-card .name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #262626;
+        }
+
+        .party-card .role {
+            font-size: 12px;
+            color: #8C8C8C;
+            margin-top: 2px;
+        }
+
+        .section-tabs {
+            display: flex;
+            background-color: white;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .section-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+            color: #8C8C8C;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .section-tab.active {
+            color: #1890FF;
+            font-weight: 600;
+        }
+
+        .section-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 2px;
+            background-color: #1890FF;
+            border-radius: 1px;
+        }
+
+        .section-content {
+            display: none;
+        }
+
+        .section-content.show {
+            display: block;
+        }
+
+        .text-content {
+            font-size: 13px;
+            line-height: 1.8;
+            color: #595959;
+            padding: 12px;
+            background-color: #FAFAFA;
+            border-radius: 8px;
+            margin: 12px;
+        }
+
+        .stage-item {
+            border: 1px solid #E8E8E8;
+            border-radius: 8px;
+            margin: 0 12px 12px;
+            overflow: hidden;
+        }
+
+        .stage-header {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background-color: #FAFAFA;
+            cursor: pointer;
+        }
+
+        .stage-header .stage-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #1890FF 0%, #40A9FF 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .stage-header .stage-info {
+            flex: 1;
+        }
+
+        .stage-header .stage-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #262626;
+        }
+
+        .stage-header .stage-meta {
+            font-size: 12px;
+            color: #8C8C8C;
+            margin-top: 2px;
+        }
+
+        .stage-header .arrow {
+            margin-left: 8px;
+            color: #8C8C8C;
+            transition: transform 0.3s;
+        }
+
+        .stage-header .arrow.expanded {
+            transform: rotate(180deg);
+        }
+
+        .stage-tasks {
+            display: none;
+            padding: 12px;
+            border-top: 1px solid #E8E8E8;
+        }
+
+        .stage-tasks.show {
+            display: block;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #E8E8E8;
+            cursor: pointer;
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-item .task-status {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        .task-item .task-status.completed {
+            background-color: #52C41A;
+            color: #FFFFFF;
+        }
+
+        .task-item .task-status.pending {
+            background-color: #F0F0F0;
+            color: #8C8C8C;
+        }
+
+        .task-item .task-status.in-progress {
+            background-color: #FAAD14;
+            color: #FFFFFF;
+        }
+
+        .task-item .task-info {
+            flex: 1;
+        }
+
+        .task-item .task-name {
+            font-size: 13px;
+            color: #262626;
+        }
+
+        .task-item .task-desc {
+            font-size: 11px;
+            color: #8C8C8C;
+            margin-top: 2px;
+        }
+
+        .task-item .task-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .task-item .task-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            color: #595959;
+            background-color: #FAFAFA;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .task-item .task-meta-item .role-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 1px 4px;
+            background-color: #E6F7FF;
+            color: #1890FF;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .task-item .task-meta-item .role-tag.confirmer {
+            background-color: #F6FFED;
+            color: #52C41A;
+        }
+
+        .attachment-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #FAFAFA;
+            border-radius: 8px;
+            margin: 0 12px 8px;
+        }
+
+        .attachment-item:last-child {
+            margin-bottom: 12px;
+        }
+
+        .attachment-item .file-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background-color: #E6F7FF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .attachment-item .file-info {
+            flex: 1;
+        }
+
+        .attachment-item .file-name {
+            font-size: 13px;
+            color: #262626;
+        }
+
+        .attachment-item .file-meta {
+            font-size: 11px;
+            color: #8C8C8C;
+            margin-top: 2px;
+        }
+
+        .attachment-item .download-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1890FF;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="ppt-layout-mode">
+    <div class="ppt-layout">
+        <!-- 左侧流程图展示 -->
+        <div class="ppt-left-panel">
+            <div class="ppt-flow-title">
+                <span class="icon">📊</span>
+                <span>任务化合同签订</span>
+            </div>
+            <div class="ppt-flow-image-wrapper">
+                <img src="./imgs/imgOne.png" alt="任务化合同签订思维导图">
+            </div>
+        </div>
+
+        <!-- 中间手机展示区域 -->
+        <div class="ppt-center-panel">
+            <div class="phone-container">
+        <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="wx-capsule">
+                <div class="wx-capsule-btn">
+                    <div class="dot">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="wx-capsule-btn" onclick="showToast('关闭小程序')">
+                    <div class="close-icon"></div>
+                </div>
+            </div>
+            <div class="phone-content">
+                <div class="header">
+                    <div class="header-back" onclick="history.back()">‹</div>
+                    <div class="header-title">合同详情</div>
+                </div>
+
+                <div class="page-content">
+                    <div class="status-banner">
+                        <div class="status-text">已签约</div>
+                        <div class="status-desc">合同已正式生效，双方按约定履行合同义务</div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">
+                            <span>📋 合同信息</span>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">合同名称</div>
+                            <div class="value">水电分包合同</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">合同类型</div>
+                            <div class="value"><span class="contract-category-tag">水电服务合同</span></div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">合同编号</div>
+                            <div class="value">BJSDSWHT000001</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="label">合同金额</div>
+                            <div class="value highlight">¥80,000.00</div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 0; border-radius: 0; margin-left: 0; margin-right: 0;">
+                        <div class="card-title">
+                            <span>👥 签约双方</span>
+                        </div>
+                        <div class="party-card">
+                            <div class="avatar">甲</div>
+                            <div class="info">
+                                <div class="name">张三</div>
+                                <div class="role">发包方（甲方）· 业主</div>
+                            </div>
+                        </div>
+                        <div class="party-card">
+                            <div class="avatar party-b">乙</div>
+                            <div class="info">
+                                <div class="name">李四</div>
+                                <div class="role">承包方（乙方）· 施工方</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-tabs">
+                        <div class="section-tab active" onclick="switchSection(this, 'content')">合同内容</div>
+                        <div class="section-tab" onclick="switchSection(this, 'stages')">阶段任务</div>
+                        <div class="section-tab" onclick="switchSection(this, 'attachments')">附件</div>
+                    </div>
+
+                    <div class="section-content show" id="contentSection">
+                        <div class="text-content">
+                            根据《中华人民共和国民法典》及相关法律法规的规定，甲乙双方本着平等、自愿、公平、诚实信用的原则，就水电工程分包事宜协商一致，订立本合同。<br><br>
+                            一、工程概况<br>
+                            工程名称：XX小区整体装修水电工程<br>
+                            工程地点：XX市XX区XX路XX号<br>
+                            工程内容：强电、弱电、给排水等水电工程...
+                        </div>
+                    </div>
+
+                    <div class="section-content" id="stagesSection">
+                        <div class="stage-item">
+                            <div class="stage-header" onclick="toggleStage(this)">
+                                <div class="stage-icon">1</div>
+                                <div class="stage-info">
+                                    <div class="stage-name">材料进场阶段</div>
+                                    <div class="stage-meta">5个任务 · 已完成</div>
+                                </div>
+                                <div class="arrow expanded">▼</div>
+                            </div>
+                            <div class="stage-tasks show">
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status completed">✓</div>
+                                    <div class="task-info">
+                                        <div class="task-name">材料采购</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 张三</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 李四、王五</span>
+                                        </div>
+                                        <div class="task-desc">已完成 · 2024-01-12</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status completed">✓</div>
+                                    <div class="task-info">
+                                        <div class="task-name">材料运输</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 张三</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 李四</span>
+                                        </div>
+                                        <div class="task-desc">已完成 · 2024-01-13</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status completed">✓</div>
+                                    <div class="task-info">
+                                        <div class="task-name">材料确认</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 张三</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 李四、王五、赵六</span>
+                                        </div>
+                                        <div class="task-desc">已完成 · 2024-01-13</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status completed">✓</div>
+                                    <div class="task-info">
+                                        <div class="task-name">材料入库</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 李四</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三</span>
+                                        </div>
+                                        <div class="task-desc">已完成 · 2024-01-14</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status completed">✓</div>
+                                    <div class="task-info">
+                                        <div class="task-name">材料报验</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 王五</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三、业主</span>
+                                        </div>
+                                        <div class="task-desc">已完成 · 2024-01-15</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stage-item">
+                            <div class="stage-header" onclick="toggleStage(this)">
+                                <div class="stage-icon" style="background: linear-gradient(135deg, #52C41A 0%, #73D13D 100%);">2</div>
+                                <div class="stage-info">
+                                    <div class="stage-name">布管布线阶段</div>
+                                    <div class="stage-meta">6个任务 · 确认中</div>
+                                </div>
+                                <div class="arrow">▼</div>
+                            </div>
+                            <div class="stage-tasks">
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status completed">✓</div>
+                                    <div class="task-info">
+                                        <div class="task-name">开槽</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 李四</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三、王五</span>
+                                        </div>
+                                        <div class="task-desc">已完成 · 2024-01-18</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status completed">✓</div>
+                                    <div class="task-info">
+                                        <div class="task-name">布管</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 李四</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三、王五</span>
+                                        </div>
+                                        <div class="task-desc">已完成 · 2024-01-22</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status in-progress">⋯</div>
+                                    <div class="task-info">
+                                        <div class="task-name">穿线</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 李四</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三、王五、赵六</span>
+                                        </div>
+                                        <div class="task-desc">确认中 · 已提交执行记录</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">线路测试</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 王五</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">隐蔽工程验收</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 张三</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 业主、监理</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">阶段确认</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 李四</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三、王五、业主</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stage-item">
+                            <div class="stage-header" onclick="toggleStage(this)">
+                                <div class="stage-icon" style="background: linear-gradient(135deg, #FA8C16 0%, #FFA940 100%);">3</div>
+                                <div class="stage-info">
+                                    <div class="stage-name">安装阶段</div>
+                                    <div class="stage-meta">5个任务 · 待开始</div>
+                                </div>
+                                <div class="arrow">▼</div>
+                            </div>
+                            <div class="stage-tasks">
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">开关插座安装</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 王五</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三、李四</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">灯具安装</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 王五</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三、李四</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">配电箱安装</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 王五</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三、监理</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">设备调试</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 赵六</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三、王五</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">阶段确认</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 王五</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三、李四、赵六、业主</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="stage-item">
+                            <div class="stage-header" onclick="toggleStage(this)">
+                                <div class="stage-icon" style="background: linear-gradient(135deg, #722ED1 0%, #9254DE 100%);">4</div>
+                                <div class="stage-info">
+                                    <div class="stage-name">收尾阶段</div>
+                                    <div class="stage-meta">5个任务 · 待开始</div>
+                                </div>
+                                <div class="arrow">▼</div>
+                            </div>
+                            <div class="stage-tasks">
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">清理现场</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 李四</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三、王五</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">竣工验收</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 张三</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 业主、监理</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">资料整理</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 王五</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">培训使用</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 赵六</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 业主</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                                <div class="task-item" onclick="location.href='task-detail.html'">
+                                    <div class="task-status pending">○</div>
+                                    <div class="task-info">
+                                        <div class="task-name">最终确认</div>
+                                        <div class="task-meta-row">
+                                            <span class="task-meta-item"><span class="role-tag">执行</span> 李四</span>
+                                            <span class="task-meta-item"><span class="role-tag confirmer">确认</span> 张三、王五、赵六、钱七、孙八、业主</span>
+                                        </div>
+                                        <div class="task-desc">待开始</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-content" id="attachmentsSection">
+                        <div class="card" style="margin: 0; border-radius: 0;">
+                            <div class="card-title">
+                                <span>📝 签约文件</span>
+                            </div>
+                            <div class="attachment-item">
+                                <div class="file-icon">📄</div>
+                                <div class="file-info">
+                                    <div class="file-name">水电分包合同_签约文件.pdf</div>
+                                    <div class="file-meta">张三上传 · 2024-01-15 10:30</div>
+                                </div>
+                                <div class="download-btn">👁️</div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin: 0; border-radius: 0;">
+                            <div class="card-title">
+                                <span>📎 合同附件</span>
+                            </div>
+                            <div class="attachment-item">
+                                <div class="file-icon">📄</div>
+                                <div class="file-info">
+                                    <div class="file-name">水电分包合同.pdf</div>
+                                    <div class="file-meta">2.3MB · 2024-01-10上传</div>
+                                </div>
+                                <div class="download-btn">⬇</div>
+                            </div>
+                            <div class="attachment-item">
+                                <div class="file-icon">🖼️</div>
+                                <div class="file-info">
+                                    <div class="file-name">签约照片.jpg</div>
+                                    <div class="file-meta">1.5MB · 2024-01-10上传</div>
+                                </div>
+                                <div class="download-btn">👁️</div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin: 0; border-radius: 0;">
+                            <div class="card-title">
+                                <span>📁 补充文件</span>
+                            </div>
+                            <div class="attachment-item">
+                                <div class="file-icon">📊</div>
+                                <div class="file-info">
+                                    <div class="file-name">材料清单.xlsx</div>
+                                    <div class="file-meta">156KB · 2024-01-12上传</div>
+                                </div>
+                                <div class="download-btn">⬇</div>
+                            </div>
+                            <div class="attachment-item">
+                                <div class="file-icon">📐</div>
+                                <div class="file-info">
+                                    <div class="file-name">施工图纸.dwg</div>
+                                    <div class="file-meta">5.8MB · 2024-01-12上传</div>
+                                </div>
+                                <div class="download-btn">⬇</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+        <!-- 右侧文字说明 -->
+        <div class="ppt-right-panel">
+            <div class="ppt-text-card">
+                <div class="main-title">合同阶段化管理</div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">合同信息清晰展示</div>
+                </div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">阶段任务一目了然</div>
+                </div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">进度实时追踪</div>
+                </div>
+                <div class="highlight-box">
+                    <div class="title">💡 合同执行透明</div>
+                    <div class="content">每个阶段都有据可查<br>合同执行全程可控</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-nav-wrapper" id="pageNavWrapper">
+        <div class="page-nav-toggle" onclick="togglePageNav()">◀</div>
+        <div class="page-nav" id="pageNav">
+            <div class="page-nav-title">小程序导航</div>
+            <div class="page-nav-group">
+                <div class="page-nav-group-title">子页面</div>
+                <a href="project-detail.html" class="page-nav-item">项目详情</a>
+                <a href="contract-detail.html" class="page-nav-item active">合同详情</a>
+                <a href="task-detail.html" class="page-nav-item">任务详情</a>
+                <a href="member.html" class="page-nav-item">项目成员</a>
+                <a href="member-profile.html" class="page-nav-item">个人电子名片</a>
+                <a href="architecture.html" class="page-nav-item">项目架构</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePageNav() {
+            const wrapper = document.getElementById('pageNavWrapper');
+            const toggle = wrapper.querySelector('.page-nav-toggle');
+            wrapper.classList.toggle('collapsed');
+            if (wrapper.classList.contains('collapsed')) {
+                toggle.textContent = '◀';
+            } else {
+                toggle.textContent = '▶';
+            }
+        }
+
+        function showToast(message) {
+            const existingToast = document.querySelector('.app-toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'app-toast';
+            toast.innerHTML = message.replace(/\n/g, '<br>');
+            toast.style.cssText = `
+                position: absolute;
+                bottom: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: rgba(0, 0, 0, 0.7);
+                color: #FFFFFF;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 13px;
+                z-index: 1000;
+                white-space: pre-wrap;
+                max-width: 90%;
+                text-align: center;
+                line-height: 1.5;
+            `;
+            const phoneFrame = document.querySelector('.phone-frame');
+            if (phoneFrame) {
+                phoneFrame.appendChild(toast);
+            }
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 2500);
+        }
+
+        function switchSection(tab, section) {
+            document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            document.querySelectorAll('.section-content').forEach(s => s.classList.remove('show'));
+            document.getElementById(section + 'Section').classList.add('show');
+        }
+
+        function toggleStage(header) {
+            const tasks = header.nextElementSibling;
+            const arrow = header.querySelector('.arrow');
+            
+            if (tasks.classList.contains('show')) {
+                tasks.classList.remove('show');
+                arrow.classList.remove('expanded');
+            } else {
+                tasks.classList.add('show');
+                arrow.classList.add('expanded');
+            }
+        }
+    </script>
+</body>
+</html>

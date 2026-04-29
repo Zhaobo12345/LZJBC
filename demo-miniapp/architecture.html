@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>演示小程序 - 项目架构</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="demo-common.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            padding-bottom: 60px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            padding-top: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-back {
+            font-size: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        .architecture-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .architecture-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .level-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .level-item:last-child {
+            border-bottom: none;
+        }
+
+        .level-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e6f7ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            margin-right: 12px;
+        }
+
+        .level-info {
+            flex: 1;
+        }
+
+        .level-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+        .level-desc {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .level-count {
+            font-size: 13px;
+            color: #1890ff;
+            font-weight: 500;
+        }
+
+        .tree-structure {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .tree-node {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .tree-node::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 15px;
+            height: 1px;
+            background: #d9d9d9;
+        }
+
+        .tree-node::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background: #d9d9d9;
+        }
+
+        .tree-node:last-child::after {
+            height: 10px;
+        }
+
+        .node-content {
+            background: #f9f9f9;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* PPT布局样式 */
+        .ppt-layout {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 60px;
+            min-height: calc(100vh - 100px);
+            padding: 40px;
+            padding-left: 30px;
+            flex-wrap: nowrap;
+            min-width: 1300px;
+        }
+
+        .ppt-left-panel {
+            width: 500px;
+            flex-shrink: 0;
+            margin-left: 0;
+        }
+
+        .ppt-center-panel {
+            flex-shrink: 0;
+            position: relative;
+            margin-left: 0;
+        }
+
+        .ppt-center-panel > .phone-container {
+            position: relative !important;
+            transform: none !important;
+            top: auto !important;
+            left: auto !important;
+            margin: 0 !important;
+            z-index: 1 !important;
+            display: inline-block !important;
+        }
+
+        .ppt-flow-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ppt-flow-title .icon {
+            font-size: 20px;
+        }
+
+        .ppt-flow-image-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .ppt-flow-image-wrapper:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+        }
+
+        .ppt-flow-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .ppt-right-panel {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .ppt-text-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 28px;
+            color: white;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+
+        .ppt-text-card .main-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .ppt-text-card .sub-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .ppt-text-card .sub-item .bullet {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .ppt-text-card .sub-item .text {
+            flex: 1;
+            opacity: 0.95;
+        }
+
+        .ppt-text-card .highlight-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .ppt-text-card .highlight-box .title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .ppt-text-card .highlight-box .content {
+            font-size: 13px;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body class="ppt-layout-mode">
+    <div class="ppt-layout">
+        <!-- 左侧流程图展示 -->
+        <div class="ppt-left-panel">
+            <div class="ppt-flow-title">
+                <span class="icon">📊</span>
+                <span>任务化合同签订</span>
+            </div>
+            <div class="ppt-flow-image-wrapper">
+                <img src="./imgs/imgOne.png" alt="任务化合同签订思维导图">
+            </div>
+        </div>
+
+        <!-- 中间手机展示区域 -->
+        <div class="ppt-center-panel">
+            <div class="phone-container">
+        <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="wx-capsule">
+                <div class="wx-capsule-btn">
+                    <div class="dot">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="wx-capsule-btn" onclick="showToast('关闭小程序')">
+                    <div class="close-icon"></div>
+                </div>
+            </div>
+            <div class="phone-content">
+                <div class="header">
+                    <div class="header-back" onclick="history.back()">‹</div>
+                    <div class="header-title">项目架构</div>
+                </div>
+
+                <div class="content">
+                    <div class="architecture-card">
+                        <div class="architecture-title">项目层级</div>
+                        <div class="level-item">
+                            <div class="level-icon">🏢</div>
+                            <div class="level-info">
+                                <div class="level-name">项目</div>
+                                <div class="level-desc">西湖区别墅装修项目</div>
+                            </div>
+                            <span class="level-count">1个项目</span>
+                        </div>
+                        <div class="level-item">
+                            <div class="level-icon">📋</div>
+                            <div class="level-info">
+                                <div class="level-name">合同</div>
+                                <div class="level-desc">装修工程合同</div>
+                            </div>
+                            <span class="level-count">1份合同</span>
+                        </div>
+                        <div class="level-item">
+                            <div class="level-icon">📦</div>
+                            <div class="level-info">
+                                <div class="level-name">阶段</div>
+                                <div class="level-desc">材料进场、水电施工、泥瓦工程等</div>
+                            </div>
+                            <span class="level-count">5个阶段</span>
+                        </div>
+                        <div class="level-item">
+                            <div class="level-icon">📝</div>
+                            <div class="level-info">
+                                <div class="level-name">任务</div>
+                                <div class="level-desc">材料验收、强电布管、弱电布线等</div>
+                            </div>
+                            <span class="level-count">15个任务</span>
+                        </div>
+                    </div>
+
+                    <div class="architecture-card">
+                        <div class="architecture-title">组织架构</div>
+                        <div class="node-content" style="margin-bottom: 10px; background: #e6f7ff;">
+                            🏢 西湖区别墅装修项目
+                        </div>
+                        <div class="tree-structure">
+                            <div class="tree-node">
+                                <div class="node-content">👤 张三（项目经理）</div>
+                            </div>
+                            <div class="tree-node">
+                                <div class="node-content">👤 李四（监理）</div>
+                            </div>
+                            <div class="tree-node">
+                                <div class="node-content">👷 施工团队</div>
+                                <div class="tree-structure">
+                                    <div class="tree-node">
+                                        <div class="node-content">⚡ 电工组（王五、赵六）</div>
+                                    </div>
+                                    <div class="tree-node">
+                                        <div class="node-content">💧 水电组（钱七）</div>
+                                    </div>
+                                    <div class="tree-node">
+                                        <div class="node-content">🧱 泥瓦组（孙八）</div>
+                                    </div>
+                                    <div class="tree-node">
+                                        <div class="node-content">🪚 木工组（周九）</div>
+                                    </div>
+                                    <div class="tree-node">
+                                        <div class="node-content">🎨 油漆组（吴十）</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tree-node">
+                                <div class="node-content">🏠 业主（郑先生）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <!-- 右侧文字说明 -->
+        <div class="ppt-right-panel">
+            <div class="ppt-text-card">
+                <div class="main-title">项目层级架构</div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">项目层级清晰展示</div>
+                </div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">组织架构一目了然</div>
+                </div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">人员分工明确</div>
+                </div>
+                <div class="highlight-box">
+                    <div class="title">💡 架构清晰透明</div>
+                    <div class="content">层层管理，责任明确<br>项目结构清晰可见</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-nav-wrapper" id="pageNavWrapper">
+        <div class="page-nav-toggle" onclick="togglePageNav()">◀</div>
+        <div class="page-nav" id="pageNav">
+            <div class="page-nav-title">小程序导航</div>
+            <div class="page-nav-group">
+                <div class="page-nav-group-title">子页面</div>
+                <a href="project-detail.html" class="page-nav-item">项目详情</a>
+                <a href="contract-detail.html" class="page-nav-item">合同详情</a>
+                <a href="task-detail.html" class="page-nav-item">任务详情</a>
+                <a href="member.html" class="page-nav-item">项目成员</a>
+                <a href="member-profile.html" class="page-nav-item">个人电子名片</a>
+                <a href="architecture.html" class="page-nav-item active">项目架构</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePageNav() {
+            const wrapper = document.getElementById('pageNavWrapper');
+            const toggle = wrapper.querySelector('.page-nav-toggle');
+            wrapper.classList.toggle('collapsed');
+            if (wrapper.classList.contains('collapsed')) {
+                toggle.textContent = '◀';
+            } else {
+                toggle.textContent = '▶';
+            }
+        }
+
+        function showToast(message) {
+            const existingToast = document.querySelector('.app-toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'app-toast';
+            toast.innerHTML = message.replace(/\n/g, '<br>');
+            toast.style.cssText = `
+                position: absolute;
+                bottom: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: rgba(0, 0, 0, 0.7);
+                color: #FFFFFF;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 13px;
+                z-index: 1000;
+                white-space: pre-wrap;
+                max-width: 90%;
+                text-align: center;
+                line-height: 1.5;
+            `;
+            const phoneFrame = document.querySelector('.phone-frame');
+            if (phoneFrame) {
+                phoneFrame.appendChild(toast);
+            }
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 2500);
+        }
+    </script>
+</body>
+</html>

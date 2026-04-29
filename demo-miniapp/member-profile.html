@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>演示小程序 - 个人电子名片</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="demo-common.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            padding-top: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-back {
+            font-size: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .profile-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 32px 16px 24px;
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 600;
+            margin: 0 auto 16px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .profile-role {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .profile-section {
+            background-color: #FFFFFF;
+            margin: 12px 16px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .section-header {
+            padding: 16px;
+            border-bottom: 1px solid #E8E8E8;
+            font-size: 15px;
+            font-weight: 600;
+            color: #262626;
+        }
+
+        .section-content {
+            padding: 16px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #E8E8E8;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item .label {
+            font-size: 14px;
+            color: #8C8C8C;
+        }
+
+        .info-item .value {
+            font-size: 14px;
+            color: #262626;
+            font-weight: 500;
+        }
+
+        .role-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .role-badge.manager {
+            background-color: #F9F0FF;
+            color: #722ED1;
+        }
+
+        .role-badge.foreman {
+            background-color: #F6FFED;
+            color: #52C41A;
+        }
+
+        .role-badge.owner {
+            background-color: #FFF7E6;
+            color: #FA8C16;
+        }
+
+        .role-badge.designer {
+            background-color: #E6F7FF;
+            color: #1890FF;
+        }
+
+        .role-badge.worker {
+            background-color: #FFF0F0;
+            color: #F5222D;
+        }
+
+        .project-list {
+            margin-top: 8px;
+        }
+
+        .project-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            background-color: #F5F5F5;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+        }
+
+        .project-item:hover {
+            background-color: #E6F7FF;
+        }
+
+        .project-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-size: 16px;
+            margin-right: 12px;
+        }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #262626;
+            margin-bottom: 4px;
+        }
+
+        .project-role {
+            font-size: 12px;
+            color: #8C8C8C;
+        }
+
+        .arrow {
+            color: #8C8C8C;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .skill-tag {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            background-color: #F5F5F5;
+            color: #8C8C8C;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .ppt-layout {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 60px;
+            min-height: calc(100vh - 100px);
+            padding: 40px;
+            padding-left: 30px;
+            flex-wrap: nowrap;
+            min-width: 1300px;
+        }
+
+        .ppt-left-panel {
+            width: 500px;
+            flex-shrink: 0;
+            margin-left: 0;
+        }
+
+        .ppt-center-panel {
+            flex-shrink: 0;
+            position: relative;
+            margin-left: 0;
+        }
+
+        .ppt-center-panel > .phone-container {
+            position: relative !important;
+            transform: none !important;
+            top: auto !important;
+            left: auto !important;
+            margin: 0 !important;
+            z-index: 1 !important;
+            display: inline-block !important;
+        }
+
+        .ppt-flow-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ppt-flow-title .icon {
+            font-size: 20px;
+        }
+
+        .ppt-flow-image-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .ppt-flow-image-wrapper:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+        }
+
+        .ppt-flow-image {
+            width: 100%;
+            display: block;
+        }
+
+        .ppt-flow-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .ppt-flow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .ppt-flow-step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .ppt-flow-step-content {
+            flex: 1;
+        }
+
+        .ppt-flow-step-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .ppt-flow-step-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="wx-capsule">
+                <div class="wx-capsule-btn">
+                    <div class="dot">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="wx-capsule-btn" onclick="showToast('关闭小程序')">
+                    <div class="close-icon"></div>
+                </div>
+            </div>
+            <div class="phone-content">
+                <div class="header">
+                    <div class="header-back" onclick="history.back()">‹</div>
+                    <div class="header-title">个人电子名片</div>
+                </div>
+                
+                <div class="profile-header">
+                    <div class="profile-avatar" id="profileAvatar">张</div>
+                    <div class="profile-name" id="profileName">张三</div>
+                    <div class="profile-role" id="profileRole">项目部 · 项目经理</div>
+                </div>
+                
+                <div class="profile-section">
+                    <div class="section-header">基本信息</div>
+                    <div class="section-content">
+                        <div class="info-item">
+                            <div class="label">姓名</div>
+                            <div class="value" id="infoName">张三</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">角色</div>
+                            <div class="value">
+                                <span class="role-badge manager" id="infoRoleBadge">项目总</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">所属架构</div>
+                            <div class="value" id="infoGroup">项目部</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="label">联系方式</div>
+                            <div class="value">138****8888</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-section">
+                    <div class="section-header">专业技能</div>
+                    <div class="section-content">
+                        <div class="skill-tags" id="skillTags">
+                            <span class="skill-tag">项目管理</span>
+                            <span class="skill-tag">施工协调</span>
+                            <span class="skill-tag">预算管理</span>
+                            <span class="skill-tag">质量控制</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-section">
+                    <div class="section-header">项目经历</div>
+                    <div class="section-content">
+                        <div class="project-list" id="projectList">
+                            <div class="project-item" onclick="goToProject('project-001')">
+                                <div class="project-icon">🏠</div>
+                                <div class="project-info">
+                                    <div class="project-name">XX小区整体装修</div>
+                                    <div class="project-role">项目经理</div>
+                                </div>
+                                <div class="arrow">›</div>
+                            </div>
+                            <div class="project-item" onclick="goToProject('project-002')">
+                                <div class="project-icon">🏢</div>
+                                <div class="project-info">
+                                    <div class="project-name">商业办公空间装修</div>
+                                    <div class="project-role">项目总监</div>
+                                </div>
+                                <div class="arrow">›</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-nav-wrapper" id="pageNavWrapper">
+        <div class="page-nav-toggle" onclick="togglePageNav()">◀</div>
+        <div class="page-nav" id="pageNav">
+            <div class="page-nav-title">小程序导航</div>
+            <div class="page-nav-group">
+                <div class="page-nav-group-title">子页面</div>
+                <a href="project-detail.html" class="page-nav-item">项目详情</a>
+                <a href="contract-detail.html" class="page-nav-item">合同详情</a>
+                <a href="task-detail.html" class="page-nav-item">任务详情</a>
+                <a href="member.html" class="page-nav-item">项目成员</a>
+                <a href="member-profile.html" class="page-nav-item active">个人电子名片</a>
+                <a href="architecture.html" class="page-nav-item">项目架构</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function initProfile() {
+            const id = getQueryParam('id');
+            const name = getQueryParam('name');
+            const role = getQueryParam('role');
+
+            if (name) {
+                document.getElementById('profileName').textContent = name;
+                document.getElementById('infoName').textContent = name;
+            }
+
+            if (role) {
+                document.getElementById('profileRole').textContent = role;
+                
+                const roleText = role.split(' · ')[1] || role;
+                let roleClass = 'worker';
+                if (roleText.includes('经理') || roleText.includes('总')) {
+                    roleClass = 'manager';
+                } else if (roleText.includes('工长') || roleText.includes('主管')) {
+                    roleClass = 'foreman';
+                } else if (roleText.includes('业主')) {
+                    roleClass = 'owner';
+                } else if (roleText.includes('设计师')) {
+                    roleClass = 'designer';
+                }
+                
+                const roleBadge = document.getElementById('infoRoleBadge');
+                roleBadge.className = `role-badge ${roleClass}`;
+                roleBadge.textContent = getRoleShortName(roleText);
+            }
+
+            if (name) {
+                document.getElementById('profileAvatar').textContent = name.charAt(0);
+            }
+        }
+
+        function getRoleShortName(roleText) {
+            const roleMap = {
+                '项目经理': '项目总',
+                '施工主管': '工长',
+                '业主代表': '业主',
+                '设计师': '设计',
+                '施工人员': '施工',
+                '组长': '组长'
+            };
+            
+            for (const [key, value] of Object.entries(roleMap)) {
+                if (roleText.includes(key)) {
+                    return value;
+                }
+            }
+            return roleText;
+        }
+
+        function goToProject(projectId) {
+            console.log('跳转到项目:', projectId);
+        }
+
+        function togglePageNav() {
+            const wrapper = document.getElementById('pageNavWrapper');
+            const toggle = wrapper.querySelector('.page-nav-toggle');
+            wrapper.classList.toggle('collapsed');
+            if (wrapper.classList.contains('collapsed')) {
+                toggle.textContent = '◀';
+            } else {
+                toggle.textContent = '▶';
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        initProfile();
+    </script>
+</body>
+</html>

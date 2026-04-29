@@ -1,4 +1,4 @@
-﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -12,30 +12,17 @@
 
         .search-filter-bar {
             background-color: var(--bg-primary);
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border-color);
-            position: relative;
-        }
-
-        .search-filter-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .search-input-wrap {
-            flex: 1;
-            position: relative;
+            padding: 4px 10px;
         }
 
         .search-input {
             width: 100%;
-            height: 36px;
+            height: 28px;
             background-color: var(--bg-secondary);
             border: none;
-            border-radius: 18px;
-            padding: 0 16px;
-            font-size: 14px;
+            border-radius: 14px;
+            padding: 0 12px;
+            font-size: 13px;
             color: var(--text-primary);
             outline: none;
         }
@@ -46,28 +33,6 @@
 
         .search-input:focus {
             background-color: #E6F7FF;
-        }
-
-        .filter-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            background-color: var(--bg-secondary);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.2s;
-            flex-shrink: 0;
-        }
-
-        .filter-btn:hover {
-            background-color: #E6F7FF;
-        }
-
-        .filter-btn.active {
-            background-color: var(--primary-color);
-            color: #FFFFFF;
         }
 
         .filter-tags {
@@ -93,74 +58,64 @@
             font-size: 14px;
         }
 
-        .filter-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
+        .filter-level-one {
+            display: flex;
             background-color: var(--bg-primary);
-            border-radius: 0 0 8px 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 100;
-            display: none;
-            max-height: 300px;
-            overflow-y: auto;
+            padding: 8px 16px;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .filter-dropdown.show {
-            display: block;
-        }
-
-        .filter-dropdown-header {
+        .filter-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .filter-dropdown-close {
-            font-size: 18px;
-            color: var(--text-tertiary);
-            cursor: pointer;
-        }
-
-        .filter-section {
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .filter-section:last-child {
-            border-bottom: none;
-        }
-
-        .filter-section-title {
-            font-size: 12px;
-            color: var(--text-tertiary);
-            margin-bottom: 10px;
-        }
-
-        .filter-options {
-            display: flex;
-            flex-wrap: wrap;
             gap: 8px;
+            padding: 6px 12px 0px 12px;
+            background-color: var(--bg-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .filter-group:first-child {
+            flex: 0 0 auto;
+        }
+
+        .filter-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+
+        .filter-toggle {
+            display: flex;
+            background-color: var(--bg-secondary);
+            border-radius: 16px;
+            overflow: hidden;
+            padding: 2px;
         }
 
         .filter-option {
-            padding: 6px 12px;
-            background-color: var(--bg-secondary);
-            border-radius: 14px;
-            font-size: 13px;
+            padding: 5px 12px;
+            font-size: 12px;
             color: var(--text-secondary);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            user-select: none;
+            -webkit-user-select: none;
+            border-radius: 14px;
+            background-color: transparent;
         }
 
         .filter-option:hover {
-            background-color: #E6F7FF;
+            color: var(--primary-color);
         }
 
         .filter-option.active {
@@ -168,43 +123,106 @@
             color: #FFFFFF;
         }
 
-        .stats-summary {
-            display: flex;
-            background-color: var(--bg-primary);
-            padding: 12px 16px;
-            border-bottom: 1px solid var(--border-color);
+        .filter-option.active:hover {
+            background-color: var(--primary-color);
         }
 
-        .stats-item {
-            flex: 1;
-            text-align: center;
+        .filter-select {
             position: relative;
-        }
-
-        .stats-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 10%;
-            height: 80%;
-            width: 1px;
-            background-color: var(--border-color);
-        }
-
-        .stats-item .value {
-            font-size: 18px;
-            font-weight: 700;
+            padding: 6px 28px 6px 12px;
+            font-size: 12px;
             color: var(--text-primary);
+            background-color: var(--bg-secondary);
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            user-select: none;
+            -webkit-user-select: none;
+            min-width: 90px;
         }
 
-        .stats-item .value.highlight {
+        .filter-select:hover {
+            background-color: #E6F7FF;
+        }
+
+        .filter-select.active {
+            background-color: #E6F7FF;
             color: var(--primary-color);
         }
 
-        .stats-item .label {
-            font-size: 11px;
+        .filter-select::after {
+            content: '▼';
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 8px;
             color: var(--text-tertiary);
-            margin-top: 2px;
+            transition: transform 0.2s;
+        }
+
+        .filter-select.active::after {
+            transform: translateY(-50%) rotate(180deg);
+            color: var(--primary-color);
+        }
+
+        .status-dropdown {
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            width: 140px;
+            background-color: var(--bg-primary);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            z-index: 1000;
+            display: none;
+        }
+
+        .status-dropdown.show {
+            display: block;
+            animation: dropdownFadeIn 0.15s ease;
+        }
+
+        @keyframes dropdownFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .status-dropdown-item {
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s;
+            user-select: none;
+            -webkit-user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dropdown-item:hover {
+            background-color: #F5F5F5;
+        }
+
+        .status-dropdown-item.active {
+            background-color: #E6F7FF;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .status-dropdown-item.active::before {
+            content: '✓';
+            font-size: 12px;
         }
 
         .contract-section {
@@ -473,6 +491,11 @@
             color: #FFFFFF;
         }
 
+        .task-item .task-status.executing {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+        }
+
         .task-item .task-status.pending {
             background-color: var(--bg-tertiary);
             color: var(--text-tertiary);
@@ -505,6 +528,11 @@
         .task-item .task-status-text.completed {
             background-color: var(--status-success-bg);
             color: var(--success-color);
+        }
+
+        .task-item .task-status-text.executing {
+            background-color: var(--status-primary-bg);
+            color: var(--primary-color);
         }
 
         .task-item .confirm-progress {
@@ -620,10 +648,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 8px 16px;
+            padding: 3px 12px;
             background-color: var(--bg-primary);
             border-bottom: 1px solid var(--border-color);
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-tertiary);
         }
 
@@ -1066,66 +1094,33 @@
         </div>
         
         <div class="page-content">
-            <div class="search-filter-bar" id="searchFilterBar">
-                <div class="search-filter-row">
-                    <div class="search-input-wrap">
-                        <input type="text" class="search-input" placeholder="搜索任务名称..." id="searchInput" oninput="filterTasks()">
+            <div class="search-filter-bar">
+                <input type="text" class="search-input" placeholder="搜索任务名称..." id="searchInput" oninput="filterTasks()">
+            </div>
+
+            <div class="filter-bar" id="taskFilterBar">
+                <div class="filter-group">
+                    <span class="filter-label">参与</span>
+                    <div class="filter-toggle" id="participantToggle">
+                        <div class="filter-option active" data-filter="all">全部</div>
+                        <div class="filter-option" data-filter="mine">我参与</div>
                     </div>
-                    <div class="filter-btn" id="filterBtn" onclick="openFilterPanel()">
-                        <span>⚙️</span>
+                </div>
+                <div class="filter-group" style="position: relative;">
+                    <span class="filter-label">状态</span>
+                    <div class="filter-select" id="statusSelectBtn">
+                        全部状态
+                    </div>
+                    <div class="status-dropdown" id="statusDropdownMenu">
+                        <div class="status-dropdown-item active" data-status="all">全部状态</div>
+                        <div class="status-dropdown-item" data-status="pending">待开始</div>
+                        <div class="status-dropdown-item" data-status="executing">执行中</div>
+                        <div class="status-dropdown-item" data-status="confirming">确认中</div>
+                        <div class="status-dropdown-item" data-status="completed">已完成</div>
                     </div>
                 </div>
             </div>
 
-            <div class="quick-filter-bar">
-                <div class="quick-filter-btn active" onclick="quickFilter('all', this)">
-                    全部 <span class="badge">22</span>
-                </div>
-                <div class="quick-filter-btn" onclick="quickFilter('mine', this)">
-                    我参与的 <span class="badge">8</span>
-                </div>
-                <div class="quick-filter-btn" onclick="quickFilter('pending', this)">
-                    待开始 <span class="badge">9</span>
-                </div>
-                <div class="quick-filter-btn" onclick="quickFilter('confirming', this)">
-                    确认中 <span class="badge">5</span>
-                </div>
-            </div>
-            
-            <div class="stats-summary">
-                <div class="stats-item">
-                    <div class="value highlight" id="totalCount">22</div>
-                    <div class="label">全部任务</div>
-                </div>
-                <div class="stats-item">
-                    <div class="value" id="pendingCount">8</div>
-                    <div class="label">待开始</div>
-                </div>
-                <div class="stats-item">
-                    <div class="value" id="confirmingCount">4</div>
-                    <div class="label">确认中</div>
-                </div>
-                <div class="stats-item">
-                    <div class="value" id="completedCount">12</div>
-                    <div class="label">已完成</div>
-                </div>
-            </div>
-
-            <div class="view-switch-bar">
-                <div class="view-switch-tabs">
-                    <div class="view-switch-tab active" onclick="switchView('grouped', this)">分组列表</div>
-                    <div class="view-switch-tab" onclick="switchView('flat', this)">扁平列表</div>
-                </div>
-                <div class="group-by-selector" id="groupBySelector">
-                    <span>分组方式：</span>
-                    <select onchange="changeGroupBy(this.value)">
-                        <option value="contract">按合同</option>
-                        <option value="stage">按阶段</option>
-                        <option value="status">按状态</option>
-                    </select>
-                </div>
-            </div>
-            
             <div class="result-bar">
                 <span id="resultCount">共 24 个任务</span>
                 <span class="expand-all-btn" onclick="expandAllContracts()">展开全部</span>
@@ -1158,7 +1153,7 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-task-index="0" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">材料采购 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">材料采购</div>
                                         <div class="task-meta">执行人：张三 · 确认人：李四、王五</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1166,7 +1161,7 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-task-index="1" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">材料运输 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">材料运输</div>
                                         <div class="task-meta">执行人：张三 · 确认人：李四</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1174,7 +1169,7 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-task-index="2" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">材料确认 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">材料确认</div>
                                         <div class="task-meta">执行人：张三 · 确认人：李四、王五、赵六</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1187,14 +1182,14 @@
                                 <div class="stage-dot confirming"></div>
                                 <div class="stage-name">布管布线阶段</div>
                                 <div class="sequential-icon" title="按序执行"></div>
-                                <div class="stage-count">2/4 进行中</div>
+                                <div class="stage-count">3/5 进行中</div>
                                 <div class="arrow">▼</div>
                             </div>
                             <div class="task-list">
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-task-index="0" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">开槽 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">开槽</div>
                                         <div class="task-meta">执行人：李四 · 确认人：张三、王五</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1202,15 +1197,23 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-task-index="1" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">布管 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">布管</div>
                                         <div class="task-meta">执行人：李四 · 确认人：张三、王五</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
                                 </div>
-                                <div class="task-item" data-type="contract" data-status="confirming" data-priority="important" data-task-index="2" data-participant="false" onclick="goToTaskDetail(this)">
+                                <div class="task-item" data-type="contract" data-status="executing" data-priority="normal" data-task-index="2" data-participant="true" onclick="goToTaskDetail(this)">
+                                    <div class="task-status executing">▶</div>
+                                    <div class="task-info">
+                                        <div class="task-name">穿线</div>
+                                        <div class="task-meta">执行人：李四 · 进行中</div>
+                                    </div>
+                                    <div class="task-status-text executing"><span class="status-icon">▶</span>执行中</div>
+                                </div>
+                                <div class="task-item" data-type="contract" data-status="confirming" data-priority="important" data-task-index="3" data-participant="false" onclick="goToTaskDetail(this)">
                                     <div class="task-status confirming">⏳</div>
                                     <div class="task-info">
-                                        <div class="task-name">穿线 <span class="task-tag contract">合约</span><span class="priority-badge important">重要</span></div>
+                                        <div class="task-name">穿线验收</div>
                                         <div class="task-meta">执行人：李四</div>
                                         <div class="confirm-progress">
                                             <div class="confirm-progress-bar"><div class="confirm-progress-fill" style="width: 33%;"></div></div>
@@ -1219,10 +1222,10 @@
                                     </div>
                                     <div class="task-status-text confirming"><span class="status-icon">⏳</span>确认中</div>
                                 </div>
-                                <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-task-index="3" data-participant="true" onclick="goToTaskDetail(this)">
+                                <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-task-index="4" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">阶段确认 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">阶段确认</div>
                                         <div class="task-meta">执行人：李四 · 确认人：张三、王五</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1242,7 +1245,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-task-index="0" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">开关插座安装 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">开关插座安装</div>
                                         <div class="task-meta">执行人：王五 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1250,7 +1253,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-task-index="1" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">灯具安装 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">灯具安装</div>
                                         <div class="task-meta">执行人：王五 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1269,7 +1272,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">清理现场 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">清理现场</div>
                                         <div class="task-meta">执行人：李四 · 确认人：张三、王五</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1277,7 +1280,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">最终确认 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">最终确认</div>
                                         <div class="task-meta">执行人：李四 · 确认人：张三、王五、赵六、钱七、孙八</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1312,7 +1315,7 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">防水施工 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">防水施工</div>
                                         <div class="task-meta">执行人：王五 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1320,7 +1323,7 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">防水确认 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">防水确认</div>
                                         <div class="task-meta">执行人：王五 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1339,7 +1342,7 @@
                                 <div class="task-item" data-type="contract" data-status="confirming" data-priority="urgent" data-participant="false" onclick="goToTaskDetail(this)">
                                     <div class="task-status confirming">⏳</div>
                                     <div class="task-info">
-                                        <div class="task-name">墙面贴砖 <span class="task-tag contract">合约</span><span class="priority-badge urgent">紧急</span></div>
+                                        <div class="task-name">墙面贴砖</div>
                                         <div class="task-meta">执行人：王五</div>
                                         <div class="confirm-progress">
                                             <div class="confirm-progress-bar"><div class="confirm-progress-fill" style="width: 67%;"></div></div>
@@ -1351,7 +1354,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">地面铺砖 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">地面铺砖</div>
                                         <div class="task-meta">执行人：王五 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1385,7 +1388,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">吊顶施工 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">吊顶施工</div>
                                         <div class="task-meta">执行人：赵六 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1393,7 +1396,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">吊顶确认 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">吊顶确认</div>
                                         <div class="task-meta">执行人：赵六 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1427,7 +1430,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">墙面批刮 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">墙面批刮</div>
                                         <div class="task-meta">执行人：钱七 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending">待开始</div>
@@ -1435,7 +1438,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">批刮确认 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">批刮确认</div>
                                         <div class="task-meta">执行人：钱七 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending">待开始</div>
@@ -1455,7 +1458,7 @@
                 <div class="flat-task-item" data-status="completed" onclick="goToTaskDetail(this)">
                     <div class="task-status completed">✓</div>
                     <div class="task-info">
-                        <div class="task-name">材料采购 <span class="task-tag contract">合约</span></div>
+                        <div class="task-name">材料采购</div>
                         <div class="task-meta">
                             <span class="contract-name">水电分包合同</span>
                             <span>执行人：张三</span>
@@ -1466,7 +1469,7 @@
                 <div class="flat-task-item" data-status="confirming" onclick="goToTaskDetail(this)">
                     <div class="task-status confirming">⏳</div>
                     <div class="task-info">
-                        <div class="task-name">穿线 <span class="task-tag contract">合约</span><span class="priority-badge important">重要</span></div>
+                        <div class="task-name">穿线</div>
                         <div class="task-meta">
                             <span class="contract-name">水电分包合同</span>
                             <span>执行人：李四</span>
@@ -1478,7 +1481,7 @@
                 <div class="flat-task-item" data-status="confirming" onclick="goToTaskDetail(this)">
                     <div class="task-status confirming">⏳</div>
                     <div class="task-info">
-                        <div class="task-name">墙面贴砖 <span class="task-tag contract">合约</span><span class="priority-badge urgent">紧急</span></div>
+                        <div class="task-name">墙面贴砖</div>
                         <div class="task-meta">
                             <span class="contract-name">泥瓦分包合同</span>
                             <span>执行人：王五</span>
@@ -1490,7 +1493,7 @@
                 <div class="flat-task-item" data-status="pending" onclick="goToTaskDetail(this)">
                     <div class="task-status pending">○</div>
                     <div class="task-info">
-                        <div class="task-name">吊顶施工 <span class="task-tag contract">合约</span></div>
+                        <div class="task-name">吊顶施工</div>
                         <div class="task-meta">
                             <span class="contract-name">木工分包合同</span>
                             <span>执行人：赵六</span>
@@ -1501,7 +1504,7 @@
                 <div class="flat-task-item" data-status="pending" onclick="goToTaskDetail(this)">
                     <div class="task-status pending">○</div>
                     <div class="task-info">
-                        <div class="task-name">墙面批刮 <span class="task-tag contract">合约</span></div>
+                        <div class="task-name">墙面批刮</div>
                         <div class="task-meta">
                             <span class="contract-name">油漆分包合同</span>
                             <span>执行人：钱七</span>
@@ -1509,74 +1512,6 @@
                     </div>
                     <div class="task-status-text pending">待开始</div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="filter-panel-overlay" id="filterPanelOverlay"></div>
-        <div class="filter-panel" id="filterPanel">
-            <div class="filter-panel-header">
-                <div class="filter-panel-title">筛选条件</div>
-                <div class="filter-panel-close" onclick="closeFilterPanel()">✕</div>
-            </div>
-            <div class="filter-panel-content">
-                <div class="filter-group">
-                    <div class="filter-group-title">
-                        <span>合同</span>
-                        <span class="tip">可多选</span>
-                    </div>
-                    <div class="filter-multi-options" id="contractFilterOptions">
-                        <div class="filter-multi-option selected" data-value="all" onclick="toggleMultiOption(this)">全部</div>
-                        <div class="filter-multi-option" data-value="contract-1" onclick="toggleMultiOption(this)">水电分包合同</div>
-                        <div class="filter-multi-option" data-value="contract-2" onclick="toggleMultiOption(this)">泥瓦分包合同</div>
-                        <div class="filter-multi-option" data-value="contract-3" onclick="toggleMultiOption(this)">木工分包合同</div>
-                        <div class="filter-multi-option" data-value="contract-4" onclick="toggleMultiOption(this)">油漆分包合同</div>
-                    </div>
-                </div>
-                
-                <div class="filter-group">
-                    <div class="filter-group-title">
-                        <span>任务类型</span>
-                        <span class="tip">可多选</span>
-                    </div>
-                    <div class="filter-multi-options" id="typeFilterOptions">
-                        <div class="filter-multi-option selected" data-value="all" onclick="toggleMultiOption(this)">全部</div>
-                        <div class="filter-multi-option" data-value="contract" onclick="toggleMultiOption(this)">合约任务</div>
-                    </div>
-                </div>
-                
-                <div class="filter-group">
-                    <div class="filter-group-title">
-                        <span>任务状态</span>
-                        <span class="tip">可多选</span>
-                    </div>
-                    <div class="filter-multi-options" id="statusFilterOptions">
-                        <div class="filter-multi-option selected" data-value="all" onclick="toggleMultiOption(this)">全部</div>
-                        <div class="filter-multi-option" data-value="pending" onclick="toggleMultiOption(this)">待开始</div>
-                        <div class="filter-multi-option" data-value="confirming" onclick="toggleMultiOption(this)">确认中</div>
-                        <div class="filter-multi-option" data-value="completed" onclick="toggleMultiOption(this)">已完成</div>
-                    </div>
-                </div>
-                
-                <div class="save-filter-btn" onclick="saveFilterScheme()">
-                    <span>💾</span>
-                    <span>保存筛选方案</span>
-                </div>
-                
-                <div class="saved-filters">
-                    <div class="filter-group-title">已保存的方案</div>
-                    <div class="saved-filter-item" onclick="showToast('应用方案：待处理任务')">
-                        <span class="saved-filter-name">待处理任务</span>
-                        <span class="saved-filter-delete" onclick="event.stopPropagation(); showToast('删除方案')">🗑️</span>
-                    </div>
-                    <div class="saved-filter-item" onclick="showToast('应用方案：紧急任务')">
-                        <span class="saved-filter-name">紧急任务</span>
-                        <span class="saved-filter-delete" onclick="event.stopPropagation(); showToast('删除方案')">🗑️</span>
-                    </div>
-                </div>
-            </div>
-            <div class="filter-panel-footer">
-                <button class="filter-panel-btn reset" onclick="resetFilters()">重置</button>
-                <button class="filter-panel-btn apply" onclick="applyFilters()">应用筛选</button>
             </div>
         </div>
     </div>
@@ -2012,45 +1947,16 @@
             filterTasks();
         }
 
+        function handleParticipantClick(type, btn) {
+            document.querySelectorAll('.filter-option').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            currentFilters.mine = type === 'mine';
+            filterTasks();
+        }
+
         function saveFilterScheme() {
             showToast('筛选方案已保存');
-        }
-
-        function applyFilters() {
-            const selectedContracts = [];
-            const selectedTypes = [];
-            const selectedStatuses = [];
-            
-            document.querySelectorAll('#contractFilterOptions .filter-multi-option.selected').forEach(opt => {
-                selectedContracts.push(opt.dataset.value);
-            });
-            
-            document.querySelectorAll('#typeFilterOptions .filter-multi-option.selected').forEach(opt => {
-                selectedTypes.push(opt.dataset.value);
-            });
-            
-            document.querySelectorAll('#statusFilterOptions .filter-multi-option.selected').forEach(opt => {
-                selectedStatuses.push(opt.dataset.value);
-            });
-            
-            filterTasks();
-            closeFilterPanel();
-        }
-
-        function resetFilters() {
-            document.querySelectorAll('.filter-multi-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            currentFilters = {
-                contract: 'all',
-                contractText: '全部合同',
-                type: 'all',
-                typeText: '全部类型',
-                status: 'all',
-                statusText: '全部状态',
-                mine: false
-            };
-            filterTasks();
         }
 
         let currentView = 'grouped';
@@ -2240,6 +2146,61 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             checkSequentialTasks();
+            
+            const participantOptions = document.querySelectorAll('.filter-option');
+            participantOptions.forEach(function(option) {
+                option.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    participantOptions.forEach(function(o) { o.classList.remove('active'); });
+                    option.classList.add('active');
+                    
+                    const type = option.dataset.filter;
+                    currentFilters.mine = type === 'mine';
+                    filterTasks();
+                });
+            });
+            
+            const dropdown = document.getElementById('statusDropdownMenu');
+            const selectBtn = document.getElementById('statusSelectBtn');
+            
+            if (dropdown && selectBtn) {
+                selectBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdown.classList.toggle('show');
+                    selectBtn.classList.toggle('active');
+                    
+                    if (dropdown.classList.contains('show')) {
+                        setTimeout(function() {
+                            document.addEventListener('click', function handleDocClick(e) {
+                                if (!dropdown.contains(e.target) && !selectBtn.contains(e.target)) {
+                                    dropdown.classList.remove('show');
+                                    selectBtn.classList.remove('active');
+                                    document.removeEventListener('click', handleDocClick);
+                                }
+                            });
+                        }, 0);
+                    }
+                });
+                
+                const items = dropdown.querySelectorAll('.status-dropdown-item');
+                items.forEach(function(item) {
+                    item.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const status = item.dataset.status;
+                        const text = item.textContent;
+                        
+                        items.forEach(function(i) { i.classList.remove('active'); });
+                        item.classList.add('active');
+                        
+                        selectBtn.textContent = text;
+                        dropdown.classList.remove('show');
+                        selectBtn.classList.remove('active');
+                        
+                        currentFilters.status = status;
+                        filterTasks();
+                    });
+                });
+            }
         });
         
         function toggleActionMenu() {
@@ -2263,3 +2224,4 @@
     </script>
 </body>
 </html>
+

@@ -494,6 +494,17 @@
 
             <form id="createForm">
                 <div class="form-section">
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span class="required">*</span>
+                            <span>项目名称</span>
+                        </label>
+                        <input type="text" class="form-input" id="projectName" placeholder="请输入项目名称" maxlength="50">
+                        <div class="error-message" id="projectNameError">请输入项目名称</div>
+                    </div>
+                </div>
+
+                <div class="form-section">
                     <div class="form-section-title">客户信息</div>
 
                     <div class="form-group">
@@ -566,7 +577,7 @@
                             <span>房屋类别</span>
                         </label>
                         <div class="category-options" id="categoryOptions">
-                            <div class="category-option" data-value="maopi" onclick="selectCategory(this)">
+                            <div class="category-option selected" data-value="maopi" onclick="selectCategory(this)">
                                 <div class="icon">🏠</div>
                                 <div class="text">毛坯房</div>
                             </div>
@@ -588,9 +599,13 @@
                             <span>房型</span>
                         </label>
                         <div class="house-type-options" id="houseTypeOptions">
-                            <div class="house-type-option" data-value="bieshu" onclick="selectHouseType(this)">
+                            <div class="house-type-option selected" data-value="bieshu" onclick="selectHouseType(this)">
                                 <div class="icon">🏰</div>
                                 <div class="text">别墅</div>
+                            </div>
+                            <div class="house-type-option" data-value="fushi" onclick="selectHouseType(this)">
+                                <div class="icon">🏘️</div>
+                                <div class="text">复式</div>
                             </div>
                             <div class="house-type-option" data-value="pingceng" onclick="selectHouseType(this)">
                                 <div class="icon">🏢</div>
@@ -617,7 +632,7 @@
                 </div>
 
                 <div class="form-section">
-                    <div class="form-section-title">风格喜好</div>
+                    <div class="form-section-title">装修风格</div>
 
                     <div class="form-group">
                         <label class="form-label">选择喜欢的装修风格（可多选）</label>
@@ -785,6 +800,17 @@
         function validateForm() {
             let isValid = true;
 
+            const projectName = document.getElementById('projectName');
+            const projectNameError = document.getElementById('projectNameError');
+            if (!projectName.value.trim()) {
+                projectName.classList.add('error');
+                projectNameError.classList.add('show');
+                isValid = false;
+            } else {
+                projectName.classList.remove('error');
+                projectNameError.classList.remove('show');
+            }
+
             const customerName = document.getElementById('customerName');
             const customerNameError = document.getElementById('customerNameError');
             if (!customerName.value.trim()) {
@@ -878,10 +904,12 @@
 
                 const houseTypeNames = {
                     'bieshu': '别墅',
+                    'fushi': '复式',
                     'pingceng': '平层'
                 };
 
                 const formData = {
+                    projectName: document.getElementById('projectName').value.trim(),
                     customerName: document.getElementById('customerName').value.trim(),
                     customerPhone: document.getElementById('customerPhone').value.trim(),
                     province: document.getElementById('province').value,
@@ -909,6 +937,13 @@
                 }
             }
         }
+
+        document.getElementById('projectName').addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.classList.remove('error');
+                document.getElementById('projectNameError').classList.remove('show');
+            }
+        });
 
         document.getElementById('customerName').addEventListener('input', function() {
             if (this.value.trim()) {

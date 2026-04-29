@@ -1,4 +1,4 @@
-﻿﻿﻿<!DOCTYPE html>
+﻿﻿﻿﻿﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -838,6 +838,10 @@
                                 <span class="icon">+</span>
                                 <span>添加工作组</span>
                             </div>
+                            <div class="action-item danger" onclick="event.stopPropagation(); showExitProjectModal()">
+                                <span class="icon">🚪</span>
+                                <span>退出项目部</span>
+                            </div>
                         </div>
                         <div class="tree-node">
                             <div class="node-header level-1" onclick="toggleNode(this)">
@@ -933,9 +937,9 @@
                                         <span class="icon">+</span>
                                         <span>添加施工组</span>
                                     </div>
-                                    <div class="action-item danger" onclick="event.stopPropagation(); showDeleteModal('泥瓦工作组')">
-                                        <span class="icon">×</span>
-                                        <span>删除</span>
+                                    <div class="action-item danger" onclick="event.stopPropagation(); showExitGroupModal('泥瓦工作组')">
+                                        <span class="icon">🚪</span>
+                                        <span>退出工作组</span>
                                     </div>
                                 </div>
                             </div>
@@ -1150,6 +1154,28 @@
             </div>
         </div>
         
+        <div class="app-modal" id="exitGroupModal">
+            <div class="modal-box">
+                <div class="modal-title">退出工作组</div>
+                <div class="modal-content" id="exitGroupModalContent">确定要退出该工作组吗？退出后将无法查看该工作组的相关信息。</div>
+                <div class="modal-actions">
+                    <button class="modal-btn cancel" onclick="closeExitGroupModal()">取消</button>
+                    <button class="modal-btn danger" onclick="confirmExitGroup()">退出</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="app-modal" id="exitProjectModal">
+            <div class="modal-box">
+                <div class="modal-title">退出项目部</div>
+                <div class="modal-content" id="exitProjectModalContent">确定要退出项目部吗？退出后将无法查看该项目的相关信息。</div>
+                <div class="modal-actions">
+                    <button class="modal-btn cancel" onclick="closeExitProjectModal()">取消</button>
+                    <button class="modal-btn danger" onclick="confirmExitProject()">退出</button>
+                </div>
+            </div>
+        </div>
+        
         <div class="app-modal" id="contractModal">
             <div class="modal-box" style="max-height: 70%; display: flex; flex-direction: column;">
                 <div class="modal-title">查看合同</div>
@@ -1328,6 +1354,46 @@
             '油漆工作组': null
         };
         
+        const joinedGroups = ['泥瓦工作组'];
+        
+        let exitGroupName = '';
+        
+        const userTaskRoles = {
+            executor: ['泥瓦工作组-贴砖'],
+            confirmer: ['泥瓦工作组-防水验收']
+        };
+        
+        function checkCanExitGroup(groupName) {
+            const contract = groupContracts[groupName];
+            if (contract && contract.status === '已签约') {
+                return { canExit: false, reason: '该工作组已签订合同，无法退出' };
+            }
+            
+            const allTaskRoles = [...userTaskRoles.executor, ...userTaskRoles.confirmer];
+            const isTaskRole = allTaskRoles.some(task => task.startsWith(groupName));
+            if (isTaskRole) {
+                return { canExit: false, reason: '您是该工作组任务的执行人或确认人，无法退出' };
+            }
+            
+            return { canExit: true, reason: '' };
+        }
+        
+        function checkCanExitProject() {
+            for (const groupName of joinedGroups) {
+                const contract = groupContracts[groupName];
+                if (contract && contract.status === '已签约') {
+                    return { canExit: false, reason: `您加入的"${groupName}"已签订合同，无法退出项目部` };
+                }
+            }
+            
+            const allTaskRoles = [...userTaskRoles.executor, ...userTaskRoles.confirmer];
+            if (allTaskRoles.length > 0) {
+                return { canExit: false, reason: '您是项目任务的执行人或确认人，无法退出项目部' };
+            }
+            
+            return { canExit: true, reason: '' };
+        }
+        
         function showAppModal(title, content, onConfirm, showCancel = true) {
             document.getElementById('appModalTitle').textContent = title;
             document.getElementById('appModalContent').textContent = content;
@@ -1505,6 +1571,52 @@
         function confirmDelete() {
             closeDeleteModal();
             showToast('"' + deleteTarget + '" 已删除');
+        }
+        
+        function showExitGroupModal(groupName) {
+            const checkResult = checkCanExitGroup(groupName);
+            if (!checkResult.canExit) {
+                showAppModal('无法退出', checkResult.reason, null, false);
+                return;
+            }
+            exitGroupName = groupName;
+            document.getElementById('exitGroupModalContent').textContent = '确定要退出"' + groupName + '"吗？退出后将无法查看该工作组的相关信息。';
+            document.getElementById('exitGroupModal').classList.add('show');
+        }
+        
+        function closeExitGroupModal() {
+            document.getElementById('exitGroupModal').classList.remove('show');
+        }
+        
+        function confirmExitGroup() {
+            const index = joinedGroups.indexOf(exitGroupName);
+            if (index > -1) {
+                joinedGroups.splice(index, 1);
+            }
+            closeExitGroupModal();
+            showToast('已退出"' + exitGroupName + '"');
+        }
+        
+        function showExitProjectModal() {
+            const checkResult = checkCanExitProject();
+            if (!checkResult.canExit) {
+                showAppModal('无法退出', checkResult.reason, null, false);
+                return;
+            }
+            document.getElementById('exitProjectModalContent').textContent = '确定要退出项目部吗？退出后将无法查看该项目的相关信息。';
+            document.getElementById('exitProjectModal').classList.add('show');
+        }
+        
+        function closeExitProjectModal() {
+            document.getElementById('exitProjectModal').classList.remove('show');
+        }
+        
+        function confirmExitProject() {
+            closeExitProjectModal();
+            showToast('已退出项目部');
+            setTimeout(() => {
+                location.href = 'project-list.html';
+            }, 1500);
         }
         
         function viewContract(nodeName) {

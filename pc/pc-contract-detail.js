@@ -20,98 +20,98 @@
         const statusConfig = {
             draft: {
                 title: '📝 拟定中',
-                desc: '合同正在编辑中，编辑完成后可提交确认 | 合同编号：HT-2024-001',
+                desc: '合同正在编辑中，编辑完成后可提交确认 | 合同编号：BJSDSWHT000001',
                 class: 'draft'
             },
             draft_submittable: {
                 title: '📝 拟定中',
-                desc: '合同内容已完善，可以提交确认 | 合同编号：HT-2024-001',
+                desc: '合同内容已完善，可以提交确认 | 合同编号：BJSDSWHT000001',
                 class: 'draft-submittable'
             },
             platform_reviewing: {
                 title: '⏳ 待平台审核',
-                desc: '已提交确认申请，平台运营人员正在审核中 | 合同编号：HT-2024-001',
+                desc: '已提交确认申请，平台运营人员正在审核中 | 合同编号：BJSDSWHT000001',
                 class: 'platform-reviewing'
             },
             platform_rejected: {
                 title: '❌ 平台审核驳回',
-                desc: '平台审核未通过，请根据驳回原因修改合同内容后重新提交 | 合同编号：HT-2024-001',
+                desc: '平台审核未通过，请根据驳回原因修改合同内容后重新提交 | 合同编号：BJSDSWHT000001',
                 class: 'platform-rejected'
             },
             platform_rejected_modified: {
                 title: '❌ 平台审核驳回',
-                desc: '合同内容已修改，可以重新提交审核 | 合同编号：HT-2024-001',
+                desc: '合同内容已修改，可以重新提交审核 | 合同编号：BJSDSWHT000001',
                 class: 'platform-rejected-modified'
             },
             confirming: {
                 getTitle: (role) => role === 'creator' ? '📤 待对方确认' : '📥 待我方确认',
                 getDesc: (role) => role === 'creator' 
-                    ? '已发送确认申请，等待对方确认合同内容 | 合同编号：HT-2024-001'
-                    : '对方已发送确认申请，请确认或驳回修改 | 合同编号：HT-2024-001',
+                    ? '已发送确认申请，等待对方确认合同内容 | 合同编号：BJSDSWHT000001'
+                    : '对方已发送确认申请，请确认或驳回修改 | 合同编号：BJSDSWHT000001',
                 class: 'confirming'
             },
             confirmed: {
                 title: '✅ 双方已确认',
-                desc: '双方已确认，请上传签约后的合同附件 | 合同编号：HT-2024-001',
+                desc: '双方已确认，请上传签约后的合同附件 | 合同编号：BJSDSWHT000001',
                 class: 'confirmed'
             },
             signing: {
                 getTitle: (role) => role === 'creator' ? '⏳ 待对方确认签约' : '📝 待确认签约',
                 getDesc: (role) => role === 'creator'
-                    ? '签约文件已上传，等待对方确认后合同正式生效 | 合同编号：HT-2024-001'
-                    : '对方已上传签约文件，请确认后合同正式生效 | 合同编号：HT-2024-001',
+                    ? '签约文件已上传，等待对方确认后合同正式生效 | 合同编号：BJSDSWHT000001'
+                    : '对方已上传签约文件，请确认后合同正式生效 | 合同编号：BJSDSWHT000001',
                 class: 'signing'
             },
             signed: {
                 title: '✅ 合同已签约',
-                desc: '签约时间：2024-01-15 10:30 | 合同编号：HT-2024-001',
+                desc: '签约时间：2024-01-15 10:30 | 合同编号：BJSDSWHT000001',
                 class: 'signed'
             },
             changing: {
                 title: '🔄 变更中',
-                desc: '变更申请时间：2024-02-01 14:00 | 合同编号：HT-2024-001',
+                desc: '变更申请时间：2024-02-01 14:00 | 合同编号：BJSDSWHT000001',
                 class: 'changing'
             },
             change_reviewing: {
                 title: '⏳ 变更待平台审核',
-                desc: '变更申请已提交，平台运营人员正在审核中 | 合同编号：HT-2024-001',
+                desc: '变更申请已提交，平台运营人员正在审核中 | 合同编号：BJSDSWHT000001',
                 class: 'changing'
             },
             change_confirming: {
                 title: '📋 待确认变更',
-                desc: '变更申请时间：2024-02-01 14:00 | 合同编号：HT-2024-001',
+                desc: '变更申请时间：2024-02-01 14:00 | 合同编号：BJSDSWHT000001',
                 class: 'change-confirming'
             },
             confirming_receiver: {
                 title: '📥 待我方确认',
-                desc: '对方已发送确认申请，请确认或驳回修改 | 合同编号：HT-2024-001',
+                desc: '对方已发送确认申请，请确认或驳回修改 | 合同编号：BJSDSWHT000001',
                 class: 'confirming'
             },
             review_rejected: {
                 title: '❌ 审核驳回',
-                desc: '平台审核未通过，请根据驳回原因修改合同内容后重新提交 | 合同编号：HT-2024-001',
+                desc: '平台审核未通过，请根据驳回原因修改合同内容后重新提交 | 合同编号：BJSDSWHT000001',
                 class: 'platform-rejected',
                 showRejectReason: true
             },
             reviewed_pass: {
                 title: '✅ 审核已通过',
-                desc: '合同审核已通过，等待双方确认签约 | 合同编号：HT-2024-001',
+                desc: '合同审核已通过，等待双方确认签约 | 合同编号：BJSDSWHT000001',
                 class: 'confirmed'
             },
             reviewed_reject: {
                 title: '❌ 审核已驳回',
-                desc: '合同审核未通过，请根据驳回原因修改后重新提交 | 合同编号：HT-2024-001',
+                desc: '合同审核未通过，请根据驳回原因修改后重新提交 | 合同编号：BJSDSWHT000001',
                 class: 'platform-rejected',
                 showRejectReason: true
             },
             change_reviewed_pass: {
                 title: '✅ 变更已通过',
-                desc: '变更申请已通过审核 | 合同编号：HT-2024-001',
+                desc: '变更申请已通过审核 | 合同编号：BJSDSWHT000001',
                 class: 'signed'
             },
             change_reviewed_reject: {
                 title: '❌ 变更已驳回',
-                desc: '变更申请未通过审核，请根据驳回原因修改后重新提交 | 合同编号：HT-2024-001',
+                desc: '变更申请未通过审核，请根据驳回原因修改后重新提交 | 合同编号：BJSDSWHT000001',
                 class: 'platform-rejected',
                 showRejectReason: true
             }
@@ -756,7 +756,7 @@
         }
 
         function editContract() {
-            window.location.href = 'pc-contract-edit.html?contractId=HT-2024-001&role=initiator';
+            window.location.href = 'pc-contract-edit.html?contractId=BJSDSWHT000001&role=initiator';
         }
 
         function showConfirmModal(title, content, callback) {

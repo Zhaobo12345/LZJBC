@@ -1111,21 +1111,6 @@
                 </div>
             </div>
 
-            <div class="view-switch-bar">
-                <div class="view-switch-tabs">
-                    <div class="view-switch-tab active" onclick="switchView('grouped', this)">分组列表</div>
-                    <div class="view-switch-tab" onclick="switchView('flat', this)">扁平列表</div>
-                </div>
-                <div class="group-by-selector" id="groupBySelector">
-                    <span>分组方式：</span>
-                    <select onchange="changeGroupBy(this.value)">
-                        <option value="contract">按合同</option>
-                        <option value="stage">按阶段</option>
-                        <option value="status">按状态</option>
-                    </select>
-                </div>
-            </div>
-            
             <div class="result-bar">
                 <span id="resultCount">共 24 个任务</span>
                 <span class="expand-all-btn" onclick="expandAllContracts()">展开全部</span>
@@ -1158,7 +1143,7 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-task-index="0" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">材料采购 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">材料采购</div>
                                         <div class="task-meta">执行人：张三 · 确认人：李四、王五</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1166,7 +1151,7 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-task-index="1" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">材料运输 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">材料运输</div>
                                         <div class="task-meta">执行人：张三 · 确认人：李四</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1174,7 +1159,7 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-task-index="2" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">材料确认 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">材料确认</div>
                                         <div class="task-meta">执行人：张三 · 确认人：李四、王五、赵六</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1194,7 +1179,7 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-task-index="0" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">开槽 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">开槽</div>
                                         <div class="task-meta">执行人：李四 · 确认人：张三、王五</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1202,7 +1187,7 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-task-index="1" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">布管 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">布管</div>
                                         <div class="task-meta">执行人：李四 · 确认人：张三、王五</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1210,7 +1195,7 @@
                                 <div class="task-item" data-type="contract" data-status="confirming" data-priority="important" data-task-index="2" data-participant="false" onclick="goToTaskDetail(this)">
                                     <div class="task-status confirming">⏳</div>
                                     <div class="task-info">
-                                        <div class="task-name">穿线 <span class="task-tag contract">合约</span><span class="priority-badge important">重要</span></div>
+                                        <div class="task-name">穿线</div>
                                         <div class="task-meta">执行人：李四</div>
                                         <div class="confirm-progress">
                                             <div class="confirm-progress-bar"><div class="confirm-progress-fill" style="width: 33%;"></div></div>
@@ -1222,7 +1207,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-task-index="3" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">阶段确认 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">阶段确认</div>
                                         <div class="task-meta">执行人：李四 · 确认人：张三、王五</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1242,7 +1227,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-task-index="0" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">开关插座安装 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">开关插座安装</div>
                                         <div class="task-meta">执行人：王五 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1250,7 +1235,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-task-index="1" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">灯具安装 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">灯具安装</div>
                                         <div class="task-meta">执行人：王五 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1269,7 +1254,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">清理现场 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">清理现场</div>
                                         <div class="task-meta">执行人：李四 · 确认人：张三、王五</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1277,7 +1262,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">最终确认 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">最终确认</div>
                                         <div class="task-meta">执行人：李四 · 确认人：张三、王五、赵六、钱七、孙八</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1312,7 +1297,7 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">防水施工 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">防水施工</div>
                                         <div class="task-meta">执行人：王五 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1320,7 +1305,7 @@
                                 <div class="task-item" data-type="contract" data-status="completed" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status completed">✓</div>
                                     <div class="task-info">
-                                        <div class="task-name">防水确认 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">防水确认</div>
                                         <div class="task-meta">执行人：王五 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text completed"><span class="status-icon">✓</span>已完成</div>
@@ -1339,7 +1324,7 @@
                                 <div class="task-item" data-type="contract" data-status="confirming" data-priority="urgent" data-participant="false" onclick="goToTaskDetail(this)">
                                     <div class="task-status confirming">⏳</div>
                                     <div class="task-info">
-                                        <div class="task-name">墙面贴砖 <span class="task-tag contract">合约</span><span class="priority-badge urgent">紧急</span></div>
+                                        <div class="task-name">墙面贴砖</div>
                                         <div class="task-meta">执行人：王五</div>
                                         <div class="confirm-progress">
                                             <div class="confirm-progress-bar"><div class="confirm-progress-fill" style="width: 67%;"></div></div>
@@ -1351,7 +1336,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">地面铺砖 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">地面铺砖</div>
                                         <div class="task-meta">执行人：王五 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1385,7 +1370,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">吊顶施工 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">吊顶施工</div>
                                         <div class="task-meta">执行人：赵六 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1393,7 +1378,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-priority="normal" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">吊顶确认 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">吊顶确认</div>
                                         <div class="task-meta">执行人：赵六 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending"><span class="status-icon">⏸</span>待开始</div>
@@ -1427,7 +1412,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">墙面批刮 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">墙面批刮</div>
                                         <div class="task-meta">执行人：钱七 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending">待开始</div>
@@ -1435,7 +1420,7 @@
                                 <div class="task-item" data-type="contract" data-status="pending" data-participant="true" onclick="goToTaskDetail(this)">
                                     <div class="task-status pending">○</div>
                                     <div class="task-info">
-                                        <div class="task-name">批刮确认 <span class="task-tag contract">合约</span></div>
+                                        <div class="task-name">批刮确认</div>
                                         <div class="task-meta">执行人：钱七 · 确认人：张三、李四</div>
                                     </div>
                                     <div class="task-status-text pending">待开始</div>
@@ -1455,7 +1440,7 @@
                 <div class="flat-task-item" data-status="completed" onclick="goToTaskDetail(this)">
                     <div class="task-status completed">✓</div>
                     <div class="task-info">
-                        <div class="task-name">材料采购 <span class="task-tag contract">合约</span></div>
+                        <div class="task-name">材料采购</div>
                         <div class="task-meta">
                             <span class="contract-name">水电分包合同</span>
                             <span>执行人：张三</span>
@@ -1466,7 +1451,7 @@
                 <div class="flat-task-item" data-status="confirming" onclick="goToTaskDetail(this)">
                     <div class="task-status confirming">⏳</div>
                     <div class="task-info">
-                        <div class="task-name">穿线 <span class="task-tag contract">合约</span><span class="priority-badge important">重要</span></div>
+                        <div class="task-name">穿线</div>
                         <div class="task-meta">
                             <span class="contract-name">水电分包合同</span>
                             <span>执行人：李四</span>
@@ -1478,7 +1463,7 @@
                 <div class="flat-task-item" data-status="confirming" onclick="goToTaskDetail(this)">
                     <div class="task-status confirming">⏳</div>
                     <div class="task-info">
-                        <div class="task-name">墙面贴砖 <span class="task-tag contract">合约</span><span class="priority-badge urgent">紧急</span></div>
+                        <div class="task-name">墙面贴砖</div>
                         <div class="task-meta">
                             <span class="contract-name">泥瓦分包合同</span>
                             <span>执行人：王五</span>
@@ -1490,7 +1475,7 @@
                 <div class="flat-task-item" data-status="pending" onclick="goToTaskDetail(this)">
                     <div class="task-status pending">○</div>
                     <div class="task-info">
-                        <div class="task-name">吊顶施工 <span class="task-tag contract">合约</span></div>
+                        <div class="task-name">吊顶施工</div>
                         <div class="task-meta">
                             <span class="contract-name">木工分包合同</span>
                             <span>执行人：赵六</span>
@@ -1501,7 +1486,7 @@
                 <div class="flat-task-item" data-status="pending" onclick="goToTaskDetail(this)">
                     <div class="task-status pending">○</div>
                     <div class="task-info">
-                        <div class="task-name">墙面批刮 <span class="task-tag contract">合约</span></div>
+                        <div class="task-name">墙面批刮</div>
                         <div class="task-meta">
                             <span class="contract-name">油漆分包合同</span>
                             <span>执行人：钱七</span>
@@ -2263,3 +2248,4 @@
     </script>
 </body>
 </html>
+

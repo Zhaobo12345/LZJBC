@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>演示小程序 - 项目成员</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="demo-common.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            padding-bottom: 60px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            padding-top: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-back {
+            font-size: 20px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .content {
+            padding: 15px;
+        }
+
+        .member-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .member-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .member-role {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .member-badge {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: #e6f7ff;
+            color: #1890ff;
+        }
+
+        .section-title {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* PPT布局样式 */
+        .ppt-layout {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 60px;
+            min-height: calc(100vh - 100px);
+            padding: 40px;
+            padding-left: 30px;
+            flex-wrap: nowrap;
+            min-width: 1300px;
+        }
+
+        .ppt-left-panel {
+            width: 500px;
+            flex-shrink: 0;
+            margin-left: 0;
+        }
+
+        .ppt-center-panel {
+            flex-shrink: 0;
+            position: relative;
+            margin-left: 0;
+        }
+
+        .ppt-center-panel > .phone-container {
+            position: relative !important;
+            transform: none !important;
+            top: auto !important;
+            left: auto !important;
+            margin: 0 !important;
+            z-index: 1 !important;
+            display: inline-block !important;
+        }
+
+        .ppt-flow-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ppt-flow-title .icon {
+            font-size: 20px;
+        }
+
+        .ppt-flow-image-wrapper {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .ppt-flow-image-wrapper:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+        }
+
+        .ppt-flow-image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .ppt-right-panel {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .ppt-text-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 28px;
+            color: white;
+            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+        }
+
+        .ppt-text-card .main-title {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .ppt-text-card .sub-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .ppt-text-card .sub-item .bullet {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        .ppt-text-card .sub-item .text {
+            flex: 1;
+            opacity: 0.95;
+        }
+
+        .ppt-text-card .highlight-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 20px;
+        }
+
+        .ppt-text-card .highlight-box .title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .ppt-text-card .highlight-box .content {
+            font-size: 13px;
+            line-height: 1.6;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+<body class="ppt-layout-mode">
+    <div class="ppt-layout">
+        <!-- 左侧流程图展示 -->
+        <div class="ppt-left-panel">
+            <div class="ppt-flow-title">
+                <span class="icon">📊</span>
+                <span>任务化合同签订</span>
+            </div>
+            <div class="ppt-flow-image-wrapper">
+                <img src="./imgs/imgOne.png" alt="任务化合同签订思维导图">
+            </div>
+        </div>
+
+        <!-- 中间手机展示区域 -->
+        <div class="ppt-center-panel">
+            <div class="phone-container">
+        <div class="phone-screen">
+            <div class="phone-notch"></div>
+            <div class="wx-capsule">
+                <div class="wx-capsule-btn">
+                    <div class="dot">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="wx-capsule-btn" onclick="showToast('关闭小程序')">
+                    <div class="close-icon"></div>
+                </div>
+            </div>
+            <div class="phone-content">
+                <div class="header">
+                    <div class="header-back" onclick="history.back()">‹</div>
+                    <div class="header-title">项目成员</div>
+                </div>
+
+                <div class="content">
+                    <div class="section-title">管理团队</div>
+                    <div class="member-card">
+                        <div class="member-avatar">👤</div>
+                        <div class="member-info">
+                            <div class="member-name">张三</div>
+                            <div class="member-role">项目经理</div>
+                        </div>
+                        <span class="member-badge">负责人</span>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">👤</div>
+                        <div class="member-info">
+                            <div class="member-name">李四</div>
+                            <div class="member-role">监理</div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">施工团队</div>
+                    <div class="member-card">
+                        <div class="member-avatar">👤</div>
+                        <div class="member-info">
+                            <div class="member-name">王五</div>
+                            <div class="member-role">电工组长</div>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">👤</div>
+                        <div class="member-info">
+                            <div class="member-name">赵六</div>
+                            <div class="member-role">弱电工</div>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">👤</div>
+                        <div class="member-info">
+                            <div class="member-name">钱七</div>
+                            <div class="member-role">水电工</div>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">👤</div>
+                        <div class="member-info">
+                            <div class="member-name">孙八</div>
+                            <div class="member-role">泥瓦工</div>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">👤</div>
+                        <div class="member-info">
+                            <div class="member-name">周九</div>
+                            <div class="member-role">木工</div>
+                        </div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-avatar">👤</div>
+                        <div class="member-info">
+                            <div class="member-name">吴十</div>
+                            <div class="member-role">油漆工</div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">业主</div>
+                    <div class="member-card">
+                        <div class="member-avatar">👤</div>
+                        <div class="member-info">
+                            <div class="member-name">郑先生</div>
+                            <div class="member-role">业主</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <!-- 右侧文字说明 -->
+        <div class="ppt-right-panel">
+            <div class="ppt-text-card">
+                <div class="main-title">团队协作管理</div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">管理团队清晰展示</div>
+                </div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">施工团队分工明确</div>
+                </div>
+                <div class="sub-item">
+                    <div class="bullet"></div>
+                    <div class="text">业主参与透明</div>
+                </div>
+                <div class="highlight-box">
+                    <div class="title">💡 团队分工明确</div>
+                    <div class="content">责任到人，协作高效<br>团队信息一目了然</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-nav-wrapper" id="pageNavWrapper">
+        <div class="page-nav-toggle" onclick="togglePageNav()">◀</div>
+        <div class="page-nav" id="pageNav">
+            <div class="page-nav-title">小程序导航</div>
+            <div class="page-nav-group">
+                <div class="page-nav-group-title">子页面</div>
+                <a href="project-detail.html" class="page-nav-item">项目详情</a>
+                <a href="contract-detail.html" class="page-nav-item">合同详情</a>
+                <a href="task-detail.html" class="page-nav-item">任务详情</a>
+                <a href="member.html" class="page-nav-item active">项目成员</a>
+                <a href="member-profile.html" class="page-nav-item">个人电子名片</a>
+                <a href="architecture.html" class="page-nav-item">项目架构</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePageNav() {
+            const wrapper = document.getElementById('pageNavWrapper');
+            const toggle = wrapper.querySelector('.page-nav-toggle');
+            wrapper.classList.toggle('collapsed');
+            if (wrapper.classList.contains('collapsed')) {
+                toggle.textContent = '◀';
+            } else {
+                toggle.textContent = '▶';
+            }
+        }
+
+        function showToast(message) {
+            const existingToast = document.querySelector('.app-toast');
+            if (existingToast) {
+                existingToast.remove();
+            }
+            
+            const toast = document.createElement('div');
+            toast.className = 'app-toast';
+            toast.innerHTML = message.replace(/\n/g, '<br>');
+            toast.style.cssText = `
+                position: absolute;
+                bottom: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: rgba(0, 0, 0, 0.7);
+                color: #FFFFFF;
+                padding: 10px 20px;
+                border-radius: 8px;
+                font-size: 13px;
+                z-index: 1000;
+                white-space: pre-wrap;
+                max-width: 90%;
+                text-align: center;
+                line-height: 1.5;
+            `;
+            const phoneFrame = document.querySelector('.phone-frame');
+            if (phoneFrame) {
+                phoneFrame.appendChild(toast);
+            }
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 2500);
+        }
+    </script>
+</body>
+</html>

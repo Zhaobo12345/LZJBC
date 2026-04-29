@@ -54,6 +54,10 @@ const TaskDetailPage = (function() {
         efficiency: 0,
         attitude: 0
     };
+    let overallRating = 0;
+    let selectedTags = [];
+    let evaluationOverallRating = 0;
+    let selectedEvaluationTags = [];
     let currentTaskStatus = TaskStatus.CONFIGURING;
     let currentUserRole = UserRoles.CONFIGURER;
     let uploadedFiles = [];
@@ -541,6 +545,98 @@ const TaskDetailPage = (function() {
         ['Quality', 'Efficiency', 'Attitude'].forEach(dim => {
             const stars = document.querySelectorAll('#ratingStars' + dim + ' .star');
             stars.forEach(star => star.classList.remove('active'));
+        });
+    }
+    
+    function setOverallRating(rating) {
+        overallRating = rating;
+        const wrappers = document.querySelectorAll('#ratingStarsOverall .star-wrapper');
+        wrappers.forEach((wrapper, index) => {
+            const starNum = index + 1;
+            const halfStar = wrapper.querySelector('.star.half');
+            const fullStar = wrapper.querySelector('.star.full');
+            
+            if (rating >= starNum) {
+                halfStar.classList.add('active');
+                fullStar.classList.add('active');
+            } else if (rating >= starNum - 0.5) {
+                halfStar.classList.add('active');
+                fullStar.classList.remove('active');
+            } else {
+                halfStar.classList.remove('active');
+                fullStar.classList.remove('active');
+            }
+        });
+    }
+    
+    function toggleTag(tag) {
+        const index = selectedTags.indexOf(tag);
+        const tagElements = document.querySelectorAll('#confirmModal .tag-item');
+        
+        if (index > -1) {
+            selectedTags.splice(index, 1);
+        } else {
+            selectedTags.push(tag);
+        }
+        
+        tagElements.forEach(el => {
+            const tagText = el.textContent.trim();
+            let tagKey = '';
+            if (tagText === '责任心棒') tagKey = 'responsible';
+            else if (tagText === '服务态度好') tagKey = 'attitude';
+            else if (tagText === '专业能力强') tagKey = 'professional';
+            
+            if (selectedTags.includes(tagKey)) {
+                el.classList.add('selected');
+            } else {
+                el.classList.remove('selected');
+            }
+        });
+    }
+    
+    function setEvaluationOverallRating(rating) {
+        evaluationOverallRating = rating;
+        const wrappers = document.querySelectorAll('#evaluationStarsOverall .star-wrapper');
+        wrappers.forEach((wrapper, index) => {
+            const starNum = index + 1;
+            const halfStar = wrapper.querySelector('.star.half');
+            const fullStar = wrapper.querySelector('.star.full');
+            
+            if (rating >= starNum) {
+                halfStar.classList.add('active');
+                fullStar.classList.add('active');
+            } else if (rating >= starNum - 0.5) {
+                halfStar.classList.add('active');
+                fullStar.classList.remove('active');
+            } else {
+                halfStar.classList.remove('active');
+                fullStar.classList.remove('active');
+            }
+        });
+    }
+    
+    function toggleEvaluationTag(tag) {
+        const index = selectedEvaluationTags.indexOf(tag);
+        const tagElements = document.querySelectorAll('#evaluationModal .tag-item');
+        
+        if (index > -1) {
+            selectedEvaluationTags.splice(index, 1);
+        } else {
+            selectedEvaluationTags.push(tag);
+        }
+        
+        tagElements.forEach(el => {
+            const tagText = el.textContent.trim();
+            let tagKey = '';
+            if (tagText === '责任心棒') tagKey = 'responsible';
+            else if (tagText === '服务态度好') tagKey = 'attitude';
+            else if (tagText === '专业能力强') tagKey = 'professional';
+            
+            if (selectedEvaluationTags.includes(tagKey)) {
+                el.classList.add('selected');
+            } else {
+                el.classList.remove('selected');
+            }
         });
     }
     
@@ -2432,7 +2528,11 @@ const TaskDetailPage = (function() {
     }
 
     function submitEvaluation() {
-        const avgRating = Math.round((evaluationDimensionRatings.quality + evaluationDimensionRatings.efficiency + evaluationDimensionRatings.attitude) / 3 * 10) / 10;
+        if (evaluationOverallRating < 0.5) {
+            showToast('请至少选择半颗星进行评价');
+            return;
+        }
+        const avgRating = evaluationOverallRating;
         const comment = document.getElementById('evaluationDescInput').value;
         closeEvaluationModal();
         showToast('评价提交成功！');
@@ -2641,59 +2741,6 @@ const TaskDetailPage = (function() {
     }
     
     function initProfileClickEvents() {
-        document.querySelectorAll('.confirm-item .avatar, .confirm-item .name').forEach(el => {
-            el.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const confirmItem = this.closest('.confirm-item');
-                const avatarEl = confirmItem.querySelector('.avatar');
-                const nameEl = confirmItem.querySelector('.name');
-                const avatarText = avatarEl ? avatarEl.textContent : '';
-                let nameText = nameEl ? nameEl.textContent : '';
-                let role = '';
-                if (nameText.includes(' ')) {
-                    const parts = nameText.split(' ');
-                    nameText = parts[0];
-                }
-                const memberId = getMemberIdByAvatar(avatarText);
-                goToProfile(memberId, nameText || avatarText, role);
-            });
-        });
-        
-        document.querySelectorAll('.people-card .person-avatar, .people-card .person-name').forEach(el => {
-            el.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const personItem = this.closest('.person-item');
-                if (personItem) {
-                    const avatarEl = personItem.querySelector('.person-avatar');
-                    const nameEl = personItem.querySelector('.person-name');
-                    const roleEl = personItem.querySelector('.person-role');
-                    const avatarText = avatarEl ? avatarEl.textContent : '';
-                    const nameText = nameEl ? nameEl.textContent : '';
-                    const roleText = roleEl ? roleEl.textContent : '';
-                    const memberId = getMemberIdByAvatar(avatarText);
-                    goToProfile(memberId, nameText || avatarText, roleText);
-                }
-            });
-        });
-        
-        document.querySelectorAll('.confirmer-status-item .avatar, .confirmer-status-item .name').forEach(el => {
-            el.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const item = this.closest('.confirmer-status-item');
-                const avatarEl = item.querySelector('.avatar');
-                const nameEl = item.querySelector('.name');
-                const avatarText = avatarEl ? avatarEl.textContent : '';
-                let nameText = nameEl ? nameEl.textContent : '';
-                let role = '';
-                if (nameText.includes(' · ')) {
-                    const parts = nameText.split(' · ');
-                    nameText = parts[0];
-                    role = parts[1] || '';
-                }
-                const memberId = getMemberIdByAvatar(avatarText);
-                goToProfile(memberId, nameText || avatarText, role);
-            });
-        });
     }
     
     document.addEventListener('DOMContentLoaded', function() {
@@ -2734,6 +2781,10 @@ const TaskDetailPage = (function() {
     window.confirmTask = confirmTask;
     window.setRating = setRating;
     window.setDimensionRating = setDimensionRating;
+    window.setOverallRating = setOverallRating;
+    window.toggleTag = toggleTag;
+    window.setEvaluationOverallRating = setEvaluationOverallRating;
+    window.toggleEvaluationTag = toggleEvaluationTag;
     window.showEvaluationModal = showEvaluationModal;
     window.closeEvaluationModal = closeEvaluationModal;
     window.setEvaluationRating = setEvaluationRating;

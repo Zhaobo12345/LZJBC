@@ -908,7 +908,7 @@ const ContractDetailPage = (function() {
      * 复制编辑链接
      */
     function copyEditLink() {
-        const link = 'https://www.example.com/contract/edit/HT-2024-001';
+        const link = 'https://www.example.com/contract/edit/BJSDSWHT000001';
         
         if (navigator.clipboard) {
             navigator.clipboard.writeText(link).then(function() {
