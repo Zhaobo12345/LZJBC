@@ -232,6 +232,7 @@
         }
 
         .ppt-left-panel {
+            display: none;
             width: 500px;
             flex-shrink: 0;
             margin-left: 0;
@@ -241,6 +242,7 @@
             flex-shrink: 0;
             position: relative;
             margin-left: 0;
+            padding-left: 390px;
         }
 
         .ppt-center-panel > .phone-container {
@@ -291,18 +293,20 @@
         }
 
         .ppt-text-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, #F9FAFB 100%);
             border-radius: 16px;
             padding: 28px;
-            color: white;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+            color: #1F2937;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            border: 1px solid #E5E7EB;
         }
 
         .ppt-text-card .main-title {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 700;
             margin-bottom: 24px;
             line-height: 1.4;
+            color: #111827;
         }
 
         .ppt-text-card .sub-item {
@@ -314,38 +318,39 @@
         }
 
         .ppt-text-card .sub-item .bullet {
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.8);
+            width: 10px;
+            height: 10px;
+            background: #3B82F6;
             border-radius: 50%;
             margin-right: 12px;
-            margin-top: 8px;
+            margin-top: 7px;
             flex-shrink: 0;
         }
 
         .ppt-text-card .sub-item .text {
             flex: 1;
-            opacity: 0.95;
+            color: #374151;
         }
 
         .ppt-text-card .highlight-box {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(59, 130, 246, 0.1);
             border-radius: 10px;
             padding: 16px;
             margin-top: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .ppt-text-card .highlight-box .title {
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 8px;
-            opacity: 0.9;
+            color: #1E40AF;
         }
 
         .ppt-text-card .highlight-box .content {
             font-size: 13px;
             line-height: 1.6;
-            opacity: 0.85;
+            color: #4B5563;
         }
 
         .toast {

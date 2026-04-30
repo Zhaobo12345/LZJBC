@@ -120,6 +120,7 @@
         }
 
         .ppt-left-panel {
+            display: none;
             width: 500px;
             flex-shrink: 0;
             margin-left: 0;
@@ -129,6 +130,7 @@
             flex-shrink: 0;
             position: relative;
             margin-left: 0;
+            padding-left: 390px;
         }
 
         .ppt-center-panel > .phone-container {
@@ -179,18 +181,20 @@
         }
 
         .ppt-text-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, #F9FAFB 100%);
             border-radius: 16px;
             padding: 28px;
-            color: white;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+            color: #1F2937;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            border: 1px solid #E5E7EB;
         }
 
         .ppt-text-card .main-title {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 700;
             margin-bottom: 24px;
             line-height: 1.4;
+            color: #111827;
         }
 
         .ppt-text-card .sub-item {
@@ -202,38 +206,39 @@
         }
 
         .ppt-text-card .sub-item .bullet {
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.8);
+            width: 10px;
+            height: 10px;
+            background: #3B82F6;
             border-radius: 50%;
             margin-right: 12px;
-            margin-top: 8px;
+            margin-top: 7px;
             flex-shrink: 0;
         }
 
         .ppt-text-card .sub-item .text {
             flex: 1;
-            opacity: 0.95;
+            color: #374151;
         }
 
         .ppt-text-card .highlight-box {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(59, 130, 246, 0.1);
             border-radius: 10px;
             padding: 16px;
             margin-top: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .ppt-text-card .highlight-box .title {
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 8px;
-            opacity: 0.9;
+            color: #1E40AF;
         }
 
         .ppt-text-card .highlight-box .content {
             font-size: 13px;
             line-height: 1.6;
-            opacity: 0.85;
+            color: #4B5563;
         }
 
         .page-content {
@@ -422,29 +427,29 @@
         .stage-item {
             border: 1px solid #E8E8E8;
             border-radius: 8px;
-            margin: 0 12px 12px;
+            margin: 0 12px 3px;
             overflow: hidden;
         }
 
         .stage-header {
             display: flex;
             align-items: center;
-            padding: 12px;
+            padding: 6px;
             background-color: #FAFAFA;
             cursor: pointer;
         }
 
         .stage-header .stage-icon {
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
             background: linear-gradient(135deg, #1890FF 0%, #40A9FF 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             color: #FFFFFF;
-            font-size: 14px;
-            margin-right: 10px;
+            font-size: 12px;
+            margin-right: 8px;
         }
 
         .stage-header .stage-info {
@@ -452,30 +457,41 @@
         }
 
         .stage-header .stage-name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #262626;
+            line-height: 1.2;
         }
 
         .stage-header .stage-meta {
-            font-size: 12px;
+            font-size: 11px;
             color: #8C8C8C;
-            margin-top: 2px;
+            margin-top: 0;
+            line-height: 1.2;
         }
 
         .stage-order-tag {
             display: inline-flex;
             align-items: center;
-            padding: 2px 8px;
+            padding: 1px 6px;
             border-radius: 4px;
-            font-size: 11px;
-            margin-left: 8px;
+            font-size: 10px;
+            margin-left: 6px;
+        }
+
+        .stage-order-tag.sequential {
             background-color: #E6F7FF;
             color: #1890FF;
         }
 
+        .stage-order-tag.parallel {
+            background-color: #FFF7E6;
+            color: #FA8C16;
+        }
+
         .stage-header .arrow {
-            margin-left: 8px;
+            font-size: 10px;
+            margin-left: 6px;
             color: #8C8C8C;
             transition: transform 0.3s;
         }
@@ -486,7 +502,7 @@
 
         .stage-tasks {
             display: none;
-            padding: 12px;
+            padding: 6px 8px;
             border-top: 1px solid #E8E8E8;
         }
 
@@ -497,7 +513,7 @@
         .task-item {
             display: flex;
             align-items: center;
-            padding: 10px 0;
+            padding: 6px 0;
             border-bottom: 1px solid #E8E8E8;
             cursor: pointer;
         }
@@ -770,8 +786,8 @@
                         <div class="party-card">
                             <div class="avatar">甲</div>
                             <div class="info">
-                                <div class="name">张三</div>
-                                <div class="role">发包方（甲方）· 业主</div>
+                                <div class="name">李四</div>
+                                <div class="role">工长（甲方）</div>
                             </div>
                         </div>
                         <div class="party-card">
@@ -916,11 +932,11 @@
                     <div class="section-content" id="stagesSection">
                         <div class="stage-item">
                             <div class="stage-header" onclick="toggleStage(this)">
-                                <div class="stage-icon">1</div>
+                                <div class="stage-icon" style="background: linear-gradient(135deg, #1890FF 0%, #40A9FF 100%);">1</div>
                                 <div class="stage-info">
                                     <div class="stage-name">给水阶段</div>
                                     <div class="stage-meta">8个任务 · 部分完成</div>
-                                    <div class="stage-order-tag">按序执行</div>
+                                    <div class="stage-order-tag sequential">按序执行</div>
                                 </div>
                                 <div class="arrow expanded">▼</div>
                             </div>
@@ -1022,7 +1038,7 @@
                                 <div class="stage-info">
                                     <div class="stage-name">排水阶段</div>
                                     <div class="stage-meta">8个任务 · 部分完成</div>
-                                    <div class="stage-order-tag" style="background-color: #FFF7E6; color: #FA8C16;">并行执行</div>
+                                    <div class="stage-order-tag parallel">并行执行</div>
                                 </div>
                                 <div class="arrow expanded">▼</div>
                             </div>
@@ -1124,7 +1140,7 @@
                                 <div class="stage-info">
                                     <div class="stage-name">强弱电阶段</div>
                                     <div class="stage-meta">8个任务 · 部分完成</div>
-                                    <div class="stage-order-tag" style="background-color: #FFF7E6; color: #FA8C16;">并行执行</div>
+                                    <div class="stage-order-tag parallel">并行执行</div>
                                 </div>
                                 <div class="arrow expanded">▼</div>
                             </div>
@@ -1226,7 +1242,7 @@
                                 <div class="stage-info">
                                     <div class="stage-name">配电箱安装阶段</div>
                                     <div class="stage-meta">4个任务 · 部分完成</div>
-                                    <div class="stage-order-tag">按序执行</div>
+                                    <div class="stage-order-tag sequential">按序执行</div>
                                 </div>
                                 <div class="arrow expanded">▼</div>
                             </div>
@@ -1284,7 +1300,7 @@
                                 <div class="stage-info">
                                     <div class="stage-name">桥架铺设阶段</div>
                                     <div class="stage-meta">3个任务 · 部分完成</div>
-                                    <div class="stage-order-tag" style="background-color: #FFF7E6; color: #FA8C16;">并行执行</div>
+                                    <div class="stage-order-tag parallel">并行执行</div>
                                 </div>
                                 <div class="arrow expanded">▼</div>
                             </div>
@@ -1331,7 +1347,7 @@
                                 <div class="stage-info">
                                     <div class="stage-name">面板安装阶段</div>
                                     <div class="stage-meta">2个任务 · 部分完成</div>
-                                    <div class="stage-order-tag">按序执行</div>
+                                    <div class="stage-order-tag sequential">按序执行</div>
                                 </div>
                                 <div class="arrow expanded">▼</div>
                             </div>

@@ -98,6 +98,22 @@
             padding: var(--spacing-md);
             background-color: white;
             border-bottom: 1px solid #E8E8E8;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            max-height: 80px;
+            position: relative;
+        }
+
+        .quick-nav.collapsed {
+            max-height: 0;
+            padding: 0 var(--spacing-lg);
+            gap: 0;
+            border-bottom: none;
+        }
+
+        .quick-nav.collapsed .quick-nav-item {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .quick-nav-item {
@@ -134,6 +150,251 @@
         .quick-nav-item .label {
             font-size: 12px;
             color: #666;
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: white;
+            transition: box-shadow 0.3s;
+        }
+
+        .sticky-header.with-shadow {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .quick-nav.collapsed {
+            max-height: 0;
+            padding: 0 var(--spacing-lg);
+            gap: 0;
+            border-bottom: none;
+        }
+
+        .quick-nav.collapsed .quick-nav-item {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .quick-nav-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background-color: white;
+            border-bottom: 1px solid #E8E8E8;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-nav-toggle.show {
+            display: flex;
+        }
+
+        .quick-nav-toggle .toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: 13px;
+            color: var(--color-blue);
+        }
+
+        .quick-nav-toggle .toggle-btn .arrow {
+            transition: transform 0.3s;
+        }
+
+        .quick-nav-toggle .toggle-btn .arrow.expanded {
+            transform: rotate(180deg);
+        }
+
+        .quick-nav-toggle .dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .quick-nav-toggle .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--color-blue);
+        }
+
+        .level-selector {
+            background-color: white;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-bottom: 1px solid #E8E8E8;
+            position: relative;
+            z-index: 50;
+            transition: box-shadow 0.3s;
+        }
+
+        .level-selector.sticky {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .level-dropdown {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .level-dropdown .current {
+            display: flex;
+            align-items: center;
+        }
+
+        .level-dropdown .current .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--border-radius-md);
+            background: var(--gradient-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        .level-dropdown .current .text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .level-dropdown .current .text-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .level-dropdown .current .type-badge {
+            display: inline-block;
+            font-size: 10px;
+            padding: 1px 6px;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .level-dropdown .current .type-badge.project {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: #1D4ED8;
+        }
+
+        .level-dropdown .current .type-badge.workgroup {
+            background-color: rgba(34, 197, 94, 0.15);
+            color: #166534;
+        }
+
+        .level-dropdown .current .type-badge.team {
+            background-color: rgba(249, 115, 22, 0.15);
+            color: #9A3412;
+        }
+
+        .level-dropdown .arrow {
+            color: #999;
+            transition: transform 0.3s;
+        }
+
+        .level-dropdown .arrow.open {
+            transform: rotate(180deg);
+        }
+
+        .breadcrumb-inline {
+            font-size: 12px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .breadcrumb-inline .breadcrumb-item {
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .breadcrumb-inline .breadcrumb-item.active {
+            color: #666;
+        }
+
+        .level-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            z-index: 100;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .level-options.show {
+            display: block;
+        }
+
+        .level-option {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-md) var(--spacing-lg);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 1px solid #F5F5F5;
+        }
+
+        .level-option:last-child {
+            border-bottom: none;
+        }
+
+        .level-option:hover {
+            background-color: #F9FAFB;
+        }
+
+        .level-option.selected {
+            background-color: rgba(59, 130, 246, 0.08);
+        }
+
+        .level-option .option-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: var(--border-radius-sm);
+            background: var(--gradient-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        .level-option .option-info {
+            flex: 1;
+        }
+
+        .level-option .option-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .level-option .option-path {
+            font-size: 11px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .level-option .option-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .level-option .option-badge.project {
+            background-color: rgba(59, 130, 246, 0.15);
+            color: #1D4ED8;
+        }
+
+        .level-option .option-badge.workgroup {
+            background-color: rgba(34, 197, 94, 0.15);
+            color: #166534;
         }
 
         .card {
@@ -173,7 +434,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: var(--spacing-sm) 0;
+            padding: 6px 0;
         }
 
         .contract-stat {
@@ -190,17 +451,17 @@
             content: '';
             position: absolute;
             right: 0;
-            top: 10%;
-            height: 80%;
+            top: 20%;
+            height: 60%;
             width: 1px;
             background-color: #E8E8E8;
         }
 
         .contract-stat .value {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: #333;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .contract-stat .value .current {
@@ -214,13 +475,13 @@
 
         .contract-stat .value .total {
             color: #999;
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .contract-stat .label {
-            font-size: 10px;
+            font-size: 9px;
             color: #999;
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
         .contract-list {
@@ -291,7 +552,8 @@
 
         .task-stats {
             display: flex;
-            gap: var(--spacing-sm);
+            gap: 6px;
+            padding: 4px 0;
         }
 
         .task-stat-item {
@@ -299,9 +561,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: var(--spacing-sm) var(--spacing-xs);
+            padding: 4px 2px;
             background-color: #f5f5f5;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.2s;
         }
@@ -312,14 +574,14 @@
         }
 
         .task-stat-item .icon-wrap {
-            width: 28px;
-            height: 28px;
-            border-radius: var(--border-radius-md);
+            width: 22px;
+            height: 22px;
+            border-radius: var(--border-radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 4px;
-            font-size: 12px;
+            margin-bottom: 2px;
+            font-size: 10px;
         }
 
         .task-stat-item .icon-wrap.all { background: var(--gradient-blue); }
@@ -333,10 +595,10 @@
         }
 
         .task-stat-item .value {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             color: #333;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .task-stat-item .value .current {
@@ -350,13 +612,13 @@
 
         .task-stat-item .value .total {
             color: #999;
-            font-size: 12px;
+            font-size: 10px;
         }
 
         .task-stat-item .label {
-            font-size: 10px;
+            font-size: 8px;
             color: #999;
-            margin-top: 2px;
+            margin-top: 1px;
         }
 
         .badge-wrap {
@@ -467,7 +729,7 @@
 
         .activity-list {
             padding: 0;
-            max-height: 140px;
+            max-height: 100px;
             overflow: hidden;
             transition: max-height 0.3s;
         }
@@ -624,6 +886,7 @@
         }
 
         .ppt-left-panel {
+            display: none;
             width: 500px;
             flex-shrink: 0;
             margin-left: 0;
@@ -633,6 +896,7 @@
             flex-shrink: 0;
             position: relative;
             margin-left: 0;
+            padding-left: 390px;
         }
 
         .ppt-center-panel > .phone-container {
@@ -683,18 +947,20 @@
         }
 
         .ppt-text-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, #F9FAFB 100%);
             border-radius: 16px;
             padding: 28px;
-            color: white;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+            color: #1F2937;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            border: 1px solid #E5E7EB;
         }
 
         .ppt-text-card .main-title {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 700;
             margin-bottom: 24px;
             line-height: 1.4;
+            color: #111827;
         }
 
         .ppt-text-card .sub-item {
@@ -706,38 +972,39 @@
         }
 
         .ppt-text-card .sub-item .bullet {
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.8);
+            width: 10px;
+            height: 10px;
+            background: #3B82F6;
             border-radius: 50%;
             margin-right: 12px;
-            margin-top: 8px;
+            margin-top: 7px;
             flex-shrink: 0;
         }
 
         .ppt-text-card .sub-item .text {
             flex: 1;
-            opacity: 0.95;
+            color: #374151;
         }
 
         .ppt-text-card .highlight-box {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(59, 130, 246, 0.1);
             border-radius: 10px;
             padding: 16px;
             margin-top: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .ppt-text-card .highlight-box .title {
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 8px;
-            opacity: 0.9;
+            color: #1E40AF;
         }
 
         .ppt-text-card .highlight-box .content {
             font-size: 13px;
             line-height: 1.6;
-            opacity: 0.85;
+            color: #4B5563;
         }
     </style>
 </head>
@@ -784,14 +1051,131 @@
                             </div>
                         </div>
 
-                        <div class="quick-nav">
-                            <div class="quick-nav-item">
-                                <div class="icon structure">🏗️</div>
-                                <div class="label">架构</div>
+                        <div class="sticky-header" id="stickyHeader">
+                            <div class="quick-nav" id="quickNav">
+                                <div class="quick-nav-item" onclick="location.href='project-info.html'">
+                                    <div class="icon info">📋</div>
+                                    <div class="label">项目信息</div>
+                                </div>
+                                <div class="quick-nav-item" onclick="location.href='architecture.html'">
+                                    <div class="icon structure">🏗️</div>
+                                    <div class="label">架构</div>
+                                </div>
+                                <div class="quick-nav-item" onclick="location.href='member.html'">
+                                    <div class="icon member">👥</div>
+                                    <div class="label">成员</div>
+                                </div>
+                                <div class="quick-nav-item" onclick="location.href='project-files.html'">
+                                    <div class="icon files">📁</div>
+                                    <div class="label">资料</div>
+                                </div>
                             </div>
-                            <div class="quick-nav-item">
-                                <div class="icon member">👥</div>
-                                <div class="label">成员</div>
+
+                            <div class="quick-nav-toggle" id="quickNavToggle">
+                                <div class="toggle-btn">
+                                    <div class="dots">
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                        <div class="dot"></div>
+                                    </div>
+                                    <span id="toggleText">展开快捷入口</span>
+                                    <span class="arrow" id="toggleArrow">▼</span>
+                                </div>
+                            </div>
+
+                            <div class="level-selector" id="levelSelector">
+                                <div class="level-dropdown">
+                                    <div class="current">
+                                        <div class="icon" id="levelIcon">🏢</div>
+                                        <div>
+                                            <div class="text-row">
+                                                <div class="text" id="levelText">项目部</div>
+                                                <div class="type-badge project" id="levelType">项目部</div>
+                                            </div>
+                                            <div class="breadcrumb-inline" id="breadcrumbInline">
+                                                <span class="breadcrumb-item active">项目部</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="arrow" id="levelArrow">▼</div>
+                                </div>
+                                <div class="level-options" id="levelOptions">
+                                    <div class="level-option selected" data-level="0" data-name="项目部" data-icon="🏢" data-type="project">
+                                        <div class="option-icon">🏢</div>
+                                        <div class="option-info">
+                                            <div class="option-name">项目部</div>
+                                            <div class="option-path">项目顶层</div>
+                                        </div>
+                                        <div class="option-badge project">项目部</div>
+                                    </div>
+                                    <div class="level-option" data-level="1" data-name="基础施工工作组（张三）" data-icon="👷" data-type="workgroup">
+                                        <div class="option-icon">👷</div>
+                                        <div class="option-info">
+                                            <div class="option-name">基础施工工作组（张三）</div>
+                                            <div class="option-path">项目部 → 基础施工工作组</div>
+                                        </div>
+                                        <div class="option-badge workgroup">工作组</div>
+                                    </div>
+                                    <div class="level-option" data-level="1" data-name="基础施工工作组（李四）" data-icon="👷" data-type="workgroup">
+                                        <div class="option-icon">👷</div>
+                                        <div class="option-info">
+                                            <div class="option-name">基础施工工作组（李四）</div>
+                                            <div class="option-path">项目部 → 基础施工工作组</div>
+                                        </div>
+                                        <div class="option-badge workgroup">工作组</div>
+                                    </div>
+                                    <div class="level-option" data-level="1" data-name="设计方案工作组" data-icon="🎨" data-type="workgroup">
+                                        <div class="option-icon">🎨</div>
+                                        <div class="option-info">
+                                            <div class="option-name">设计方案工作组</div>
+                                            <div class="option-path">项目部 → 设计方案工作组</div>
+                                        </div>
+                                        <div class="option-badge workgroup">工作组</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-title">
+                                <span>📝 今日动态</span>
+                                <span class="more">查看全部 ></span>
+                            </div>
+                            <div class="activity-list" id="activityList">
+                                <div class="activity-item">
+                                    <div class="activity-header">
+                                        <div class="activity-avatar">李</div>
+                                        <div class="activity-info">
+                                            <div class="activity-user">李监理</div>
+                                            <div class="activity-time">01-15 10:30</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-content">完成了 开槽布线 的验收</div>
+                                    <div class="activity-media">
+                                        <div class="activity-media-item" style="background: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop') center/cover; border-radius: 6px;"></div>
+                                        <div class="activity-media-item" style="background: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=120&h=120&fit=crop') center/cover; border-radius: 6px;"></div>
+                                        <div class="activity-media-item" style="background: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=120&h=120&fit=crop') center/cover; border-radius: 6px;"></div>
+                                    </div>
+                                </div>
+                                <div class="activity-item secondary">
+                                    <div class="activity-header">
+                                        <div class="activity-avatar" style="background: linear-gradient(135deg, #52C41A 0%, #73D13D 100%);">张</div>
+                                        <div class="activity-info">
+                                            <div class="activity-user">张工长</div>
+                                            <div class="activity-time">01-15 09:15</div>
+                                        </div>
+                                    </div>
+                                    <div class="activity-content">提交了 开槽布线 的验收申请</div>
+                                    <div class="activity-media">
+                                        <div class="activity-media-item" style="background: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&h=120&fit=crop') center/cover; border-radius: 6px;"></div>
+                                        <div class="activity-media-item" style="background: url('https://images.unsplash.com/photo-1585232351009-aa654f89dfed?w=120&h=120&fit=crop') center/cover; border-radius: 6px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="activity-more-btn" id="activityMoreBtn">
+                                <span id="activityMoreText">展开更多</span>
+                                <span class="arrow" id="activityMoreArrow">▼</span>
                             </div>
                         </div>
 
@@ -923,48 +1307,6 @@
                             </div>
                         </div>
 
-                        <div class="card">
-                            <div class="card-title">
-                                <span>📝 今日动态</span>
-                                <span class="more">查看全部 ></span>
-                            </div>
-                            <div class="activity-list" id="activityList">
-                                <div class="activity-item">
-                                    <div class="activity-header">
-                                        <div class="activity-avatar">李</div>
-                                        <div class="activity-info">
-                                            <div class="activity-user">李监理</div>
-                                            <div class="activity-time">01-15 10:30</div>
-                                        </div>
-                                    </div>
-                                    <div class="activity-content">完成了 开槽布线 的验收</div>
-                                    <div class="activity-media">
-                                        <div class="activity-media-item" style="background: url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop') center/cover; border-radius: 6px;"></div>
-                                        <div class="activity-media-item" style="background: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=120&h=120&fit=crop') center/cover; border-radius: 6px;"></div>
-                                        <div class="activity-media-item" style="background: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=120&h=120&fit=crop') center/cover; border-radius: 6px;"></div>
-                                    </div>
-                                </div>
-                                <div class="activity-item secondary">
-                                    <div class="activity-header">
-                                        <div class="activity-avatar" style="background: linear-gradient(135deg, #52C41A 0%, #73D13D 100%);">张</div>
-                                        <div class="activity-info">
-                                            <div class="activity-user">张工长</div>
-                                            <div class="activity-time">01-15 09:15</div>
-                                        </div>
-                                    </div>
-                                    <div class="activity-content">提交了 开槽布线 的验收申请</div>
-                                    <div class="activity-media">
-                                        <div class="activity-media-item" style="background: url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&h=120&fit=crop') center/cover; border-radius: 6px;"></div>
-                                        <div class="activity-media-item" style="background: url('https://images.unsplash.com/photo-1585232351009-aa654f89dfed?w=120&h=120&fit=crop') center/cover; border-radius: 6px;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="activity-more-btn" id="activityMoreBtn">
-                                <span id="activityMoreText">展开更多</span>
-                                <span class="arrow" id="activityMoreArrow">▼</span>
-                            </div>
-                        </div>
-
                         <div style="height: 20px;"></div>
                     </div>
                 </div>
@@ -1073,6 +1415,131 @@
             activityList.classList.toggle('expanded');
             arrow.classList.toggle('expanded');
             text.textContent = activityList.classList.contains('expanded') ? '收起' : '展开更多';
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const levelSelector = document.getElementById('levelSelector');
+            const levelDropdown = levelSelector.querySelector('.level-dropdown');
+            const levelOptions = document.getElementById('levelOptions');
+            const levelArrow = document.getElementById('levelArrow');
+
+            levelDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+                levelOptions.classList.toggle('show');
+                levelArrow.classList.toggle('open');
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!levelSelector.contains(e.target)) {
+                    levelOptions.classList.remove('show');
+                    levelArrow.classList.remove('open');
+                }
+            });
+
+            const levelOptionItems = levelOptions.querySelectorAll('.level-option');
+            levelOptionItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    const icon = this.getAttribute('data-icon');
+                    const name = this.getAttribute('data-name');
+                    const type = this.getAttribute('data-type');
+
+                    document.getElementById('levelIcon').textContent = icon;
+                    document.getElementById('levelText').textContent = name;
+                    
+                    const levelType = document.getElementById('levelType');
+                    levelType.textContent = type === 'project' ? '项目部' : type === 'workgroup' ? '工作组' : '施工组';
+                    levelType.className = 'type-badge ' + type;
+
+                    document.getElementById('breadcrumbInline').innerHTML = '<span class="breadcrumb-item active">' + name + '</span>';
+
+                    levelOptionItems.forEach(function(opt) {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+
+                    levelOptions.classList.remove('show');
+                    levelArrow.classList.remove('open');
+                });
+            });
+
+            const quickNav = document.getElementById('quickNav');
+            const quickNavToggle = document.getElementById('quickNavToggle');
+            const stickyHeader = document.getElementById('stickyHeader');
+            const toggleText = document.getElementById('toggleText');
+            const toggleArrow = document.getElementById('toggleArrow');
+            const levelSelector = document.getElementById('levelSelector');
+            const phoneContent = document.querySelector('.phone-content');
+
+            let quickNavExpanded = true;
+            let userManualExpand = false;
+
+            function throttle(fn, delay) {
+                let lastTime = 0;
+                return function(...args) {
+                    const now = Date.now();
+                    if (now - lastTime >= delay) {
+                        lastTime = now;
+                        fn.apply(this, args);
+                    }
+                };
+            }
+
+            function toggleQuickNav() {
+                if (quickNavExpanded) {
+                    quickNav.classList.add('collapsed');
+                    toggleText.textContent = '展开快捷入口';
+                    toggleArrow.classList.remove('expanded');
+                    quickNavExpanded = false;
+                    userManualExpand = false;
+                } else {
+                    quickNav.classList.remove('collapsed');
+                    toggleText.textContent = '收起快捷入口';
+                    toggleArrow.classList.add('expanded');
+                    quickNavExpanded = true;
+                    userManualExpand = true;
+                }
+            }
+
+            function handleScroll() {
+                if (!phoneContent) return;
+                
+                const scrollTop = phoneContent.scrollTop;
+                
+                if (scrollTop > 50) {
+                    if (quickNavExpanded && !userManualExpand) {
+                        quickNav.classList.add('collapsed');
+                        quickNavToggle.classList.add('show');
+                        quickNavExpanded = false;
+                        toggleText.textContent = '展开快捷入口';
+                        toggleArrow.classList.remove('expanded');
+                    }
+                    stickyHeader.classList.add('with-shadow');
+                    if (levelSelector) {
+                        levelSelector.classList.add('sticky');
+                    }
+                } else {
+                    if (!quickNavExpanded) {
+                        quickNav.classList.remove('collapsed');
+                        quickNavToggle.classList.remove('show');
+                        quickNavExpanded = true;
+                        toggleText.textContent = '收起快捷入口';
+                        toggleArrow.classList.add('expanded');
+                        userManualExpand = false;
+                    }
+                    stickyHeader.classList.remove('with-shadow');
+                    if (levelSelector) {
+                        levelSelector.classList.remove('sticky');
+                    }
+                }
+            }
+
+            if (phoneContent) {
+                phoneContent.addEventListener('scroll', throttle(handleScroll, 100));
+            }
+
+            if (quickNavToggle) {
+                quickNavToggle.addEventListener('click', toggleQuickNav);
+            }
         });
     </script>
 </body>

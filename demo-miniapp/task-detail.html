@@ -21,6 +21,7 @@
         }
 
         .ppt-left-panel {
+            display: none;
             width: 500px;
             flex-shrink: 0;
             margin-left: 0;
@@ -30,6 +31,7 @@
             flex-shrink: 0;
             position: relative;
             margin-left: 0;
+            padding-left: 390px;
         }
 
         .ppt-center-panel > .phone-container {
@@ -80,18 +82,20 @@
         }
 
         .ppt-text-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, #F9FAFB 100%);
             border-radius: 16px;
             padding: 28px;
-            color: white;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+            color: #1F2937;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            border: 1px solid #E5E7EB;
         }
 
         .ppt-text-card .main-title {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 700;
             margin-bottom: 24px;
             line-height: 1.4;
+            color: #111827;
         }
 
         .ppt-text-card .sub-item {
@@ -103,38 +107,39 @@
         }
 
         .ppt-text-card .sub-item .bullet {
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.8);
+            width: 10px;
+            height: 10px;
+            background: #3B82F6;
             border-radius: 50%;
             margin-right: 12px;
-            margin-top: 8px;
+            margin-top: 7px;
             flex-shrink: 0;
         }
 
         .ppt-text-card .sub-item .text {
             flex: 1;
-            opacity: 0.95;
+            color: #374151;
         }
 
         .ppt-text-card .highlight-box {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(59, 130, 246, 0.1);
             border-radius: 10px;
             padding: 16px;
             margin-top: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .ppt-text-card .highlight-box .title {
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 8px;
-            opacity: 0.9;
+            color: #1E40AF;
         }
 
         .ppt-text-card .highlight-box .content {
             font-size: 13px;
             line-height: 1.6;
-            opacity: 0.85;
+            color: #4B5563;
         }
     </style>
 </head>
@@ -1827,7 +1832,7 @@
                 renderStandardContent('liableStandard', standards.liable);
 
                 if (standards.execRecords) {
-                    renderExecRecords(standards.execRecords);
+                    renderExecRecords(standards.execRecords, taskName);
                 }
                 if (standards.confirmRecords) {
                     renderConfirmRecords(standards.confirmRecords);
@@ -1843,7 +1848,7 @@
                 { time: '2024-01-24 10:30', desc: '强电线路穿设完成，共穿设BV2.5mm²铜线12根，BV4mm²铜线4根。线管固定牢固，间距均匀。', medias: 3 },
                 { time: '2024-01-25 14:30', desc: '穿线工作全部完成！弱电线路穿设6根，包括网线、电视线、音响线各2根。已进行绝缘测试，所有线路绝缘电阻均大于0.5MΩ，符合规范要求。', medias: 4, completed: true }
             ];
-            renderExecRecords(defaultExecRecords);
+            renderExecRecords(defaultExecRecords, '穿线');
 
             const defaultConfirmRecords = [
                 { name: '张三', role: '项目总', time: '2024-01-25 15:20', content: '穿线工作符合标准，绝缘测试数据合格，线路排布规范。', rating: 4 },
@@ -1853,7 +1858,7 @@
             renderConfirmRecords(defaultConfirmRecords);
         }
 
-        function renderExecRecords(records) {
+        function renderExecRecords(records, taskName) {
             const container = document.getElementById('execRecordsContainer');
             const summary = document.getElementById('execSummary');
             if (!container || !records) return;
@@ -1871,7 +1876,7 @@
                                 ${isCompleted ? '✅ 任务完成' : '📤 执行记录 #' + (index + 1)} · ${record.time}
                             </div>
                         </div>
-                        ${!isCompleted ? `<div class="media-grid">${generateMediaItems(record.medias)}</div>` : ''}
+                        ${!isCompleted ? `<div class="media-grid">${generateMediaItems(record.medias, taskName)}</div>` : ''}
                         <div class="execution-desc" style="color: ${isCompleted ? 'var(--text-primary)' : 'inherit'};">
                             ${record.desc}
                         </div>
@@ -1886,12 +1891,149 @@
             }
         }
 
-        function generateMediaItems(count) {
+        function generateMediaItems(count, taskName) {
             let html = '';
+            const imageUrls = getTaskImageUrls(taskName);
+            
             for (let i = 0; i < count; i++) {
-                html += '<div class="media-item">📷</div>';
+                const url = imageUrls[i % imageUrls.length];
+                html += `<div class="media-item" style="background: url('${url}') center/cover; border-radius: 6px;"></div>`;
             }
             return html;
+        }
+
+        function getTaskImageUrls(taskName) {
+            const imageMap = {
+                '清理': [
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=120&h=120&fit=crop'
+                ],
+                '放线': [
+                    'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1585232351009-aa654f89dfed?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop'
+                ],
+                '开槽': [
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop'
+                ],
+                '管路': [
+                    'https://images.unsplash.com/photo-1558618047-3c8976ce4016?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&h=120&fit=crop'
+                ],
+                '布管': [
+                    'https://images.unsplash.com/photo-1585232351009-aa654f89dfed?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1558618047-3c8976ce4016?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop'
+                ],
+                '热熔': [
+                    'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=120&h=120&fit=crop'
+                ],
+                '打压': [
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1585232351009-aa654f89dfed?w=120&h=120&fit=crop'
+                ],
+                '排水': [
+                    'https://images.unsplash.com/photo-1558618047-3c8976ce4016?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=120&h=120&fit=crop'
+                ],
+                '强弱电': [
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1585232351009-aa654f89dfed?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1558618047-3c8976ce4016?w=120&h=120&fit=crop'
+                ],
+                '配电箱': [
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop'
+                ],
+                '桥架': [
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&h=120&fit=crop'
+                ],
+                '面板': [
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1585232351009-aa654f89dfed?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1558618047-3c8976ce4016?w=120&h=120&fit=crop'
+                ],
+                '开关': [
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1585232351009-aa654f89dfed?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1558618047-3c8976ce4016?w=120&h=120&fit=crop'
+                ],
+                '开工': [
+                    'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop'
+                ],
+                '验收': [
+                    'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop'
+                ],
+                '竣工': [
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=120&h=120&fit=crop'
+                ],
+                '巡查': [
+                    'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop'
+                ],
+                '例会': [
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop'
+                ],
+                '拆除': [
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop'
+                ],
+                '木工': [
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=120&h=120&fit=crop'
+                ],
+                '瓦工': [
+                    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=120&h=120&fit=crop'
+                ],
+                '油工': [
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop'
+                ],
+                '结算': [
+                    'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop',
+                    'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop'
+                ]
+            };
+
+            const defaultImages = [
+                'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=120&h=120&fit=crop',
+                'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=120&h=120&fit=crop',
+                'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=120&h=120&fit=crop'
+            ];
+
+            for (const [key, urls] of Object.entries(imageMap)) {
+                if (taskName.includes(key)) {
+                    return urls;
+                }
+            }
+
+            return defaultImages;
         }
 
         function renderConfirmRecords(records) {

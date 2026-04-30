@@ -171,6 +171,12 @@
             color: #666;
         }
 
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         /* PPT布局样式 */
         .ppt-layout {
             display: flex;
@@ -184,6 +190,7 @@
         }
 
         .ppt-left-panel {
+            display: none;
             width: 500px;
             flex-shrink: 0;
             margin-left: 0;
@@ -193,6 +200,7 @@
             flex-shrink: 0;
             position: relative;
             margin-left: 0;
+            padding-left: 390px;
         }
 
         .ppt-center-panel > .phone-container {
@@ -243,18 +251,20 @@
         }
 
         .ppt-text-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFFFFF 0%, #F9FAFB 100%);
             border-radius: 16px;
             padding: 28px;
-            color: white;
-            box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+            color: #1F2937;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            border: 1px solid #E5E7EB;
         }
 
         .ppt-text-card .main-title {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 700;
             margin-bottom: 24px;
             line-height: 1.4;
+            color: #111827;
         }
 
         .ppt-text-card .sub-item {
@@ -266,38 +276,39 @@
         }
 
         .ppt-text-card .sub-item .bullet {
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.8);
+            width: 10px;
+            height: 10px;
+            background: #3B82F6;
             border-radius: 50%;
             margin-right: 12px;
-            margin-top: 8px;
+            margin-top: 7px;
             flex-shrink: 0;
         }
 
         .ppt-text-card .sub-item .text {
             flex: 1;
-            opacity: 0.95;
+            color: #374151;
         }
 
         .ppt-text-card .highlight-box {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(59, 130, 246, 0.1);
             border-radius: 10px;
             padding: 16px;
             margin-top: 20px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .ppt-text-card .highlight-box .title {
             font-size: 14px;
             font-weight: 600;
             margin-bottom: 8px;
-            opacity: 0.9;
+            color: #1E40AF;
         }
 
         .ppt-text-card .highlight-box .content {
             font-size: 13px;
             line-height: 1.6;
-            opacity: 0.85;
+            color: #4B5563;
         }
 
         .page-content {
@@ -760,122 +771,6 @@
             margin-bottom: 0;
         }
 
-        /* PPT布局样式 */
-        .ppt-layout {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-            gap: 40px;
-        }
-
-        .ppt-left-panel {
-            width: 500px;
-            flex-shrink: 0;
-        }
-
-        .ppt-center-panel {
-            flex-shrink: 0;
-            position: relative;
-        }
-
-        .ppt-center-panel > .phone-container {
-            position: relative !important;
-            top: auto !important;
-            left: auto !important;
-            transform: none !important;
-            z-index: 1 !important;
-            margin: 0 !important;
-            float: none !important;
-            display: block !important;
-        }
-
-        .ppt-right-panel {
-            width: 280px;
-            flex-shrink: 0;
-        }
-
-        .ppt-flow-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 16px;
-        }
-
-        .ppt-flow-image-wrapper {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-
-        .ppt-flow-image-wrapper img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .ppt-text-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 12px;
-            padding: 24px;
-            color: #fff;
-            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .ppt-text-card .main-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .ppt-text-card .sub-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .ppt-text-card .sub-item:last-of-type {
-            margin-bottom: 20px;
-        }
-
-        .ppt-text-card .bullet {
-            width: 8px;
-            height: 8px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .ppt-text-card .text {
-            font-size: 14px;
-            opacity: 0.95;
-        }
-
-        .ppt-text-card .highlight-box {
-            background: rgba(255,255,255,0.15);
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: 16px;
-        }
-
-        .ppt-text-card .highlight-box .title {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .ppt-text-card .highlight-box .content {
-            font-size: 13px;
-            line-height: 1.6;
-            opacity: 0.9;
-        }
     </style>
 </head>
 <body class="ppt-layout-mode">
@@ -964,14 +859,14 @@
                             <span>👥 签约双方</span>
                         </div>
                         <div class="party-card">
-                            <div class="avatar">张</div>
+                            <div class="avatar">甲</div>
                             <div class="info">
                                 <div class="name">张三</div>
                                 <div class="role">客户（甲方）</div>
                             </div>
                         </div>
                         <div class="party-card">
-                            <div class="avatar party-b">李</div>
+                            <div class="avatar party-b">乙</div>
                             <div class="info">
                                 <div class="name">李四</div>
                                 <div class="role">工长（乙方）</div>
@@ -1661,8 +1556,6 @@
                                 </div>
                             </div>
                         </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="section-content" id="attachmentsSection">
@@ -1700,30 +1593,29 @@
                                 </div>
                                 <div class="download-btn" onclick="event.stopPropagation(); downloadFile('签约照片.jpg')">⬇</div>
                             </div>
-                        </div>
-
-                        <div class="attachments-container">
-                            <div class="attachment-item" onclick="previewFile('基础施工报价清单.xlsx', 'excel')">
-                                <div class="file-icon">📊</div>
+                            <div class="attachment-item" onclick="previewFile('施工工艺及质量验收标准.pdf', 'pdf')">
+                                <div class="file-icon">📄</div>
                                 <div class="file-info">
-                                    <div class="file-name">基础施工报价清单.xlsx</div>
-                                    <div class="file-meta">156KB · 2024-01-12上传</div>
+                                    <div class="file-name">施工工艺及质量验收标准.pdf</div>
+                                    <div class="file-meta">856KB · 2024-01-11上传</div>
                                 </div>
-                                <div class="download-btn" onclick="event.stopPropagation(); downloadFile('基础施工报价清单.xlsx')">⬇</div>
+                                <div class="download-btn" onclick="event.stopPropagation(); downloadFile('施工工艺及质量验收标准.pdf')">⬇</div>
                             </div>
-                            <div class="attachment-item" onclick="previewFile('施工图纸.dwg', 'dwg')">
-                                <div class="file-icon">📐</div>
+                            <div class="attachment-item" onclick="previewFile('安全文明施工规定.pdf', 'pdf')">
+                                <div class="file-icon">📄</div>
                                 <div class="file-info">
-                                    <div class="file-name">施工图纸.dwg</div>
-                                    <div class="file-meta">5.8MB · 2024-01-12上传</div>
+                                    <div class="file-name">安全文明施工规定.pdf</div>
+                                    <div class="file-meta">324KB · 2024-01-11上传</div>
                                 </div>
-                                <div class="download-btn" onclick="event.stopPropagation(); downloadFile('施工图纸.dwg')">⬇</div>
+                                <div class="download-btn" onclick="event.stopPropagation(); downloadFile('安全文明施工规定.pdf')">⬇</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+    </div>
 
         <!-- 右侧文字说明 -->
         <div class="ppt-right-panel">
@@ -1834,133 +1726,26 @@
             }
         }
 
+        function toggleActionMenu() {
+            const menu = document.getElementById('actionMenu');
+            menu.classList.toggle('show');
+        }
+
         function previewFile(fileName, fileType) {
-            const previewModal = document.createElement('div');
-            previewModal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.8);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 9999;
-            `;
-            
-            let content = '';
-            if (fileType === 'image') {
-                content = `<div style="color: white; text-align: center;">📷 图片预览：${fileName}</div>`;
-            } else if (fileType === 'pdf') {
-                content = `<div style="color: white; text-align: center; padding: 40px;">📄 PDF文档预览：${fileName}<br><br><span style="font-size: 14px; color: #aaa;">（演示环境仅显示文件名）</span></div>`;
-            } else if (fileType === 'excel') {
-                content = `<div style="color: white; text-align: center; padding: 40px;">📊 Excel文档预览：${fileName}<br><br><span style="font-size: 14px; color: #aaa;">（演示环境仅显示文件名）</span></div>`;
-            } else if (fileType === 'dwg') {
-                content = `<div style="color: white; text-align: center; padding: 40px;">📐 CAD图纸预览：${fileName}<br><br><span style="font-size: 14px; color: #aaa;">（演示环境仅显示文件名）</span></div>`;
-            } else {
-                content = `<div style="color: white; text-align: center; padding: 40px;">📎 文件预览：${fileName}</div>`;
-            }
-            
-            previewModal.innerHTML = `
-                <div style="background: white; border-radius: 12px; padding: 20px; max-width: 90%; max-height: 80%; overflow: auto;">
-                    ${content}
-                    <div style="margin-top: 20px; text-align: center;">
-                        <button onclick="this.closest('div[style*=\"position: fixed\"]').remove()" style="padding: 10px 30px; background: #1890FF; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">关闭</button>
-                    </div>
-                </div>
-            `;
-            
-            previewModal.addEventListener('click', function(e) {
-                if (e.target === previewModal) {
-                    previewModal.remove();
-                }
-            });
-            
-            document.body.appendChild(previewModal);
+            showToast('预览文件：' + fileName);
         }
 
         function downloadFile(fileName) {
-            const downloadLink = document.createElement('a');
-            downloadLink.href = '#';
-            downloadLink.download = fileName;
-            downloadLink.style.display = 'none';
-            
-            const toast = document.createElement('div');
-            toast.style.cssText = `
-                position: fixed;
-                bottom: 100px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: rgba(0, 0, 0, 0.75);
-                color: white;
-                padding: 12px 24px;
-                border-radius: 8px;
-                font-size: 14px;
-                z-index: 10000;
-            `;
-            toast.textContent = `📥 开始下载：${fileName}`;
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.remove();
-                showToast(`文件已保存到本地：${fileName}`);
-            }, 1500);
-        }
-
-        function toggleActionMenu() {
-            const actionMenu = document.getElementById('actionMenu');
-            if (actionMenu) {
-                actionMenu.classList.toggle('show');
-            }
+            showToast('下载文件：' + fileName);
         }
 
         function exportPDF(type) {
-            const actionMenu = document.getElementById('actionMenu');
-            if (actionMenu) {
-                actionMenu.classList.remove('show');
-            }
-            
+            toggleActionMenu();
             if (type === 'download') {
-                showToast('正在生成PDF...\\n\\n合同文件已准备好下载');
-            } else if (type === 'share') {
-                showToast('正在生成分享链接...\\n\\n已发送到微信');
+                showToast('正在生成PDF文件...\n请稍候');
+            } else {
+                showToast('正在准备分享...\n请稍候');
             }
-        }
-
-        function showToast(message) {
-            const existingToast = document.querySelector('.app-toast');
-            if (existingToast) {
-                existingToast.remove();
-            }
-            
-            const toast = document.createElement('div');
-            toast.className = 'app-toast';
-            toast.innerHTML = message.replace(/\n/g, '<br>');
-            toast.style.cssText = `
-                position: absolute;
-                bottom: 80px;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: rgba(0, 0, 0, 0.7);
-                color: #FFFFFF;
-                padding: 10px 20px;
-                border-radius: 8px;
-                font-size: 13px;
-                z-index: 1000;
-                white-space: pre-wrap;
-                max-width: 90%;
-                text-align: center;
-                line-height: 1.5;
-            `;
-            const phoneFrame = document.querySelector('.phone-frame');
-            if (phoneFrame) {
-                phoneFrame.appendChild(toast);
-            }
-            
-            setTimeout(() => {
-                toast.remove();
-            }, 2500);
         }
     </script>
 </body>
