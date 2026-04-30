@@ -1557,6 +1557,18 @@ const TaskDetailPage = (function() {
                             </div>
                             <div class="time">2024-01-25 15:20</div>
                             <div class="content">穿线工作符合标准，绝缘测试数据合格。</div>
+                            <div class="tags">
+                                <span class="tag">责任心棒</span>
+                                <span class="tag">专业能力强</span>
+                            </div>
+                            <div class="rating">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star empty">★</span>
+                                <span class="text">优秀</span>
+                            </div>
                         </div>
                     </div>
                     <div class="confirm-item">
@@ -1753,6 +1765,18 @@ const TaskDetailPage = (function() {
                             </div>
                             <div class="time">2024-01-26 11:00</div>
                             <div class="content">调整后的线路走向符合设计要求，确认通过。</div>
+                            <div class="tags">
+                                <span class="tag">责任心棒</span>
+                                <span class="tag">服务态度好</span>
+                            </div>
+                            <div class="rating">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="text">非常满意</span>
+                            </div>
                         </div>
                     </div>
                     <div class="confirm-item">
@@ -1941,6 +1965,11 @@ const TaskDetailPage = (function() {
                             <div class="content">穿线工作符合标准，绝缘测试数据合格。</div>
                             <div class="media-row">
                                 <div class="media-thumb">📷</div>
+                            </div>
+                            <div class="tags">
+                                <span class="tag">责任心棒</span>
+                                <span class="tag">专业能力强</span>
+                                <span class="tag">服务态度好</span>
                             </div>
                             <div class="rating">
                                 <span class="star">★</span>

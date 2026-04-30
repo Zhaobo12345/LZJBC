@@ -667,6 +667,22 @@
     margin-left: 4px;
 }
 
+.confirm-item .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.confirm-item .tags .tag {
+    font-size: 12px;
+    padding: 3px 8px;
+    background: linear-gradient(135deg, #E6F7FF 0%, #BAE7FF 100%);
+    color: #1890ff;
+    border-radius: 12px;
+    border: 0.5px solid #91D5FF;
+}
+
 /* 按钮样式 */
 .btn {
     display: flex;

@@ -18,6 +18,7 @@
             padding-top: 40px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
         }
 
         .header-back {
@@ -27,8 +28,15 @@
         }
 
         .header-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
         }
 
         .profile-header {
@@ -215,13 +223,12 @@
         .ppt-layout {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             gap: 60px;
-            min-height: calc(100vh - 100px);
-            padding: 40px;
-            padding-left: 30px;
-            flex-wrap: nowrap;
-            min-width: 1300px;
+            width: 100%;
+            max-width: 1400px;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         .ppt-left-panel {
@@ -381,21 +388,23 @@
                 <div class="phone-screen">
                     <div class="phone-notch"></div>
                     <div class="wx-capsule">
-                        <div class="wx-capsule-btn">
-                            <div class="dot">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        </div>
-                        <div class="wx-capsule-btn" onclick="showToast('关闭小程序')">
-                            <div class="close-icon"></div>
-                        </div>
                     </div>
                     <div class="phone-content">
                         <div class="header">
                             <div class="header-back" onclick="history.back()">‹</div>
                             <div class="header-title">个人电子名片</div>
+                            <div class="header-right">
+                                <div class="wx-capsule-btn">
+                                    <div class="dot">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="wx-capsule-btn" onclick="showToast('关闭小程序')">
+                                    <div class="close-icon"></div>
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="profile-header">
@@ -504,6 +513,7 @@
                 <div class="page-nav-group-title">子页面</div>
                 <a href="project-detail.html" class="page-nav-item">项目详情</a>
                 <a href="contract-detail.html" class="page-nav-item">合同详情</a>
+                <a href="contract-detail-shuid.html" class="page-nav-item">合同详情-水电</a>
                 <a href="task-detail.html?status=completed" class="page-nav-item">任务详情</a>
                 <a href="member.html" class="page-nav-item">项目成员</a>
                 <a href="member-profile.html" class="page-nav-item active">个人电子名片</a>

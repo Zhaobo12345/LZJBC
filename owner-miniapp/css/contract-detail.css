@@ -494,6 +494,17 @@
     color: #fff;
 }
 
+.stage-order-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    margin-left: 8px;
+    background-color: #E6F7FF;
+    color: #1890FF;
+}
+
 /* 任务项 */
 .task-item {
     display: flex;
