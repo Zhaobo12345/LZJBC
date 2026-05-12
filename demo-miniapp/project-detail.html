@@ -1339,7 +1339,7 @@
     </div>
 
     <div class="page-nav-wrapper" id="pageNavWrapper">
-        <div class="page-nav-toggle" onclick="togglePageNav()">▶</div>
+        <div class="page-nav-toggle" onclick="togglePageNav()">◀</div>
         <div class="page-nav" id="pageNav">
             <div class="page-nav-title">小程序导航</div>
             <div class="page-nav-group">
@@ -1357,7 +1357,6 @@
 
     <script>
         function togglePageNav() {
-            console.log('togglePageNav called');
             const wrapper = document.getElementById('pageNavWrapper');
             const toggle = wrapper.querySelector('.page-nav-toggle');
             wrapper.classList.toggle('collapsed');
@@ -1469,7 +1468,6 @@
             const stickyHeader = document.getElementById('stickyHeader');
             const toggleText = document.getElementById('toggleText');
             const toggleArrow = document.getElementById('toggleArrow');
-            const levelSelector = document.getElementById('levelSelector');
             const phoneContent = document.querySelector('.phone-content');
 
             let quickNavExpanded = true;
