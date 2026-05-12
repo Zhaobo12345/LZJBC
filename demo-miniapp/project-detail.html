@@ -1316,29 +1316,30 @@
         <!-- 右侧文字说明 -->
         <div class="ppt-right-panel">
             <div class="ppt-text-card">
-                <div class="main-title">任务完成及存证</div>
+                <div class="main-title">项目中控台</div>
                 <div class="sub-item">
                     <div class="bullet"></div>
-                    <div class="text">任务流程标准透明</div>
+                    <div class="text">项目全景透明</div>
                 </div>
-                <div class="sub-item">
-                    <div class="bullet"></div>
-                    <div class="text">存证任务全程记录</div>
-                </div>
+                
                 <div class="sub-item">
                     <div class="bullet"></div>
                     <div class="text">施工过程可追溯</div>
                 </div>
                 <div class="highlight-box">
-                    <div class="title">💡 防水施工存证</div>
-                    <div class="content">透明施工，100%存证<br>每道工序都有据可查</div>
+                    <div class="title">💡 对C展现项目架构全景</div>
+                    <div class="content">每日施工动态、任务履约情况、每日待办事项等<br>让客户掌控全局，提高沟通效率</div>
+                </div>
+                <div class="highlight-box">
+                    <div class="title">💡 对B提高工作效率</div>
+                    <div class="content">提供整体规划、任务提示功能</div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="page-nav-wrapper" id="pageNavWrapper">
-        <div class="page-nav-toggle" onclick="togglePageNav()">◀</div>
+        <div class="page-nav-toggle" onclick="togglePageNav()">▶</div>
         <div class="page-nav" id="pageNav">
             <div class="page-nav-title">小程序导航</div>
             <div class="page-nav-group">
@@ -1356,6 +1357,7 @@
 
     <script>
         function togglePageNav() {
+            console.log('togglePageNav called');
             const wrapper = document.getElementById('pageNavWrapper');
             const toggle = wrapper.querySelector('.page-nav-toggle');
             wrapper.classList.toggle('collapsed');

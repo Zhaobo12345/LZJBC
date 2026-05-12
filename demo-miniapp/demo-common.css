@@ -65,7 +65,7 @@ body.ppt-layout-mode {
 /* 页面导航适配 */
 .page-nav-wrapper {
     position: fixed !important;
-    right: -150px !important;
+    right: 10px !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     width: 160px !important;
@@ -75,10 +75,6 @@ body.ppt-layout-mode {
 
 .page-nav-wrapper.collapsed {
     right: -150px !important;
-}
-
-.page-nav-wrapper:not(.collapsed) {
-    right: 10px !important;
 }
 
 /* 响应式设计 - 在小屏幕上隐藏手机容器边框 */
