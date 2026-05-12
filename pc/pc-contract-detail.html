@@ -247,7 +247,6 @@
                             <div class="pc-card">
                                 <div class="pc-card-header">
                                     <div class="pc-card-title">阶段任务管理</div>
-                                    <button class="pc-btn pc-btn-primary pc-btn-sm" onclick="editStages()">编辑阶段任务</button>
                                 </div>
                                 <div class="pc-card-body" id="stagesContent">
                                     <div class="change-summary-card" id="changeSummaryCard" style="display: none;">
@@ -741,5 +740,43 @@
         // 页面加载时执行
         window.addEventListener('DOMContentLoaded', hideChangeRecordTab);
     </script>
+
+    <!-- 任务详情弹窗 -->
+    <div class="task-detail-modal" id="taskDetailModal" onclick="closeTaskDetail()">
+        <div class="task-detail-content" onclick="event.stopPropagation()">
+            <div class="task-detail-header">
+                <h3 class="task-detail-title" id="taskDetailTitle">任务详情</h3>
+                <button class="task-detail-close" onclick="closeTaskDetail()">×</button>
+            </div>
+            <div class="task-detail-body">
+                <div class="task-detail-section">
+                    <h4>📋 任务信息</h4>
+                    <div class="task-detail-row">
+                        <span class="task-detail-label">执行人：</span>
+                        <span class="task-detail-value" id="taskDetailExecutor"></span>
+                    </div>
+                    <div class="task-detail-row">
+                        <span class="task-detail-label">验收人：</span>
+                        <div class="task-detail-value" id="taskDetailConfirmers"></div>
+                    </div>
+                </div>
+                <div class="task-detail-section">
+                    <h4>📝 执行标准</h4>
+                    <p class="task-detail-standard" id="taskDetailExecuteStandard"></p>
+                </div>
+                <div class="task-detail-section">
+                    <h4>✅ 验收标准</h4>
+                    <p class="task-detail-standard" id="taskDetailConfirmStandard"></p>
+                </div>
+                <div class="task-detail-section">
+                    <h4>⚖️ 责任标准</h4>
+                    <p class="task-detail-standard" id="taskDetailResponsibleStandard"></p>
+                </div>
+            </div>
+            <div class="pc-modal-footer">
+                <button class="pc-btn pc-btn-default" onclick="closeTaskDetail()">关闭</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

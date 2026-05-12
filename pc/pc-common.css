@@ -819,6 +819,111 @@ body {
 .pc-modal-lg { width: 800px; }
 .pc-modal-xl { width: 1000px; }
 
+/* 任务详情弹窗 */
+.task-detail-modal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background-color: rgba(0, 0, 0, 0.45) !important;
+    display: none !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 10002 !important;
+}
+
+.task-detail-modal.show {
+    display: flex !important;
+}
+
+.task-detail-content {
+    background-color: #fff !important;
+    border-radius: 8px !important;
+    width: 640px !important;
+    max-width: 90% !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    position: relative !important;
+    margin: 0 !important;
+    transform: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.task-detail-header {
+    padding: 16px 24px !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.task-detail-title {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+}
+
+.task-detail-close {
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    border-radius: 4px !important;
+    font-size: 18px !important;
+    color: var(--text-tertiary) !important;
+}
+
+.task-detail-body {
+    padding: 24px !important;
+}
+
+.task-detail-section {
+    margin-bottom: 24px !important;
+}
+
+.task-detail-row {
+    display: flex !important;
+    margin-bottom: 12px !important;
+}
+
+.task-detail-label {
+    width: 80px !important;
+    font-size: 13px !important;
+    color: var(--text-tertiary) !important;
+    flex-shrink: 0 !important;
+}
+
+.task-detail-value {
+    flex: 1 !important;
+    font-size: 13px !important;
+    color: var(--text-primary) !important;
+}
+
+.task-detail-standard {
+    background-color: var(--bg-secondary) !important;
+    padding: 12px 16px !important;
+    border-radius: 6px !important;
+    font-size: 13px !important;
+    color: var(--text-secondary) !important;
+    line-height: 1.6 !important;
+}
+
+.task-detail-person {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 4px 10px !important;
+    background-color: var(--bg-secondary) !important;
+    border-radius: 4px !important;
+    font-size: 13px !important;
+    color: var(--text-primary) !important;
+    margin-right: 8px !important;
+    margin-bottom: 8px !important;
+}
+
 /* --------------------------------------------------------------------------
    14. 分页样式
    -------------------------------------------------------------------------- */
