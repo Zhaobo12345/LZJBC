@@ -412,67 +412,237 @@
                             </div>
                         </div>
                         
-                        <div class="profile-header">
-                            <div class="profile-avatar" id="profileAvatar">张</div>
-                            <div class="profile-name" id="profileName">张三</div>
-                            <div class="profile-role" id="profileRole">项目部 · 项目经理</div>
-                        </div>
-                        
-                        <div class="profile-section">
-                            <div class="section-header">基本信息</div>
-                            <div class="section-content">
-                                <div class="info-item">
-                                    <div class="label">姓名</div>
-                                    <div class="value" id="infoName">张三</div>
-                                </div>
-                                <div class="info-item">
-                                    <div class="label">角色</div>
-                                    <div class="value">
-                                        <span class="role-badge manager" id="infoRoleBadge">项目总</span>
+                        <div style="padding: 16px;">
+                            <div style="background: #FFFFFF; border-radius: 16px; padding: 20px; margin-bottom: 12px;">
+                                <div style="display: flex; align-items: flex-start; margin-bottom: 16px;">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop&crop=face" 
+                                         alt="头像" 
+                                         style="width: 72px; height: 72px; border-radius: 16px; object-fit: cover; margin-right: 16px;">
+                                    <div style="flex: 1;">
+                                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                            <span style="font-size: 18px; font-weight: 600;">沈子怡</span>
+                                            <span style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); color: #8B4513; font-size: 11px; padding: 2px 8px; border-radius: 12px; font-weight: 500;">金牌服务</span>
+                                        </div>
+                                        <span style="font-size: 13px; color: #666;">资深全案设计师 · 从业8年</span>
                                     </div>
                                 </div>
-                                <div class="info-item">
-                                    <div class="label">所属架构</div>
-                                    <div class="value" id="infoGroup">项目部</div>
+                                <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
+                                    <span style="background: linear-gradient(135deg, #FA8C16 0%, #FFA940 100%); color: white; font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 500;">平台认证</span>
+                                    <span style="font-size: 12px; color: #999;">♀ 女</span>
+                                    <span style="font-size: 12px; color: #999;">📍 浙江·杭州</span>
                                 </div>
-                                <div class="info-item">
-                                    <div class="label">联系方式</div>
-                                    <div class="value">138****8888</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="profile-section">
-                            <div class="section-header">专业技能</div>
-                            <div class="section-content">
-                                <div class="skill-tags" id="skillTags">
-                                    <span class="skill-tag">项目管理</span>
-                                    <span class="skill-tag">施工协调</span>
-                                    <span class="skill-tag">预算管理</span>
-                                    <span class="skill-tag">质量控制</span>
+                                <div style="display: flex; gap: 8px;">
+                                    <span style="background: #E6F7FF; color: #1890FF; font-size: 12px; padding: 4px 12px; border-radius: 16px;">全案设计专家</span>
+                                    <span style="background: #F6FFED; color: #52C41A; font-size: 12px; padding: 4px 12px; border-radius: 16px;">零差评口碑</span>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="profile-section">
-                            <div class="section-header">项目经历</div>
-                            <div class="section-content">
-                                <div class="project-list" id="projectList">
-                                    <div class="project-item" onclick="goToProject('project-001')">
-                                        <div class="project-icon">🏠</div>
-                                        <div class="project-info">
-                                            <div class="project-name">XX小区整体装修</div>
-                                            <div class="project-role">项目经理</div>
-                                        </div>
-                                        <div class="arrow">›</div>
+                            
+                            <div style="background: #FFFFFF; border-radius: 16px; padding: 16px; margin-bottom: 12px;">
+                                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span>💬</span>
+                                        <span style="font-size: 15px; font-weight: 600; color: #333;">客户评价</span>
                                     </div>
-                                    <div class="project-item" onclick="goToProject('project-002')">
-                                        <div class="project-icon">🏢</div>
-                                        <div class="project-info">
-                                            <div class="project-name">商业办公空间装修</div>
-                                            <div class="project-role">项目总监</div>
+                                    <div style="display: flex; align-items: center; gap: 4px;">
+                                        <span style="font-size: 16px; font-weight: 600; color: #333;">4.9</span>
+                                        <span>⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                </div>
+                                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
+                                    <span style="background: #E8F4FD; color: #4A90D9; font-size: 12px; padding: 4px 12px; border-radius: 16px;">#细节控</span>
+                                    <span style="background: #E8F4FD; color: #4A90D9; font-size: 12px; padding: 4px 12px; border-radius: 16px;">#审美在线</span>
+                                    <span style="background: #E8F4FD; color: #4A90D9; font-size: 12px; padding: 4px 12px; border-radius: 16px;">#专业度高</span>
+                                    <span style="background: #E8F4FD; color: #4A90D9; font-size: 12px; padding: 4px 12px; border-radius: 16px;">#沟通顺畅</span>
+                                </div>
+                                <div style="background: #FAFAFA; border-radius: 12px; padding: 12px;">
+                                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <div style="width: 28px; height: 28px; border-radius: 50%; background: #E8E8E8; display: flex; align-items: center; justify-content: center; color: #999; font-size: 12px;">王</div>
+                                            <span style="font-size: 13px; font-weight: 500;">王先生</span>
                                         </div>
-                                        <div class="arrow">›</div>
+                                        <span style="font-size: 12px; color: #999;">2024.03.12</span>
+                                    </div>
+                                    <p style="font-size: 13px; color: #666; line-height: 1.5;">"沈老师非常专业，从方案设计到后期落地全程贴心跟进，细节控必备！"</p>
+                                    <div style="margin-top: 8px;">
+                                        <span style="background: #FFF7E6; color: #FA8C16; font-size: 11px; padding: 2px 8px; border-radius: 8px;">🏠 中海御道二期</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: #FFFFFF; border-radius: 16px; padding: 16px; margin-bottom: 12px;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+                                    <span>📊</span>
+                                    <span style="font-size: 15px; font-weight: 600; color: #333;">专业素质评估</span>
+                                </div>
+                                <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                                    <div style="flex: 1; background: #F6FFED; border-radius: 12px; padding: 12px; text-align: center;">
+                                        <div style="font-size: 22px; font-weight: 700; color: #52C41A;">96%</div>
+                                        <div style="font-size: 11px; color: #999; margin-top: 2px;">一次通过</div>
+                                    </div>
+                                    <div style="flex: 1; background: #E6F7FF; border-radius: 12px; padding: 12px; text-align: center;">
+                                        <div style="font-size: 22px; font-weight: 700; color: #1890FF;">100%</div>
+                                        <div style="font-size: 11px; color: #999; margin-top: 2px;">工期履约</div>
+                                    </div>
+                                    <div style="flex: 1; background: #FFF7E6; border-radius: 12px; padding: 12px; text-align: center;">
+                                        <div style="font-size: 22px; font-weight: 700; color: #FA8C16;">4.9</div>
+                                        <div style="font-size: 11px; color: #999; margin-top: 2px;">服务质量</div>
+                                    </div>
+                                </div>
+                                <div style="border-top: 1px solid #F0F0F0; padding-top: 16px;">
+                                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                                        <span>📋</span>
+                                        <span style="font-size: 14px; font-weight: 600; color: #333;">近期服务记录</span>
+                                    </div>
+                                    <div style="padding-left: 20px; position: relative;">
+                                        <div style="position: absolute; left: 7px; top: 6px; bottom: 36px; width: 2px; background: #E8E8E8;"></div>
+                                        <div style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 16px; position: relative;">
+                                            <div style="width: 14px; height: 14px; border-radius: 50%; background: #52C41A; border: 3px solid #FFFFFF; position: absolute; left: -17px; top: 4px;"></div>
+                                            <div style="flex: 1;">
+                                                <div style="font-size: 13px; font-weight: 500; color: #333; margin-bottom: 4px;">保利天悦140m²法式复古</div>
+                                                <div style="font-size: 12px; color: #999;">主创设计师 · 2023.10</div>
+                                            </div>
+                                            <span style="background: #E8F8E8; color: #52C41A; font-size: 11px; padding: 3px 10px; border-radius: 8px; font-weight: 500; margin-left: 12px;">DONE</span>
+                                        </div>
+                                        <div style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 12px; position: relative;">
+                                            <div style="width: 14px; height: 14px; border-radius: 50%; background: #52C41A; border: 3px solid #FFFFFF; position: absolute; left: -17px; top: 4px;"></div>
+                                            <div style="flex: 1;">
+                                                <div style="font-size: 13px; font-weight: 500; color: #333;">万科翡翠90m²现代简约</div>
+                                                <div style="font-size: 12px; color: #999;">软装搭配 · 2023.08</div>
+                                            </div>
+                                            <span style="background: #E8F8E8; color: #52C41A; font-size: 11px; padding: 3px 10px; border-radius: 8px; font-weight: 500; margin-left: 12px;">DONE</span>
+                                        </div>
+                                    </div>
+                                    <button style="width: 100%; background: #F5F5F5; border: none; padding: 12px; border-radius: 12px; font-size: 13px; color: #666; margin-top: 8px;">查看全部历史项目</button>
+                                </div>
+                            </div>
+                            
+                            <div style="background: #FFFFFF; border-radius: 16px; padding: 16px; margin-bottom: 12px;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                    <div style="width: 32px; height: 32px; border-radius: 8px; background: #E6F7FF; display: flex; align-items: center; justify-content: center;">🛡️</div>
+                                    <div>
+                                        <div style="font-size: 14px; font-weight: 600; color: #333;">平台联合保障与背调</div>
+                                        <div style="font-size: 11px; color: #999;">全量资质深度核验与实地走访，服务更安心</div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 12px;">
+                                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: #F6FFED; border-radius: 12px; margin-bottom: 8px;">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="width: 32px; height: 32px; border-radius: 8px; background: #B7EB8F; display: flex; align-items: center; justify-content: center;">👤</div>
+                                            <div>
+                                                <div style="font-size: 13px; font-weight: 500; color: #333;">实名身份核验</div>
+                                                <div style="font-size: 11px; color: #999;">政府权威数据核验</div>
+                                            </div>
+                                        </div>
+                                        <span style="background: #52C41A; color: white; font-size: 11px; padding: 4px 12px; border-radius: 12px; font-weight: 500;">✓ 通过审核</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: #FAFAFA; border-radius: 12px; margin-bottom: 8px;">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="width: 32px; height: 32px; border-radius: 8px; background: #E8E8E8; display: flex; align-items: center; justify-content: center;">🔍</div>
+                                            <div style="font-size: 13px; font-weight: 500; color: #333;">履历背调</div>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 12px; color: #52C41A;">已核验</span>
+                                            <span>›</span>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: #FAFAFA; border-radius: 12px; margin-bottom: 8px;">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="width: 32px; height: 32px; border-radius: 8px; background: #E8E8E8; display: flex; align-items: center; justify-content: center;">🏠</div>
+                                            <div style="font-size: 13px; font-weight: 500; color: #333;">现场考察</div>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 12px; color: #52C41A;">已核验</span>
+                                            <span>›</span>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: #FAFAFA; border-radius: 12px; margin-bottom: 8px;">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="width: 32px; height: 32px; border-radius: 8px; background: #E8E8E8; display: flex; align-items: center; justify-content: center;">🖼️</div>
+                                            <div style="font-size: 13px; font-weight: 500; color: #333;">项目案例</div>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 12px; color: #52C41A;">已核验</span>
+                                            <span>›</span>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: #FAFAFA; border-radius: 12px; margin-bottom: 8px;">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="width: 32px; height: 32px; border-radius: 8px; background: #E8E8E8; display: flex; align-items: center; justify-content: center;">📝</div>
+                                            <div style="font-size: 13px; font-weight: 500; color: #333;">考试结果</div>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 12px; color: #52C41A;">已核验</span>
+                                            <span>›</span>
+                                        </div>
+                                    </div>
+                                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px; background: #FAFAFA; border-radius: 12px;">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="width: 32px; height: 32px; border-radius: 8px; background: #E8E8E8; display: flex; align-items: center; justify-content: center;">🛡️</div>
+                                            <div style="font-size: 13px; font-weight: 500; color: #333;">意外保单</div>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 12px; color: #52C41A;">已核验</span>
+                                            <span>›</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="background: #FFFFFF; border-radius: 16px; padding: 16px; margin-bottom: 20px;">
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+                                    <span>🎓</span>
+                                    <span style="font-size: 15px; font-weight: 600; color: #333;">培训记录</span>
+                                </div>
+                                <div style="background: #FAFAFA; border-radius: 12px; padding: 14px; margin-bottom: 12px;">
+                                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                                        <span style="font-size: 13px; font-weight: 600; color: #333;">软装色彩搭配与空间视觉进阶</span>
+                                        <span style="background: #E8F4FD; color: #4A90D9; font-size: 10px; padding: 3px 10px; border-radius: 10px; font-weight: 500;">证书</span>
+                                    </div>
+                                    <div style="font-size: 12px; color: #999; margin-bottom: 12px;">中国室内装饰协会 · 2024.03.15</div>
+                                    <button style="width: 100%; background: #FFFFFF; border: 1px solid #E8E8E8; padding: 11px; border-radius: 8px; font-size: 12px; color: #666;">📎 查看培训附件(2)</button>
+                                </div>
+                                <div style="background: #FAFAFA; border-radius: 12px; padding: 14px; margin-bottom: 16px;">
+                                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                                        <span style="font-size: 13px; font-weight: 600; color: #333;">全案管家服务标准实战培训</span>
+                                        <span style="background: #FFF6E6; color: #E5973E; font-size: 10px; padding: 3px 10px; border-radius: 10px; font-weight: 500;">内训</span>
+                                    </div>
+                                    <div style="font-size: 12px; color: #999; margin-bottom: 12px;">平台官方运营中心 · 2023.11.20</div>
+                                    <button style="width: 100%; background: #FFFFFF; border: 1px solid #E8E8E8; padding: 11px; border-radius: 8px; font-size: 12px; color: #666;">📎 查看培训附件(1)</button>
+                                </div>
+                                <div style="border-top: 1px solid #F0F0F0; padding-top: 16px;">
+                                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+                                        <span>🏆</span>
+                                        <span style="font-size: 14px; font-weight: 600; color: #333;">认证与进修</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px; background: #F9F0FF; border-radius: 12px; margin-bottom: 12px;">
+                                        <div style="display: flex; align-items: center; gap: 12px;">
+                                            <div style="width: 44px; height: 44px; border-radius: 12px; background: #E8D4FF; display: flex; align-items: center; justify-content: center; font-size: 20px;">✨</div>
+                                            <div>
+                                                <div style="font-size: 13px; font-weight: 600; color: #333;">专业技能定级</div>
+                                                <div style="font-size: 12px; color: #999;">2023年度官方考核</div>
+                                            </div>
+                                        </div>
+                                        <span style="background: #8B5CF6; color: white; font-size: 14px; padding: 6px 16px; border-radius: 12px; font-weight: 600;">A级</span>
+                                    </div>
+                                    <div style="background: #FAFAFA; border-radius: 12px; padding: 14px;">
+                                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                                            <span style="font-size: 12px; color: #666;">累计进修 174 学时</span>
+                                            <span style="background: #E8F8E8; color: #52C41A; font-size: 10px; padding: 3px 10px; border-radius: 10px; font-weight: 500;">持续学习中</span>
+                                        </div>
+                                        <div style="display: flex; flex-direction: column; gap: 6px;">
+                                            <div style="display: flex; align-items: center; gap: 10px;">
+                                                <span style="width: 10px; height: 10px; border-radius: 50%; background: #4A90D9;"></span>
+                                                <span style="font-size: 12px; color: #666;">高级全案设计进阶班 (2023.11)</span>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 10px;">
+                                                <span style="width: 10px; height: 10px; border-radius: 50%; background: #4A90D9;"></span>
+                                                <span style="font-size: 12px; color: #666;">高级全案设计进阶班 (2023.11)</span>
+                                            </div>
+                                            <div style="display: flex; align-items: center; gap: 10px;">
+                                                <span style="width: 10px; height: 10px; border-radius: 50%; background: #52C41A;"></span>
+                                                <span style="font-size: 12px; color: #666;">从业者素养及诚信规范 (2023.12)</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

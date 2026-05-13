@@ -270,12 +270,19 @@
             const stage3NewSection = document.getElementById('stage3NewSection');
             const stage3OriginalSection = document.getElementById('stage3OriginalSection');
             
-            if (currentStatus === 'change_reviewing') {
+            if (currentStatus === 'change_reviewing' || currentStatus === 'change_reviewed_pass') {
                 if (changeSummaryCard) changeSummaryCard.style.display = 'block';
                 if (stage2ChangeBadge) stage2ChangeBadge.style.display = 'inline';
                 if (taskWaterPipeBadge) taskWaterPipeBadge.style.display = 'inline';
                 if (stage3NewSection) stage3NewSection.style.display = 'block';
                 if (stage3OriginalSection) stage3OriginalSection.style.display = 'none';
+                
+                if (stage2Section) {
+                    stage2Section.classList.add('stage-modified');
+                }
+                if (taskWaterPipe) {
+                    taskWaterPipe.classList.add('task-modified');
+                }
             } else {
                 if (changeSummaryCard) changeSummaryCard.style.display = 'none';
                 if (stage2ChangeBadge) stage2ChangeBadge.style.display = 'none';
@@ -341,6 +348,32 @@
                 logs.push({ time: '01-15 10:30', content: '合同签约完成', user: '系统' });
             }
             
+            if (currentStatus === 'change_reviewing') {
+                logs.push({ time: '02-01 14:00', content: '发起变更申请', user: '张三' });
+                logs.push({ time: '02-01 14:00', content: '进入平台审核', user: '系统' });
+            }
+            
+            if (currentStatus === 'change_reviewed_pass') {
+                logs.push({ time: '02-01 14:00', content: '发起变更申请', user: '张三' });
+                logs.push({ time: '02-01 14:00', content: '进入平台审核', user: '系统' });
+                logs.push({ time: '02-01 15:00', content: '变更审核通过', user: '运营人员' });
+                logs.push({ time: '02-01 15:00', content: '变更已生效', user: '系统' });
+            }
+            
+            if (currentStatus === 'change_reviewed_reject') {
+                logs.push({ time: '02-01 14:00', content: '发起变更申请', user: '张三' });
+                logs.push({ time: '02-01 14:00', content: '进入平台审核', user: '系统' });
+                logs.push({ time: '02-01 15:00', content: '变更审核驳回', user: '运营人员', detail: document.getElementById('rejectReasonContent').textContent || '变更内容描述不清晰，缺少具体施工范围说明' });
+            }
+            
+            if (currentStatus === 'reviewed_pass') {
+                logs.push({ time: '01-10 16:30', content: '合同审核通过', user: '运营人员' });
+            }
+            
+            if (currentStatus === 'reviewed_reject') {
+                logs.push({ time: '01-10 16:30', content: '合同审核驳回', user: '运营人员', detail: document.getElementById('rejectReasonContent').textContent || '合同金额与实际工程量不符，请核实后重新提交' });
+            }
+            
             let html = '';
             logs.reverse().forEach(log => {
                 html += `
@@ -364,7 +397,7 @@
             const contractPriceChange = document.getElementById('contractPriceChange');
             const contractAdditionChange = document.getElementById('contractAdditionChange');
             
-            if ((currentStatus === 'platform_reviewing' || currentStatus === 'change_reviewing') && currentRole === 'operator') {
+            if ((currentStatus === 'platform_reviewing' || currentStatus === 'change_reviewing') && currentRole === 'operator' && currentPcRole === 'operator') {
                 panel.style.display = 'block';
                 statusBanner.style.display = 'none';
                 rejectInput.style.display = 'none';
@@ -563,6 +596,24 @@
                 if (changeRecord2) changeRecord2.style.display = 'none';
                 if (changeRecord3) changeRecord3.style.display = 'none';
                 if (noChangeRecord) noChangeRecord.style.display = 'none';
+            } else if (currentStatus === 'change_reviewed_pass') {
+                if (changeRecord1) changeRecord1.style.display = 'block';
+                if (changeRecord2) changeRecord2.style.display = 'none';
+                if (changeRecord3) changeRecord3.style.display = 'none';
+                if (noChangeRecord) noChangeRecord.style.display = 'none';
+                if (changeRecord1) {
+                    changeRecord1.querySelector('.change-record-status').textContent = '已生效';
+                    changeRecord1.querySelector('.change-record-status').className = 'change-record-status completed';
+                }
+            } else if (currentStatus === 'change_reviewed_reject') {
+                if (changeRecord1) changeRecord1.style.display = 'block';
+                if (changeRecord2) changeRecord2.style.display = 'none';
+                if (changeRecord3) changeRecord3.style.display = 'none';
+                if (noChangeRecord) noChangeRecord.style.display = 'none';
+                if (changeRecord1) {
+                    changeRecord1.querySelector('.change-record-status').textContent = '已驳回';
+                    changeRecord1.querySelector('.change-record-status').className = 'change-record-status rejected';
+                }
             } else if (currentStatus === 'signed') {
                 if (changeRecord1) changeRecord1.style.display = 'none';
                 if (changeRecord2) changeRecord2.style.display = 'block';
@@ -579,20 +630,32 @@
         function showRejectInput() {
             const rejectInput = document.getElementById('rejectReasonInput');
             const showBtn = document.getElementById('showRejectBtn');
+            const confirmBtn = document.getElementById('confirmRejectBtn');
             
             if (rejectInput.style.display === 'none') {
                 rejectInput.style.display = 'block';
                 showBtn.textContent = '取消驳回';
+                confirmBtn.style.display = 'inline-block';
             } else {
                 rejectInput.style.display = 'none';
                 showBtn.textContent = '驳回';
+                confirmBtn.style.display = 'none';
+                document.getElementById('rejectReason').value = '';
             }
         }
 
         function approveContract() {
-            showToast('审核通过，合同已进入待确认状态');
-            document.getElementById('statusSelector').value = 'confirming_sender';
-            switchStatus('confirming_sender');
+            const title = currentStatus === 'change_reviewing' ? '确认审核通过变更' : '确认审核通过';
+            const message = currentStatus === 'change_reviewing' 
+                ? '确定审核通过该变更申请吗？通过后变更将生效。' 
+                : '确定审核通过该合同吗？通过后合同将进入待确认状态。';
+            
+            showConfirmModal(title, message, () => {
+                showToast(currentStatus === 'change_reviewing' ? '变更审核通过' : '审核通过，合同已进入待确认状态');
+                const nextStatus = currentStatus === 'change_reviewing' ? 'change_reviewed_pass' : 'reviewed_pass';
+                document.getElementById('statusSelector').value = nextStatus;
+                switchStatus(nextStatus);
+            });
         }
 
         function rejectContract() {
@@ -601,9 +664,24 @@
                 showToast('请输入驳回原因');
                 return;
             }
-            showToast('已驳回，合同退回拟定中状态');
-            document.getElementById('statusSelector').value = 'review_rejected';
-            switchStatus('review_rejected');
+            
+            const title = currentStatus === 'change_reviewing' ? '确认驳回变更' : '确认驳回';
+            const message = currentStatus === 'change_reviewing' 
+                ? '确定驳回该变更申请吗？驳回后变更将被取消。' 
+                : '确定驳回该合同吗？驳回后合同将退回修改状态。';
+            
+            showConfirmModal(title, message, () => {
+                showToast(currentStatus === 'change_reviewing' ? '变更已驳回' : '已驳回，合同退回修改状态');
+                const nextStatus = currentStatus === 'change_reviewing' ? 'change_reviewed_reject' : 'reviewed_reject';
+                document.getElementById('statusSelector').value = nextStatus;
+                switchStatus(nextStatus);
+                
+                document.getElementById('rejectReasonContent').textContent = reason;
+                document.getElementById('rejectReasonInput').style.display = 'none';
+                document.getElementById('showRejectBtn').textContent = '驳回';
+                document.getElementById('confirmRejectBtn').style.display = 'none';
+                document.getElementById('rejectReason').value = '';
+            });
         }
 
         function confirmContract() {
@@ -710,45 +788,6 @@
                 document.getElementById('statusSelector').value = 'draft_submittable';
                 switchStatus('draft_submittable');
             });
-        }
-
-        function approveContract() {
-            const title = currentStatus === 'change_reviewing' ? '审核通过变更' : '审核通过';
-            const message = currentStatus === 'change_reviewing' ? '确定审核通过该变更申请吗？' : '确定审核通过该合同吗？';
-            showConfirmModal(title, message, () => {
-                showToast('审核已通过');
-                if (currentStatus === 'change_reviewing') {
-                    document.getElementById('statusSelector').value = 'signed';
-                    switchStatus('signed');
-                } else {
-                    document.getElementById('statusSelector').value = 'confirming_sender';
-                    switchStatus('confirming_sender');
-                }
-            });
-        }
-
-        function rejectContract() {
-            const panel = document.getElementById('reviewPanel');
-            const rejectInput = document.getElementById('rejectReasonInput');
-            panel.style.display = 'block';
-            rejectInput.style.display = 'block';
-        }
-
-        function confirmReject() {
-            const reason = document.getElementById('rejectReason').value.trim();
-            if (!reason) {
-                showToast('请输入驳回原因');
-                return;
-            }
-            showToast('已驳回');
-            if (currentStatus === 'change_reviewing') {
-                document.getElementById('statusSelector').value = 'signed';
-                switchStatus('signed');
-            } else {
-                document.getElementById('statusSelector').value = 'platform_rejected';
-                switchStatus('platform_rejected');
-            }
-            document.getElementById('reviewPanel').style.display = 'none';
         }
 
         function exportContract() {

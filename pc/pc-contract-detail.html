@@ -111,6 +111,7 @@
                         </div>
                         <div class="review-actions">
                             <button class="pc-btn pc-btn-default" id="showRejectBtn" onclick="showRejectInput()">驳回</button>
+                            <button class="pc-btn pc-btn-danger" id="confirmRejectBtn" onclick="rejectContract()" style="display: none;">确认驳回</button>
                             <button class="pc-btn pc-btn-primary" onclick="approveContract()">审核通过</button>
                         </div>
                     </div>
@@ -775,6 +776,23 @@
             </div>
             <div class="pc-modal-footer">
                 <button class="pc-btn pc-btn-default" onclick="closeTaskDetail()">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认操作弹窗 -->
+    <div class="pc-modal-overlay" id="confirmModal" onclick="closeConfirmModal()">
+        <div class="pc-modal pc-modal-sm" onclick="event.stopPropagation()">
+            <div class="pc-modal-header">
+                <h3 class="pc-modal-title" id="confirmModalTitle">确认</h3>
+                <button class="pc-modal-close" onclick="closeConfirmModal()">×</button>
+            </div>
+            <div class="pc-modal-body">
+                <p id="confirmModalContent" style="font-size: 14px; color: var(--text-secondary);"></p>
+            </div>
+            <div class="pc-modal-footer">
+                <button class="pc-btn pc-btn-default" onclick="closeConfirmModal()">取消</button>
+                <button class="pc-btn pc-btn-primary" onclick="confirmAction()">确定</button>
             </div>
         </div>
     </div>
