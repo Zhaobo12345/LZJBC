@@ -50,7 +50,7 @@
 
 .quick-nav {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: var(--spacing-sm);
     padding: var(--spacing-md);
     background-color: var(--bg-primary);
@@ -137,6 +137,7 @@
 .quick-nav-item .icon.structure { background: var(--gradient-green); }
 .quick-nav-item .icon.member { background: var(--gradient-orange); }
 .quick-nav-item .icon.file { background: var(--gradient-purple); }
+.quick-nav-item .icon.statement { background: linear-gradient(135deg, #FAAD14 0%, #FFC53D 100%); }
 
 .quick-nav-item .label {
     font-size: 12px;

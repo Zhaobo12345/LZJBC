@@ -251,8 +251,8 @@ body {
    -------------------------------------------------------------------------- */
 .card {
     background-color: var(--bg-primary);
-    border-radius: 8px;
-    margin: 8px 12px;
+    border-radius: 10px;
+    margin: 12px;
     padding: 12px;
     box-shadow: 0 1px 3px var(--shadow-color);
 }

@@ -15,6 +15,7 @@
     --activity-list-max-height: 180px;
     --activity-list-expanded-height: 400px;
     --quick-nav-max-height: 100px;
+    --page-bg-color: #f7f8fa;
 
     /* 颜色变量 */
     --color-blue-light: #E6F7FF;
@@ -45,13 +46,14 @@
 }
 
 .page-content {
-    height: calc(100% - 44px - 44px); /* status + nav */
+    height: calc(100% - 44px - 44px);
     overflow-y: auto;
+    background-color: var(--page-bg-color);
 }
 
 .quick-nav {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: var(--spacing-sm);
     padding: var(--spacing-md);
     background-color: var(--bg-primary);
@@ -114,10 +116,6 @@
     transition: all 0.2s;
 }
 
-.quick-nav-item:hover {
-    background-color: var(--bg-secondary);
-}
-
 .quick-nav-item:active {
     transform: scale(0.95);
     background-color: var(--color-blue-light);
@@ -138,6 +136,7 @@
 .quick-nav-item .icon.structure { background: var(--gradient-green); }
 .quick-nav-item .icon.member { background: var(--gradient-orange); }
 .quick-nav-item .icon.file { background: var(--gradient-purple); }
+.quick-nav-item .icon.statement { background: linear-gradient(135deg, #FAAD14 0%, #FFC53D 100%); }
 
 .quick-nav-item .label {
     font-size: 12px;
@@ -157,10 +156,6 @@
 
 .quick-nav-toggle.show {
     display: flex;
-}
-
-.quick-nav-toggle:hover {
-    background-color: var(--bg-secondary);
 }
 
 .quick-nav-toggle .toggle-btn {
@@ -379,7 +374,7 @@
 }
 
 .level-option:hover {
-    background-color: var(--bg-secondary);
+    background-color: var(--color-blue-light);
 }
 
 .level-option.selected {
@@ -557,7 +552,6 @@
     flex-direction: column;
     align-items: center;
     padding: var(--spacing-sm) var(--spacing-xs);
-    background-color: var(--bg-secondary);
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s;
@@ -623,7 +617,6 @@
 
 .todo-tabs {
     display: flex;
-    background-color: var(--bg-secondary);
     border-radius: var(--border-radius-md);
     padding: var(--spacing-xs);
     margin-bottom: var(--spacing-md);
@@ -689,7 +682,6 @@
     display: flex;
     align-items: center;
     padding: var(--spacing-sm);
-    background-color: var(--bg-secondary);
     border-radius: var(--border-radius-md);
     margin-bottom: var(--spacing-xs);
     cursor: pointer;
@@ -828,10 +820,6 @@
     transition: background-color 0.2s;
 }
 
-.activity-item:hover {
-    background-color: var(--bg-secondary);
-}
-
 .activity-item:last-child {
     border-bottom: none;
 }
@@ -888,7 +876,6 @@
     justify-content: center;
     padding: var(--spacing-sm);
     margin-top: var(--spacing-xs);
-    background-color: var(--bg-secondary);
     border-radius: var(--border-radius-md);
     cursor: pointer;
     transition: all 0.2s;

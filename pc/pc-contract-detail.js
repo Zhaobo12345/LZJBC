@@ -458,6 +458,14 @@
                     case 'change_reviewing':
                         actionsHtml = '';
                         break;
+                    case 'reviewed_pass':
+                        actionsHtml = `
+                            <button class="pc-btn btn" onclick="exportContract()">导出合同</button>
+                        `;
+                        break;
+                    case 'reviewed_reject':
+                        actionsHtml = '';
+                        break;
                     case 'signed':
                         actionsHtml = `
                             <button class="pc-btn btn" onclick="initiateChange()">发起变更</button>
