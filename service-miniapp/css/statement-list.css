@@ -139,9 +139,9 @@
 .statement-summary {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     background-color: #FFFFFF;
-    padding: 16px;
+    padding: 10px 4px;
     margin: 12px;
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -150,12 +150,17 @@
 .summary-item {
     text-align: center;
     flex: 1;
+    max-width: 100px;
+    padding: 0 2px;
 }
 
 .summary-value {
-    font-size: 20px;
+    font-size: 13px;
     font-weight: 600;
     color: #262626;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .summary-value.pending {
@@ -248,6 +253,10 @@
     color: #8C8C8C;
 }
 
+.status-tag.paid {
+    color: #1890FF;
+}
+
 .card-body {
     padding: 12px;
 }
@@ -289,13 +298,15 @@
 }
 
 .card-footer.confirmed,
-.card-footer.rejected {
+.card-footer.rejected,
+.card-footer.paid {
     background-color: #FFFFFF;
 }
 
 .creator-info,
 .confirmed-info,
-.rejected-info {
+.rejected-info,
+.paid-info {
     display: flex;
     align-items: center;
     font-size: 12px;
@@ -304,7 +315,8 @@
 
 .creator-avatar,
 .confirmer-avatar,
-.rejecter-avatar {
+.rejecter-avatar,
+.paid-avatar {
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -326,6 +338,10 @@
     background: linear-gradient(135deg, #8C8C8C 0%, #BFBFBF 100%);
 }
 
+.paid-avatar {
+    background: linear-gradient(135deg, #1890FF 0%, #40A9FF 100%);
+}
+
 .creator-name {
     color: #262626;
     margin-right: 8px;
@@ -336,12 +352,14 @@
 }
 
 .confirmed-text,
-.rejected-text {
+.rejected-text,
+.paid-text {
     color: #595959;
 }
 
 .confirmed-text strong,
-.rejected-text strong {
+.rejected-text strong,
+.paid-text strong {
     color: #262626;
 }
 

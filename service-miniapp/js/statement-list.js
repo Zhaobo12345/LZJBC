@@ -18,6 +18,7 @@ const statusNames = {
     'all': '全部',
     'pending': '待我确认',
     'effective': '已生效',
+    'paid': '已支付',
     'rejected': '已驳回'
 };
 
@@ -187,11 +188,8 @@ function hideContractPicker() {
 }
 
 const contractConfirmerMap = {
-    '基础施工合同': { role: '业主', name: '李先生' },
-    '水电分包合同': { role: '业主', name: '李先生' },
-    '木工分包合同': { role: '业主', name: '李先生' },
-    '泥瓦分包合同': { role: '业主', name: '李先生' },
-    '油漆分包合同': { role: '业主', name: '李先生' }
+    '基础施工服务合同': { role: '业主', name: '李先生' },
+    '设计服务合同': { role: '业主', name: '李先生' }
 };
 
 function selectContract(contractName) {

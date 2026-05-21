@@ -26,6 +26,10 @@
     background: linear-gradient(135deg, #FF4D4F 0%, #FF7875 100%);
 }
 
+.status-banner.paid {
+    background: linear-gradient(135deg, #1890FF 0%, #40A9FF 100%);
+}
+
 .status-icon {
     font-size: 32px;
 }
@@ -223,6 +227,61 @@
     color: #8C8C8C;
 }
 
+.voucher-info {
+    padding: 0 16px 16px;
+}
+
+.voucher-uploader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: #8C8C8C;
+}
+
+.uploader-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1890FF 0%, #40A9FF 100%);
+    color: #FFFFFF;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uploader-text {
+    color: #595959;
+}
+
+.uploader-text strong {
+    color: #262626;
+}
+
+.voucher-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.voucher-img {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    background-color: #F5F5F5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.voucher-img .img-placeholder {
+    font-size: 24px;
+    color: #BFBFBF;
+}
+
 .operation-log-card {
     background-color: #FFFFFF;
     margin: 0 16px 12px;
@@ -309,6 +368,37 @@
     justify-content: center;
     font-size: 16px;
     font-weight: 500;
+}
+
+.action-footer.single {
+    justify-content: center;
+}
+
+.btn-upload-voucher {
+    flex: 1;
+    height: 44px;
+    border-radius: 22px;
+    background-color: #FFFFFF;
+    color: #1890FF;
+    border: 1px solid #1890FF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.waiting-hint {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 16px;
+    background-color: #FFFFFF;
+    border-top: 1px solid #F0F0F0;
+    text-align: center;
+    font-size: 14px;
+    color: #8C8C8C;
 }
 
 .confirm-modal-overlay {
@@ -518,6 +608,107 @@
 .btn-submit.reject {
     background-color: #FF4D4F;
     color: #FFFFFF;
+}
+
+.voucher-drawer-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 300;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.voucher-drawer-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.voucher-drawer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFFFFF;
+    border-radius: 16px 16px 0 0;
+    z-index: 301;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    max-height: 70vh;
+}
+
+.voucher-drawer.show {
+    transform: translateY(0);
+}
+
+.voucher-upload-area {
+    padding-bottom: 8px;
+}
+
+.upload-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.upload-item {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-item.add {
+    border: 1px dashed #D9D9D9;
+    background-color: #FAFAFA;
+}
+
+.upload-item .add-icon {
+    font-size: 28px;
+    color: #8C8C8C;
+    line-height: 1;
+}
+
+.upload-item .add-text {
+    font-size: 12px;
+    color: #8C8C8C;
+    margin-top: 4px;
+}
+
+.upload-item.preview {
+    background-color: #E8E8E8;
+}
+
+.upload-item .delete-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #FFFFFF;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-hint {
+    font-size: 12px;
+    color: #8C8C8C;
+    margin-top: 12px;
+    text-align: center;
 }
 
 .toast-modal {

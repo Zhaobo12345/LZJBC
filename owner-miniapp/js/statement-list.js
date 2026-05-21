@@ -16,6 +16,7 @@ const statusNames = {
     'all': '全部',
     'pending': '待我确认',
     'effective': '已生效',
+    'paid': '已支付',
     'rejected': '已驳回'
 };
 

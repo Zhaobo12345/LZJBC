@@ -12,8 +12,15 @@ let statementData = {
     confirmer: '李先生',
     confirmerRole: 'owner',
     confirmTime: '',
-    rejectReason: ''
+    rejectReason: '',
+    payment_voucher: {
+        attachment_urls: [],
+        upload_time: '',
+        uploader_name: ''
+    }
 };
+
+let uploadedImages = [];
 
 const typeMap = {
     'worker_wage': '工友工资',
@@ -27,6 +34,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const status = urlParams.get('status') || 'pending';
 const type = urlParams.get('type') || 'material';
 const isConfirmer = urlParams.get('role') !== 'creator';
+const currentUserRole = 'service';
 
 document.addEventListener('DOMContentLoaded', function() {
     initPageData();
@@ -58,22 +66,18 @@ function updatePageByStatus() {
     const statusIcon = document.getElementById('statusIcon');
     const statusText = document.getElementById('statusText');
     const statusDesc = document.getElementById('statusDesc');
-    const actionFooter = document.getElementById('actionFooter');
     const rejectReasonBanner = document.getElementById('rejectReasonBanner');
     const confirmInfoCard = document.getElementById('confirmInfoCard');
+    const voucherCard = document.getElementById('voucherCard');
+    const uploadFooter = document.getElementById('uploadFooter');
     
     switch (status) {
         case 'pending':
             statusBanner.className = 'status-banner';
             statusIcon.textContent = '⏳';
             statusText.textContent = '待确认';
-            statusDesc.textContent = isConfirmer ? '请确认此对账单' : '等待对方确认';
-            
-            if (isConfirmer) {
-                actionFooter.classList.remove('hidden');
-            } else {
-                actionFooter.classList.add('hidden');
-            }
+            statusDesc.textContent = '等待业主确认';
+            uploadFooter.style.display = 'none';
             break;
             
         case 'effective':
@@ -81,7 +85,6 @@ function updatePageByStatus() {
             statusIcon.textContent = '✅';
             statusText.textContent = '已生效';
             statusDesc.textContent = '账单已确认生效';
-            actionFooter.classList.add('hidden');
             
             confirmInfoCard.style.display = 'block';
             document.getElementById('confirmerAvatar').textContent = statementData.confirmer.charAt(0);
@@ -89,19 +92,44 @@ function updatePageByStatus() {
             document.getElementById('confirmTime').textContent = '已于 2026-05-19 14:30 确认';
             
             addLogItem(statementData.confirmer + ' 确认了对账单', '2026-05-19 14:30');
+            
+            uploadFooter.style.display = 'flex';
+            break;
+            
+        case 'paid':
+            statusBanner.className = 'status-banner paid';
+            statusIcon.textContent = '💳';
+            statusText.textContent = '已支付';
+            statusDesc.textContent = '账单已完成支付';
+            
+            confirmInfoCard.style.display = 'block';
+            document.getElementById('confirmerAvatar').textContent = statementData.confirmer.charAt(0);
+            document.getElementById('confirmerName').textContent = statementData.confirmer + '（业主）';
+            document.getElementById('confirmTime').textContent = '已于 2026-05-19 14:30 确认';
+            
+            voucherCard.style.display = 'block';
+            document.getElementById('uploaderAvatar').textContent = statementData.creator.charAt(0);
+            document.getElementById('uploaderName').textContent = statementData.creator;
+            document.getElementById('uploadTime').textContent = '2026-05-18 16:30';
+            
+            addLogItem(statementData.confirmer + ' 确认了对账单', '2026-05-19 14:30');
+            addLogItem(statementData.creator + ' 上传了支付凭证', '2026-05-18 16:30');
+            
+            uploadFooter.style.display = 'none';
             break;
             
         case 'rejected':
             statusBanner.className = 'status-banner rejected';
             statusIcon.textContent = '❌';
             statusText.textContent = '已驳回';
-            statusDesc.textContent = '账单已被驳回';
-            actionFooter.classList.add('hidden');
+            statusDesc.textContent = '账单已被业主驳回';
             
             rejectReasonBanner.style.display = 'block';
-            document.getElementById('rejectReasonContent').textContent = '数量算错了，现场测量只有20米，请核对后重新发起。';
+            document.getElementById('rejectReasonContent').textContent = statementData.confirmer + '（业主）：数量算错了，现场测量只有20米，请核对后重新发起。';
             
             addLogItem(statementData.confirmer + ' 驳回了对账单', '2026-05-18 16:00');
+            
+            uploadFooter.style.display = 'none';
             break;
     }
 }
@@ -185,4 +213,83 @@ function showToast(message) {
     setTimeout(() => {
         toast.classList.remove('show');
     }, 2000);
+}
+
+function showVoucherDrawer() {
+    document.getElementById('voucherDrawerOverlay').classList.add('show');
+    document.getElementById('voucherDrawer').classList.add('show');
+    uploadedImages = [];
+    renderUploadGrid();
+}
+
+function hideVoucherDrawer() {
+    document.getElementById('voucherDrawerOverlay').classList.remove('show');
+    document.getElementById('voucherDrawer').classList.remove('show');
+}
+
+function renderUploadGrid() {
+    const uploadGrid = document.getElementById('uploadGrid');
+    let html = '';
+    
+    uploadedImages.forEach((img, index) => {
+        html += `
+            <div class="upload-item preview" onclick="previewUploadImage(${index})">
+                <div class="img-placeholder">📷</div>
+                <div class="delete-btn" onclick="event.stopPropagation(); deleteImage(${index})">×</div>
+            </div>
+        `;
+    });
+    
+    if (uploadedImages.length < 9) {
+        html += `
+            <div class="upload-item add" onclick="addImage()">
+                <div class="add-icon">+</div>
+                <div class="add-text">添加图片</div>
+            </div>
+        `;
+    }
+    
+    uploadGrid.innerHTML = html;
+}
+
+function addImage() {
+    if (uploadedImages.length >= 9) {
+        showToast('最多上传9张图片');
+        return;
+    }
+    
+    uploadedImages.push({
+        id: Date.now(),
+        url: ''
+    });
+    
+    renderUploadGrid();
+    showToast('已添加1张图片');
+}
+
+function deleteImage(index) {
+    uploadedImages.splice(index, 1);
+    renderUploadGrid();
+}
+
+function previewUploadImage(index) {
+    showToast('预览图片 ' + (index + 1));
+}
+
+function previewImage(index) {
+    showToast('预览凭证图片 ' + (index + 1));
+}
+
+function submitVoucher() {
+    if (uploadedImages.length === 0) {
+        showToast('请至少上传1张凭证图片');
+        return;
+    }
+    
+    showToast('凭证上传成功');
+    hideVoucherDrawer();
+    
+    setTimeout(() => {
+        window.location.href = 'statement-list.html';
+    }, 1500);
 }

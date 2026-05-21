@@ -99,6 +99,27 @@
                 </div>
             </div>
 
+            <div class="detail-card" id="voucherCard" style="display: none;">
+                <div class="card-title">支付凭证</div>
+                <div class="voucher-info">
+                    <div class="voucher-uploader">
+                        <span class="uploader-avatar" id="uploaderAvatar">张</span>
+                        <span class="uploader-text">服务方 <strong id="uploaderName">张工长</strong> 已于 <strong id="uploadTime">2026-05-18 16:30</strong> 上传</span>
+                    </div>
+                    <div class="voucher-grid" id="voucherGrid">
+                        <div class="voucher-img" onclick="previewImage(0)">
+                            <div class="img-placeholder">📷</div>
+                        </div>
+                        <div class="voucher-img" onclick="previewImage(1)">
+                            <div class="img-placeholder">📷</div>
+                        </div>
+                        <div class="voucher-img" onclick="previewImage(2)">
+                            <div class="img-placeholder">📷</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="operation-log-card">
                 <div class="card-title">操作记录</div>
                 <div class="log-list" id="logList">
@@ -118,6 +139,10 @@
         <div class="action-footer" id="actionFooter">
             <div class="btn-reject" onclick="showRejectDrawer()">驳回</div>
             <div class="btn-confirm" onclick="confirmStatement()">确认无误</div>
+        </div>
+
+        <div class="waiting-hint" id="waitingHint" style="display: none;">
+            等待服务方上传线下支付凭证
         </div>
 
         <div class="confirm-modal-overlay" id="confirmModalOverlay" onclick="hideConfirmModal()"></div>

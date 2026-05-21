@@ -12,7 +12,12 @@ let statementData = {
     confirmer: '我',
     confirmerRole: 'owner',
     confirmTime: '',
-    rejectReason: ''
+    rejectReason: '',
+    payment_voucher: {
+        attachment_urls: [],
+        upload_time: '',
+        uploader_name: ''
+    }
 };
 
 const typeMap = {
@@ -59,8 +64,10 @@ function updatePageByStatus() {
     const statusText = document.getElementById('statusText');
     const statusDesc = document.getElementById('statusDesc');
     const actionFooter = document.getElementById('actionFooter');
+    const waitingHint = document.getElementById('waitingHint');
     const rejectReasonBanner = document.getElementById('rejectReasonBanner');
     const confirmInfoCard = document.getElementById('confirmInfoCard');
+    const voucherCard = document.getElementById('voucherCard');
     
     switch (status) {
         case 'pending':
@@ -71,9 +78,12 @@ function updatePageByStatus() {
             
             if (role === 'confirmer') {
                 actionFooter.classList.remove('hidden');
+                actionFooter.style.display = 'flex';
             } else {
                 actionFooter.classList.add('hidden');
+                actionFooter.style.display = 'none';
             }
+            waitingHint.style.display = 'none';
             break;
             
         case 'effective':
@@ -81,7 +91,7 @@ function updatePageByStatus() {
             statusIcon.textContent = '✅';
             statusText.textContent = '已生效';
             statusDesc.textContent = '账单已确认生效';
-            actionFooter.classList.add('hidden');
+            actionFooter.style.display = 'none';
             
             confirmInfoCard.style.display = 'block';
             document.getElementById('confirmerAvatar').textContent = '我';
@@ -89,6 +99,30 @@ function updatePageByStatus() {
             document.getElementById('confirmTime').textContent = '已于 2026-05-19 14:30 确认';
             
             addLogItem('我 确认了对账单', '2026-05-19 14:30');
+            
+            waitingHint.style.display = 'block';
+            break;
+            
+        case 'paid':
+            statusBanner.className = 'status-banner paid';
+            statusIcon.textContent = '💳';
+            statusText.textContent = '已支付';
+            statusDesc.textContent = '账单已完成支付';
+            actionFooter.style.display = 'none';
+            waitingHint.style.display = 'none';
+            
+            confirmInfoCard.style.display = 'block';
+            document.getElementById('confirmerAvatar').textContent = '我';
+            document.getElementById('confirmerName').textContent = '我（业主）';
+            document.getElementById('confirmTime').textContent = '已于 2026-05-19 14:30 确认';
+            
+            voucherCard.style.display = 'block';
+            document.getElementById('uploaderAvatar').textContent = statementData.creator.charAt(0);
+            document.getElementById('uploaderName').textContent = statementData.creator;
+            document.getElementById('uploadTime').textContent = '2026-05-18 16:30';
+            
+            addLogItem('我 确认了对账单', '2026-05-19 14:30');
+            addLogItem(statementData.creator + ' 上传了支付凭证', '2026-05-18 16:30');
             break;
             
         case 'rejected':
@@ -96,7 +130,8 @@ function updatePageByStatus() {
             statusIcon.textContent = '❌';
             statusText.textContent = '已驳回';
             statusDesc.textContent = '账单已被驳回';
-            actionFooter.classList.add('hidden');
+            actionFooter.style.display = 'none';
+            waitingHint.style.display = 'none';
             
             rejectReasonBanner.style.display = 'block';
             document.getElementById('rejectReasonContent').textContent = '数量算错了，现场测量只有20米，请核对后重新发起。';
@@ -173,6 +208,10 @@ function confirmStatement() {
 
 function previewAttachment(name) {
     showToast('预览：' + name);
+}
+
+function previewImage(index) {
+    showToast('预览凭证图片 ' + (index + 1));
 }
 
 function showToast(message) {
